@@ -1,4 +1,5 @@
 # cs355
+
 Web Application for CUNY transfer Students, Collaborative Project.  
 
 For now  the current web page is on my venus account . 
@@ -12,7 +13,10 @@ Good way to ensure that everyone has their git working properly.
 
 I suggest sourcetree or github desktop to help manage the project. 
 
-Useful Links 
+Useful Links (feel free to add more)
 https://guides.github.com/activities/hello-world/
+https://www.youtube.com/watch?v=TlB_eWDSMt4
+https://www.w3schools.com
+
 
 
