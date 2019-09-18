@@ -14,8 +14,10 @@ Good way to ensure that everyone has their git working properly.
 I suggest sourcetree or github desktop to help manage the project. 
 
 Useful Links (feel free to add more)
-https://guides.github.com/activities/hello-world/
+https://guides.github.com/activities/hello-world/    
+
 https://www.youtube.com/watch?v=TlB_eWDSMt4
+
 https://www.w3schools.com
 
 
