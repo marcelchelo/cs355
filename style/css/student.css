@@ -46,3 +46,12 @@
   height: 50px;
   width: 500px;
 }
+
+.dropdown {
+  margin: 20px;
+}
+
+.dropdown-menu {
+  max-height: 20rem;
+  overflow-y: auto;
+}
