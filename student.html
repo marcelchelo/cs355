@@ -31,7 +31,7 @@
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto ratione quam sed recusandae doloremque labore doloribus debitis at assumenda distinctio.</p>
     </section>
   </header>
-      
+
   <!-- TABS -->
   <div class="wrapper">
 
@@ -90,7 +90,7 @@
               $('#menuItems').append(contents.join(""))
               $('#empty').hide()
             }
-            
+
             // Capture the event when user types into search box
             window.addEventListener('input', function () {
               filter(search.value.trim().toLowerCase())
@@ -183,16 +183,50 @@
 
     <div style=margin-left:50px;margin-top:15px;>
 
-    <div class="progress">
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width:25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-        </div>
-    </div>
+    <div class="rightSide">
+      <!-- Panels showing progress and percentage, there are two of them -->
+      <div class="card">
+        <div class="card-body">
 
-    <div class="progress">
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width:50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">55%</div>
+          <h5 class="card-title">Some Major Here</h5>
+          <p class="card-text"></p>
+
+          <div class="progress">
+
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width:80%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">80%</div>
+            </div>
+
+          </div>
+
+          <hr>
+          <p style=color:black>0 credits apply</p>
+          <button class="button cardButton">View detail</button>
+
+        </div>
       </div>
+
+      <div class="card">
+        <div class="card-body">
+
+          <h5 class="card-title">Some Major Here</h5>
+          <p class="card-text"></p>
+
+          <div class="progress">
+
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width:55%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">55%</div>
+            </div>
+
+          </div>
+
+          <hr>
+          <p style=color:black>0 credits apply</p>
+          <button class=" button cardButton">View detail</button>
+
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -206,13 +240,13 @@
 
 
 
-<!-- 
+<!--
 <!doctype html>
 <html lang="en">
   <head>
-    
 
-   
+
+
     <nav class="navbar top navbar-dark" >
       <a class="navbar-brand" href="student.html">CUNY Transfer Portal</a>
       <li>
@@ -223,14 +257,14 @@
  </head>
 
  <style>
- 	
+
 
  </style>
 
   <body>
-  
-  
-    
+
+
+
 
 </body>
 </html> -->
