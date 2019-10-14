@@ -208,9 +208,6 @@
 	<script>
 		function updateValue(majorName) {
 			if (document.getElementById(majorName).checked) {
-				if (document.getElementById("Major1").innerHTML != "Choose a major." && document.getElementById("Major2").innerHTML != "Choose a major.") {
-					alert("Please select only 2 majors.");
-				}
 			
 				if (document.getElementById("Major1").innerHTML != "Choose a major." && document.getElementById("Major2").innerHTML == "Choose a major.") {
 						document.getElementById("Major2").innerHTML = majorName;
