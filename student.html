@@ -1,153 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Queens College: Transfer Protocol</title>
+  <!-- Local CSS -->
+  <link rel="stylesheet" href="./style/css/student.css">
+  <link rel="stylesheet" href="./style/css/style.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+  <!-- Banner -->
+  <header id="banner">
+    <div class="header-image"></div>
+    <img
+          class="header-logo"
+          src="./style/images/modern-american-history-collage-1280px-Queens_College_Logo.svg.png"
+          alt="QC logo"
+        />
+    <section class="header-text">
+      <h1>QC Transfer Portal:</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto ratione quam sed recusandae doloremque labore doloribus debitis at assumenda distinctio.</p>
+    </section>
+  </header>
+
+  <!-- TABS -->
+  <div class="wrapper">
+
+    <div>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href="#From" role="tab" data-toggle="tab">1. Current School</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#To" role="tab" data-toggle="tab">2. Transfer School</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#Majors" role="tab" data-toggle="tab">3. Majors</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#Classes" role="tab" data-toggle="tab">4. Classes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#AP" role="tab" data-toggle="tab">5. AP Scores</a>
+        </li>
+
+      </ul>
+      <!-- CONTENTS OF THE TABS -->
+      <div class="tab-content">
+        <!-- SELECT "FROM SCHOOL" TAB -->
+        <div role="tabpanel" class="tab-pane active" id="From">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_schools" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Search for your school here
+            </button>
+            <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_schools">
+              <form class="px-4 py-2">
+                <input type="search" class="form-control" id="searchSchool" placeholder="" autofocus="autofocus">
+              </form>
+              <div id="menuItems"></div>
+              <div id="empty" class="dropdown-header">No schools found</div>
+            </div>
+          </div>
+          <!-- Script for school search-->
+          <script>
+            // Initialize list with example colleges
+            let schools = ["Alabama State University", "Adelphi University",  "CUNY Queens College", "CUNY Hunter College", "CUNY City Tech", "CUNY John Jay", "SUNY Binghamtom University"]
+            // Input search box
+            let search = document.getElementById("searchSchool")
+            // Find all items inside the dropdown
+            let items = document.getElementsByClassName("dropdown-item")
+            function buildDropDown(values) {
+              let contents = []
+              for (let school of values) {
+                contents.push('<input type="button" class="dropdown-item" type="button" value="' + school + '"/>')
+              }
+              $('#menuItems').append(contents.join(""))
+              $('#empty').hide()
+            }
+            // Capture the event when user types into search box
+            window.addEventListener('input', function () {
+              filter(search.value.trim().toLowerCase())
+            })
+            // For every word entered by user, check if symbol includes with that word
+            // If symbol exists, show the symbol; else hide it
+            function filter(word) {
+              let length = items.length
+              let collection = []
+              let hidden = 0
+              for (let i = 0; i < length; i++) {
+                if (items[i].value.toLowerCase().includes(word)) {
+                  $(items[i]).show()
+                }
+                else {
+                  $(items[i]).hide()
+                  hidden++
+                }
+              }
+              // If all items are hidden, show the empty view
+              if (hidden === length) {
+                $('#empty').show()
+              }
+              else {
+                $('#empty').hide()
+              }
+            }
+            // If the user clicks on any item, set the title of button as the text of the item
+            $('#menuItems').on('click', '.dropdown-item', function () {
+              $('#dropdown_schools').text($(this)[0].value)
+              $('#dropdown_schools').dropdown('toggle')
+            })
+            buildDropDown(schools)
+          </script>
+        </div>
+
+        <div role="tabpanel" class="tab-pane " id="To">School going to
+        </div>
+
+		<style>
+		.collapsible2 {
+		background-color: red;
+		color: white;
+		cursor: pointer;
+		padding: 10px;
+		width: 40%;
+		border: double;
+		text-align: left;
+		outline: none;
+		font-size: 15px;
+		}
+		
+		.content {
+		padding: 0 18px;
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.2s ease-out;
+		background-color: white;
+		}
+		</style>
+		
+		 <p>Majors sorted by category:</p>
+        <div role="tabpanel" class="tab-pane" id="Majors">
+          <!--List of majors -->
+         
+		 <button class="collapsible2">Arts and Humanities</button>
+          <div class="content">
+            <input id = "Art" type="checkbox" onclick=updateValue(id)> Art<br>
+            <input id = "Comparitive Literature" type="checkbox" onclick=updateValue(id)> Comparitive Literature<br>
+            <input id = "Drama, Theatre, & Dance" type="checkbox" onclick=updateValue(id)> Drama, Theatre, & Dance<br>
+            <input id = "English" type="checkbox" onclick=updateValue(id)> English<br>
+            <input id = "Media Studies" type="checkbox" onclick=updateValue(id)> Media Studies<br>
+          </div>
+		 
+          <button class="collapsible2">Mathematics and Natural Sciences</button>
+          <div class="content">
+            <input id = "Biology" type="checkbox" onclick=updateValue(id)> Biology <br>
+            <input id = "Chemistry" type="checkbox" onclick=updateValue(id)> Chemistry<br>
+            <input id = "Physics" type="checkbox" onclick=updateValue(id)> Physics<br>
+            <input id = "Computer Science BA" type="checkbox" onclick=updateValue(id)> Computer Science BA<br>
+            <input id = "Computer Science BS" type="checkbox" onclick=updateValue(id)> Computer Science BS<br>
+          </div>
+
+          <button class="collapsible2">Education</button>
+          <div class="content">
+			<input id = "Educational and Community Programs" type="checkbox" onclick=updateValue(id)> Educational and Community Programs<br>
+			<input id = "Elementary and Early Childhood Education" type="checkbox" onclick=updateValue(id)> Elementary and Early Childhood Education<br>
+			<input id = "Secondary Education and Youth Services" type="checkbox" onclick=updateValue(id)> Secondary Education and Youth Services<br>
+          </div>
+
+          <!--Script for collapsible -->
+          <script>
+          var coll = document.getElementsByClassName("collapsible2");
+          var i;
+          for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+              this.classList.toggle("active");
+              var content = this.nextElementSibling;
+              if (content.style.maxHeight){
+                content.style.maxHeight = null;
+              } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+              }
+            });
+          }
+          </script>
+
+        </div>
+
+        <div role="tabpanel" class="tab-pane " id="Classes">Classes taken
+        </div>
+
+        <div role="tabpanel" class="tab-pane " id="AP">AP scores
+        </div>
+
+      </div>
+    </div>
+
+	<script>
+		function updateValue(majorName) {
+			if (document.getElementById(majorName).checked) {
+				if (document.getElementById("Major1").innerHTML != "Choose a major." && document.getElementById("Major2").innerHTML != "Choose a major.") {
+					alert("Please select only 2 majors.");
+				}
+			
+				if (document.getElementById("Major1").innerHTML != "Choose a major." && document.getElementById("Major2").innerHTML == "Choose a major.") {
+						document.getElementById("Major2").innerHTML = majorName;
+				}
+				if (document.getElementById("Major1").innerHTML == "Choose a major.") {
+					document.getElementById("Major1").innerHTML = majorName;
+				}
+			}
+			else {
+				if (document.getElementById("Major2").innerHTML != "Choose a major.") {
+					document.getElementById("Major2").innerHTML = "Choose a major.";
+				}
+				else {
+					document.getElementById("Major1").innerHTML ="Choose a major.";
+				}
+			}
+		}
+	</script>
+	
+    <div style=margin-left:50px;margin-top:15px;>
+
+    <div class="rightSide">
+      <!-- Panels showing progress and percentage, there are two of them -->
+      <div class="card">
+        <div class="card-body">
+
+          <h5 id="Major1">Choose a major.</h5>
+          <p class="card-text"></p>
+
+          <div class="progress">
+
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width:80%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">80%</div>
+            </div>
+
+          </div>
+
+          <hr>
+          <p style=color:black>0 credits apply</p>
+          <button class="button cardButton">View detail</button>
+
+        </div>
+      </div>
+
+	 
+			
+	  
+      <div class="card">
+        <div class="card-body">
+
+          <h5 id="Major2"> Choose a major.</h5>
+          <p class="card-text"></p>
+
+          <div class="progress">
+
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width:55%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">55%</div>
+            </div>
+
+          </div>
+
+          <hr>
+          <p style=color:black>0 credits apply</p>
+          <button class=" button cardButton">View detail</button>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!--
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-
-    <!-- navigation bar -->
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="index.html">CS355</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-
-        <!-- Course Dropdown  -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Student View</a>
-
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="student.html">Student View</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-
-
-      <!-- Contributors    -->
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contributors</a>
-
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-            <a class="dropdown-item" href="marcelo.html">Marcelo Villalba</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-
-
-
-        <!-- Search   -->
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</a>
-
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="fixed_list.html"> Fixed Search</a>
-            <a class="dropdown-item" href="#">From List</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Google API</a>
-            <a class="dropdown-item" href="#">Our Search Engine</a>
-          </div>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-
-    </div>
-  </nav>
-
-
-
-  <!-- All of the code above  and below can be stored in a header and footer and then just referenced so we dont have to write it -->
-
-<!--CSS Styling for list of majors -->
-<style>
-	.collapsible {
-	background-color: red;
-	color: white;
-	cursor: pointer;
-	padding: 10px;
-	width: 40%;
-	border: double;
-	text-align: left;
-	outline: none;
-	font-size: 15px;
-	}
-
-	.active, .collapsible:hover {
-		background-color: #cc0000;
-	}
-	
-	.content {
-	padding: 0 18px;
-	max-height: 0;
-	overflow: hidden;
-	transition: max-height 0.2s ease-out;
-	background-color: white;
-	}
-	
-</style>
-
-<!--List of majors -->
-<p>Majors sorted by category:</p>
-<button class="collapsible">Mathematics and Natural Sciences</button>
-<div class="content">
-<input type="checkbox" name="Bio" value="Bio"> Biology<br>
-<input type="checkbox" name="Chem" value="Chem"> Chemistry<br>
-<input type="checkbox" name="Phys" value="Phys"> Physics<br>
-<input type="checkbox" name="CS_BA" value="CS_BA"> Computer Science BA<br>
-<input type="checkbox" name="CS_BS" value="CS_BS"> Computer Science BS<br>
-</div>
-
-<button class="collapsible">Education</button>
-<div class="content">
-<input type="checkbox" name="ECP" value="ECP"> Educational and Community Programs<br>
-<input type="checkbox" name="ECE" value="ECE"> Elementary and Early Childhood Education<br>
-<input type="checkbox" name="SE" value="SE"> Secondary Education and Youth Services<br>
-
-</div>
-
-
-<!--Script for collapsible -->
-<script>
-var coll = document.getElementsByClassName("collapsible");
-var i;
-
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.maxHeight){
-      content.style.maxHeight = null;
-    } else {
-      content.style.maxHeight = content.scrollHeight + "px";
-    } 
-  });
-}
-</script>
-
-
-
-
-
-
-
-  <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
-</html>
+    <nav class="navbar top navbar-dark" >
+      <a class="navbar-brand" href="student.html">CUNY Transfer Portal</a>
+      <li>
+        <button type="button" class="btn btn-secondary">Admin Login</button>
+      </li>
+    </nav>
+ </head>
+ <style>
+ </style>
+  <body>
+</body>
+</html> -->
