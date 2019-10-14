@@ -8,6 +8,7 @@
   <!-- Local CSS -->
   <link rel="stylesheet" href="./style/css/student.css">
   <link rel="stylesheet" href="./style/css/style.css">
+  <link rel="stylesheet" href="./style/css/home.css">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -18,19 +19,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
-  <!-- Banner -->
-  <header id="banner">
-    <div class="header-image"></div>
-    <img
-          class="header-logo"
-          src="./style/images/modern-american-history-collage-1280px-Queens_College_Logo.svg.png"
-          alt="QC logo"
-        />
-    <section class="header-text">
-      <h1>QC Transfer Portal:</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto ratione quam sed recusandae doloremque labore doloribus debitis at assumenda distinctio.</p>
+ <!-- Navigation Bar -->
+ <nav class="main-nav" id="overlay">
+  <img src="./style/images/Close Menu.svg" alt="menu" class="close-btn" id="close-menu">
+  <ul>
+      <li>
+        <a href="#home">home.</a>
+        <span>go back home</span>
+      </li>
+      <li>
+        <a href="#resource">resource.</a>
+        <span>view our campus resource</span>
+      </li>
+      <li>
+        <a href="#">github.</a>
+        <span>view group 2's github page</span>
+      </li>
+      <li>
+        <a href="#">admin.</a>
+        <span>portal for site administrator</span>
+      </li>
+
+  </ul>
+</nav>
+<!-- Banner -->
+
+<header id="home">
+  <div class="header-container">
+      <a href="#"><img src="./style/images/modern-american-history-collage-1280px-Queens_College_Logo.svg.png" alt="logo"></a>
+
+      <img src="./style/images/Hamburger Menu.svg" alt="menu" class="menu-btn" id="open-menu">
+
+  </div>
+  <section class="header-txt">
+      <h1>Transfer Protocol.</h1>
+      <br>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam alias voluptatum expedita, dolorum ipsum et voluptate facilis ad eum quis natus aliquid, debitis inventore! Corporis beatae asperiores obcaecati velit? Incidunt.</p>
+  
     </section>
-  </header>
+</header>
+
 
   <!-- TABS -->
   <div class="wrapper">
@@ -75,13 +103,10 @@
           <script>
             // Initialize list with example colleges
             let schools = ["Alabama State University", "Adelphi University",  "CUNY Queens College", "CUNY Hunter College", "CUNY City Tech", "CUNY John Jay", "SUNY Binghamtom University"]
-
             // Input search box
             let search = document.getElementById("searchSchool")
-
             // Find all items inside the dropdown
             let items = document.getElementsByClassName("dropdown-item")
-
             function buildDropDown(values) {
               let contents = []
               for (let school of values) {
@@ -90,12 +115,10 @@
               $('#menuItems').append(contents.join(""))
               $('#empty').hide()
             }
-
             // Capture the event when user types into search box
             window.addEventListener('input', function () {
               filter(search.value.trim().toLowerCase())
             })
-
             // For every word entered by user, check if symbol includes with that word
             // If symbol exists, show the symbol; else hide it
             function filter(word) {
@@ -111,7 +134,6 @@
                   hidden++
                 }
               }
-
               // If all items are hidden, show the empty view
               if (hidden === length) {
                 $('#empty').show()
@@ -120,13 +142,11 @@
                 $('#empty').hide()
               }
             }
-
             // If the user clicks on any item, set the title of button as the text of the item
             $('#menuItems').on('click', '.dropdown-item', function () {
               $('#dropdown_schools').text($(this)[0].value)
               $('#dropdown_schools').dropdown('toggle')
             })
-
             buildDropDown(schools)
           </script>
         </div>
@@ -230,6 +250,7 @@
     </div>
 
   </div>
+  <script type="text/javascript" src="style/js/student.js"></script>
 </body>
 </html>
 
@@ -244,27 +265,22 @@
 <!doctype html>
 <html lang="en">
   <head>
-
-
-
     <nav class="navbar top navbar-dark" >
       <a class="navbar-brand" href="student.html">CUNY Transfer Portal</a>
       <li>
         <button type="button" class="btn btn-secondary">Admin Login</button>
       </li>
     </nav>
-
  </head>
-
  <style>
-
-
  </style>
-
   <body>
-
-
-
-
 </body>
 </html> -->
+
+
+
+
+
+ 
+  
