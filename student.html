@@ -75,13 +75,10 @@
           <script>
             // Initialize list with example colleges
             let schools = ["Alabama State University", "Adelphi University",  "CUNY Queens College", "CUNY Hunter College", "CUNY City Tech", "CUNY John Jay", "SUNY Binghamtom University"]
-
             // Input search box
             let search = document.getElementById("searchSchool")
-
             // Find all items inside the dropdown
             let items = document.getElementsByClassName("dropdown-item")
-
             function buildDropDown(values) {
               let contents = []
               for (let school of values) {
@@ -90,12 +87,10 @@
               $('#menuItems').append(contents.join(""))
               $('#empty').hide()
             }
-
             // Capture the event when user types into search box
             window.addEventListener('input', function () {
               filter(search.value.trim().toLowerCase())
             })
-
             // For every word entered by user, check if symbol includes with that word
             // If symbol exists, show the symbol; else hide it
             function filter(word) {
@@ -111,7 +106,6 @@
                   hidden++
                 }
               }
-
               // If all items are hidden, show the empty view
               if (hidden === length) {
                 $('#empty').show()
@@ -120,13 +114,11 @@
                 $('#empty').hide()
               }
             }
-
             // If the user clicks on any item, set the title of button as the text of the item
             $('#menuItems').on('click', '.dropdown-item', function () {
               $('#dropdown_schools').text($(this)[0].value)
               $('#dropdown_schools').dropdown('toggle')
             })
-
             buildDropDown(schools)
           </script>
         </div>
@@ -134,28 +126,60 @@
         <div role="tabpanel" class="tab-pane " id="To">School going to
         </div>
 
-        <div role="tabpanel" class="tab-pane " id="Majors">
+		<style>
+		.collapsible2 {
+		background-color: red;
+		color: white;
+		cursor: pointer;
+		padding: 10px;
+		width: 40%;
+		border: double;
+		text-align: left;
+		outline: none;
+		font-size: 15px;
+		}
+		
+		.content {
+		padding: 0 18px;
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.2s ease-out;
+		background-color: white;
+		}
+		</style>
+		
+		 <p>Majors sorted by category:</p>
+        <div role="tabpanel" class="tab-pane" id="Majors">
           <!--List of majors -->
-          <p>Majors sorted by category:</p>
-          <button class="collapsible">Mathematics and Natural Sciences</button>
+         
+		 <button class="collapsible2">Arts and Humanities</button>
           <div class="content">
-            <input type="checkbox" name="Bio" value="Bio"> Biology<br>
-            <input type="checkbox" name="Chem" value="Chem"> Chemistry<br>
-            <input type="checkbox" name="Phys" value="Phys"> Physics<br>
-            <input type="checkbox" name="CS_BA" value="CS_BA"> Computer Science BA<br>
-            <input type="checkbox" name="CS_BS" value="CS_BS"> Computer Science BS<br>
+            <input id = "Art" type="checkbox" onclick=updateValue(id)> Art<br>
+            <input id = "Comparitive Literature" type="checkbox" onclick=updateValue(id)> Comparitive Literature<br>
+            <input id = "Drama, Theatre, & Dance" type="checkbox" onclick=updateValue(id)> Drama, Theatre, & Dance<br>
+            <input id = "English" type="checkbox" onclick=updateValue(id)> English<br>
+            <input id = "Media Studies" type="checkbox" onclick=updateValue(id)> Media Studies<br>
+          </div>
+		 
+          <button class="collapsible2">Mathematics and Natural Sciences</button>
+          <div class="content">
+            <input id = "Biology" type="checkbox" onclick=updateValue(id)> Biology <br>
+            <input id = "Chemistry" type="checkbox" onclick=updateValue(id)> Chemistry<br>
+            <input id = "Physics" type="checkbox" onclick=updateValue(id)> Physics<br>
+            <input id = "Computer Science BA" type="checkbox" onclick=updateValue(id)> Computer Science BA<br>
+            <input id = "Computer Science BS" type="checkbox" onclick=updateValue(id)> Computer Science BS<br>
           </div>
 
-          <button class="collapsible">Education</button>
+          <button class="collapsible2">Education</button>
           <div class="content">
-            <input type="checkbox" name="ECP" value="ECP"> Educational and Community Programs<br>
-            <input type="checkbox" name="ECE" value="ECE"> Elementary and Early Childhood Education<br>
-            <input type="checkbox" name="SE" value="SE"> Secondary Education and Youth Services<br>
+			<input id = "Educational and Community Programs" type="checkbox" onclick=updateValue(id)> Educational and Community Programs<br>
+			<input id = "Elementary and Early Childhood Education" type="checkbox" onclick=updateValue(id)> Elementary and Early Childhood Education<br>
+			<input id = "Secondary Education and Youth Services" type="checkbox" onclick=updateValue(id)> Secondary Education and Youth Services<br>
           </div>
 
           <!--Script for collapsible -->
           <script>
-          var coll = document.getElementsByClassName("collapsible");
+          var coll = document.getElementsByClassName("collapsible2");
           var i;
           for (i = 0; i < coll.length; i++) {
             coll[i].addEventListener("click", function() {
@@ -181,6 +205,31 @@
       </div>
     </div>
 
+	<script>
+		function updateValue(majorName) {
+			if (document.getElementById(majorName).checked) {
+				if (document.getElementById("Major1").innerHTML != "Choose a major." && document.getElementById("Major2").innerHTML != "Choose a major.") {
+					alert("Please select only 2 majors.");
+				}
+			
+				if (document.getElementById("Major1").innerHTML != "Choose a major." && document.getElementById("Major2").innerHTML == "Choose a major.") {
+						document.getElementById("Major2").innerHTML = majorName;
+				}
+				if (document.getElementById("Major1").innerHTML == "Choose a major.") {
+					document.getElementById("Major1").innerHTML = majorName;
+				}
+			}
+			else {
+				if (document.getElementById("Major2").innerHTML != "Choose a major.") {
+					document.getElementById("Major2").innerHTML = "Choose a major.";
+				}
+				else {
+					document.getElementById("Major1").innerHTML ="Choose a major.";
+				}
+			}
+		}
+	</script>
+	
     <div style=margin-left:50px;margin-top:15px;>
 
     <div class="rightSide">
@@ -188,7 +237,7 @@
       <div class="card">
         <div class="card-body">
 
-          <h5 class="card-title">Some Major Here</h5>
+          <h5 id="Major1">Choose a major.</h5>
           <p class="card-text"></p>
 
           <div class="progress">
@@ -206,10 +255,13 @@
         </div>
       </div>
 
+	 
+			
+	  
       <div class="card">
         <div class="card-body">
 
-          <h5 class="card-title">Some Major Here</h5>
+          <h5 id="Major2"> Choose a major.</h5>
           <p class="card-text"></p>
 
           <div class="progress">
@@ -244,27 +296,15 @@
 <!doctype html>
 <html lang="en">
   <head>
-
-
-
     <nav class="navbar top navbar-dark" >
       <a class="navbar-brand" href="student.html">CUNY Transfer Portal</a>
       <li>
         <button type="button" class="btn btn-secondary">Admin Login</button>
       </li>
     </nav>
-
  </head>
-
  <style>
-
-
  </style>
-
   <body>
-
-
-
-
 </body>
 </html> -->
