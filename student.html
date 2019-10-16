@@ -102,7 +102,6 @@
           <!-- Script for school search-->
           <script>
             // Initialize list with example colleges
-<<<<<<< HEAD
             let pastSchools = ["Alabama State University", "Adelphi University",  "CUNY Queens College", "CUNY Hunter College", "CUNY City Tech", "CUNY John Jay", "SUNY Binghamtom University"]
 
             // Input search box
@@ -112,14 +111,6 @@
             let pastSchoolsDropdownItems = document.getElementsByClassName("past-dropdown-item")
 
             function buildPastDropDown(values) {
-=======
-            let schools = ["Alabama State University", "Adelphi University",  "CUNY Queens College", "CUNY Hunter College", "CUNY City Tech", "CUNY John Jay", "SUNY Binghamtom University"]
-            // Input search box
-            let search = document.getElementById("searchSchool")
-            // Find all items inside the dropdown
-            let items = document.getElementsByClassName("dropdown-item")
-            function buildDropDown(values) {
->>>>>>> b3b23e5... Just banner change (#22)
               let contents = []
               for (let school of values) {
                 contents.push('<input type="button" class="dropdown-item past-dropdown-item" type="button" value="' + school + '"/>')
@@ -168,12 +159,8 @@
               $('#dropdown_past_schools').text($(this)[0].value)
               $('#dropdown_past_schools').dropdown('toggle')
             })
-<<<<<<< HEAD
 
             buildPastDropDown(pastSchools)
-=======
-            buildDropDown(schools)
->>>>>>> b3b23e5... Just banner change (#22)
           </script>
         </div>
 
