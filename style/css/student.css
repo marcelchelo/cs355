@@ -1,0 +1,104 @@
+.collapsible {
+  background-color: teal;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  width: 40%;
+  border: double;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+.active,
+.collapsible:hover {
+  background-color: none;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: white;
+}
+
+.navbar {
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 0;
+  font-size: 0;
+  letter-spacing: 0;
+  background-color: teal;
+  color: white;
+}
+
+.wrapper {
+  display: grid;
+  height: 1000px;
+  grid-template-columns: 60% 40%;
+  margin: auto;
+  padding: 10px;
+}
+
+.progress {
+  margin-bottom: 30px;
+  /* border: 2px solid red; */
+  height: 60%;
+  width: 100%;
+}
+
+
+.dropdown {
+  margin: 20px;
+  width:90%;
+}
+
+.btn{
+  width:100%;
+}
+
+.dropdown-menu {
+  max-height: 20rem;
+  overflow-y: auto;
+  width:100%;
+}
+
+.rightSide{
+  background-color:#EDEEEC;
+  height: 100%;
+}
+
+.card{
+  background-color:white;
+  width:90%;
+  height:auto;
+  margin:0 auto;
+  top:5%;
+  margin-bottom:5%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cardButton{
+  padding:0.6em 2em;
+  border-radius: 8px;
+  color:#fff;
+  background-color:#1976d2;
+  font-size:1em;
+  border:1;
+  cursor:pointer;
+  border-color:#1976d2;
+}
+
+.button {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+.button:hover {
+  background-color:white;
+  color: black;
+}
+
+.button:focus {
+outline:0;
+}
