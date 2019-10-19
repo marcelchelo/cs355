@@ -43,17 +43,24 @@
 .progress {
   margin-bottom: 30px;
   /* border: 2px solid red; */
-  height: 50px;
-  width: 500px;
+  height: 60%;
+  width: 100%;
 }
+
 
 .dropdown {
   margin: 20px;
+  width:90%;
+}
+
+.btn{
+  width:100%;
 }
 
 .dropdown-menu {
   max-height: 20rem;
   overflow-y: auto;
+  width:100%;
 }
 
 .rightSide{
