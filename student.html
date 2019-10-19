@@ -55,7 +55,7 @@
       <h1>Transfer Protocol.</h1>
       <br>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam alias voluptatum expedita, dolorum ipsum et voluptate facilis ad eum quis natus aliquid, debitis inventore! Corporis beatae asperiores obcaecati velit? Incidunt.</p>
-
+  
     </section>
 </header>
 
@@ -281,109 +281,7 @@
         <div role="tabpanel" class="tab-pane " id="Classes">Classes taken
         </div>
 
-        <div role="tabpanel" class="tab-pane " id="AP">
-          <div class="card">
-            <div class="card-body">
-
-              <h5 class="card-title">AP Scores</h5>
-              <div class="dropdown" style="width:90%">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_tests" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
-                  Search for your school here
-                </button>
-                <div id="menu" class="dropdown-menu" aria-labelledby="dropdown">
-                  <form class="px-4 py-2">
-                    <input type="search" class="form-control" id="searchTests" placeholder="" autofocus="autofocus">
-                  </form>
-                  <div id="testMenuItems"></div>
-                  <div id="testEmpty" class="dropdown-header">No tests found</div>
-                </div>
-              </div>
-              <!-- Script for school search-->
-              <script>
-                // Initialize list with example colleges
-                let tests = ["Physics","Biology","Calculus"]
-
-                // Input search box
-                let testSearch = document.getElementById("searchTests")
-
-                // Find all items inside the dropdown
-                let testItems = document.getElementsByClassName("dropdown-item")
-
-                function buildDropDown(values) {
-                  let contents = []
-                  for (let school of values) {
-                    contents.push('<input type="button" class="dropdown-item" type="button" value="' + school + '"/>')
-                  }
-                  $('#testMenuItems').append(contents.join(""))
-                  $('#testEmpty').hide()
-                }
-
-                // Capture the event when user types into search box
-                window.addEventListener('input', function () {
-                  filter(testSearch.value.trim().toLowerCase())
-                })
-
-                // For every word entered by user, check if symbol includes with that word
-                // If symbol exists, show the symbol; else hide it
-                function filter(word) {
-                  let length = testItems.length
-                  let collection = []
-                  let hidden = 0
-                  for (let i = 0; i < length; i++) {
-                    if (testItems[i].value.toLowerCase().includes(word)) {
-                      $(testItems[i]).show()
-                    }
-                    else {
-                      $(testItems[i]).hide()
-                      hidden++
-                    }
-                  }
-
-                  // If all items are hidden, show the empty view
-                  if (hidden === length) {
-                    $('#testEmpty').show()
-                  }
-                  else {
-                    $('#testEmpty').hide()
-                  }
-                }
-
-                // If the user clicks on any item, set the title of button as the text of the item
-                $('#testMenuItems').on('click', '.dropdown-item', function () {
-                  $('#dropdown_tests').text($(this)[0].value)
-                  $('#dropdown_tests').dropdown('toggle')
-
-
-                  var x = document.createElement("div role=\"tabpanel\" class=\"tab-pane \"");                 // Create a <p> element
-
-                  /*x.innerHTML = "
-
-                  <div class=\"card\">
-                    <div class=\"card-body\">
-
-                      <h5 class=\"card-title\">AP Scores adfeadfe</h5>
-
-
-                    </div>
-                  </div>
-
-
-                  ";
-
-                  document.getElementById("AP").appendChild(x);-->*/
-
-                })
-
-                buildDropDown(tests)
-              </script>
-
-
-
-
-
-            </div>
-          </div>
+        <div role="tabpanel" class="tab-pane " id="AP">AP scores
         </div>
 
       </div>
@@ -465,3 +363,10 @@
   <body>
 </body>
 </html> -->
+
+
+
+
+
+ 
+  
