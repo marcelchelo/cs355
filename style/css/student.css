@@ -102,3 +102,21 @@
 .button:focus {
 outline:0;
 }
+
+.selected {
+  /*border: 0.5px solid black;*/
+}
+
+.subject {
+  color: black;
+}
+
+.testScore {
+  width: 200px;
+}
+
+.error {
+  padding-top: 10px;
+  display: none;
+  color: red;
+}

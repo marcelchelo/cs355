@@ -285,7 +285,7 @@
           <div class="card">
             <div class="card-body">
 
-              <h5 class="card-title">AP Scores</h5>
+              <h3 class="card-title">AP Scores</h5>
               <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_tests" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
@@ -297,6 +297,12 @@
                   </form>
                   <div id="testMenuItems"></div>
                   <div id="testEmpty" class="dropdown-header">No test found</div>
+                </div>
+              </div>
+              <div id="selectedTestContainer" style="display:none">
+                <h5>Selected tests</h5>
+                <div>
+                  <div id="selectedTests"></div>
                 </div>
               </div>
               <!-- Script for school search-->
@@ -356,11 +362,88 @@
                 }
                 // If the user clicks on any item, set the title of button as the text of the item
                 $('#testMenuItems').on('click', '.test-dropdown-item', function () {
-                  $('#dropdown_tests').text($(this)[0].value)
+                  addSelectedTest(($(this)[0].value));
                   $('#dropdown_tests').dropdown('toggle')
                 })
 
                 buildTestDropDown(tests)
+
+                //Adds a test to div  
+                function addSelectedTest(t) {
+                  //If there are no tests to begin with, div holding 'Selected Tests' will not be shown
+                  //Changes display from none to block
+                  if(document.getElementById('selectedTests').innerHTML === "") {
+                    document.getElementById('selectedTestContainer').style.display = "block";
+                  }
+                  //Create div with name of test and input for score
+                  //Div
+                  let divTest = document.createElement('div');
+                  divTest.setAttribute('class', 'selected');
+                  divTest.setAttribute('id', t);
+                  //Test
+                  let test = document.createElement('p');
+                  let testName = document.createTextNode(t);
+                  test.setAttribute('class', 'subject');
+                  //Remove button
+                  let removeButton = document.createElement('button');
+                  removeButton.setAttribute('type','button');
+                  removeButton.setAttribute('class','close');
+                  removeButton.setAttribute('aria-label','Close');
+                  removeButton.setAttribute('onclick','removeTest(this)');
+                  let removeText = document.createElement('span');
+                  removeText.setAttribute('aria-hidden','true');
+                  let x = document.createTextNode('x');
+                  removeButton.appendChild(x);
+                  //Input
+                  let testScore = document.createElement('input');
+                  testScore.setAttribute('class', 'testScore');
+                  removeButton.setAttribute('id',t+"Score");
+                  testScore.setAttribute('type','number');
+                  testScore.setAttribute('name', 'testScore');
+                  testScore.setAttribute('min','1');
+                  testScore.setAttribute('max','5');
+                  testScore.setAttribute('onchange','isValidScore(this)');
+                  testScore.setAttribute('placeholder','Score');
+                  //Error message score if entered too low or high
+                  //hidden by default
+                  let error = document.createElement('p');
+                  let errorMessage = document.createTextNode("Score entered needs to be a whole number from 1 to 5.");
+                  error.setAttribute('class', 'error');
+                  error.appendChild(errorMessage);
+                  //Horizontal Rule
+                  let rule = document.createElement('hr');
+                  
+                  test.appendChild(testName);
+                  divTest.appendChild(removeButton);
+                  divTest.appendChild(test);
+                  divTest.appendChild(testScore);
+                  divTest.appendChild(error);
+                  divTest.appendChild(rule);
+                  
+                  document.getElementById('selectedTests').appendChild(divTest);
+                  
+                }
+                
+                //Remove div with test containing the button that was clicked on
+                function removeTest(b) {
+                  //Removes div containing button
+                  b.parentNode.remove();
+                  //If selectedTest div is empty, will hide div
+                  if(document.getElementById('selectedTests').innerHTML === "") {
+                    document.getElementById('selectedTestContainer').style.display = 'none';
+                  }
+                }
+
+                //Check if score entered is valid
+                //Parameter is button and not value of score itself for ease of finding elements.
+                //If not, display error message
+                function isValidScore(score) {
+                  let s = Number(score.value);
+                  if(s === NaN || Number.isInteger(s) === false || s < 1 || s > 5)
+                    $(score).parent().find('p').filter('.error').show();
+                  else 
+                    $(score).parent().find('p').filter('.error').hide();
+                }
               </script>
 
             </div>
