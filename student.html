@@ -55,7 +55,7 @@
       <h1>Transfer Protocol.</h1>
       <br>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam alias voluptatum expedita, dolorum ipsum et voluptate facilis ad eum quis natus aliquid, debitis inventore! Corporis beatae asperiores obcaecati velit? Incidunt.</p>
-
+  
     </section>
 </header>
 
@@ -280,23 +280,23 @@
 
         <div role="tabpanel" class="tab-pane " id="Classes">Classes taken
         </div>
-
+        
         <div role="tabpanel" class="tab-pane " id="AP">
           <div class="card">
             <div class="card-body">
 
               <h5 class="card-title">AP Scores</h5>
-              <div class="dropdown" style="width:90%">
+              <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_tests" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
-                  Search for your school here
+                  Find your AP test
                 </button>
-                <div id="menu" class="dropdown-menu" aria-labelledby="dropdown">
+                <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_past_tests">
                   <form class="px-4 py-2">
                     <input type="search" class="form-control" id="searchTests" placeholder="" autofocus="autofocus">
                   </form>
                   <div id="testMenuItems"></div>
-                  <div id="testEmpty" class="dropdown-header">No tests found</div>
+                  <div id="testEmpty" class="dropdown-header">No test found</div>
                 </div>
               </div>
               <!-- Script for school search-->
@@ -305,41 +305,47 @@
                 let tests = ["Physics","Biology","Calculus"]
 
                 // Input search box
-                let testSearch = document.getElementById("searchTests")
+                let testsSearchInput = document.getElementById("searchTests")
 
                 // Find all items inside the dropdown
-                let testItems = document.getElementsByClassName("dropdown-item")
+                let testsDropdownItems = document.getElementsByClassName("test-dropdown-item")
 
-                function buildDropDown(values) {
+                function buildTestDropDown(values) {
                   let contents = []
-                  for (let school of values) {
-                    contents.push('<input type="button" class="dropdown-item" type="button" value="' + school + '"/>')
+                  for (let test of values) {
+                    contents.push('<input type="button" class="dropdown-item test-dropdown-item" type="button" value="' + test + '"/>')
                   }
-                  $('#testMenuItems').append(contents.join(""))
-                  $('#testEmpty').hide()
+                  // Hides all schools by default.
+                  $('#testMenuItems').append(contents.join("")).hide()
+                  $('#testEmpty').show()
                 }
-
                 // Capture the event when user types into search box
-                window.addEventListener('input', function () {
-                  filter(testSearch.value.trim().toLowerCase())
-                })
+                document.querySelector("#searchTests").addEventListener('input', function() {
+                  if (testsSearchInput.value.length !== 0) {
+                    filterTest(testsSearchInput.value.trim().toLowerCase())
+                  }
 
+                  else {
+                    $('#testMenuItems').hide()
+                    $('#testEmpty').show()
+                  }
+                })
                 // For every word entered by user, check if symbol includes with that word
                 // If symbol exists, show the symbol; else hide it
-                function filter(word) {
-                  let length = testItems.length
+                function filterTest(word) {
+                  let length = testsDropdownItems.length
                   let collection = []
                   let hidden = 0
                   for (let i = 0; i < length; i++) {
-                    if (testItems[i].value.toLowerCase().includes(word)) {
-                      $(testItems[i]).show()
+                    if (testsDropdownItems[i].value.toLowerCase().includes(word)) {
+                      $('#testMenuItems').show()
+                      $(testsDropdownItems[i]).show()
                     }
                     else {
-                      $(testItems[i]).hide()
+                      $(testsDropdownItems[i]).hide()
                       hidden++
                     }
                   }
-
                   // If all items are hidden, show the empty view
                   if (hidden === length) {
                     $('#testEmpty').show()
@@ -348,39 +354,14 @@
                     $('#testEmpty').hide()
                   }
                 }
-
                 // If the user clicks on any item, set the title of button as the text of the item
-                $('#testMenuItems').on('click', '.dropdown-item', function () {
+                $('#testMenuItems').on('click', '.test-dropdown-item', function () {
                   $('#dropdown_tests').text($(this)[0].value)
                   $('#dropdown_tests').dropdown('toggle')
-
-
-                  var x = document.createElement("div role=\"tabpanel\" class=\"tab-pane \"");                 // Create a <p> element
-
-                  /*x.innerHTML = "
-
-                  <div class=\"card\">
-                    <div class=\"card-body\">
-
-                      <h5 class=\"card-title\">AP Scores adfeadfe</h5>
-
-
-                    </div>
-                  </div>
-
-
-                  ";
-
-                  document.getElementById("AP").appendChild(x);-->*/
-
                 })
 
-                buildDropDown(tests)
+                buildTestDropDown(tests)
               </script>
-
-
-
-
 
             </div>
           </div>
@@ -465,3 +446,10 @@
   <body>
 </body>
 </html> -->
+
+
+
+
+
+ 
+  
