@@ -155,27 +155,27 @@
          
 		 <button class="collapsible2">Arts and Humanities</button>
           <div class="content">
-            <label><input id = "Art" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Art</label><br>
-            <label><input id = "Comparitive Literature" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Comparitive Literature</label><br>
-            <label><input id = "Drama, Theatre, & Dance" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Drama, Theatre, & Dance</label><br>
-            <label><input id = "English" type="checkbox" name = "Major" class="single-checkbox" onclick=updateValue(id)> English</label><br>
-            <label><input id = "Media Studies" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Media Studies</label><br>
+            <input id = "Art" type="checkbox" onclick=updateValue(id)> Art<br>
+            <input id = "Comparitive Literature" type="checkbox" onclick=updateValue(id)> Comparitive Literature<br>
+            <input id = "Drama, Theatre, & Dance" type="checkbox" onclick=updateValue(id)> Drama, Theatre, & Dance<br>
+            <input id = "English" type="checkbox" onclick=updateValue(id)> English<br>
+            <input id = "Media Studies" type="checkbox" onclick=updateValue(id)> Media Studies<br>
           </div>
 		 
           <button class="collapsible2">Mathematics and Natural Sciences</button>
           <div class="content">
-            <label><input id = "Biology" name = "Major" type="checkbox" onclick=updateValue(id)> Biology</label><br>
-            <label><input id = "Chemistry" name = "Major" type="checkbox" onclick=updateValue(id)> Chemistry</label><br>
-            <label><input id = "Physics" name = "Major" type="checkbox" onclick=updateValue(id)> Physics</label><br>
-            <label><input id = "Computer Science BA" name = "Major" type="checkbox" onclick=updateValue(id)> Computer Science BA</label><br>
-            <label><input id = "Computer Science BS" name = "Major" type="checkbox" onclick=updateValue(id)> Computer Science BS</label><br>
+            <input id = "Biology" type="checkbox" onclick=updateValue(id)> Biology <br>
+            <input id = "Chemistry" type="checkbox" onclick=updateValue(id)> Chemistry<br>
+            <input id = "Physics" type="checkbox" onclick=updateValue(id)> Physics<br>
+            <input id = "Computer Science BA" type="checkbox" onclick=updateValue(id)> Computer Science BA<br>
+            <input id = "Computer Science BS" type="checkbox" onclick=updateValue(id)> Computer Science BS<br>
           </div>
 
           <button class="collapsible2">Education</button>
           <div class="content">
-			<label><input id = "Educational and Community Programs" name = "Major" type="checkbox" onclick=updateValue(id)> Educational and Community Programs</label><br>
-			<label><input id = "Elementary and Early Childhood Education" name = "Major" type="checkbox" onclick=updateValue(id)> Elementary and Early Childhood Education</label><br>
-			<label><input id = "Secondary Education and Youth Services" name = "Major" type="checkbox" onclick=updateValue(id)> Secondary Education and Youth Services</label><br>
+			<input id = "Educational and Community Programs" type="checkbox" onclick=updateValue(id)> Educational and Community Programs<br>
+			<input id = "Elementary and Early Childhood Education" type="checkbox" onclick=updateValue(id)> Elementary and Early Childhood Education<br>
+			<input id = "Secondary Education and Youth Services" type="checkbox" onclick=updateValue(id)> Secondary Education and Youth Services<br>
           </div>
 
           <!--Script for collapsible -->
@@ -207,7 +207,6 @@
     </div>
 
 	<script>
-		// Updates major selection for user to view
 		function updateValue(majorName) {
 			if (document.getElementById(majorName).checked) {
 			
@@ -227,14 +226,6 @@
 				}
 			}
 		}
-		
-		// Limits user to select only 2 majors.
-		var limit = 3;
-		$('input.single-checkbox').on('change', function(evt) {
-			if($(("input[name = 'Major']:checked")).length >= limit) {
-				this.checked = false;
-			}
-		});
 	</script>
 	
     <div style=margin-left:50px;margin-top:15px;>
@@ -268,7 +259,7 @@
       <div class="card">
         <div class="card-body">
 
-          <h5 id="Major2">Choose a major.</h5>
+          <h5 id="Major2"> Choose a major.</h5>
           <p class="card-text"></p>
 
           <div class="progress">
