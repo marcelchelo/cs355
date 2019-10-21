@@ -243,20 +243,30 @@
         <div role="tabpanel" class="tab-pane " id="Majors">
           <!--List of majors -->
           <p>Majors sorted by category:</p>
+		
+		 <button class="collapsible">Arts and Humanities</button>
+          <div class="content">
+            <label><input id = "Art" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Art</label><br>
+            <label><input id = "Comparitive Literature" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Comparitive Literature</label><br>
+            <label><input id = "Drama, Theatre, & Dance" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Drama, Theatre, & Dance</label><br>
+            <label><input id = "English" type="checkbox" name = "Major" class="single-checkbox" onclick=updateValue(id)> English</label><br>
+            <label><input id = "Media Studies" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Media Studies</label><br>
+          </div>
+		 
           <button class="collapsible">Mathematics and Natural Sciences</button>
           <div class="content">
-            <input type="checkbox" name="Bio" value="Bio"> Biology<br>
-            <input type="checkbox" name="Chem" value="Chem"> Chemistry<br>
-            <input type="checkbox" name="Phys" value="Phys"> Physics<br>
-            <input type="checkbox" name="CS_BA" value="CS_BA"> Computer Science BA<br>
-            <input type="checkbox" name="CS_BS" value="CS_BS"> Computer Science BS<br>
+            <label><input id = "Biology" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Biology</label><br>
+            <label><input id = "Chemistry" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Chemistry</label><br>
+            <label><input id = "Physics" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Physics</label><br>
+            <label><input id = "Computer Science BA" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Computer Science BA</label><br>
+            <label><input id = "Computer Science BS" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Computer Science BS</label><br>
           </div>
 
           <button class="collapsible">Education</button>
           <div class="content">
-            <input type="checkbox" name="ECP" value="ECP"> Educational and Community Programs<br>
-            <input type="checkbox" name="ECE" value="ECE"> Elementary and Early Childhood Education<br>
-            <input type="checkbox" name="SE" value="SE"> Secondary Education and Youth Services<br>
+			<label><input id = "Educational and Community Programs" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Educational and Community Programs</label><br>
+			<label><input id = "Elementary and Early Childhood Education" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Elementary and Early Childhood Education</label><br>
+			<label><input id = "Secondary Education and Youth Services" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Secondary Education and Youth Services</label><br>
           </div>
 
           <!--Script for collapsible -->
@@ -277,6 +287,37 @@
           </script>
 
         </div>
+
+<script>
+		// Updates major selection for user to view
+		function updateValue(majorName) {
+			if (document.getElementById(majorName).checked) {
+			
+				if (document.getElementById("Major1").innerHTML != "Choose a major." && document.getElementById("Major2").innerHTML == "Choose a major.") {
+						document.getElementById("Major2").innerHTML = majorName;
+				}
+				if (document.getElementById("Major1").innerHTML == "Choose a major.") {
+					document.getElementById("Major1").innerHTML = majorName;
+				}
+			}
+			else {
+				if (document.getElementById("Major2").innerHTML != "Choose a major.") {
+					document.getElementById("Major2").innerHTML = "Choose a major.";
+				}
+				else {
+					document.getElementById("Major1").innerHTML ="Choose a major.";
+				}
+			}
+		}
+		
+		// Limits user to select only 2 majors.
+		var limit = 3;
+		$('input.single-checkbox').on('change', function(evt) {
+			if($(("input[name = 'Major']:checked")).length >= limit) {
+				this.checked = false;
+			}
+		});
+	</script>
 
         <div role="tabpanel" class="tab-pane " id="Classes">Classes taken
         </div>
@@ -377,7 +418,7 @@
       <div class="card">
         <div class="card-body">
 
-          <h5 class="card-title">Some Major Here</h5>
+          <h5 id="Major1">Choose a major.</h5>
           <p class="card-text"></p>
 
           <div class="progress">
@@ -398,7 +439,7 @@
       <div class="card">
         <div class="card-body">
 
-          <h5 class="card-title">Some Major Here</h5>
+          <h5 id="Major2">Choose a major.</h5>
           <p class="card-text"></p>
 
           <div class="progress">
