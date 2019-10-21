@@ -32,7 +32,7 @@
   color: white;
 }
 
-.wrapper {
+.wrapper{
   display: grid;
   height: 1000px;
   grid-template-columns: 60% 40%;
