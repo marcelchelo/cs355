@@ -16,10 +16,11 @@ body a, html a {
 
 header {
   padding: 0 2.5em;
-  height: 65vh;
+  height: 70vh;
   width: 100%;
   background-image: url("../images/bg.png");
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 header .header-container {
