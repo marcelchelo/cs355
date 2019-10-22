@@ -49,17 +49,18 @@ header .header-container .menu-btn {
 
 header .header-txt {
   color: white;
-  width: 375px;
+  width: 400px;
   padding: 0;
   position: absolute;
   top: 40%;
   left: 10%;
   margin-top: -130px;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 header .header-txt h1 {
   font-size: 3em;
-  display: inline-block;
+  display: inline;
 }
 
 header .header-txt h1::before {
@@ -70,6 +71,41 @@ header .header-txt h1::before {
 
 header .header-txt p {
   font-size: 1.2em;
+  padding: 0 10px;
+}
+
+/* Responsiveness for Cellphones */
+
+@media only screen and (max-width: 500px) {
+
+    header .header-container a img {
+    max-width: 100px;
+  }
+
+    header {
+    height: 10vh;
+    width: 100%;
+  }
+
+    header .header-txt {
+    display: none;
+  }
+}
+
+/* Responsiveness for Tablets */
+
+@media only screen and (min-width: 600px; max-width: 768px) {
+
+    header .header-container a img {
+    max-width: 100px;
+  }
+
+    header {
+    height: 45vh;
+  }
+
+/* _________________________ */
+
 }
 
 .main-nav {

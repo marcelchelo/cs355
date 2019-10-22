@@ -66,15 +66,16 @@
 .rightSide{
   background-color:#EDEEEC;
   height: 100%;
+  margin-left:50px;
+  margin-top:15px;
 }
 
 .card{
   background-color:white;
   width:90%;
   height:auto;
-  margin:0 auto;
+  margin:0 auto 5%;
   top:5%;
-  margin-bottom:5%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -101,4 +102,37 @@
 
 .button:focus {
 outline:0;
+}
+
+/* Responsiveness for Cellphones */
+
+@media only screen and (max-width: 500px) {
+
+  .wrapper {
+  grid-template-columns: 100%;
+  justify-items: center;
+}
+
+  .rightSide{
+  background-color:#EDEEEC;
+  height: 85%;
+  width: 375px;
+  margin:0;
+}
+
+}
+
+/* Responsiveness for Tablets */
+
+@media only screen and (min-width: 400px; max-width: 768px) {
+
+  .wrapper {
+  grid-template-columns: 60% 40%;
+}
+
+  .rightSide{
+  background-color:#EDEEEC;
+  height: 100%;
+  width: 375px;
+  margin:0;
 }
