@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="./style/css/home.css">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="./style/fonts/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -88,9 +89,14 @@
       <div class="tab-content">
         <!-- SELECT "FROM SCHOOL" TAB -->
         <div role="tabpanel" class="tab-pane active" id="From">
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_past_schools" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+
+          <button id="btn-add-past-schools" class="btn btn-outline-secondary col-xs-12">
+            <span id="btn-add-past-schools-font">+ Add a past college or university</span>
+          </button>
+
+          <div class="dropdown dropdown-past-schools-div">
+            <button class="btn btn-secondary dropdown-toggle btn-past-schools" type="button" id="dropdown_past_schools"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Find your past college or university
             </button>
             <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_past_schools">
@@ -101,8 +107,29 @@
               <div id="pastEmpty" class="dropdown-header">No schools found</div>
             </div>
           </div>
+
+          <!-- Script for adding additional past schools -->
+          <script>
+            var numOfPastSchoolsSelection = 1;
+            $(function() {
+              $('#btn-add-past-schools').click(function() {
+                if (numOfPastSchoolsSelection < 3) {
+                  let newDiv = $('.dropdown-past-schools-div').clone()
+                  console.log(newDiv.length)
+                  $('#From').append(newDiv[0])
+                  numOfPastSchoolsSelection++;
+                } else {
+                  console.log("Exceeded the number of past schools")
+                }
+              })
+            })
+          </script>
+
           <!-- Script for school search-->
-			<script>
+          <script>
+            // Stores the list of selected schools
+            var selectedSchools = []
+
             // Initialize list with example colleges
             let pastSchools = ["Alabama State University", "Adelphi University",  "CUNY Queens College", "CUNY Hunter College", "CUNY City Tech", "CUNY John Jay", "SUNY Binghamtom University"]
 
@@ -160,6 +187,8 @@
             $('#pastMenuItems').on('click', '.past-dropdown-item', function () {
               $('#dropdown_past_schools').text($(this)[0].value)
               $('#dropdown_past_schools').dropdown('toggle')
+              selectedSchools.push(($(this)[0].value))
+              console.log(selectedSchools)
             })
 
             buildPastDropDown(pastSchools)
