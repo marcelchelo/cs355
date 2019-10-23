@@ -278,8 +278,192 @@
 
         </div>
 
+<<<<<<< Updated upstream
         <div role="tabpanel" class="tab-pane " id="Classes">Classes taken
         </div>
+=======
+<script>
+		// Updates major selection for user to view
+		function updateValue(majorName) {
+			if (document.getElementById(majorName).checked) {
+			
+				if (document.getElementById("Major1").innerHTML != "Choose a major." && document.getElementById("Major2").innerHTML == "Choose a major.") {
+						document.getElementById("Major2").innerHTML = majorName;
+				}
+				if (document.getElementById("Major1").innerHTML == "Choose a major.") {
+					document.getElementById("Major1").innerHTML = majorName;
+				}
+			}
+			else {
+				if (document.getElementById("Major2").innerHTML != "Choose a major.") {
+					document.getElementById("Major2").innerHTML = "Choose a major.";
+				}
+				else {
+					document.getElementById("Major1").innerHTML ="Choose a major.";
+				}
+			}
+		}
+		
+		// Limits user to select only 2 majors.
+		var limit = 3;
+		$('input.single-checkbox').on('change', function(evt) {
+			if($(("input[name = 'Major']:checked")).length >= limit) {
+				this.checked = false;
+			}
+		});
+	</script>
+
+        <!--The Classes Tab-->
+        <div role="tabpanel" class="tab-pane " id="Classes">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_classes" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" onclick="Class_Search()" >
+                Find your Previous Classes
+              </button>
+              <div id="classes_menu" class="dropdown-menu" aria-labelledby="dropdown_classes" >
+                <form class="px-4 py-2">
+                  <input type="search" class="form-control" id="searchClasses" placeholder="Search For Classes" autofocus="autofocus">
+                </form>
+                <div id="Classes_Desc" data-toggle="dropdown"></div>
+                <div id="NoClasses" class="dropdown-header">No Classes Selected</div>
+              </div>
+            </div>
+          
+          <!--Script for the classes Tab-->
+          <script>
+             let school_name;
+             let list_of_classes = [];
+
+
+             
+             
+              //dictionary of classes and what school they are from
+             let Schools_Classes = {}
+                  Schools_Classes["CUNY Queens College"] = ["English 101" , "CS 101" , "History 105" , "Math 241" , "Chem 103"] ;
+                  Schools_Classes["Alabama State University"] = ["English 201" , "CS 111" , "History 115" , "Math 931" , "Phys 103" , "Gym 1000"] ;
+                  Schools_Classes["Adelphi University"] = ["English 325" , "CS 207" , "CS 999" , "Math 200" , "Bio 102" , "Bio 103"] ; 
+                  Schools_Classes["CUNY Hunter College"] = ["English 110" , "CS 542" , "History 105" , "Math 738" , "Chinese 103"] ;
+                  Schools_Classes["CUNY City Tech"] = ["English 101" , "CS 101" , "CS 102", "History 129" , "Math 257" , "Chem 167" , "Phys 1000"] ;
+                  Schools_Classes["CUNY John Jay"] = ["English 601" , "CS 101" , "History 105" , "Cop 911" , "Nark 101"] ; 
+                  Schools_Classes["SUNY Binghamtom University"] = ["English 1010" , "CS 7331" , "History 1776" , "Math 9876" , "Chem 4317" , "Party 4200"] ; 
+
+            
+           
+
+            // getting the school selected from the FROM tab
+            document.getElementById("dropdown_classes").onclick = function Class_Search()
+            {
+              school_name = document.getElementById("dropdown_past_schools").innerHTML;
+              
+              // if the user never entered a school show a message 
+              if(school_name.includes("Find your")){
+                  document.getElementById("NoClasses").innerHTML = "No School Selected";
+              }
+              else{
+                // putting all the classes into a list 
+                for(var classes in Schools_Classes[school_name]){
+                  list_of_classes.push('<input type ="button" class = "dropdown-item classes-dropdown-item" type="button" value="' + Schools_Classes[school_name][classes] +'"/>' )
+                   
+
+                } 
+                
+                document.getElementById("Classes_Desc").innerHTML = list_of_classes;
+                //list_of_classes = [];
+                // if their exists classes change the message to be blank
+                if(document.getElementById("Classes_Desc").innerHTML != ""){
+                    document.getElementById("NoClasses").innerHTML = "";
+                }
+
+              }  
+      
+              list_of_classes = [];
+            };
+
+          </script>
+          </div>
+        
+        <div role="tabpanel" class="tab-pane " id="AP">
+          <div class="card">
+            <div class="card-body">
+
+              <h5 class="card-title">AP Scores</h5>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_tests" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  Find your AP test
+                </button>
+                <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_past_tests">
+                  <form class="px-4 py-2">
+                    <input type="search" class="form-control" id="searchTests" placeholder="" autofocus="autofocus">
+                  </form>
+                  <div id="testMenuItems"></div>
+                  <div id="testEmpty" class="dropdown-header">No test found</div>
+                </div>
+              </div>
+              <!-- Script for school search-->
+              <script>
+                // Initialize list with example colleges
+                let tests = ["Physics","Biology","Calculus"]
+
+                // Input search box
+                let testsSearchInput = document.getElementById("searchTests")
+
+                // Find all items inside the dropdown
+                let testsDropdownItems = document.getElementsByClassName("test-dropdown-item")
+
+                function buildTestDropDown(values) {
+                  let contents = []
+                  for (let test of values) {
+                    contents.push('<input type="button" class="dropdown-item test-dropdown-item" type="button" value="' + test + '"/>')
+                  }
+                  // Hides all schools by default.
+                  $('#testMenuItems').append(contents.join("")).hide()
+                  $('#testEmpty').show()
+                }
+                // Capture the event when user types into search box
+                document.querySelector("#searchTests").addEventListener('input', function() {
+                  if (testsSearchInput.value.length !== 0) {
+                    filterTest(testsSearchInput.value.trim().toLowerCase())
+                  }
+
+                  else {
+                    $('#testMenuItems').hide()
+                    $('#testEmpty').show()
+                  }
+                })
+                // For every word entered by user, check if symbol includes with that word
+                // If symbol exists, show the symbol; else hide it
+                function filterTest(word) {
+                  let length = testsDropdownItems.length
+                  let collection = []
+                  let hidden = 0
+                  for (let i = 0; i < length; i++) {
+                    if (testsDropdownItems[i].value.toLowerCase().includes(word)) {
+                      $('#testMenuItems').show()
+                      $(testsDropdownItems[i]).show()
+                    }
+                    else {
+                      $(testsDropdownItems[i]).hide()
+                      hidden++
+                    }
+                  }
+                  // If all items are hidden, show the empty view
+                  if (hidden === length) {
+                    $('#testEmpty').show()
+                  }
+                  else {
+                    $('#testEmpty').hide()
+                  }
+                }
+                // If the user clicks on any item, set the title of button as the text of the item
+                $('#testMenuItems').on('click', '.test-dropdown-item', function () {
+                  $('#dropdown_tests').text($(this)[0].value)
+                  $('#dropdown_tests').dropdown('toggle')
+                })
+
+                buildTestDropDown(tests)
+              </script>
+>>>>>>> Stashed changes
 
         <div role="tabpanel" class="tab-pane " id="AP">AP scores
         </div>
