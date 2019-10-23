@@ -57,11 +57,88 @@
           <p>Choose your color, then click the button below to apply it to the student page!</p>
           <button class="btn btn-info btn-lg" onclick="changeColor()">Change Color</button>
         </div>
+        <!-- let Schools_Classes = {}
+                Schools_Classes["CUNY Queens College"] = ["English 101" , "CS 101" , "History 105" , "Math 241" , "Chem 103"] ;
+                Schools_Classes["Alabama State University"] = ["English 201" , "CS 111" , "History 115" , "Math 931" , "Phys 103" , "Gym 1000"] ;
+                Schools_Classes["Adelphi University"] = ["English 325" , "CS 207" , "CS 999" , "Math 200" , "Bio 102" , "Bio 103"] ; 
+                Schools_Classes["CUNY Hunter College"] = ["English 110" , "CS 542" , "History 105" , "Math 738" , "Chinese 103"] ;
+                Schools_Classes["CUNY City Tech"] = ["English 101" , "CS 101" , "CS 102", "History 129" , "Math 257" , "Chem 167" , "Phys 1000"] ;
+                Schools_Classes["CUNY John Jay"] = ["English 601" , "CS 101" , "History 105" , "Cop 911" , "Nark 101"] ; 
+                Schools_Classes["SUNY Binghamtom University"] = ["English 1010" , "CS 7331" , "History 1776" , "Math 9876" , "Chem 4317" , "Party 4200"] ;  -->
+
         <div class="tab-pane" id="v-pills-class" role="tabpanel" aria-labelledby="v-pills-class-tab">
+        <h2><strong>Classes</strong> </h2>
+        <!--Putting teh data in the first row and column of width 6-->
+          <div class ="row">
+              <div class="col -6">
+              
+              <h5>Please pick a school </h5></br>
+                <div id = "CUNY">
+                    <h7><strong>CUNY</strong></h7></br>
+                  
+                  <button type="button" style="background-color:red" class="btn btn-primary"value="CUNY Queens College" onclick="btn_pressed(this.value)">CUNY Queens College</button>
+                  <button type="button" style="background-color:red" class="btn btn-primary"value="Hunter College" onclick="btn_pressed(this.value)">CUNY Hunter College</button>
+                  <button type="button" style="background-color:red" class="btn btn-primary"value="CUNY City Tech" onclick="btn_pressed(this.value)">CUNY City Tech</button>
+                  <button type="button" style="background-color:red" class="btn btn-primary"value="CUNY John Jay" onclick="btn_pressed(this.value)">CUNY John Jay</button>
 
-          <p> test2 </p>
+                </div>
 
+                <div id = "SUNY">
+                    <h7><strong>SUNY</strong></h7></br>
+                    <button type="button" style="background-color:darkblue " class="btn btn-primary" value="SUNY Binghamtom University" id="Binghamtom" onclick="btn_pressed(this.value)">Binghamtom</button>    
+
+                </div>
+
+                <div id = "Other">
+                    <h7><strong>Other</strong></h7></br>
+                    <button type="button" style="background-color:seagreen " class="btn btn-primary" value="Alabama State University" id="Alabama" onclick="btn_pressed(this.value)">Alabama</button>
+
+                </div>
+                
+                <!--Script for the tab so that it lists teh colleges classses once you select the class-->
+                <!--still have to add the removing factor-->
+                <script>
+                    Schools_Classes = {};
+                    list_of_classes = [];
+                      function btn_pressed(btn_name){
+                          Schools_Classes["CUNY Queens College"] = ["English 101" , "CS 101" , "History 105" , "Math 241" , "Chem 103"] ;
+                          Schools_Classes["Alabama State University"] = ["English 201" , "CS 111" , "History 115" , "Math 931" , "Phys 103" , "Gym 1000"] ;
+                          Schools_Classes["Adelphi University"] = ["English 325" , "CS 207" , "CS 999" , "Math 200" , "Bio 102" , "Bio 103"] ; 
+                          Schools_Classes["CUNY Hunter College"] = ["English 110" , "CS 542" , "History 105" , "Math 738" , "Chinese 103"] ;
+                          Schools_Classes["CUNY City Tech"] = ["English 101" , "CS 101" , "CS 102", "History 129" , "Math 257" , "Chem 167" , "Phys 1000"] ;
+                          Schools_Classes["CUNY John Jay"] = ["English 601" , "CS 101" , "History 105" , "Cop 911" , "Nark 101"] ; 
+                          Schools_Classes["SUNY Binghamtom University"] = ["English 1010" , "CS 7331" , "History 1776" , "Math 9876" , "Chem 4317" , "Party 4200"] ; 
+                          
+
+                          for(var classes in Schools_Classes[btn_name]){
+                            list_of_classes.push('<input type ="button" class = "dropdown-item classes-dropdown-item" type="button" value="' + Schools_Classes[btn_name][classes] +'"/>' )
+                          }
+
+                          document.getElementById("Classes_menu").innerHTML = list_of_classes;
+                          document.getElementById("dropdownMenuButton").innerHTML = btn_name;
+
+                          list_of_classes = [];
+
+                      }
+
+                  </script>
+
+              </div>
+              
+              <!--The dropdown menu holding the classes-->
+              <div class="col-6">
+                  <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Please Pick a school</button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                        <div id="Classes_menu" data-toggle="dropdown"><input type="button" class="dropdown-item classes-dropdown-item" value="English 325">,<input type="button" class="dropdown-item classes-dropdown-item" value="CS 207">,<input type="button" class="dropdown-item classes-dropdown-item" value="CS 999">,<input type="button" class="dropdown-item classes-dropdown-item" value="Math 200">,<input type="button" class="dropdown-item classes-dropdown-item" value="Bio 102">,<input type="button" class="dropdown-item classes-dropdown-item" value="Bio 103"></div>
+                      </div>
+                    </div>
+              </div>
+
+          </div>
         </div>
+
+        <!-- </div> -->
         <div class="tab-pane" id="v-pills-score" role="tabpanel" aria-labelledby="v-pills-score-tab">
           <h2>Review Rules for AP Exams</h2>
           <p>Choose the AP Exam you would like to review the rules for.</p>
