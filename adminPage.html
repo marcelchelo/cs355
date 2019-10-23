@@ -1,0 +1,319 @@
+<html lang="en">
+ <head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Transfer Portal - Admin</title>
+  <!-- Local CSS -->
+  <link rel="stylesheet" href="./style/css/admin.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="style/js/student.js"></script>
+  <script src="style/js/admin.js"></script>
+</head>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <ul class="navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" href="index.html">Transfer Portal</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="student.html">Go to Student</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/marcelchelo/cs355">Github Repository</a>
+    </li>
+  </ul>
+</nav>
+
+ <body>
+
+   <div class="split">
+     <div class="leftSide">
+        <a class="navbar-brand" href="adminPage.html"><h5>Settings for Transfer Protocol</h5></a>
+      </nav>
+
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" id="v-pills-aseth-tab" data-toggle="pill" href="#v-pills-aseth" role="tab" aria-controls="v-pills-aseth" aria-selected="true">Aesthetics</a>
+        <a class="nav-link" id="v-pills-class-tab" data-toggle="pill" href="#v-pills-class" role="tab" aria-controls="v-pills-class" aria-selected="false">Classes</a>
+        <a class="nav-link" id="v-pills-score-tab" data-toggle="pill" href="#v-pills-score" role="tab" aria-controls="v-pills-score" aria-selected="false">AP Scores</a>
+        <a class="nav-link" id="v-pills-rules-tab" data-toggle="pill" href="#v-pills-rules" role="tab" aria-controls="v-pills-score" aria-selected="false">Transfer Rules</a>
+        <a class="nav-link" id="v-pills-more-tab" data-toggle="pill" href="#v-pills-more" role="tab" aria-controls="v-pills-more" aria-selected="false">Could add more</a>
+      </div>
+     </div>
+
+    <div class="rightSide">
+
+      <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane show active"  id="v-pills-aseth" role="tabpanel" aria-labelledby="v-pills-aseth-tab">
+          <h2>Change Background Color of Student Page</h2>
+          <input type="color" id="studentPageColor">
+          <p>Choose your color, then click the button below to apply it to the student page!</p>
+          <button class="btn btn-info btn-lg" onclick="changeColor()">Change Color</button>
+        </div>
+        <div class="tab-pane" id="v-pills-class" role="tabpanel" aria-labelledby="v-pills-class-tab">
+
+          <p> test2 </p>
+
+        </div>
+        <div class="tab-pane" id="v-pills-score" role="tabpanel" aria-labelledby="v-pills-score-tab">
+          <h2>Review Rules for AP Exams</h2>
+          <p>Choose the AP Exam you would like to review the rules for.</p>
+
+          <div id="math">
+            <h5>Mathematics</h5>
+            <button type="button" class="btn btn-primary" onclick="window.location.href = '#';">Calculus AB</button>
+            <button type="button" class="btn btn-primary" onclick="window.location.href = '#';">Calculus BC</button>
+            <button type="button" class="btn btn-primary" onclick="window.location.href = '#';">Statistics</button>
+          </div>
+          <br>
+          <div id="science">
+            <h5>Sciences</h5>
+              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Biology</button>
+              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Chemistry</button>
+              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Computer Science</button>
+              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Computer Science Principles</button>
+              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Environmental Science</button><br><br>
+              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Physics 1: Algebra Based</button>
+              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Physics 2: Algebra Based</button>
+              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Physics C: Electricity and Magnetism</button><br><br>
+              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Physics C: Mechanics</button>
+              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Psychology</button>
+          </div>
+          <br>
+          <div id="language">
+            <h5>Languages</h5>
+              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">Chinese Language and Culture</button>
+              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">English Language and Composition</button>
+              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">English Literature and Composition</button><br><br>
+              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">French Language and Culture</button>
+              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">German Language and Culture</button>
+              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">Italian Language and Culture</button><br><br>
+              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">Japanese Language and Culture</button>
+              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">Latin</button>
+              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">Spanish Language and Culture</button>
+              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">Spanish Literature and Culture</button>
+          </div>
+          <br>
+          <div id="social studies">
+            <h5>Social Studies</h5>
+              <button type="button" class="btn btn-danger" onclick="window.location.href = '#';">European History</button>
+              <button type="button" class="btn btn-danger" onclick="window.location.href = '#';">Government and Politics (Comparitive)</button>
+              <button type="button" class="btn btn-danger" onclick="window.location.href = '#';">Government and Politics (US)</button><br><br>
+              <button type="button" class="btn btn-danger" onclick="window.location.href = '#';">Human Geography</button>
+              <button type="button" class="btn btn-danger" onclick="window.location.href = '#';">Macroeconomics</button>
+              <button type="button" class="btn btn-danger" onclick="window.location.href = '#';">Microeconomics</button>
+              <button type="button" class="btn btn-danger" onclick="window.location.href = '#';">US History</button>
+              <button type="button" class="btn btn-danger" onclick="window.location.href = '#';">World History (Modern)</button>
+          </div>
+          <br>
+          <div id="art">
+            <h5>Arts</h5>
+            <button type="button" class="btn btn-warning" onclick="window.location.href = '#';">Art History</button>
+            <button type="button" class="btn btn-warning" onclick="window.location.href = '#';">Studio Art Drawing</button>
+            <button type="button" class="btn btn-warning" onclick="window.location.href = '#';">Studio Art 2-D Design</button>
+            <button type="button" class="btn btn-warning" onclick="window.location.href = '#';">Studio Art 3-D Design</button>
+          </div>
+          <br>
+          <div id="other">
+            <h5>Other</h5>
+            <button type="button" class="btn btn-dark" onclick="window.location.href = '#';">Research</button>
+            <button type="button" class="btn btn-dark" onclick="window.location.href = '#';">Seminar</button>
+            <button type="button" class="btn btn-dark" onclick="window.location.href = '#';">Music Theory</button>
+            <br><br>
+          </div>
+        </div>
+        <div class="tab-pane" id="v-pills-rules" role="tabpanel" aria-labelledby="v-pills-rules-tab">
+          <h2>Review/Modify Transfer Rules</h2>
+          <p style="color:red">Note: If you choose multiple schools coming from, you can only choose one school going to. If you choose multiple schools going to, you can only choose one school coming from. </p>
+          <br>
+            <form method="post" action="#" id="form1">
+              <fieldset id="from-school">
+                <h4>School(s) Coming From:</h4>
+                <div id="from-school-list">
+                    <input type="checkbox"  id="baruch" name="from-check">
+                    <label for="baruch">Baruch College</label>
+
+                    <input type="checkbox" id="bmcc" name="from-check">
+                    <label for="bmcc">BMCC</label>
+
+                    <input type="checkbox" id="bronx" name="from-check">
+                    <label for="bronx">Bronx Community College</label>
+
+                    <input type="checkbox" id="brookyln" name="from-check">
+                    <label for="brooklyn">Brooklyn College</label>
+
+                    <input type="checkbox" id="city" name="from-check">
+                    <label for="city">City College</label>
+
+                    <input type="checkbox" id="csi" name="from-check">
+                    <label for="csi">College of Staten Island</label> <br>
+
+                    <input type="checkbox" id="law" name="from-check">
+                    <label for="law">CUNY School of Law</label>
+
+                    <input type="checkbox" id="medical" name="from-check">
+                    <label for="medical">CUNY School of Medicine</label>
+
+                    <input type="checkbox" id="journalism" name="from-check">
+                    <label for="journalism">Craig Newmark Graduate School of Journalism</label> <br>
+
+                    <input type="checkbox" id="guttman" name="from-check">
+                    <label for="guttman">Guttman Community College</label>
+
+                    <input type="checkbox" id="hostos" name="from-check"> 
+                    <label for="hostos">Hostos Community College</label>
+
+                    <input type="checkbox" id="hunter" name="from-check">
+                    <label for="hunter">Hunter College</label>
+
+                    <input type="checkbox" id="john jay" name="from-check">
+                    <label for="john jay">John Jay School of Criminal Justice</label> <br>
+
+                    <input type="checkbox" id="kingsborough" name="from-check">
+                    <label for="kingsborough">Kingsborough Community College</label>
+
+                    <input type="checkbox" id="lagcc" name="from-check">
+                    <label for="lagcc">LaGuardia Community College</label>
+
+                    <input type="checkbox" id="lehman" name="from-check">
+                    <label for="lehman">Lehman College</label>
+
+                    <input type="checkbox" id="medgar" name="from-check">
+                    <label for="medgar">Medgar Evers College</label> <br>
+
+                    <input type="checkbox" id="city tech" name="from-check">
+                    <label for="city tech">New York City College of Technology</label>
+
+                    <input type="checkbox" id="queens" name="from-check">
+                    <label for="queens">Queens College</label>
+
+                    <input type="checkbox" id="queensborough" name="from-check">
+                    <label for="queensborough">Queensborough Community College</label> <br>
+
+                    <input type="checkbox" id="labor urban" name="from-check">
+                    <label for="labor urban">CUNY School of Labor and Urban Studies</label>
+
+                    <input type="checkbox" id="sps" name="from-check">
+                    <label for="sps">CUNY School of Professional Studies</label>
+
+                    <input type="checkbox" id="public health" name="from-check">
+                    <label for="public health">CUNY Graduate School of Public Health</label> <br>
+
+                    <input type="checkbox" id="grad" name="from-check">
+                    <label for="grad">CUNY Graduate Center</label>
+
+                    <input type="checkbox" id="york" name="from-check">
+                    <label for="york">York College</label>
+
+                   <br><button type="button" class="btn btn-dark" onclick="clearAllFromSchools()">Clear All</button>
+                    
+                </div>
+
+            </fieldset>
+            <br>
+            <fieldset id="to-school">
+              <h4>School(s) Going to:</h4>
+              <div id="to-school-list">
+                  <input type="checkbox"  id="baruch2" name="to-check">
+                  <label for="baruch2">Baruch College</label>
+
+                  <input type="checkbox" id="bmcc2" name="to-check">
+                  <label for="bmcc2">BMCC</label>
+
+                  <input type="checkbox" id="bronx2" name="to-check">
+                  <label for="bronx2">Bronx Community College</label>
+
+                  <input type="checkbox" id="brookyln2" name="to-check">
+                  <label for="brooklyn2">Brooklyn College</label>
+
+                  <input type="checkbox" id="city2" name="to-check">
+                  <label for="city2">City College</label>
+
+                  <input type="checkbox" id="csi2" name="to-check">
+                  <label for="csi2">College of Staten Island</label> <br>
+
+                  <input type="checkbox" id="law2" name="to-check">
+                  <label for="law2">CUNY School of Law</label>
+
+                  <input type="checkbox" id="medical2" name="to-check">
+                  <label for="medical2">CUNY School of Medicine</label>
+
+                  <input type="checkbox" id="journalism2" name="to-check">
+                  <label for="journalism2">Craig Newmark Graduate School of Journalism</label> <br>
+
+                  <input type="checkbox" id="guttman2" name="to-check">
+                  <label for="guttman2">Guttman Community College</label>
+
+                  <input type="checkbox" id="hostos2" name="to-check">
+                  <label for="hostos2">Hostos Community College</label>
+
+                  <input type="checkbox" id="hunter2" name="to-check">
+                  <label for="hunter2">Hunter College</label>
+
+                  <input type="checkbox" id="john jay2" name="to-check">
+                  <label for="john jay2">John Jay School of Criminal Justice</label> <br>
+
+                  <input type="checkbox" id="kingsborough2" name="to-check">
+                  <label for="kingsborough2">Kingsborough Community College</label>
+
+                  <input type="checkbox" id="lagcc2" name="to-check">
+                  <label for="lagcc2">LaGuardia Community College</label>
+
+                  <input type="checkbox" id="lehman2" name="to-check">
+                  <label for="lehman2">Lehman College</label>
+
+                  <input type="checkbox" id="medgar2" name="to-check">
+                  <label for="medgar2">Medgar Evers College</label> <br>
+
+                  <input type="checkbox" id="city tech2" name="to-check">
+                  <label for="city tech2">New York City College of Technology</label>
+
+                  <input type="checkbox" id="queens2" name="to-check">
+                  <label for="queens2">Queens College</label>
+
+                  <input type="checkbox" id="queensborough2" name="to-check">
+                  <label for="queensborough2">Queensborough Community College</label> <br>
+
+                  <input type="checkbox" id="labor urban2" name="to-check">
+                  <label for="labor urban2">CUNY School of Labor and Urban Studies</label>
+
+                  <input type="checkbox" id="sps2" name="to-check">
+                  <label for="sps2">CUNY School of Professional Studies</label>
+
+                  <input type="checkbox" id="public health2" name="to-check">
+                  <label for="public health2">CUNY Graduate School of Public Health</label> <br>
+
+                  <input type="checkbox" id="grad2" name="to-check">
+                  <label for="grad2">CUNY Graduate Center</label>
+
+                  <input type="checkbox" id="york2" name="to-check">
+                  <label for="york2">York College</label>
+
+                  <br><button type="button" class="btn btn-dark" onclick="clearAllToSchools()">Clear All</button>
+              </div>
+            </fieldset>
+
+            <br><button type="submit" class="btn btn-primary">Check Rules</button>
+          </form>
+          <br>
+
+        </div>
+
+        <div class="tab-pane" id="v-pills-more" role="tabpanel" aria-labelledby="v-pills-more-tab">
+
+          <p> test5 </p>
+          <a href="student.html">Go to student</a>
+
+        </div>
+     </div>
+  </div>
+
+</body>
+<html>
