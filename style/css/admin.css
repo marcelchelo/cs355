@@ -21,7 +21,7 @@
 }
 
 .navbar-brand{
-  color:white;
+  color:#dff5f3;
   font-size: 100em;
   padding:10%;
 }
@@ -34,4 +34,32 @@
  background-color:#3C99DC;
  color:white;
 }
+
+fieldset {
+  background-color:#b6c6f0;
+  margin: 20px;
+  padding: 0 10px 10px;
+  border: 1px solid #666;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #666;
+  padding-top: 10px;
+  min-height:100%;
+}
+
+.tab-pane {
+  background-color: #dff5f3;
+  min-height:100%;
+}
+
+body, html{
+  height:100%;
+  margin:0;
+  padding:0;
+}
+
+form{
+  min-height:100%;
+}
+
+
 
