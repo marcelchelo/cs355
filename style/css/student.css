@@ -43,17 +43,24 @@
 .progress {
   margin-bottom: 30px;
   /* border: 2px solid red; */
-  height: 50px;
-  width: 500px;
+  height: 60%;
+  width: 100%;
 }
+
 
 .dropdown {
   margin: 20px;
+  width:90%;
+}
+
+.btn-past-schools{
+  width:100%;
 }
 
 .dropdown-menu {
   max-height: 20rem;
   overflow-y: auto;
+  width:100%;
 }
 
 .rightSide{
@@ -93,5 +100,10 @@
 }
 
 .button:focus {
-outline:0;
+  outline:0;
+}
+
+#btn-add-past-schools-font {
+  font-size: 12px;
+  font-size: 0.9vw;
 }
