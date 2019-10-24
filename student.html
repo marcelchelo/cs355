@@ -55,10 +55,10 @@
 
   </div>
   <section class="header-txt">
-      <h1>Transfer Protocol.</h1>
+      <h1>Transfer Protocol</h1>
       <br>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam alias voluptatum expedita, dolorum ipsum et voluptate facilis ad eum quis natus aliquid, debitis inventore! Corporis beatae asperiores obcaecati velit? Incidunt.</p>
-  
+
     </section>
 </header>
 
@@ -274,7 +274,7 @@
         <div role="tabpanel" class="tab-pane " id="Majors">
           <!--List of majors -->
           <p>Majors sorted by category:</p>
-		
+
 		 <button class="collapsible">Arts and Humanities</button>
           <div class="content">
             <label><input id = "Art" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Art</label><br>
@@ -283,7 +283,7 @@
             <label><input id = "English" type="checkbox" name = "Major" class="single-checkbox" onclick=updateValue(id)> English</label><br>
             <label><input id = "Media Studies" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Media Studies</label><br>
           </div>
-		 
+
           <button class="collapsible">Mathematics and Natural Sciences</button>
           <div class="content">
             <label><input id = "Biology" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Biology</label><br>
@@ -323,7 +323,7 @@
 		// Updates major selection for user to view
 		function updateValue(majorName) {
 			if (document.getElementById(majorName).checked) {
-			
+
 				if (document.getElementById("Major1").innerHTML != "Choose a major." && document.getElementById("Major2").innerHTML == "Choose a major.") {
 						document.getElementById("Major2").innerHTML = majorName;
 				}
@@ -340,7 +340,7 @@
 				}
 			}
 		}
-		
+
 		// Limits user to select only 2 majors.
 		var limit = 3;
 		$('input.single-checkbox').on('change', function(evt) {
@@ -365,44 +365,44 @@
               <div id="NoClasses" class="dropdown-header">No Classes Selected</div>
             </div>
           </div>
-        
+
         <!--Script for the classes Tab-->
         <script>
            let school_name;
            let list_of_classes = [];
 
 
-           
-           
+
+
             //dictionary of classes and what school they are from
            let Schools_Classes = {}
                 Schools_Classes["CUNY Queens College"] = ["English 101" , "CS 101" , "History 105" , "Math 241" , "Chem 103"] ;
                 Schools_Classes["Alabama State University"] = ["English 201" , "CS 111" , "History 115" , "Math 931" , "Phys 103" , "Gym 1000"] ;
-                Schools_Classes["Adelphi University"] = ["English 325" , "CS 207" , "CS 999" , "Math 200" , "Bio 102" , "Bio 103"] ; 
+                Schools_Classes["Adelphi University"] = ["English 325" , "CS 207" , "CS 999" , "Math 200" , "Bio 102" , "Bio 103"] ;
                 Schools_Classes["CUNY Hunter College"] = ["English 110" , "CS 542" , "History 105" , "Math 738" , "Chinese 103"] ;
                 Schools_Classes["CUNY City Tech"] = ["English 101" , "CS 101" , "CS 102", "History 129" , "Math 257" , "Chem 167" , "Phys 1000"] ;
-                Schools_Classes["CUNY John Jay"] = ["English 601" , "CS 101" , "History 105" , "Cop 911" , "Nark 101"] ; 
-                Schools_Classes["SUNY Binghamtom University"] = ["English 1010" , "CS 7331" , "History 1776" , "Math 9876" , "Chem 4317" , "Party 4200"] ; 
+                Schools_Classes["CUNY John Jay"] = ["English 601" , "CS 101" , "History 105" , "Cop 911" , "Nark 101"] ;
+                Schools_Classes["SUNY Binghamtom University"] = ["English 1010" , "CS 7331" , "History 1776" , "Math 9876" , "Chem 4317" , "Party 4200"] ;
 
-          
-         
+
+
 
           // getting the school selected from the FROM tab
           document.getElementById("dropdown_classes").onclick = function Class_Search()
           {
             school_name = document.getElementById("dropdown_past_schools").innerHTML;
-            
-            // if the user never entered a school show a message 
+
+            // if the user never entered a school show a message
             if(school_name.includes("Find your")){
                 document.getElementById("NoClasses").innerHTML = "No School Selected";
             }
             else{
-              // putting all the classes into a list 
+              // putting all the classes into a list
               for(var classes in Schools_Classes[school_name]){
                 list_of_classes.push('<input type ="button" class = "dropdown-item classes-dropdown-item" type="button" value="' + Schools_Classes[school_name][classes] +'"/>' )
-                 
 
-              } 
+
+              }
               console.log(list_of_classes)
               document.getElementById("Classes_Desc").innerHTML = list_of_classes;
               //list_of_classes = [];
@@ -411,14 +411,14 @@
                   document.getElementById("NoClasses").innerHTML = "";
               }
 
-            }  
-    
+            }
+
             list_of_classes = [];
           };
 
         </script>
         </div>
-        
+
         <div role="tabpanel" class="tab-pane " id="AP">
           <div class="card">
             <div class="card-body">
@@ -506,7 +506,7 @@
 
                 buildTestDropDown(tests)
 
-                //Adds a test to div  
+                //Adds a test to div
                 function addSelectedTest(t) {
                   //If there are no tests to begin with, div holding 'Selected Tests' will not be shown
                   //Changes display from none to block
@@ -550,18 +550,18 @@
                   error.appendChild(errorMessage);
                   //Horizontal Rule
                   let rule = document.createElement('hr');
-                  
+
                   test.appendChild(testName);
                   divTest.appendChild(removeButton);
                   divTest.appendChild(test);
                   divTest.appendChild(testScore);
                   divTest.appendChild(error);
                   divTest.appendChild(rule);
-                  
+
                   document.getElementById('selectedTests').appendChild(divTest);
-                  
+
                 }
-                
+
                 //Remove div with test containing the button that was clicked on
                 function removeTest(b) {
                   //Removes div containing button
@@ -579,7 +579,7 @@
                   let s = Number(score.value);
                   if(s === NaN || Number.isInteger(s) === false || s < 1 || s > 5)
                     $(score).parent().find('p').filter('.error').show();
-                  else 
+                  else
                     $(score).parent().find('p').filter('.error').hide();
                 }
               </script>

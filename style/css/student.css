@@ -57,6 +57,10 @@
   width:100%;
 }
 
+.btn{
+  width:100%;
+}
+
 .dropdown-menu {
   max-height: 20rem;
   overflow-y: auto;

@@ -36,356 +36,552 @@
 
    <div class="split">
      <div class="leftSide">
-        <a class="navbar-brand" href="adminPage.html"><h5>Settings for Transfer Protocol</h5></a>
+        <a class="navbar-brand" href="adminPage.html"><h5 style="padding:10px">Settings</h5></a>
       </nav>
 
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
         <a class="nav-link active" id="v-pills-aseth-tab" data-toggle="pill" href="#v-pills-aseth" role="tab" aria-controls="v-pills-aseth" aria-selected="true">Aesthetics</a>
-        <a class="nav-link" id="v-pills-class-tab" data-toggle="pill" href="#v-pills-class" role="tab" aria-controls="v-pills-class" aria-selected="false">Classes</a>
+                <a class="nav-link" id="v-pills-rules-tab" data-toggle="pill" href="#v-pills-rules" role="tab" aria-controls="v-pills-score" aria-selected="false">Transfer School Rules</a>
         <a class="nav-link" id="v-pills-score-tab" data-toggle="pill" href="#v-pills-score" role="tab" aria-controls="v-pills-score" aria-selected="false">AP Scores</a>
-        <a class="nav-link" id="v-pills-rules-tab" data-toggle="pill" href="#v-pills-rules" role="tab" aria-controls="v-pills-score" aria-selected="false">Transfer Rules</a>
         <a class="nav-link" id="v-pills-more-tab" data-toggle="pill" href="#v-pills-more" role="tab" aria-controls="v-pills-more" aria-selected="false">Could add more</a>
       </div>
      </div>
 
     <div class="rightSide">
-
       <div class="tab-content" id="v-pills-tabContent">
         <div class="tab-pane show active"  id="v-pills-aseth" role="tabpanel" aria-labelledby="v-pills-aseth-tab">
-          <h2>Change Background Color of Student Page</h2>
-          <input type="color" id="studentPageColor">
-          <p>Choose your color, then click the button below to apply it to the student page!</p>
-          <button class="btn btn-info btn-lg" onclick="changeColor()">Change Color</button>
-        </div>
-        <!-- let Schools_Classes = {}
-                Schools_Classes["CUNY Queens College"] = ["English 101" , "CS 101" , "History 105" , "Math 241" , "Chem 103"] ;
-                Schools_Classes["Alabama State University"] = ["English 201" , "CS 111" , "History 115" , "Math 931" , "Phys 103" , "Gym 1000"] ;
-                Schools_Classes["Adelphi University"] = ["English 325" , "CS 207" , "CS 999" , "Math 200" , "Bio 102" , "Bio 103"] ; 
-                Schools_Classes["CUNY Hunter College"] = ["English 110" , "CS 542" , "History 105" , "Math 738" , "Chinese 103"] ;
-                Schools_Classes["CUNY City Tech"] = ["English 101" , "CS 101" , "CS 102", "History 129" , "Math 257" , "Chem 167" , "Phys 1000"] ;
-                Schools_Classes["CUNY John Jay"] = ["English 601" , "CS 101" , "History 105" , "Cop 911" , "Nark 101"] ; 
-                Schools_Classes["SUNY Binghamtom University"] = ["English 1010" , "CS 7331" , "History 1776" , "Math 9876" , "Chem 4317" , "Party 4200"] ;  -->
-
-        <div class="tab-pane" id="v-pills-class" role="tabpanel" aria-labelledby="v-pills-class-tab">
-        <h2><strong>Classes</strong> </h2>
-        <!--Putting teh data in the first row and column of width 6-->
-          <div class ="row">
-              <div class="col -6">
-              
-              <h5>Please pick a school </h5></br>
-                <div id = "CUNY">
-                    <h7><strong>CUNY</strong></h7></br>
-                  
-                  <button type="button" style="background-color:red" class="btn btn-primary"value="CUNY Queens College" onclick="btn_pressed(this.value)">CUNY Queens College</button>
-                  <button type="button" style="background-color:red" class="btn btn-primary"value="Hunter College" onclick="btn_pressed(this.value)">CUNY Hunter College</button>
-                  <button type="button" style="background-color:red" class="btn btn-primary"value="CUNY City Tech" onclick="btn_pressed(this.value)">CUNY City Tech</button>
-                  <button type="button" style="background-color:red" class="btn btn-primary"value="CUNY John Jay" onclick="btn_pressed(this.value)">CUNY John Jay</button>
-
+          <div class="splitRight">
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="PageTitleChanger">Page Title</label>
+                      <input type="title" class="form-control" id="aTitle" aria-describedby="textHelp" placeholder="Enter title">
+                      <small id="textHelp" class="form-text text-muted">Text displayed in Browser Title</small>
+                  </div>
                 </div>
-
-                <div id = "SUNY">
-                    <h7><strong>SUNY</strong></h7></br>
-                    <button type="button" style="background-color:darkblue " class="btn btn-primary" value="SUNY Binghamtom University" id="Binghamtom" onclick="btn_pressed(this.value)">Binghamtom</button>    
-
-                </div>
-
-                <div id = "Other">
-                    <h7><strong>Other</strong></h7></br>
-                    <button type="button" style="background-color:seagreen " class="btn btn-primary" value="Alabama State University" id="Alabama" onclick="btn_pressed(this.value)">Alabama</button>
-
-                </div>
-                
-                <!--Script for the tab so that it lists teh colleges classses once you select the class-->
-                <!--still have to add the removing factor-->
-                <script>
-                    Schools_Classes = {};
-                    list_of_classes = [];
-                      function btn_pressed(btn_name){
-                          Schools_Classes["CUNY Queens College"] = ["English 101" , "CS 101" , "History 105" , "Math 241" , "Chem 103"] ;
-                          Schools_Classes["Alabama State University"] = ["English 201" , "CS 111" , "History 115" , "Math 931" , "Phys 103" , "Gym 1000"] ;
-                          Schools_Classes["Adelphi University"] = ["English 325" , "CS 207" , "CS 999" , "Math 200" , "Bio 102" , "Bio 103"] ; 
-                          Schools_Classes["CUNY Hunter College"] = ["English 110" , "CS 542" , "History 105" , "Math 738" , "Chinese 103"] ;
-                          Schools_Classes["CUNY City Tech"] = ["English 101" , "CS 101" , "CS 102", "History 129" , "Math 257" , "Chem 167" , "Phys 1000"] ;
-                          Schools_Classes["CUNY John Jay"] = ["English 601" , "CS 101" , "History 105" , "Cop 911" , "Nark 101"] ; 
-                          Schools_Classes["SUNY Binghamtom University"] = ["English 1010" , "CS 7331" , "History 1776" , "Math 9876" , "Chem 4317" , "Party 4200"] ; 
-                          
-
-                          for(var classes in Schools_Classes[btn_name]){
-                            list_of_classes.push('<input type ="button" class = "dropdown-item classes-dropdown-item" type="button" value="' + Schools_Classes[btn_name][classes] +'"/>' )
-                          }
-
-                          document.getElementById("Classes_menu").innerHTML = list_of_classes;
-                          document.getElementById("dropdownMenuButton").innerHTML = btn_name;
-
-                          list_of_classes = [];
-
-                      }
-
-                  </script>
-
               </div>
-              
-              <!--The dropdown menu holding the classes-->
-              <div class="col-6">
-                  <div class="dropdown">
-                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Please Pick a school</button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
-                        <div id="Classes_menu" data-toggle="dropdown"><input type="button" class="dropdown-item classes-dropdown-item" value="English 325">,<input type="button" class="dropdown-item classes-dropdown-item" value="CS 207">,<input type="button" class="dropdown-item classes-dropdown-item" value="CS 999">,<input type="button" class="dropdown-item classes-dropdown-item" value="Math 200">,<input type="button" class="dropdown-item classes-dropdown-item" value="Bio 102">,<input type="button" class="dropdown-item classes-dropdown-item" value="Bio 103"></div>
-                      </div>
+
+              <div class="card">
+                <div class="card-body">
+                  <p>Change Background Color of Student Page</p>
+                  <input type="color" id="studentPageColor" style="width:30%">
+                  <small class="form-text text-muted">Choose your color, then click the button below to apply it to the student page!</small>
+                  <button class="btn btn-info btn-lg" onclick="changeColor()">Change Color</button>
+                </div>
+              </div>
+
+            </div>
+            <div>
+
+              <div class="card">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="DescChanger">Page Description</label>
+                      <input type="desc" class="form-control" id="aDesc" aria-describedby="textHelp" placeholder="Enter Description">
+                      <small id="textHelp" class="form-text text-muted">Text displayed on page description</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-body">
+                  <p>Upload New Banner and Logo</p>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputBanner">Upload</span>
                     </div>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="inputBanner" aria-describedby="inputBanner1">
+                      <label class="custom-file-label" for="inputBanner">Banner File</label>
+                    </div>
+                  </div>
+                  <div class="input-group" style="top:10px">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputLogo">Upload</span>
+                    </div>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="inputLogo" aria-describedby="inputLogo1">
+                      <label class="custom-file-label" for="inputLogo">Logo File</label>
+                    </div>
+                  </div>
+
+                </div>
               </div>
 
+            </div>
           </div>
         </div>
 
-        <!-- </div> -->
         <div class="tab-pane" id="v-pills-score" role="tabpanel" aria-labelledby="v-pills-score-tab">
           <h2>Review Rules for AP Exams</h2>
-          <p>Choose the AP Exam you would like to review the rules for.</p>
+          <p>Choose a school and AP Exam to review</p>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">School</h5>
+              <div class = "splitRight">
+                <div>
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_tests2" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      Select a school
+                    </button>
+                    <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_past_tests2">
+                      <form class="px-4 py-2">
+                        <input type="search" class="form-control" id="searchTests2" placeholder="" autofocus="autofocus">
+                      </form>
+                      <div id="test2MenuItems"></div>
+                      <div id="test2Empty" class="dropdown-header">No test found</div>
+                    </div>
+                  </div>
+                  <!-- Script for school search-->
+                  <script>
+                    // Initialize list with example colleges
+                    let tests2 = ["Queens College", "City College"]
 
-          <div id="math">
-            <h5>Mathematics</h5>
-            <button type="button" class="btn btn-primary" onclick="window.location.href = '#';">Calculus AB</button>
-            <button type="button" class="btn btn-primary" onclick="window.location.href = '#';">Calculus BC</button>
-            <button type="button" class="btn btn-primary" onclick="window.location.href = '#';">Statistics</button>
+                    // Input search box
+                    let tests2SearchInput = document.getElementById("searchTests2")
+
+                    // Find all items inside the dropdown
+                    let tests2DropdownItems = document.getElementsByClassName("test2-dropdown-item")
+
+                    function buildTest2DropDown(values) {
+                      let contents = []
+                      for (let test of values) {
+                        contents.push('<input type="button" class="dropdown-item test2-dropdown-item" type="button" value="' + test + '"/>')
+                      }
+                      // Hides all schools by default.
+                      $('#test2MenuItems').append(contents.join("")).hide()
+                      $('#test2Empty').show()
+                    }
+                    // Capture the event when user types into search box
+                    document.querySelector("#searchTests2").addEventListener('input', function() {
+                      if (tests2SearchInput.value.length !== 0) {
+                        filterTest2(tests2SearchInput.value.trim().toLowerCase())
+                      }
+
+                      else {
+                        $('#test2MenuItems').hide()
+                        $('#test2Empty').show()
+                      }
+                    })
+                    // For every word entered by user, check if symbol includes with that word
+                    // If symbol exists, show the symbol; else hide it
+                    function filterTest2(word) {
+                      let length = tests2DropdownItems.length
+                      let collection = []
+                      let hidden = 0
+                      for (let i = 0; i < length; i++) {
+                        if (tests2DropdownItems[i].value.toLowerCase().includes(word)) {
+                          $('#test2MenuItems').show()
+                          $(tests2DropdownItems[i]).show()
+                        }
+                        else {
+                          $(tests2DropdownItems[i]).hide()
+                          hidden++
+                        }
+                      }
+                      // If all items are hidden, show the empty view
+                      if (hidden === length) {
+                        $('#test2Empty').show()
+                      }
+                      else {
+                        $('#test2Empty').hide()
+                      }
+                    }
+                    // If the user clicks on any item, set the title of button as the text of the item
+                    var temp ='blank'
+                    $('#test2MenuItems').on('click', '.test2-dropdown-item', function () {
+                      $('#dropdown_tests2').text($(this)[0].value)
+                      temp=$(this)[0].value
+                      editTextap1($(this)[0].value)
+                      defaultScore = 5
+                      display(false)
+                      input()
+                      $('#dropdown_tests2').dropdown('toggle')
+                    })
+
+                    function editTextap1(t)
+                    {
+                      document.getElementById("apschool1").innerHTML = t;
+                    }
+
+                    buildTest2DropDown(tests2)
+                  </script>
+                </div>
+                <div>
+                  <h5 id=apschool1> Select a school please</h5>
+                </div>
+              </div>
+            </div>
           </div>
-          <br>
-          <div id="science">
-            <h5>Sciences</h5>
-              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Biology</button>
-              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Chemistry</button>
-              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Computer Science</button>
-              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Computer Science Principles</button>
-              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Environmental Science</button><br><br>
-              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Physics 1: Algebra Based</button>
-              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Physics 2: Algebra Based</button>
-              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Physics C: Electricity and Magnetism</button><br><br>
-              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Physics C: Mechanics</button>
-              <button type="button" class="btn btn-success" onclick="window.location.href = '#';">Psychology</button>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">AP Scores</h5>
+              <div class="splitRight">
+                <div id="left1">
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_tests" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      Select an AP test
+                    </button>
+                    <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_past_tests">
+                      <form class="px-4 py-2">
+                        <input type="search" class="form-control" id="searchTests" placeholder="" autofocus="autofocus">
+                      </form>
+                      <div id="testMenuItems"></div>
+                      <div id="testEmpty" class="dropdown-header">No test found</div>
+                    </div>
+                  </div>
+                  <!-- Script for school search-->
+                  <script>
+                    // Initialize list with example colleges
+                    let tests = ["Physics","Biology","Calculus"]
+
+                    // Input search box
+                    let testsSearchInput = document.getElementById("searchTests")
+
+                    // Find all items inside the dropdown
+                    let testsDropdownItems = document.getElementsByClassName("test-dropdown-item")
+
+                    function buildTestDropDown(values) {
+                      let contents = []
+                      for (let test of values) {
+                        contents.push('<input type="button" class="dropdown-item test-dropdown-item" type="button" value="' + test + '"/>')
+                      }
+                      // Hides all schools by default.
+                      $('#testMenuItems').append(contents.join("")).hide()
+                      $('#testEmpty').show()
+                    }
+                    // Capture the event when user types into search box
+                    document.querySelector("#searchTests").addEventListener('input', function() {
+                      if (testsSearchInput.value.length !== 0) {
+                        filterTest(testsSearchInput.value.trim().toLowerCase())
+                      }
+
+                      else {
+                        $('#testMenuItems').hide()
+                        $('#testEmpty').show()
+                      }
+                    })
+                    // For every word entered by user, check if symbol includes with that word
+                    // If symbol exists, show the symbol; else hide it
+                    function filterTest(word) {
+                      let length = testsDropdownItems.length
+                      let collection = []
+                      let hidden = 0
+                      for (let i = 0; i < length; i++) {
+                        if (testsDropdownItems[i].value.toLowerCase().includes(word)) {
+                          $('#testMenuItems').show()
+                          $(testsDropdownItems[i]).show()
+                        }
+                        else {
+                          $(testsDropdownItems[i]).hide()
+                          hidden++
+                        }
+                      }
+                      // If all items are hidden, show the empty view
+                      if (hidden === length) {
+                        $('#testEmpty').show()
+                      }
+                      else {
+                        $('#testEmpty').hide()
+                      }
+                    }
+                    // If the user clicks on any item, set the title of button as the text of the item
+                    var temp2='blank'
+                    $('#testMenuItems').on('click', '.test-dropdown-item', function () {
+                      $('#dropdown_tests').text($(this)[0].value)
+                      temp2=$(this)[0].value
+                      editTextap2($(this)[0].value)
+                      defaultScore = 5;
+                      display(false)
+                      input()
+                      $('#dropdown_tests').dropdown('toggle')
+                    })
+
+                    function editTextap2(t)
+                    {
+                      document.getElementById("aptest2").innerHTML = t;
+                    }
+
+                    var defaultScore = 5;
+                    var change2 =true;
+                    var currentScore = document.createElement('H5')
+
+                    function display(status)
+                    {
+                      var text = document.createTextNode("Current Test Score: "+defaultScore)
+                      var left = document.getElementById("left1")
+                      if(temp!='blank'&&temp2!='blank'&&change2)
+                      {
+                        currentScore.appendChild(text);
+                        left.appendChild(currentScore);
+                        change2=false;
+                      }
+                      if(status==false)
+                      {
+                        currentScore.innerHTML="Current Test Score: "+defaultScore;
+                      }
+                      if(status)
+                      {
+                        currentScore.innerHTML="Current Test Score: "+defaultScore;
+                      }
+                    }
+
+                    var change = true;
+                    product = document.createElement("input");
+
+                    function submitted()
+                    {
+                      if(temp=='blank'||temp2=='blank'||isValidScore())
+                      {
+                        alert("Inputs not correct");
+                        isValidScore()
+                      }
+                      else
+                      {
+                        alert("Success")
+                        defaultScore = product.value;
+                        display(true)
+                      }
+                    }
+
+                    function input()
+                    {
+                      var myform = document.createElement("form");
+                      myform.action = "myForm.aspx";
+                      myform.method = "post";
+                      var displayInput = document.createElement('H5')
+                      var text2 = document.createTextNode("Change minimum score")
+                      displayInput.appendChild(text2);
+                      myform.appendChild(product);
+                      var left2 = document.getElementById("left2")
+                      left2.appendChild(myform);
+                      if(temp!='blank'&&temp2!='blank'&&change)
+                      {
+                        left2.appendChild(text2);
+                        change=false;
+                      }
+                    }
+
+                    function isValidScore() {
+                      var x = Number(product.value);
+                      if(x === NaN || Number.isInteger(x) === false || x < 1 || x > 5)
+                      {
+                        return true
+                      }
+
+                      return false
+                    }
+
+                    buildTestDropDown(tests)
+                  </script>
+                </div>
+
+                <div id="left2">
+                  <h5 id="aptest2">Please select a test</h5>
+                </div>
+              </div>
+            </div>
           </div>
-          <br>
-          <div id="language">
-            <h5>Languages</h5>
-              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">Chinese Language and Culture</button>
-              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">English Language and Composition</button>
-              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">English Literature and Composition</button><br><br>
-              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">French Language and Culture</button>
-              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">German Language and Culture</button>
-              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">Italian Language and Culture</button><br><br>
-              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">Japanese Language and Culture</button>
-              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">Latin</button>
-              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">Spanish Language and Culture</button>
-              <button type="button" class="btn btn-info" onclick="window.location.href = '#';">Spanish Literature and Culture</button>
-          </div>
-          <br>
-          <div id="social studies">
-            <h5>Social Studies</h5>
-              <button type="button" class="btn btn-danger" onclick="window.location.href = '#';">European History</button>
-              <button type="button" class="btn btn-danger" onclick="window.location.href = '#';">Government and Politics (Comparitive)</button>
-              <button type="button" class="btn btn-danger" onclick="window.location.href = '#';">Government and Politics (US)</button><br><br>
-              <button type="button" class="btn btn-danger" onclick="window.location.href = '#';">Human Geography</button>
-              <button type="button" class="btn btn-danger" onclick="window.location.href = '#';">Macroeconomics</button>
-              <button type="button" class="btn btn-danger" onclick="window.location.href = '#';">Microeconomics</button>
-              <button type="button" class="btn btn-danger" onclick="window.location.href = '#';">US History</button>
-              <button type="button" class="btn btn-danger" onclick="window.location.href = '#';">World History (Modern)</button>
-          </div>
-          <br>
-          <div id="art">
-            <h5>Arts</h5>
-            <button type="button" class="btn btn-warning" onclick="window.location.href = '#';">Art History</button>
-            <button type="button" class="btn btn-warning" onclick="window.location.href = '#';">Studio Art Drawing</button>
-            <button type="button" class="btn btn-warning" onclick="window.location.href = '#';">Studio Art 2-D Design</button>
-            <button type="button" class="btn btn-warning" onclick="window.location.href = '#';">Studio Art 3-D Design</button>
-          </div>
-          <br>
-          <div id="other">
-            <h5>Other</h5>
-            <button type="button" class="btn btn-dark" onclick="window.location.href = '#';">Research</button>
-            <button type="button" class="btn btn-dark" onclick="window.location.href = '#';">Seminar</button>
-            <button type="button" class="btn btn-dark" onclick="window.location.href = '#';">Music Theory</button>
-            <br><br>
-          </div>
+          <button type="button" class="btn btn-primary" onclick="submitted()">Submit</button>
+          <script>
+
+          </script>
         </div>
         <div class="tab-pane" id="v-pills-rules" role="tabpanel" aria-labelledby="v-pills-rules-tab">
           <h2>Review/Modify Transfer Rules</h2>
-          <p style="color:red">Note: If you choose multiple schools coming from, you can only choose one school going to. If you choose multiple schools going to, you can only choose one school coming from. </p>
-          <br>
-            <form method="post" action="#" id="form1">
-              <fieldset id="from-school">
-                <h4>School(s) Coming From:</h4>
-                <div id="from-school-list">
-                    <input type="checkbox"  id="baruch" name="from-check">
-                    <label for="baruch">Baruch College</label>
+          <p style="color:red">Note: This will allow you to change the transfer rules for base school in regards to extension school </p>
+          <div class=card>
+            <div class=card-body>
+              <h4 class="card-title">Base School</h4>
+             <div class=splitRight>
+               <div>
+                 <div class="dropdown">
+                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_past_schools" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false">
+                     Select a base school
+                   </button>
+                   <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_past_schools">
+                     <form class="px-4 py-2">
+                       <input type="search" class="form-control" id="searchPastSchool" placeholder="" autofocus="autofocus">
+                     </form>
+                     <div id="pastMenuItems"></div>
+                     <div id="pastEmpty" class="dropdown-header">No schools found</div>
+                   </div>
+                 </div>
+                 <!-- Script for school search-->
+       			<script>
+                   // Initialize list with example colleges
+                   let pastSchools = ["Alabama State University", "Adelphi University",  "CUNY Queens College", "CUNY Hunter College", "CUNY City Tech", "CUNY John Jay", "SUNY Binghamtom University"]
 
-                    <input type="checkbox" id="bmcc" name="from-check">
-                    <label for="bmcc">BMCC</label>
+                   // Input search box
+                   let pastSchoolsSearchInput = document.getElementById("searchPastSchool")
 
-                    <input type="checkbox" id="bronx" name="from-check">
-                    <label for="bronx">Bronx Community College</label>
+                   // Find all items inside the dropdown
+                   let pastSchoolsDropdownItems = document.getElementsByClassName("past-dropdown-item")
 
-                    <input type="checkbox" id="brookyln" name="from-check">
-                    <label for="brooklyn">Brooklyn College</label>
+                   function buildPastDropDown(values) {
+                     let contents = []
+                     for (let school of values) {
+                       contents.push('<input type="button" class="dropdown-item past-dropdown-item" type="button" value="' + school + '"/>')
+                     }
+                     // Hides all schools by default.
+                     $('#pastMenuItems').append(contents.join("")).hide()
+                     $('#pastEmpty').show()
+                   }
+                   // Capture the event when user types into search box
+                   document.querySelector("#searchPastSchool").addEventListener('input', function() {
+                     if (pastSchoolsSearchInput.value.length !== 0) {
+                       filterSearchFromPast(pastSchoolsSearchInput.value.trim().toLowerCase())
+                     }
 
-                    <input type="checkbox" id="city" name="from-check">
-                    <label for="city">City College</label>
+                     else {
+                       $('#pastMenuItems').hide()
+                       $('#pastEmpty').show()
+                     }
+                   })
+                   // For every word entered by user, check if symbol includes with that word
+                   // If symbol exists, show the symbol; else hide it
+                   function filterSearchFromPast(word) {
+                     let length = pastSchoolsDropdownItems.length
+                     let collection = []
+                     let hidden = 0
+                     for (let i = 0; i < length; i++) {
+                       if (pastSchoolsDropdownItems[i].value.toLowerCase().includes(word)) {
+                         $('#pastMenuItems').show()
+                         $(pastSchoolsDropdownItems[i]).show()
+                       }
+                       else {
+                         $(pastSchoolsDropdownItems[i]).hide()
+                         hidden++
+                       }
+                     }
+                     // If all items are hidden, show the empty view
+                     if (hidden === length) {
+                       $('#pastEmpty').show()
+                     }
+                     else {
+                       $('#pastEmpty').hide()
+                     }
+                   }
+                   // If the user clicks on any item, set the title of button as the text of the item
+                   $('#pastMenuItems').on('click', '.past-dropdown-item', function () {
+                     $('#dropdown_past_schools').text($(this)[0].value)
+                     editText(($(this)[0].value));
+                     $('#dropdown_past_schools').dropdown('toggle')
+                   })
+                   function editText(t)
+                   {
+                     document.getElementById("school1").innerHTML = t;
+                   }
+                   buildPastDropDown(pastSchools)
+                 </script>
+               </div>
 
-                    <input type="checkbox" id="csi" name="from-check">
-                    <label for="csi">College of Staten Island</label> <br>
+               <div>
+                 <h5 id="school1">Choose a school</h5>
+               </div>
+             </div>
+           </div>
+         </div>
 
-                    <input type="checkbox" id="law" name="from-check">
-                    <label for="law">CUNY School of Law</label>
-
-                    <input type="checkbox" id="medical" name="from-check">
-                    <label for="medical">CUNY School of Medicine</label>
-
-                    <input type="checkbox" id="journalism" name="from-check">
-                    <label for="journalism">Craig Newmark Graduate School of Journalism</label> <br>
-
-                    <input type="checkbox" id="guttman" name="from-check">
-                    <label for="guttman">Guttman Community College</label>
-
-                    <input type="checkbox" id="hostos" name="from-check"> 
-                    <label for="hostos">Hostos Community College</label>
-
-                    <input type="checkbox" id="hunter" name="from-check">
-                    <label for="hunter">Hunter College</label>
-
-                    <input type="checkbox" id="john jay" name="from-check">
-                    <label for="john jay">John Jay School of Criminal Justice</label> <br>
-
-                    <input type="checkbox" id="kingsborough" name="from-check">
-                    <label for="kingsborough">Kingsborough Community College</label>
-
-                    <input type="checkbox" id="lagcc" name="from-check">
-                    <label for="lagcc">LaGuardia Community College</label>
-
-                    <input type="checkbox" id="lehman" name="from-check">
-                    <label for="lehman">Lehman College</label>
-
-                    <input type="checkbox" id="medgar" name="from-check">
-                    <label for="medgar">Medgar Evers College</label> <br>
-
-                    <input type="checkbox" id="city tech" name="from-check">
-                    <label for="city tech">New York City College of Technology</label>
-
-                    <input type="checkbox" id="queens" name="from-check">
-                    <label for="queens">Queens College</label>
-
-                    <input type="checkbox" id="queensborough" name="from-check">
-                    <label for="queensborough">Queensborough Community College</label> <br>
-
-                    <input type="checkbox" id="labor urban" name="from-check">
-                    <label for="labor urban">CUNY School of Labor and Urban Studies</label>
-
-                    <input type="checkbox" id="sps" name="from-check">
-                    <label for="sps">CUNY School of Professional Studies</label>
-
-                    <input type="checkbox" id="public health" name="from-check">
-                    <label for="public health">CUNY Graduate School of Public Health</label> <br>
-
-                    <input type="checkbox" id="grad" name="from-check">
-                    <label for="grad">CUNY Graduate Center</label>
-
-                    <input type="checkbox" id="york" name="from-check">
-                    <label for="york">York College</label>
-
-                   <br><button type="button" class="btn btn-dark" onclick="clearAllFromSchools()">Clear All</button>
-                    
+         <div class=card>
+           <div class=card-body>
+             <h4 class="card-title">Extension School</h4>
+             <div class=splitRight>
+              <div>
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_transfer_schools" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Select a extension school
+                  </button>
+                  <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_transfer_schools">
+                    <form class="px-4 py-2">
+                      <input type="search" class="form-control" id="searchTransferSchool" placeholder="" autofocus="autofocus">
+                    </form>
+                    <div id="transferMenuItems"></div>
+                    <div id="transferEmpty" class="dropdown-header">No schools found</div>
+                  </div>
                 </div>
 
-            </fieldset>
-            <br>
-            <fieldset id="to-school">
-              <h4>School(s) Going to:</h4>
-              <div id="to-school-list">
-                  <input type="checkbox"  id="baruch2" name="to-check">
-                  <label for="baruch2">Baruch College</label>
+                <script>
+                  let transferSchools = ["Baruch College", "Borough of Manhattan CC", "Bronx Community College", "CUNY Queens College"]
 
-                  <input type="checkbox" id="bmcc2" name="to-check">
-                  <label for="bmcc2">BMCC</label>
+                  let transferSchoolsSearchInput = document.getElementById("searchTransferSchool")
 
-                  <input type="checkbox" id="bronx2" name="to-check">
-                  <label for="bronx2">Bronx Community College</label>
+                  let transferSchoolsDropdownItems = document.getElementsByClassName("transfer-dropdown-item")
 
-                  <input type="checkbox" id="brookyln2" name="to-check">
-                  <label for="brooklyn2">Brooklyn College</label>
+                  function buildTransferDropdown(values) {
+                    let contents = []
+                    for (let school of values) {
+                      contents.push('<input type="button" class="dropdown-item transfer-dropdown-item" type="button" value="' + school + '"/>')
+                    }
 
-                  <input type="checkbox" id="city2" name="to-check">
-                  <label for="city2">City College</label>
+                    $('#transferMenuItems').append(contents.join("")).hide()
+                    $('#transferEmpty').show()
+                  }
 
-                  <input type="checkbox" id="csi2" name="to-check">
-                  <label for="csi2">College of Staten Island</label> <br>
+                  document.querySelector("#searchTransferSchool").addEventListener('input', function() {
+                    if (transferSchoolsSearchInput.value.length !== 0) {
+                      filterSearchFromTransfer(transferSchoolsSearchInput.value.trim().toLowerCase())
+                    }
 
-                  <input type="checkbox" id="law2" name="to-check">
-                  <label for="law2">CUNY School of Law</label>
+                    else {
+                      $('#transferMenuItems').hide()
+                      $('#transferEmpty').show()
+                    }
+                  })
 
-                  <input type="checkbox" id="medical2" name="to-check">
-                  <label for="medical2">CUNY School of Medicine</label>
+                  function filterSearchFromTransfer(word) {
+                    let length = transferSchoolsDropdownItems.length
+                    let collection = []
+                    let hidden = 0
+                    for (let i = 0; i < length; i++) {
+                      if (transferSchoolsDropdownItems[i].value.toLowerCase().includes(word)) {
+                        $('#transferMenuItems').show()
+                        $(transferSchoolsDropdownItems[i]).show()
+                      }
+                      else {
+                        $(transferSchoolsDropdownItems[i]).hide()
+                        hidden++
+                      }
 
-                  <input type="checkbox" id="journalism2" name="to-check">
-                  <label for="journalism2">Craig Newmark Graduate School of Journalism</label> <br>
+                      if (hidden === length) {
+                        $('#transferEmpty').show()
+                      }
+                      else {
+                        $('#transferEmpty').hide()
+                      }
+                    }
+                  }
 
-                  <input type="checkbox" id="guttman2" name="to-check">
-                  <label for="guttman2">Guttman Community College</label>
+                  $('#transferMenuItems').on('click', '.transfer-dropdown-item', function () {
+                    $('#dropdown_transfer_schools').text($(this)[0].value)
+                    editText2(($(this)[0].value));
+                    $('#dropdown_transfer_schools').dropdown('toggle')
+                  })
+                  function editText2(t)
+                  {
+                    document.getElementById("school2").innerHTML = t;
+                  }
 
-                  <input type="checkbox" id="hostos2" name="to-check">
-                  <label for="hostos2">Hostos Community College</label>
-
-                  <input type="checkbox" id="hunter2" name="to-check">
-                  <label for="hunter2">Hunter College</label>
-
-                  <input type="checkbox" id="john jay2" name="to-check">
-                  <label for="john jay2">John Jay School of Criminal Justice</label> <br>
-
-                  <input type="checkbox" id="kingsborough2" name="to-check">
-                  <label for="kingsborough2">Kingsborough Community College</label>
-
-                  <input type="checkbox" id="lagcc2" name="to-check">
-                  <label for="lagcc2">LaGuardia Community College</label>
-
-                  <input type="checkbox" id="lehman2" name="to-check">
-                  <label for="lehman2">Lehman College</label>
-
-                  <input type="checkbox" id="medgar2" name="to-check">
-                  <label for="medgar2">Medgar Evers College</label> <br>
-
-                  <input type="checkbox" id="city tech2" name="to-check">
-                  <label for="city tech2">New York City College of Technology</label>
-
-                  <input type="checkbox" id="queens2" name="to-check">
-                  <label for="queens2">Queens College</label>
-
-                  <input type="checkbox" id="queensborough2" name="to-check">
-                  <label for="queensborough2">Queensborough Community College</label> <br>
-
-                  <input type="checkbox" id="labor urban2" name="to-check">
-                  <label for="labor urban2">CUNY School of Labor and Urban Studies</label>
-
-                  <input type="checkbox" id="sps2" name="to-check">
-                  <label for="sps2">CUNY School of Professional Studies</label>
-
-                  <input type="checkbox" id="public health2" name="to-check">
-                  <label for="public health2">CUNY Graduate School of Public Health</label> <br>
-
-                  <input type="checkbox" id="grad2" name="to-check">
-                  <label for="grad2">CUNY Graduate Center</label>
-
-                  <input type="checkbox" id="york2" name="to-check">
-                  <label for="york2">York College</label>
-
-                  <br><button type="button" class="btn btn-dark" onclick="clearAllToSchools()">Clear All</button>
+                  buildTransferDropdown(transferSchools)
+                </script>
               </div>
-            </fieldset>
+              <div>
+                <h5 id="school2">Choose a school</h5>
+              </div>
+             </div>
+          </div>
+          <button type="button" class="btn btn-primary" onclick="showingTest();">Submit</button>
+       </div>
 
-            <br><button type="submit" class="btn btn-primary">Check Rules</button>
-          </form>
-          <br>
-
-        </div>
-
+       </div>
         <div class="tab-pane" id="v-pills-more" role="tabpanel" aria-labelledby="v-pills-more-tab">
 
-          <p> test5 </p>
+          <p> Something here </p>
           <a href="student.html">Go to student</a>
 
         </div>
