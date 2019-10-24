@@ -98,26 +98,26 @@
           </button>
 
           <div class="dropdown dropdown-past-schools-div">
-            <button class="btn btn-secondary dropdown-toggle btn-past-schools" type="button" id="dropdown_past_schools"
+            <button class="btn btn-secondary dropdown-toggle btn-past-schools dropdown_past_schools" type="button"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Find your past college or university
             </button>
-            <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_past_schools">
+            <div class="menu dropdown-menu" aria-labelledby="dropdown_past_schools">
               <form class="px-4 py-2">
-                <input type="search" class="form-control" id="searchPastSchool" placeholder="" autofocus="autofocus">
+                <input type="search" class="form-control searchPastSchool" placeholder="" autofocus="autofocus">
               </form>
-              <div id="pastMenuItems"></div>
-              <div id="pastEmpty" class="dropdown-header">No schools found</div>
+              <div class="pastMenuItems"></div>
+              <div class="dropdown-header pastEmpty">No schools found</div>
             </div>
           </div>
 
           <!-- Script for adding additional past schools -->
           <script>
             var numOfPastSchoolsSelection = 1;
+            var newDiv = $('.dropdown-past-schools-div').clone()
             $(function() {
               $('#btn-add-past-schools').click(function() {
                 if (numOfPastSchoolsSelection < 3) {
-                  let newDiv = $('.dropdown-past-schools-div').clone()
                   console.log(newDiv.length)
                   $('#From').append(newDiv[0])
                   numOfPastSchoolsSelection++;
@@ -137,7 +137,8 @@
             let pastSchools = ["Alabama State University", "Adelphi University",  "CUNY Queens College", "CUNY Hunter College", "CUNY City Tech", "CUNY John Jay", "SUNY Binghamtom University"]
 
             // Input search box
-            let pastSchoolsSearchInput = document.getElementById("searchPastSchool")
+            let searchInput = document.getElementsByClassName("searchPastSchool")
+            let pastSchoolsSearchInput = searchInput[0]
 
             // Find all items inside the dropdown
             let pastSchoolsDropdownItems = document.getElementsByClassName("past-dropdown-item")
@@ -148,18 +149,18 @@
                 contents.push('<input type="button" class="dropdown-item past-dropdown-item" type="button" value="' + school + '"/>')
               }
               // Hides all schools by default.
-              $('#pastMenuItems').append(contents.join("")).hide()
-              $('#pastEmpty').show()
+              $('.pastMenuItems').append(contents.join("")).hide()
+              $('.pastEmpty').show()
             }
             // Capture the event when user types into search box
-            document.querySelector("#searchPastSchool").addEventListener('input', function() {
+            document.querySelector(".searchPastSchool").addEventListener('input', function() {
               if (pastSchoolsSearchInput.value.length !== 0) {
                 filterSearchFromPast(pastSchoolsSearchInput.value.trim().toLowerCase())
               }
 
               else {
-                $('#pastMenuItems').hide()
-                $('#pastEmpty').show()
+                $('.pastMenuItems').hide()
+                $('.pastEmpty').show()
               }
             })
             // For every word entered by user, check if symbol includes with that word
@@ -170,7 +171,7 @@
               let hidden = 0
               for (let i = 0; i < length; i++) {
                 if (pastSchoolsDropdownItems[i].value.toLowerCase().includes(word)) {
-                  $('#pastMenuItems').show()
+                  $('.pastMenuItems').show()
                   $(pastSchoolsDropdownItems[i]).show()
                 }
                 else {
@@ -180,16 +181,16 @@
               }
               // If all items are hidden, show the empty view
               if (hidden === length) {
-                $('#pastEmpty').show()
+                $('.pastEmpty').show()
               }
               else {
-                $('#pastEmpty').hide()
+                $('.pastEmpty').hide()
               }
             }
             // If the user clicks on any item, set the title of button as the text of the item
-            $('#pastMenuItems').on('click', '.past-dropdown-item', function () {
-              $('#dropdown_past_schools').text($(this)[0].value)
-              $('#dropdown_past_schools').dropdown('toggle')
+            $('.pastMenuItems').on('click', '.past-dropdown-item', function () {
+              $('.dropdown_past_schools').text($(this)[0].value)
+              $('.dropdown_past_schools').dropdown('toggle')
               selectedSchools.push(($(this)[0].value))
               console.log(selectedSchools)
             })
@@ -428,7 +429,7 @@
           // getting the school selected from the FROM tab
           document.getElementById("dropdown_classes").onclick = function Class_Search()
           {
-            school_name = document.getElementById("dropdown_past_schools").innerHTML;
+            school_name = document.getElementsByClassName("dropdown_past_schools")[0].innerHTML;
 
             // if the user never entered a school show a message
             if(school_name.includes("Find your")){
