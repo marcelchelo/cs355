@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="./style/css/home.css">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="./style/fonts/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -54,10 +55,10 @@
 
   </div>
   <section class="header-txt">
-      <h1>Transfer Protocol.</h1>
+      <h1>Transfer Protocol</h1>
       <br>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam alias voluptatum expedita, dolorum ipsum et voluptate facilis ad eum quis natus aliquid, debitis inventore! Corporis beatae asperiores obcaecati velit? Incidunt.</p>
-  
+
     </section>
 </header>
 
@@ -88,9 +89,14 @@
       <div class="tab-content">
         <!-- SELECT "FROM SCHOOL" TAB -->
         <div role="tabpanel" class="tab-pane active" id="From">
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_past_schools" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+
+          <button id="btn-add-past-schools" class="btn btn-outline-secondary col-xs-12">
+            <span id="btn-add-past-schools-font">+ Add a past college or university</span>
+          </button>
+
+          <div class="dropdown dropdown-past-schools-div">
+            <button class="btn btn-secondary dropdown-toggle btn-past-schools" type="button" id="dropdown_past_schools"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Find your past college or university
             </button>
             <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_past_schools">
@@ -101,8 +107,29 @@
               <div id="pastEmpty" class="dropdown-header">No schools found</div>
             </div>
           </div>
+
+          <!-- Script for adding additional past schools -->
+          <script>
+            var numOfPastSchoolsSelection = 1;
+            $(function() {
+              $('#btn-add-past-schools').click(function() {
+                if (numOfPastSchoolsSelection < 3) {
+                  let newDiv = $('.dropdown-past-schools-div').clone()
+                  console.log(newDiv.length)
+                  $('#From').append(newDiv[0])
+                  numOfPastSchoolsSelection++;
+                } else {
+                  console.log("Exceeded the number of past schools")
+                }
+              })
+            })
+          </script>
+
           <!-- Script for school search-->
-			<script>
+          <script>
+            // Stores the list of selected schools
+            var selectedSchools = []
+
             // Initialize list with example colleges
             let pastSchools = ["Alabama State University", "Adelphi University",  "CUNY Queens College", "CUNY Hunter College", "CUNY City Tech", "CUNY John Jay", "SUNY Binghamtom University"]
 
@@ -160,6 +187,8 @@
             $('#pastMenuItems').on('click', '.past-dropdown-item', function () {
               $('#dropdown_past_schools').text($(this)[0].value)
               $('#dropdown_past_schools').dropdown('toggle')
+              selectedSchools.push(($(this)[0].value))
+              console.log(selectedSchools)
             })
 
             buildPastDropDown(pastSchools)
@@ -245,7 +274,7 @@
         <div role="tabpanel" class="tab-pane " id="Majors">
           <!--List of majors -->
           <p>Majors sorted by category:</p>
-		
+
 		 <button class="collapsible">Arts and Humanities</button>
           <div class="content">
             <label><input id = "Art" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Art</label><br>
@@ -254,7 +283,7 @@
             <label><input id = "English" type="checkbox" name = "Major" class="single-checkbox" onclick=updateValue(id)> English</label><br>
             <label><input id = "Media Studies" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Media Studies</label><br>
           </div>
-		 
+
           <button class="collapsible">Mathematics and Natural Sciences</button>
           <div class="content">
             <label><input id = "Biology" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Biology</label><br>
@@ -294,7 +323,7 @@
 		// Updates major selection for user to view
 		function updateValue(majorName) {
 			if (document.getElementById(majorName).checked) {
-			
+
 				if (document.getElementById("Major1").innerHTML != "Choose a major." && document.getElementById("Major2").innerHTML == "Choose a major.") {
 						document.getElementById("Major2").innerHTML = majorName;
 				}
@@ -311,7 +340,7 @@
 				}
 			}
 		}
-		
+
 		// Limits user to select only 2 majors.
 		var limit = 3;
 		$('input.single-checkbox').on('change', function(evt) {
@@ -336,44 +365,44 @@
               <div id="NoClasses" class="dropdown-header">No Classes Selected</div>
             </div>
           </div>
-        
+
         <!--Script for the classes Tab-->
         <script>
            let school_name;
            let list_of_classes = [];
 
 
-           
-           
+
+
             //dictionary of classes and what school they are from
            let Schools_Classes = {}
                 Schools_Classes["CUNY Queens College"] = ["English 101" , "CS 101" , "History 105" , "Math 241" , "Chem 103"] ;
                 Schools_Classes["Alabama State University"] = ["English 201" , "CS 111" , "History 115" , "Math 931" , "Phys 103" , "Gym 1000"] ;
-                Schools_Classes["Adelphi University"] = ["English 325" , "CS 207" , "CS 999" , "Math 200" , "Bio 102" , "Bio 103"] ; 
+                Schools_Classes["Adelphi University"] = ["English 325" , "CS 207" , "CS 999" , "Math 200" , "Bio 102" , "Bio 103"] ;
                 Schools_Classes["CUNY Hunter College"] = ["English 110" , "CS 542" , "History 105" , "Math 738" , "Chinese 103"] ;
                 Schools_Classes["CUNY City Tech"] = ["English 101" , "CS 101" , "CS 102", "History 129" , "Math 257" , "Chem 167" , "Phys 1000"] ;
-                Schools_Classes["CUNY John Jay"] = ["English 601" , "CS 101" , "History 105" , "Cop 911" , "Nark 101"] ; 
-                Schools_Classes["SUNY Binghamtom University"] = ["English 1010" , "CS 7331" , "History 1776" , "Math 9876" , "Chem 4317" , "Party 4200"] ; 
+                Schools_Classes["CUNY John Jay"] = ["English 601" , "CS 101" , "History 105" , "Cop 911" , "Nark 101"] ;
+                Schools_Classes["SUNY Binghamtom University"] = ["English 1010" , "CS 7331" , "History 1776" , "Math 9876" , "Chem 4317" , "Party 4200"] ;
 
-          
-         
+
+
 
           // getting the school selected from the FROM tab
           document.getElementById("dropdown_classes").onclick = function Class_Search()
           {
             school_name = document.getElementById("dropdown_past_schools").innerHTML;
-            
-            // if the user never entered a school show a message 
+
+            // if the user never entered a school show a message
             if(school_name.includes("Find your")){
                 document.getElementById("NoClasses").innerHTML = "No School Selected";
             }
             else{
-              // putting all the classes into a list 
+              // putting all the classes into a list
               for(var classes in Schools_Classes[school_name]){
                 list_of_classes.push('<input type ="button" class = "dropdown-item classes-dropdown-item" type="button" value="' + Schools_Classes[school_name][classes] +'"/>' )
-                 
 
-              } 
+
+              }
               console.log(list_of_classes)
               document.getElementById("Classes_Desc").innerHTML = list_of_classes;
               //list_of_classes = [];
@@ -382,19 +411,19 @@
                   document.getElementById("NoClasses").innerHTML = "";
               }
 
-            }  
-    
+            }
+
             list_of_classes = [];
           };
 
         </script>
         </div>
-        
+
         <div role="tabpanel" class="tab-pane " id="AP">
           <div class="card">
             <div class="card-body">
 
-              <h5 class="card-title">AP Scores</h5>
+              <h3 class="card-title">AP Scores</h5>
               <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_tests" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
@@ -406,6 +435,12 @@
                   </form>
                   <div id="testMenuItems"></div>
                   <div id="testEmpty" class="dropdown-header">No test found</div>
+                </div>
+              </div>
+              <div id="selectedTestContainer" style="display:none">
+                <h5>Selected tests</h5>
+                <div>
+                  <div id="selectedTests"></div>
                 </div>
               </div>
               <!-- Script for school search-->
@@ -465,11 +500,88 @@
                 }
                 // If the user clicks on any item, set the title of button as the text of the item
                 $('#testMenuItems').on('click', '.test-dropdown-item', function () {
-                  $('#dropdown_tests').text($(this)[0].value)
+                  addSelectedTest(($(this)[0].value));
                   $('#dropdown_tests').dropdown('toggle')
                 })
 
                 buildTestDropDown(tests)
+
+                //Adds a test to div
+                function addSelectedTest(t) {
+                  //If there are no tests to begin with, div holding 'Selected Tests' will not be shown
+                  //Changes display from none to block
+                  if(document.getElementById('selectedTests').innerHTML === "") {
+                    document.getElementById('selectedTestContainer').style.display = "block";
+                  }
+                  //Create div with name of test and input for score
+                  //Div
+                  let divTest = document.createElement('div');
+                  divTest.setAttribute('class', 'selected');
+                  divTest.setAttribute('id', t);
+                  //Test
+                  let test = document.createElement('p');
+                  let testName = document.createTextNode(t);
+                  test.setAttribute('class', 'subject');
+                  //Remove button
+                  let removeButton = document.createElement('button');
+                  removeButton.setAttribute('type','button');
+                  removeButton.setAttribute('class','close');
+                  removeButton.setAttribute('aria-label','Close');
+                  removeButton.setAttribute('onclick','removeTest(this)');
+                  let removeText = document.createElement('span');
+                  removeText.setAttribute('aria-hidden','true');
+                  let x = document.createTextNode('x');
+                  removeButton.appendChild(x);
+                  //Input
+                  let testScore = document.createElement('input');
+                  testScore.setAttribute('class', 'testScore');
+                  removeButton.setAttribute('id',t+"Score");
+                  testScore.setAttribute('type','number');
+                  testScore.setAttribute('name', 'testScore');
+                  testScore.setAttribute('min','1');
+                  testScore.setAttribute('max','5');
+                  testScore.setAttribute('onchange','isValidScore(this)');
+                  testScore.setAttribute('placeholder','Score');
+                  //Error message score if entered too low or high
+                  //hidden by default
+                  let error = document.createElement('p');
+                  let errorMessage = document.createTextNode("Score entered needs to be a whole number from 1 to 5.");
+                  error.setAttribute('class', 'error');
+                  error.appendChild(errorMessage);
+                  //Horizontal Rule
+                  let rule = document.createElement('hr');
+
+                  test.appendChild(testName);
+                  divTest.appendChild(removeButton);
+                  divTest.appendChild(test);
+                  divTest.appendChild(testScore);
+                  divTest.appendChild(error);
+                  divTest.appendChild(rule);
+
+                  document.getElementById('selectedTests').appendChild(divTest);
+
+                }
+
+                //Remove div with test containing the button that was clicked on
+                function removeTest(b) {
+                  //Removes div containing button
+                  b.parentNode.remove();
+                  //If selectedTest div is empty, will hide div
+                  if(document.getElementById('selectedTests').innerHTML === "") {
+                    document.getElementById('selectedTestContainer').style.display = 'none';
+                  }
+                }
+
+                //Check if score entered is valid
+                //Parameter is button and not value of score itself for ease of finding elements.
+                //If not, display error message
+                function isValidScore(score) {
+                  let s = Number(score.value);
+                  if(s === NaN || Number.isInteger(s) === false || s < 1 || s > 5)
+                    $(score).parent().find('p').filter('.error').show();
+                  else
+                    $(score).parent().find('p').filter('.error').hide();
+                }
               </script>
 
             </div>
