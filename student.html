@@ -350,7 +350,73 @@
 		});
 	</script>
 
-        <div role="tabpanel" class="tab-pane " id="Classes">Classes taken
+        <!--The Classes Tab-->
+        <div role="tabpanel" class="tab-pane " id="Classes">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_classes" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false" onclick="Class_Search()" >
+              Find your Previous Classes
+            </button>
+            <div id="classes_menu" class="dropdown-menu" aria-labelledby="dropdown_classes" >
+              <form class="px-4 py-2">
+                <input type="search" class="form-control" id="searchClasses" placeholder="Search For Classes" autofocus="autofocus">
+              </form>
+              <div id="Classes_Desc" data-toggle="dropdown"></div>
+              <div id="NoClasses" class="dropdown-header">No Classes Selected</div>
+            </div>
+          </div>
+        
+        <!--Script for the classes Tab-->
+        <script>
+           let school_name;
+           let list_of_classes = [];
+
+
+           
+           
+            //dictionary of classes and what school they are from
+           let Schools_Classes = {}
+                Schools_Classes["CUNY Queens College"] = ["English 101" , "CS 101" , "History 105" , "Math 241" , "Chem 103"] ;
+                Schools_Classes["Alabama State University"] = ["English 201" , "CS 111" , "History 115" , "Math 931" , "Phys 103" , "Gym 1000"] ;
+                Schools_Classes["Adelphi University"] = ["English 325" , "CS 207" , "CS 999" , "Math 200" , "Bio 102" , "Bio 103"] ; 
+                Schools_Classes["CUNY Hunter College"] = ["English 110" , "CS 542" , "History 105" , "Math 738" , "Chinese 103"] ;
+                Schools_Classes["CUNY City Tech"] = ["English 101" , "CS 101" , "CS 102", "History 129" , "Math 257" , "Chem 167" , "Phys 1000"] ;
+                Schools_Classes["CUNY John Jay"] = ["English 601" , "CS 101" , "History 105" , "Cop 911" , "Nark 101"] ; 
+                Schools_Classes["SUNY Binghamtom University"] = ["English 1010" , "CS 7331" , "History 1776" , "Math 9876" , "Chem 4317" , "Party 4200"] ; 
+
+          
+         
+
+          // getting the school selected from the FROM tab
+          document.getElementById("dropdown_classes").onclick = function Class_Search()
+          {
+            school_name = document.getElementById("dropdown_past_schools").innerHTML;
+            
+            // if the user never entered a school show a message 
+            if(school_name.includes("Find your")){
+                document.getElementById("NoClasses").innerHTML = "No School Selected";
+            }
+            else{
+              // putting all the classes into a list 
+              for(var classes in Schools_Classes[school_name]){
+                list_of_classes.push('<input type ="button" class = "dropdown-item classes-dropdown-item" type="button" value="' + Schools_Classes[school_name][classes] +'"/>' )
+                 
+
+              } 
+              console.log(list_of_classes)
+              document.getElementById("Classes_Desc").innerHTML = list_of_classes;
+              //list_of_classes = [];
+              // if their exists classes change the message to be blank
+              if(document.getElementById("Classes_Desc").innerHTML != ""){
+                  document.getElementById("NoClasses").innerHTML = "";
+              }
+
+            }  
+    
+            list_of_classes = [];
+          };
+
+        </script>
         </div>
         
         <div role="tabpanel" class="tab-pane " id="AP">
