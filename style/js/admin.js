@@ -1,6 +1,19 @@
+
+function loadStoredColor(){
+    if (localStorage.getItem('colour')) {
+        document.body.style.backgroundColor = localStorage.getItem('colour');
+    }
+    else{
+        document.body.style.backgroundColor =  "white";
+        localStorage.setItem('colour', "white");
+    }
+}
+
+
 function changeColor(){
     var newColor = document.getElementById("studentPageColor").value;
-    changeBackgroundColor(newColor);
+    document.body.style.backgroundColor = newColor;
+    localStorage.setItem('colour', newColor);
 }
 
 function clearAllFromSchools(){
