@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="./style/css/home.css">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="./style/fonts/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -88,9 +89,14 @@
       <div class="tab-content">
         <!-- SELECT "FROM SCHOOL" TAB -->
         <div role="tabpanel" class="tab-pane active" id="From">
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_past_schools" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+
+          <button id="btn-add-past-schools" class="btn btn-outline-secondary col-xs-12">
+            <span id="btn-add-past-schools-font">+ Add a past college or university</span>
+          </button>
+
+          <div class="dropdown dropdown-past-schools-div">
+            <button class="btn btn-secondary dropdown-toggle btn-past-schools" type="button" id="dropdown_past_schools"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Find your past college or university
             </button>
             <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_past_schools">
@@ -101,8 +107,29 @@
               <div id="pastEmpty" class="dropdown-header">No schools found</div>
             </div>
           </div>
+
+          <!-- Script for adding additional past schools -->
+          <script>
+            var numOfPastSchoolsSelection = 1;
+            $(function() {
+              $('#btn-add-past-schools').click(function() {
+                if (numOfPastSchoolsSelection < 3) {
+                  let newDiv = $('.dropdown-past-schools-div').clone()
+                  console.log(newDiv.length)
+                  $('#From').append(newDiv[0])
+                  numOfPastSchoolsSelection++;
+                } else {
+                  console.log("Exceeded the number of past schools")
+                }
+              })
+            })
+          </script>
+
           <!-- Script for school search-->
           <script>
+            // Stores the list of selected schools
+            var selectedSchools = []
+
             // Initialize list with example colleges
             let pastSchools = ["Alabama State University", "Adelphi University",  "CUNY Queens College", "CUNY Hunter College", "CUNY City Tech", "CUNY John Jay", "SUNY Binghamtom University"]
 
@@ -160,6 +187,8 @@
             $('#pastMenuItems').on('click', '.past-dropdown-item', function () {
               $('#dropdown_past_schools').text($(this)[0].value)
               $('#dropdown_past_schools').dropdown('toggle')
+              selectedSchools.push(($(this)[0].value))
+              console.log(selectedSchools)
             })
 
             buildPastDropDown(pastSchools)
@@ -183,7 +212,7 @@
           </div>
 
           <script>
-            let transferSchools = ["CUNY Queens College"]
+            let transferSchools = ["Baruch College", "Borough of Manhattan CC", "Bronx Community College", "CUNY Queens College"]
 
             let transferSchoolsSearchInput = document.getElementById("searchTransferSchool")
 
@@ -245,20 +274,30 @@
         <div role="tabpanel" class="tab-pane " id="Majors">
           <!--List of majors -->
           <p>Majors sorted by category:</p>
+		
+		 <button class="collapsible">Arts and Humanities</button>
+          <div class="content">
+            <label><input id = "Art" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Art</label><br>
+            <label><input id = "Comparitive Literature" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Comparitive Literature</label><br>
+            <label><input id = "Drama, Theatre, & Dance" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Drama, Theatre, & Dance</label><br>
+            <label><input id = "English" type="checkbox" name = "Major" class="single-checkbox" onclick=updateValue(id)> English</label><br>
+            <label><input id = "Media Studies" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Media Studies</label><br>
+          </div>
+		 
           <button class="collapsible">Mathematics and Natural Sciences</button>
           <div class="content">
-            <input type="checkbox" name="Bio" value="Bio"> Biology<br>
-            <input type="checkbox" name="Chem" value="Chem"> Chemistry<br>
-            <input type="checkbox" name="Phys" value="Phys"> Physics<br>
-            <input type="checkbox" name="CS_BA" value="CS_BA"> Computer Science BA<br>
-            <input type="checkbox" name="CS_BS" value="CS_BS"> Computer Science BS<br>
+            <label><input id = "Biology" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Biology</label><br>
+            <label><input id = "Chemistry" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Chemistry</label><br>
+            <label><input id = "Physics" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Physics</label><br>
+            <label><input id = "Computer Science BA" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Computer Science BA</label><br>
+            <label><input id = "Computer Science BS" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Computer Science BS</label><br>
           </div>
 
           <button class="collapsible">Education</button>
           <div class="content">
-            <input type="checkbox" name="ECP" value="ECP"> Educational and Community Programs<br>
-            <input type="checkbox" name="ECE" value="ECE"> Elementary and Early Childhood Education<br>
-            <input type="checkbox" name="SE" value="SE"> Secondary Education and Youth Services<br>
+			<label><input id = "Educational and Community Programs" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Educational and Community Programs</label><br>
+			<label><input id = "Elementary and Early Childhood Education" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Elementary and Early Childhood Education</label><br>
+			<label><input id = "Secondary Education and Youth Services" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Secondary Education and Youth Services</label><br>
           </div>
 
           <!--Script for collapsible -->
@@ -279,6 +318,37 @@
           </script>
 
         </div>
+
+<script>
+		// Updates major selection for user to view
+		function updateValue(majorName) {
+			if (document.getElementById(majorName).checked) {
+			
+				if (document.getElementById("Major1").innerHTML != "Choose a major." && document.getElementById("Major2").innerHTML == "Choose a major.") {
+						document.getElementById("Major2").innerHTML = majorName;
+				}
+				if (document.getElementById("Major1").innerHTML == "Choose a major.") {
+					document.getElementById("Major1").innerHTML = majorName;
+				}
+			}
+			else {
+				if (document.getElementById("Major2").innerHTML != "Choose a major.") {
+					document.getElementById("Major2").innerHTML = "Choose a major.";
+				}
+				else {
+					document.getElementById("Major1").innerHTML ="Choose a major.";
+				}
+			}
+		}
+		
+		// Limits user to select only 2 majors.
+		var limit = 3;
+		$('input.single-checkbox').on('change', function(evt) {
+			if($(("input[name = 'Major']:checked")).length >= limit) {
+				this.checked = false;
+			}
+		});
+	</script>
 
         <div role="tabpanel" class="tab-pane " id="Classes">Classes taken
         </div>
@@ -372,14 +442,14 @@
       </div>
     </div>
 
-    <div style=margin-left:50px;margin-top:15px;>
+    <div>
 
     <div class="rightSide">
       <!-- Panels showing progress and percentage, there are two of them -->
       <div class="card">
         <div class="card-body">
 
-          <h5 class="card-title">Some Major Here</h5>
+          <h5 id="Major1">Choose a major.</h5>
           <p class="card-text"></p>
 
           <div class="progress">
@@ -400,7 +470,7 @@
       <div class="card">
         <div class="card-body">
 
-          <h5 class="card-title">Some Major Here</h5>
+          <h5 id="Major2">Choose a major.</h5>
           <p class="card-text"></p>
 
           <div class="progress">
@@ -423,34 +493,3 @@
   </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-<!--
-<!doctype html>
-<html lang="en">
-  <head>
-    <nav class="navbar top navbar-dark" >
-      <a class="navbar-brand" href="student.html">CUNY Transfer Portal</a>
-      <li>
-        <button type="button" class="btn btn-secondary">Admin Login</button>
-      </li>
-    </nav>
- </head>
- <style>
- </style>
-  <body>
-</body>
-</html> -->
-
-
-
-
-
- 
-  
