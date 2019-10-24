@@ -4,8 +4,8 @@ function loadStoredColor(){
         document.body.style.backgroundColor = localStorage.getItem('colour');
     }
     else{
-        document.body.style.backgroundColor =  "black";
-        localStorage.setItem('colour', "black");
+        document.body.style.backgroundColor =  "white";
+        localStorage.setItem('colour', "white");
     }
 }
 
