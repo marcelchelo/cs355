@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Transfer Portal - Admin</title>
+  <title>Admin Page</title>
   <!-- Local CSS -->
   <link rel="stylesheet" href="./style/css/admin.css">
   <!-- Bootstrap CSS -->
@@ -58,6 +58,7 @@
                     <label for="PageTitleChanger">Page Title</label>
                       <input type="title" class="form-control" id="aTitle" aria-describedby="textHelp" placeholder="Enter title">
                       <small id="textHelp" class="form-text text-muted">Text displayed in Browser Title</small>
+                      <button class="btn btn-info btn-lg" onclick="changeTitle()">Change Title</button>
                   </div>
                 </div>
               </div>
@@ -78,8 +79,9 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="DescChanger">Page Description</label>
-                      <input type="desc" class="form-control" id="aDesc" aria-describedby="textHelp" placeholder="Enter Description">
+                      <input type="text" class="form-control" id="aDesc" aria-describedby="textHelp" placeholder="Enter Description">
                       <small id="textHelp" class="form-text text-muted">Text displayed on page description</small>
+                      <button class="btn btn-info btn-lg" onclick="changeDescription()">Change Description</button>
                   </div>
                 </div>
               </div>

@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Queens College: Transfer Protocol</title>
   <!-- Local CSS -->
   <link rel="stylesheet" href="./style/css/student.css">
   <link rel="stylesheet" href="./style/css/style.css">
@@ -20,11 +19,15 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title id="studentTitle"></title>
+  <script>
+    loadStoredTitle();
+  </script>
 </head>
 <body id="studentBody">
 <script>
   loadStoredColor();
-  </script>
+</script>
  <!-- Navigation Bar -->
  <nav class="main-nav" id="overlay">
   <img src="./style/images/Close Menu.svg" alt="menu" class="close-btn" id="close-menu">
@@ -58,10 +61,14 @@
 
   </div>
   <section class="header-txt">
+      
       <h1>Transfer Protocol</h1>
       <br>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam alias voluptatum expedita, dolorum ipsum et voluptate facilis ad eum quis natus aliquid, debitis inventore! Corporis beatae asperiores obcaecati velit? Incidunt.</p>
+      <p id="studentDescription"></p>
 
+      <script>
+          loadStoredDescription();
+      </script>
     </section>
 </header>
 

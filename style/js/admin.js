@@ -1,3 +1,14 @@
+function loadStoredTitle(){
+    if (localStorage.getItem('title')) {
+        document.getElementById("studentTitle").innerHTML = localStorage.getItem('title');
+    }
+    else{
+        var placeHolderTitle = "Transfer Protocol: Student";
+        document.getElementById("studentTitle").innerHTML = placeHolderTitle;
+        localStorage.setItem('title', placeHolderTitle);
+    }
+}
+
 
 function loadStoredColor(){
     if (localStorage.getItem('colour')) {
@@ -9,11 +20,32 @@ function loadStoredColor(){
     }
 }
 
+function loadStoredDescription(){
+    if(localStorage.getItem('text')){
+        document.getElementById("studentDescription").innerHTML = localStorage.getItem('text');
+    }
+    else{
+        var placeholderText = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam alias voluptatum expedita, dolorum ipsum et voluptate facilis ad eum quis natus aliquid, debitis inventore! Corporis beatae asperiores obcaecati velit? Incidunt.";
+        document.getElementById("studentDescription").innerHTML= placeholderText;
+        localStorage.setItem('text', placeholderText);
+    }
+}
+
 
 function changeColor(){
     var newColor = document.getElementById("studentPageColor").value;
-    document.body.style.backgroundColor = newColor;
     localStorage.setItem('colour', newColor);
+}
+
+function changeDescription(){
+    var newDesc = document.getElementById("aDesc").value;
+    localStorage.setItem('text', newDesc);
+}
+
+function changeTitle(){
+    var newTitle = document.getElementById("aTitle").value;
+    console.log(newTitle);
+    localStorage.setItem('title', newTitle);
 }
 
 function clearAllFromSchools(){

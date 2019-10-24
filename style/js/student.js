@@ -1,7 +1,6 @@
 /*
 * This is the functions for the nav menu
 */
-document.body.style.backgroundColor = window.localStorage.bgcolor || "#000000";
 let overlay = document.getElementById('overlay');
 let closeMenu = document.getElementById('close-menu');
 
