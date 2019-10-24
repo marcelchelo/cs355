@@ -195,6 +195,7 @@
                       $('#dropdown_tests2').text($(this)[0].value)
                       temp=$(this)[0].value
                       editTextap1($(this)[0].value)
+                      defaultScore = 5
                       display(false)
                       input()
                       $('#dropdown_tests2').dropdown('toggle')
@@ -293,6 +294,7 @@
                       $('#dropdown_tests').text($(this)[0].value)
                       temp2=$(this)[0].value
                       editTextap2($(this)[0].value)
+                      defaultScore = 5;
                       display(false)
                       input()
                       $('#dropdown_tests').dropdown('toggle')
@@ -316,6 +318,10 @@
                         currentScore.appendChild(text);
                         left.appendChild(currentScore);
                         change2=false;
+                      }
+                      if(status==false)
+                      {
+                        currentScore.innerHTML="Current Test Score: "+defaultScore;
                       }
                       if(status)
                       {
@@ -351,10 +357,10 @@
                       displayInput.appendChild(text2);
                       myform.appendChild(product);
                       var left2 = document.getElementById("left2")
+                      left2.appendChild(myform);
                       if(temp!='blank'&&temp2!='blank'&&change)
                       {
                         left2.appendChild(text2);
-                        left2.appendChild(myform);
                         change=false;
                       }
                     }
