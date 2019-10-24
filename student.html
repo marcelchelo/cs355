@@ -282,54 +282,89 @@
         </div>
 
         <div role="tabpanel" class="tab-pane " id="Majors">
-          <!--List of majors -->
-          <p>Majors sorted by category:</p>
-
-		 <button class="collapsible">Arts and Humanities</button>
-          <div class="content">
-            <label><input id = "Art" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Art</label><br>
-            <label><input id = "Comparitive Literature" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Comparitive Literature</label><br>
-            <label><input id = "Drama, Theatre, & Dance" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Drama, Theatre, & Dance</label><br>
-            <label><input id = "English" type="checkbox" name = "Major" class="single-checkbox" onclick=updateValue(id)> English</label><br>
-            <label><input id = "Media Studies" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Media Studies</label><br>
-          </div>
-
-          <button class="collapsible">Mathematics and Natural Sciences</button>
-          <div class="content">
-            <label><input id = "Biology" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Biology</label><br>
-            <label><input id = "Chemistry" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Chemistry</label><br>
-            <label><input id = "Physics" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Physics</label><br>
-            <label><input id = "Computer Science BA" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Computer Science BA</label><br>
-            <label><input id = "Computer Science BS" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Computer Science BS</label><br>
-          </div>
-
-          <button class="collapsible">Education</button>
-          <div class="content">
-			<label><input id = "Educational and Community Programs" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Educational and Community Programs</label><br>
-			<label><input id = "Elementary and Early Childhood Education" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Elementary and Early Childhood Education</label><br>
-			<label><input id = "Secondary Education and Youth Services" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Secondary Education and Youth Services</label><br>
-          </div>
-
-          <!--Script for collapsible -->
-          <script>
-          var coll = document.getElementsByClassName("collapsible");
-          var i;
-          for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
-              this.classList.toggle("active");
-              var content = this.nextElementSibling;
-              if (content.style.maxHeight){
-                content.style.maxHeight = null;
-              } else {
-                content.style.maxHeight = content.scrollHeight + "px";
-              }
-            });
-          }
-          </script>
+			<!--Major Search Bar -->
+			<br><input class = "search" type="text" id="userInput" size="80" onkeyup="updateMajor()" placeholder="Search for major"><br><br>
+			
+			<!--List of majors -->
+			<ul id="majorUL" class = "majorDisplay" style = "list-style: none">
+			  <button class="collapsible">Arts and Humanities</button>
+				<div class="content">
+					<li><label><input id = "Art" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Art</label><br></li>
+					<li><label><input id = "Comparitive Literature" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Comparitive Literature</label><br></li>
+					<li><label><input id = "Drama, Theatre, & Dance" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Drama, Theatre, & Dance</label><br></li>
+					<li><label><input id = "English" type="checkbox" name = "Major" class="single-checkbox" onclick=updateValue(id)> English</label><br></li>
+					<li><label><input id = "Media Studies" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Media Studies</label><br></li>
+				</div>
+			  
+			  <button class="collapsible">Mathematics and Natural Sciences</button>
+				<div class="content">
+					<li><label><input id = "Biology" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Biology</label><br></li>
+					<li><label><input id = "Chemistry" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Chemistry</label><br></li>
+					<li><label><input id = "Physics" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Physics</label><br></li>
+					<li><label><input id = "Computer Science BA" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Computer Science BA</label><br></li>
+					<li><label><input id = "Computer Science BS" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Computer Science BS</label><br></li>
+				</div>
+				
+			  <button class="collapsible">Education</button>
+				<div class="content">
+					<li><label><input id = "Educational and Community Programs" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Educational and Community Programs</label><br></li>
+					<li><label><input id = "Elementary and Early Childhood Education" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Elementary and Early Childhood Education</label><br></li>
+					<li><label><input id = "Secondary Education and Youth Services" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Secondary Education and Youth Services</label><br></li>
+				</div>
+				
+			  <button class="collapsible">Social Sciences</button>
+				<div class="content">
+					<li><label><input id = "Anthropology" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Anthropology</label><br></li>
+					<li><label><input id = "History" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> History</label><br></li>
+					<li><label><input id = "Philosophy" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Philosophy</label><br></li>
+					<li><label><input id = "Political Science" type="checkbox" name = "Major" class="single-checkbox" onclick=updateValue(id)> Political Science</label><br></li>
+					<li><label><input id = "Urban Studies" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Urban Studies</label><br></li>
+				</div>
+			</ul>
+			
+			<script>
+			// Search bar updates majors displayed
+			function updateMajor() {
+				var input = document.getElementById("userInput");
+				var filter = input.value.toUpperCase();
+				
+				var ul = document.getElementById("majorUL");
+				
+				var li = ul.getElementsByTagName("li");
+				
+				for (i = 0; i < li.length; i++) {
+					a = li[i].getElementsByTagName("input")[0];
+					txtValue = a.id;
+					
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						li[i].style.display = "";
+					} else {
+						li[i].style.display = "none";
+					}
+				}
+			}
+			</script>
+			
+			<!--Script for collapsible -->
+			<script>
+				var coll = document.getElementsByClassName("collapsible");
+				var i;
+				for (i = 0; i < coll.length; i++) {
+					coll[i].addEventListener("click", function() {
+					this.classList.toggle("active");
+					var content = this.nextElementSibling;
+					if (content.style.maxHeight){
+						content.style.maxHeight = null;
+					} else {
+						content.style.maxHeight = content.scrollHeight + "px";
+					}
+				});
+				}
+			</script>
 
         </div>
 
-<script>
+	<script>
 		// Updates major selection for user to view
 		function updateValue(majorName) {
 			if (document.getElementById(majorName).checked) {
