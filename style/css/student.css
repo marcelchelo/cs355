@@ -104,6 +104,15 @@
 outline:0;
 }
 
+.search {
+	float: center;
+	padding: 10px;
+	border: ridge;
+	margin-top: 8px;
+	margin-right: 16px;
+	font-size: 17px;
+}
+
 /* Responsiveness for Cellphones */
 
 @media only screen and (max-width: 500px) {
