@@ -22,3 +22,16 @@ https://www.w3schools.com
 
 
 
+# Backend information 
+
+We are using Express, a node framework for back end. 
+ 
+ open the package.json file to see which packages you need to npm install. 
+ They are under dependencies. 
+ 
+ Views folder contains the html as ejs files for express to render them. 
+ folder public contains the css.  WE will allow express to serve this. 
+ 
+
+
+
