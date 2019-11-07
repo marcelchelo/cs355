@@ -12,6 +12,13 @@ app.get('/', function (req, res) {
   console.log("Someone visited the home page")
 });
 
+//Student page
+app.get('/student', function (req, res) {
+  res.render("student")
+  console.log("Someone visited the student page")
+});
+
+
 //adminLogin page
 app.get('/adminLogin', function (req, res) {
   res.render("adminLogin.ejs")
