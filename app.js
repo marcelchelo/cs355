@@ -1,20 +1,26 @@
 var express = require ("express");
 var app = express();
 
-//Test Route
+//tells express to serve contents of public directory
+app.use(express.static("public"))
+//Express will now expect ejs file.    No need to write file.ejs anymore
+app.set("view engine", "ejs")
+
+//Home Page
 app.get('/', function (req, res) {
   res.render("index.ejs")
   console.log("Someone visited the home page")
 });
 
-app.get('/student', function (req, res) {
-  res.render("student.ejs")
-  console.log("Someone visited the student page")
+//adminLogin page
+app.get('/adminLogin', function (req, res) {
+  res.render("adminLogin.ejs")
+  console.log("Someone visited the admin page")
 });
+ 
 
 
-
-//This is the catch all 
+//This is the catch all, if unavailable address is provided. 
 app.get('*', function (req, res) {
   res.send("Sorry this directory is not valid, go back to the homepage")
 });
