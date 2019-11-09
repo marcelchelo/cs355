@@ -1,5 +1,25 @@
 var express = require ("express");
 var app = express();
+var mysql = require('mysql')
+
+
+const connection = mysql.createConnection({
+  host: '35.185.14.255',
+  user: 'admin',
+  password: 'cs3552019',
+  database: 'TransferPortal'
+})
+
+connection.connect()
+
+connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
+  if (err) throw err
+
+  console.log('The solution is: ', rows[0].solution)
+})
+
+connection.end()
+
 
 //tells express to serve contents of public directory
 app.use(express.static("public"))
