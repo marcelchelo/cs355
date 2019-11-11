@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible" content="ie=edge")
+        link(rel="stylesheet" href="./css/style.css")
+        title Document
+    body
+        <!-- Banner -->
+
+        nav
+            .nav-logo
+                a(href="#") 
+                    img(src="./images/CUNY-logo.svg" alt="CUNY Logo")
+
+            ul
+                li 
+                    a(href="#") Home
+                li
+                    a(href="#") About
+                li
+                    a(href="#") GitHub
+                li
+                    a(href="#") More Resources
+        header
+        <!-- End of Banner -->
+
+        <!-- Intro Section -->
+        section.container
+            article
+                h1 Exciting Heading
+                hr
+                p Explains what the transfer protocol aims to do in a brief paragraph. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, adipisci perferendis laborum rem possimus deserunt tempora asperiores in necessitatibus suscipit?
+                hr
+
+        <!-- Transfer Protocol Tabs -->
+        main.container.transfer-section
+            <!-- Transfer Form Section/LEFT SIDE -->
+            .transfer-form
+                .tabs
+                    button#curr-school-tab.tab-item.btn-focus Current School
+                    button#transfer-school-tab.tab-item.btn-nonfocus Transfer School
+                    button#majors-tab.tab-item.btn-nonfocus  Majors
+                    button#classes-tab.tab-item.btn-nonfocus  Classes
+                    button#test-scores-tab.tab-item.btn-nonfocus  Test Scores
+
+                <!-- Current School Section -->
+                #curr-school.active.panel
+                    p Add a college you are current and/or past college(s).
+                    hr
+                    div.wrapper
+                        .vertical-flow
+                            input(type="text" id="past-colleges" class="testcase" name="past-colleges" placeholder="ie. CUNY Queens College")
+                            ul.results#past-college-results
+
+                        button(type="submit" id="past-college-submit" class="form-button" ) Add
+
+                    //- .school-result
+                    //-     h3 CUNY Baruch College
+                    //-     button(class="chosen-prev-school") Delete
+                    //- .school-result
+                    //-     h3 Cuny Queens College
+                    //-     button(class="chosen-prev-school") Delete
+                <!-- Transfer School Section -->
+                #transfer-school-tab.non-active.panel
+                    h2 Status:
+                    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam explicabo eaque adipisci dicta numquam aperiam autem at excepturi, perferendis possimus odit atque saepe veritatis quasi quia a. Aliquid quam totam est, atque repudiandae neque in, accusantium quis nam assumenda, quibusdam earum. Dolor voluptas deleniti incidunt vitae fuga temporibus provident sint quisquam accusamus fugit? Dicta, quo error. Quisquam ipsa voluptatem provident!
+                <!-- Majors Section -->
+                #majors-tab.non-active.panel
+                    h2 Status:
+                    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam explicabo eaque adipisci dicta numquam aperiam autem at excepturi, perferendis possimus odit atque saepe veritatis quasi quia a. Aliquid quam totam est, atque repudiandae neque in, accusantium quis nam assumenda, quibusdam earum. Dolor voluptas deleniti incidunt vitae fuga temporibus provident sint quisquam accusamus fugit? Dicta, quo error. Quisquam ipsa voluptatem provident!
+
+                <!-- Classes Section -->
+                #classes-tab.non-active.panel
+                    h2 Status:
+                    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam explicabo eaque adipisci dicta numquam aperiam autem at excepturi, perferendis possimus odit atque saepe veritatis quasi quia a. Aliquid quam totam est, atque repudiandae neque in, accusantium quis nam assumenda, quibusdam earum. Dolor voluptas deleniti incidunt vitae fuga temporibus provident sint quisquam accusamus fugit? Dicta, quo error. Quisquam ipsa voluptatem provident!
+                <!-- Scores Section -->
+                #test-scores-tab.non-active.panel
+                    h2 Status:
+                    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam explicabo eaque adipisci dicta numquam aperiam autem at excepturi, perferendis possimus odit atque saepe veritatis quasi quia a. Aliquid quam totam est, atque repudiandae neque in, accusantium quis nam assumenda, quibusdam earum. Dolor voluptas deleniti incidunt vitae fuga temporibus provident sint quisquam accusamus fugit? Dicta, quo error. Quisquam ipsa voluptatem provident!
+            <!-- Transfer Status Section/ RIGHT Side -->
+            .transfer-status
+                .filler
+                .panel
+                    h2 Status:
+                    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam explicabo eaque adipisci dicta numquam aperiam autem at excepturi, perferendis possimus odit atque saepe veritatis quasi quia a. Aliquid quam totam est, atque repudiandae neque in, accusantium quis nam assumenda, quibusdam earum. Dolor voluptas deleniti incidunt vitae fuga temporibus provident sint quisquam accusamus fugit? Dicta, quo error. Quisquam ipsa voluptatem provident!
+        .testingpurpose
+        script(src="./js/student-tab.js")

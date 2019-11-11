@@ -16,11 +16,10 @@ body a, html a {
 
 header {
   padding: 0 2.5em;
-  height: 70vh;
+  height: 100vh;
   width: 100%;
   background-image: url("../images/bg.png");
   background-size: cover;
-  background-repeat: no-repeat;
 }
 
 header .header-container {
@@ -49,18 +48,17 @@ header .header-container .menu-btn {
 
 header .header-txt {
   color: white;
-  width: 400px;
+  width: 375px;
   padding: 0;
   position: absolute;
   top: 40%;
   left: 10%;
   margin-top: -130px;
-  background: rgba(0, 0, 0, 0.5);
 }
 
 header .header-txt h1 {
   font-size: 3em;
-  display: inline;
+  display: inline-block;
 }
 
 header .header-txt h1::before {
@@ -71,41 +69,6 @@ header .header-txt h1::before {
 
 header .header-txt p {
   font-size: 1.2em;
-  padding: 0 10px;
-}
-
-/* Responsiveness for Cellphones */
-
-@media only screen and (max-width: 500px) {
-
-    header .header-container a img {
-    max-width: 100px;
-  }
-
-    header {
-    height: 10vh;
-    width: 100%;
-  }
-
-    header .header-txt {
-    display: none;
-  }
-}
-
-/* Responsiveness for Tablets */
-
-@media only screen and (min-width: 600px; max-width: 768px) {
-
-    header .header-container a img {
-    max-width: 100px;
-  }
-
-    header {
-    height: 45vh;
-  }
-
-/* _________________________ */
-
 }
 
 .main-nav {
