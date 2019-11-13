@@ -4,7 +4,7 @@ var mysql = require('mysql')
 
 
 const connection = mysql.createConnection({
-  host: '35.185.14.255',
+  host: '//woulcdve thought',
   user: 'admin',
   password: 'cs3552019',
   database: 'TransferPortal'
