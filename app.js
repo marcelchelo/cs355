@@ -5,13 +5,16 @@ const mysql = require ('mysql')
 
 app.use(morgan('short'))
 
-app.get('/user', (req, res) => {
+
+//API for Admin  Users
+
+app.get('/adminUsers', (req, res) => {
   console.log("Fetching all admin users " )
 
   const connection = mysql.createConnection({
-    host: 'FILL THIS in YOU know WHat is is ',
+    host: '35.185.14.255',
     user: 'admin',
-    password: '##FILL this in you know what it is',
+    password: 'cs3552019',
     database: 'TransferPortal'
 
   })
@@ -38,6 +41,39 @@ app.get('/user', (req, res) => {
 })
 
 
+//API for CUNY colleges
+
+app.get('/colleges', (req, res) => {
+  console.log("Fetching colleges " )
+
+  const connection = mysql.createConnection({
+    host: '35.185.14.255',
+    user: 'admin',
+    password: 'cs3552019',
+    database: 'TransferPortal'
+
+  })
+
+  const queryString = "SELECT * FROM INSTITUTION_VW "
+  connection.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log("Failed to query for users: " + err)
+      res.sendStatus(500)
+      return
+      // throw err
+    }
+
+    console.log("Institutions fetched  successfully")
+
+    const catalog = rows.map((row) => {
+      return {Code: row.INSTITUTION, NAME: row.DESCR}
+    })
+
+    res.json(catalog)
+  })
+
+  // res.end()
+})
 
 
 //controlls the verious routes we have
