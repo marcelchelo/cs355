@@ -1,27 +1,50 @@
 var express = require ("express");
 var app = express();
-var mysql = require('mysql')
+const morgan = require ('morgan')
+const mysql = require ('mysql')
 
+app.use(morgan('short'))
 
-const connection = mysql.createConnection({
-  host: '//woulcdve thought',
-  user: 'admin',
-  password: 'cs3552019',
-  database: 'TransferPortal'
+app.get('/user', (req, res) => {
+  console.log("Fetching all admin users " )
+
+  const connection = mysql.createConnection({
+    host: '35.185.14.255',
+    user: 'admin',
+    password: 'cs3552019',
+    database: 'TransferPortal'
+
+  })
+
+  const queryString = "SELECT * FROM adminUsers "
+  connection.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log("Failed to query for users: " + err)
+      res.sendStatus(500)
+      return
+      // throw err
+    }
+
+    console.log("I think we fetched users successfully")
+
+    const catalog = rows.map((row) => {
+      return {Username: row.username, ID: row.id}
+    })
+
+    res.json(catalog)
+  })
+
+  // res.end()
 })
 
-connection.connect()
-
-connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
-  if (err) throw err
-
-  console.log('The solution is: ', rows[0].solution)
-})
-
-connection.end()
 
 
+
+//controlls the verious routes we have
+const router = express.Router()
 //tells express to serve contents of public directory
+
+
 app.use(express.static("public"))
 //Express will now expect ejs file.    No need to write file.ejs anymore
 app.set("view engine", "ejs")
