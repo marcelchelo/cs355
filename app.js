@@ -9,9 +9,9 @@ app.get('/user', (req, res) => {
   console.log("Fetching all admin users " )
 
   const connection = mysql.createConnection({
-    host: '35.185.14.255',
+    host: 'FILL THIS in YOU know WHat is is ',
     user: 'admin',
-    password: 'cs3552019',
+    password: '##FILL this in you know what it is',
     database: 'TransferPortal'
 
   })
