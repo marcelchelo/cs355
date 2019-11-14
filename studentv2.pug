@@ -8,7 +8,8 @@ html(lang="en")
         title Document
     body
         <!-- Banner -->
-
+        //- Please style the banner. 
+        //- Please style the navigation & add proper links
         nav
             .nav-logo
                 a(href="#") 
@@ -39,11 +40,11 @@ html(lang="en")
             <!-- Transfer Form Section/LEFT SIDE -->
             .transfer-form
                 .tabs
-                    button#curr-school-tab.tab-item.btn-focus Current School
-                    button#transfer-school-tab.tab-item.btn-nonfocus Transfer School
-                    button#majors-tab.tab-item.btn-nonfocus  Majors
-                    button#classes-tab.tab-item.btn-nonfocus  Classes
-                    button#test-scores-tab.tab-item.btn-nonfocus  Test Scores
+                    button(id="curr-school-tab" class="tab-item btn-focus" data-link="curr-school") Current School
+                    button(id="transfer-school-tab" class="tab-item btn-nonfocus" data-link="transfer-school") Transfer School
+                    button(id="majors-tab" class="tab-item btn-nonfocus" data-link="majors") Majors
+                    button(id="classes-tab" class="tab-item btn-nonfocus" data-link="classes") Classes
+                    button(id="test-scores-tab" class="tab-item btn-nonfocus" data-link="test-scores") Test Scores
 
                 <!-- Current School Section -->
                 #curr-school.active.panel
@@ -63,27 +64,30 @@ html(lang="en")
                     //-     h3 Cuny Queens College
                     //-     button(class="chosen-prev-school") Delete
                 <!-- Transfer School Section -->
-                #transfer-school-tab.non-active.panel
-                    h2 Status:
+                #transfer-school.non-active.panel
+                    h2 Transfer School Section:
                     p Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam explicabo eaque adipisci dicta numquam aperiam autem at excepturi, perferendis possimus odit atque saepe veritatis quasi quia a. Aliquid quam totam est, atque repudiandae neque in, accusantium quis nam assumenda, quibusdam earum. Dolor voluptas deleniti incidunt vitae fuga temporibus provident sint quisquam accusamus fugit? Dicta, quo error. Quisquam ipsa voluptatem provident!
                 <!-- Majors Section -->
-                #majors-tab.non-active.panel
-                    h2 Status:
+                #majors.non-active.panel
+                    h2 Majors Section:
                     p Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam explicabo eaque adipisci dicta numquam aperiam autem at excepturi, perferendis possimus odit atque saepe veritatis quasi quia a. Aliquid quam totam est, atque repudiandae neque in, accusantium quis nam assumenda, quibusdam earum. Dolor voluptas deleniti incidunt vitae fuga temporibus provident sint quisquam accusamus fugit? Dicta, quo error. Quisquam ipsa voluptatem provident!
 
                 <!-- Classes Section -->
-                #classes-tab.non-active.panel
-                    h2 Status:
+                #classes.non-active.panel
+                    h2 Classes Section:
                     p Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam explicabo eaque adipisci dicta numquam aperiam autem at excepturi, perferendis possimus odit atque saepe veritatis quasi quia a. Aliquid quam totam est, atque repudiandae neque in, accusantium quis nam assumenda, quibusdam earum. Dolor voluptas deleniti incidunt vitae fuga temporibus provident sint quisquam accusamus fugit? Dicta, quo error. Quisquam ipsa voluptatem provident!
                 <!-- Scores Section -->
-                #test-scores-tab.non-active.panel
-                    h2 Status:
+                #test-scores.non-active.panel
+                    h2 Test Scores Section:
                     p Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam explicabo eaque adipisci dicta numquam aperiam autem at excepturi, perferendis possimus odit atque saepe veritatis quasi quia a. Aliquid quam totam est, atque repudiandae neque in, accusantium quis nam assumenda, quibusdam earum. Dolor voluptas deleniti incidunt vitae fuga temporibus provident sint quisquam accusamus fugit? Dicta, quo error. Quisquam ipsa voluptatem provident!
             <!-- Transfer Status Section/ RIGHT Side -->
             .transfer-status
                 .filler
                 .panel
-                    h2 Status:
-                    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam explicabo eaque adipisci dicta numquam aperiam autem at excepturi, perferendis possimus odit atque saepe veritatis quasi quia a. Aliquid quam totam est, atque repudiandae neque in, accusantium quis nam assumenda, quibusdam earum. Dolor voluptas deleniti incidunt vitae fuga temporibus provident sint quisquam accusamus fugit? Dicta, quo error. Quisquam ipsa voluptatem provident!
+                    h2 Transfer Status Section:
+                    p Status bar relates to the completion for the major you have selected. It takes account of all the classes and tests you have taken. Click "more info" after finishing the form to see the remaining requirements needed for the major(s).
         .testingpurpose
         script(src="./js/student-tab.js")
+
+
+

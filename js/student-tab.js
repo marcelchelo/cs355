@@ -2,24 +2,69 @@
 // *Tab Section..
 // TODO 1. Get this thing eff working
 // TODO 2. you can dance if you want to. you can leave your friends behind.
+// ! START OF TABS FUNTIONALITY SECTION :
 
 const tabBtns = document.querySelectorAll(".tab-item");
+let currPanel;
+tabBtns.forEach(x => {
+    //if (event.target.classList.contains("btn-focus")) {
+    // currPanel = event;
+    if (x.classList.contains("btn-focus")) {
+        currPanel = x;
+        console.log(currPanel);
+    }
+    //}
+});
 
 tabBtns.forEach(x => {
     x.addEventListener("click", event => {
-        console.log("working");
+        //console.log(event);
+        if (!event.target.classList.contains("btn-focus")) {
+            //event.target.classList.add("btn-focus");
+            //event.target.classList.remove("btn-nonfocus");
+            swapPanel(event.target);
+        }
     });
 });
+
+function swapPanel(panel) {
+    const currPanelName = currPanel.getAttribute("data-link");
+    const newPanelName = panel.getAttribute("data-link");
+
+    const replacedPanel = document.getElementById(`${currPanelName}`);
+    const incomingPanel = document.getElementById(`${newPanelName}`);
+
+    // * remove the active on the tab user is moving out of
+    // * active {display:block}; // useless class I think. REMOVED for now
+    //replacedPanel.classList.remove("active");
+    replacedPanel.classList.add("non-active");
+
+    //incomingPanel.classList.add("active");
+    incomingPanel.classList.remove("non-active");
+
+    panel.classList.add("btn-focus");
+    panel.classList.remove("btn-nonfocus");
+
+    //replacedPanel.classList.remove("");
+
+    currPanel.classList.remove("btn-focus");
+    currPanel.classList.add("btn-nonfocus");
+    //console.log(panel.getAttribute("data-link"));
+
+    currPanel = panel;
+}
+// ! END OF TABS FUNCTIONALITY SECTION
 
 // *Current School Panel
 // TODO add functionality
 // TODO delete functionality DONE!! COMPLETE
+// !THIS IS STATIC... DATABASE NEEDED FOR NEXT PRESENTATION
+// ! START OF CUR-SCHOOL TAB SECTION:
 
 // search bar
 const pastSkooSearch = document.getElementById("past-colleges");
 // ul element that acts as a dropdown list
 const pastSkooAAResults = document.getElementById("past-college-results");
-// !THIS IS STATIC... DATABASE NEEDED FOR NEXT PRESENTATION
 
 async function searchSkooList(text) {
     const res = await fetch("./js/skoo.json");
@@ -72,13 +117,9 @@ function skooSelector() {
 }
 
 pastSkooSearch.addEventListener("input", x => {
-    //console.log(x.target.value);
     if (x.target.value.length >= 3) {
-        //  console.log(pastSkooSearch.value);
         outputSkoo(pastSkooSearch.value, searchSkooList);
-        // searchSkooList(pastSkooSearch.value, outputSkoo);
     } else {
-        //  console.log("sd");
         pastSkooAAResults.innerHTML = "";
     }
 });
@@ -157,3 +198,5 @@ function addSkoo(skoo, callback) {
             console.log("sd");
         });
 }
+
+// ! END OF CURR-SCHOOL TAB SECTION ---
