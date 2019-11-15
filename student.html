@@ -19,16 +19,19 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
   <title id="studentTitle"></title>
   <script>
     loadStoredTitle();
   </script>
 </head>
-<body id="studentBody">
+
+<body id="studentBody" style="background-color:#E8E8E8">
+ <!--
 <script>
   loadStoredColor();
 </script>
- <!-- Navigation Bar -->
+
  <nav class="main-nav" id="overlay">
   <img src="./style/images/Close Menu.svg" alt="menu" class="close-btn" id="close-menu">
   <ul>
@@ -51,9 +54,9 @@
 
   </ul>
 </nav>
-<!-- Banner -->
 
-<header id="home">
+
+<header id="None">
   <div class="header-container">
       <a href="#"><img src="./style/images/modern-american-history-collage-1280px-Queens_College_Logo.svg.png" alt="logo"></a>
 
@@ -61,7 +64,7 @@
 
   </div>
   <section class="header-txt">
-      
+
       <h1>Transfer Protocol</h1>
       <br>
       <p id="studentDescription"></p>
@@ -71,13 +74,19 @@
       </script>
     </section>
 </header>
+-->
 
+
+<div class="fixed-nav-bar">
+    <a class=topBar href="https://www.cuny.edu/">City University of New York</a>
+</div>
+
+<img src="./style/images/TransferPortalLogo.png" alt="CUNY LOGO"class="center">
 
   <!-- TABS -->
-  <div class="wrapper">
-
-    <div>
-      <ul class="nav nav-tabs">
+  <div class="card">
+    <div class="card-body">
+      <ul class="nav nav-tabs nav-justified">
         <li class="nav-item">
           <a class="nav-link active" href="#From" role="tab" data-toggle="tab">1. Current School</a>
         </li>
@@ -85,7 +94,7 @@
           <a class="nav-link" href="#To" role="tab" data-toggle="tab">2. Transfer School</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#Majors" role="tab" data-toggle="tab">3. Majors</a>
+          <a class="nav-link" href="#Majors" role="tab" data-toggle="tab">3. Major</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#Classes" role="tab" data-toggle="tab">4. Classes</a>
@@ -93,6 +102,8 @@
         <li class="nav-item">
           <a class="nav-link" href="#AP" role="tab" data-toggle="tab">5. AP Scores</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#Result" role="tab" data-toggle="tab">6. Result</a>
 
       </ul>
       <!-- CONTENTS OF THE TABS -->
@@ -283,118 +294,118 @@
         </div>
 
         <div role="tabpanel" class="tab-pane " id="Majors">
-			<!--Major Search Bar -->
-			<br><input class = "search" type="text" id="userInput" size="80" onkeyup="updateMajor()" placeholder="Search for major"><br><br>
-			
-			<!--List of majors -->
-			<ul id="majorUL" class = "majorDisplay" style = "list-style: none">
-			  <button class="collapsible">Arts and Humanities</button>
-				<div class="content">
-					<li><label><input id = "Art" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Art</label><br></li>
-					<li><label><input id = "Comparitive Literature" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Comparitive Literature</label><br></li>
-					<li><label><input id = "Drama, Theatre, & Dance" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Drama, Theatre, & Dance</label><br></li>
-					<li><label><input id = "English" type="checkbox" name = "Major" class="single-checkbox" onclick=updateValue(id)> English</label><br></li>
-					<li><label><input id = "Media Studies" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Media Studies</label><br></li>
-				</div>
-			  
-			  <button class="collapsible">Mathematics and Natural Sciences</button>
-				<div class="content">
-					<li><label><input id = "Biology" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Biology</label><br></li>
-					<li><label><input id = "Chemistry" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Chemistry</label><br></li>
-					<li><label><input id = "Physics" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Physics</label><br></li>
-					<li><label><input id = "Computer Science BA" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Computer Science BA</label><br></li>
-					<li><label><input id = "Computer Science BS" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Computer Science BS</label><br></li>
-				</div>
-				
-			  <button class="collapsible">Education</button>
-				<div class="content">
-					<li><label><input id = "Educational and Community Programs" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Educational and Community Programs</label><br></li>
-					<li><label><input id = "Elementary and Early Childhood Education" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Elementary and Early Childhood Education</label><br></li>
-					<li><label><input id = "Secondary Education and Youth Services" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Secondary Education and Youth Services</label><br></li>
-				</div>
-				
-			  <button class="collapsible">Social Sciences</button>
-				<div class="content">
-					<li><label><input id = "Anthropology" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Anthropology</label><br></li>
-					<li><label><input id = "History" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> History</label><br></li>
-					<li><label><input id = "Philosophy" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Philosophy</label><br></li>
-					<li><label><input id = "Political Science" type="checkbox" name = "Major" class="single-checkbox" onclick=updateValue(id)> Political Science</label><br></li>
-					<li><label><input id = "Urban Studies" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Urban Studies</label><br></li>
-				</div>
-			</ul>
-			
-			<script>
-			// Search bar updates majors displayed
-			function updateMajor() {
-				var input = document.getElementById("userInput");
-				var filter = input.value.toUpperCase();
-				
-				var ul = document.getElementById("majorUL");
-				
-				var li = ul.getElementsByTagName("li");
-				
-				for (i = 0; i < li.length; i++) {
-					a = li[i].getElementsByTagName("input")[0];
-					txtValue = a.id;
-					
-					if (txtValue.toUpperCase().indexOf(filter) > -1) {
-						li[i].style.display = "";
-					} else {
-						li[i].style.display = "none";
-					}
-				}
-			}
-			</script>
-			
-			<!--Script for collapsible -->
-			<script>
-				var coll = document.getElementsByClassName("collapsible");
-				var i;
-				for (i = 0; i < coll.length; i++) {
-					coll[i].addEventListener("click", function() {
-					this.classList.toggle("active");
-					var content = this.nextElementSibling;
-					if (content.style.maxHeight){
-						content.style.maxHeight = null;
-					} else {
-						content.style.maxHeight = content.scrollHeight + "px";
-					}
-				});
-				}
-			</script>
+      <!--Major Search Bar -->
+      <br><input class = "search" type="text" id="userInput" size="80" onkeyup="updateMajor()" placeholder="Search for major"><br><br>
+
+      <!--List of majors -->
+      <ul id="majorUL" class = "majorDisplay" style = "list-style: none">
+        <button class="collapsible">Arts and Humanities</button>
+        <div class="content">
+          <li><label><input id = "Art" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Art</label><br></li>
+          <li><label><input id = "Comparitive Literature" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Comparitive Literature</label><br></li>
+          <li><label><input id = "Drama, Theatre, & Dance" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Drama, Theatre, & Dance</label><br></li>
+          <li><label><input id = "English" type="checkbox" name = "Major" class="single-checkbox" onclick=updateValue(id)> English</label><br></li>
+          <li><label><input id = "Media Studies" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Media Studies</label><br></li>
+        </div>
+
+        <button class="collapsible">Mathematics and Natural Sciences</button>
+        <div class="content">
+          <li><label><input id = "Biology" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Biology</label><br></li>
+          <li><label><input id = "Chemistry" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Chemistry</label><br></li>
+          <li><label><input id = "Physics" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Physics</label><br></li>
+          <li><label><input id = "Computer Science BA" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Computer Science BA</label><br></li>
+          <li><label><input id = "Computer Science BS" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Computer Science BS</label><br></li>
+        </div>
+
+        <button class="collapsible">Education</button>
+        <div class="content">
+          <li><label><input id = "Educational and Community Programs" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Educational and Community Programs</label><br></li>
+          <li><label><input id = "Elementary and Early Childhood Education" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Elementary and Early Childhood Education</label><br></li>
+          <li><label><input id = "Secondary Education and Youth Services" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Secondary Education and Youth Services</label><br></li>
+        </div>
+
+        <button class="collapsible">Social Sciences</button>
+        <div class="content">
+          <li><label><input id = "Anthropology" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Anthropology</label><br></li>
+          <li><label><input id = "History" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> History</label><br></li>
+          <li><label><input id = "Philosophy" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Philosophy</label><br></li>
+          <li><label><input id = "Political Science" type="checkbox" name = "Major" class="single-checkbox" onclick=updateValue(id)> Political Science</label><br></li>
+          <li><label><input id = "Urban Studies" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Urban Studies</label><br></li>
+        </div>
+      </ul>
+
+      <script>
+      // Search bar updates majors displayed
+      function updateMajor() {
+        var input = document.getElementById("userInput");
+        var filter = input.value.toUpperCase();
+
+        var ul = document.getElementById("majorUL");
+
+        var li = ul.getElementsByTagName("li");
+
+        for (i = 0; i < li.length; i++) {
+          a = li[i].getElementsByTagName("input")[0];
+          txtValue = a.id;
+
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+          } else {
+            li[i].style.display = "none";
+          }
+        }
+      }
+      </script>
+
+      <!--Script for collapsible -->
+      <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.maxHeight){
+            content.style.maxHeight = null;
+          } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+          }
+        });
+        }
+      </script>
 
         </div>
 
-	<script>
-		// Updates major selection for user to view
-		function updateValue(majorName) {
-			if (document.getElementById(majorName).checked) {
+  <script>
+    // Updates major selection for user to view
+    function updateValue(majorName) {
+      if (document.getElementById(majorName).checked) {
 
-				if (document.getElementById("Major1").innerHTML != "Choose a major." && document.getElementById("Major2").innerHTML == "Choose a major.") {
-						document.getElementById("Major2").innerHTML = majorName;
-				}
-				if (document.getElementById("Major1").innerHTML == "Choose a major.") {
-					document.getElementById("Major1").innerHTML = majorName;
-				}
-			}
-			else {
-				if (document.getElementById("Major2").innerHTML != "Choose a major.") {
-					document.getElementById("Major2").innerHTML = "Choose a major.";
-				}
-				else {
-					document.getElementById("Major1").innerHTML ="Choose a major.";
-				}
-			}
-		}
+        if (document.getElementById("Major1").innerHTML != "Choose a major." && document.getElementById("Major2").innerHTML == "Choose a major.") {
+            document.getElementById("Major2").innerHTML = majorName;
+        }
+        if (document.getElementById("Major1").innerHTML == "Choose a major.") {
+          document.getElementById("Major1").innerHTML = majorName;
+        }
+      }
+      else {
+        if (document.getElementById("Major2").innerHTML != "Choose a major.") {
+          document.getElementById("Major2").innerHTML = "Choose a major.";
+        }
+        else {
+          document.getElementById("Major1").innerHTML ="Choose a major.";
+        }
+      }
+    }
 
-		// Limits user to select only 2 majors.
-		var limit = 3;
-		$('input.single-checkbox').on('change', function(evt) {
-			if($(("input[name = 'Major']:checked")).length >= limit) {
-				this.checked = false;
-			}
-		});
-	</script>
+    // Limits user to select only 2 majors.
+    var limit = 3;
+    $('input.single-checkbox').on('change', function(evt) {
+      if($(("input[name = 'Major']:checked")).length >= limit) {
+        this.checked = false;
+      }
+    });
+  </script>
 
        <!--The Classes Tab-->
        <div role="tabpanel" class="tab-pane " id="Classes">
@@ -410,9 +421,9 @@
             <div id="Classes_Desc" data-toggle="dropdown" ></div>
             <div id="NoClasses" class="dropdown-header">No Classes Selected</div>
           </div>
-        </div> 
-        
-      
+        </div>
+
+
       <!--Script for the classes Tab-->
       <script>
          let school_name;
@@ -427,37 +438,37 @@
          let Schools_Classes = {}
               Schools_Classes["CUNY Queens College"] = ["English 101" , "CS 101" , "History 105" , "Math 241" , "Chem 103"] ;
               Schools_Classes["Alabama State University"] = ["English 201" , "CS 111" , "History 115" , "Math 931" , "Phys 103" , "Gym 1000"] ;
-              Schools_Classes["Adelphi University"] = ["English 325" , "CS 207" , "CS 999" , "Math 200" , "Bio 102" , "Bio 103"] ; 
+              Schools_Classes["Adelphi University"] = ["English 325" , "CS 207" , "CS 999" , "Math 200" , "Bio 102" , "Bio 103"] ;
               Schools_Classes["CUNY Hunter College"] = ["English 110" , "CS 542" , "History 105" , "Math 738" , "Chinese 103"] ;
               Schools_Classes["CUNY City Tech"] = ["English 101" , "CS 101" , "CS 102", "History 129" , "Math 257" , "Chem 167" , "Phys 1000"] ;
-              Schools_Classes["CUNY John Jay"] = ["English 601" , "CS 101" , "History 105" , "Cop 911" , "Nark 101"] ; 
-              Schools_Classes["SUNY Binghamtom University"] = ["English 1010" , "CS 7331" , "History 1776" , "Math 9876" , "Chem 4317" , "Party 4200"] ; 
+              Schools_Classes["CUNY John Jay"] = ["English 601" , "CS 101" , "History 105" , "Cop 911" , "Nark 101"] ;
+              Schools_Classes["SUNY Binghamtom University"] = ["English 1010" , "CS 7331" , "History 1776" , "Math 9876" , "Chem 4317" , "Party 4200"] ;
 
         // getting the school selected from the FROM tab
         document.getElementById("dropdown_classes").onclick = function Class_Search()
         {
           school_name = document.getElementsByClassName("dropdown_past_schools")[0].innerHTML;
           document.getElementById("Classes_Desc").innerHTML = "";
-          
-          
-          // if the user never entered a school show a message 
+
+
+          // if the user never entered a school show a message
           if(school_name.includes("Find your")){
               document.getElementById("NoClasses").innerHTML = "No School Selected";
           }
           else{
-            // putting all the classes into a list 
+            // putting all the classes into a list
             for(var classes in Schools_Classes[school_name]){
               list_of_classes.push('<input type ="button" class = "dropdown-item classes-dropdown-item" type="button"  value="' + Schools_Classes[school_name][classes] +'"/>' )
-            } 
-            
+            }
+
             $('#Classes_Desc').append(list_of_classes.join(""))
-          
+
             // if their exists classes change the message to be blank
             if(document.getElementById("Classes_Desc").innerHTML != "" ){
                 document.getElementById("NoClasses").innerHTML = "" ;
             }
 
-          }  
+          }
           //reset the array so if teh user changes his school the classes won't stack up
           list_of_classes = [] ;
         };
@@ -470,8 +481,8 @@
             document.getElementById("NoClasses").innerHTML = "No Classes Selected" ;
             $('#Classes_Desc').hide() ;
           }
-        }) ; 
-        
+        }) ;
+
          function wordfilter(word) {
            let length = Classes_in_dropdown.length;
            let i = 0;
@@ -483,8 +494,8 @@
             }
             else {
               $(Classes_in_dropdown[i]).hide()
-              
-            }   
+
+            }
              i++;
            }
          }
@@ -492,10 +503,7 @@
       </div>
 
         <div role="tabpanel" class="tab-pane " id="AP">
-          <div class="card">
-            <div class="card-body">
 
-              <h3 class="card-title">AP Scores</h5>
               <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_tests" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
@@ -656,61 +664,68 @@
                 }
               </script>
 
+
+        </div>
+
+        <div="tabpanel" class="tab-pane" id="Result">
+        <div class="card">
+          <div class="card-body">
+
+            <h5 id="Major1">Choose a major.</h5>
+            <p class="card-text"></p>
+
+            <div class="progress">
+
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width:80%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">80%</div>
+              </div>
+
             </div>
+
+            <hr>
+            <p style=color:black>0 credits apply</p>
+            <button class="button cardButton">View detail</button>
+
           </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+
+            <h5 id="Major2">Choose a major.</h5>
+            <p class="card-text"></p>
+
+            <div class="progress">
+
+              <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width:55%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">55%</div>
+              </div>
+
+            </div>
+
+            <hr>
+            <p style=color:black>0 credits apply</p>
+            <button class=" button cardButton">View detail</button>
+
+          </div>
+        </div>
         </div>
 
       </div>
     </div>
-
-    <div>
-
-    <div class="rightSide">
-      <!-- Panels showing progress and percentage, there are two of them -->
-      <div class="card">
-        <div class="card-body">
-
-          <h5 id="Major1">Choose a major.</h5>
-          <p class="card-text"></p>
-
-          <div class="progress">
-
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width:80%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">80%</div>
-            </div>
-
-          </div>
-
-          <hr>
-          <p style=color:black>0 credits apply</p>
-          <button class="button cardButton">View detail</button>
-
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-body">
-
-          <h5 id="Major2">Choose a major.</h5>
-          <p class="card-text"></p>
-
-          <div class="progress">
-
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width:55%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">55%</div>
-            </div>
-
-          </div>
-
-          <hr>
-          <p style=color:black>0 credits apply</p>
-          <button class=" button cardButton">View detail</button>
-
-        </div>
-      </div>
-
     </div>
-
   </div>
+
+  <div class="boxed">
+      The genre advertises past the involved resident. The tactless parade prosecutes beneath the satisfied motto. When can a naughty mechanic acquire a slash? The fly case works into the witty ceremony. On top of the folding autumn rots the dangerous cathedral.
+  </div>
+
+  <footer class="footer">
+      ©CUNY 2019-2020
+      <br>
+      <a class=topBar style="color:black" href="adminLogin.html">Admin Login</a>
+      <br>
+      <a class=topBar style="color:black" href="https://github.com/marcelchelo/cs355">Github</a>
+  </footer>
 </body>
 </html>
