@@ -10,7 +10,8 @@ We can decide to host it elsewhere (heroku?) later on, but for now this will do.
 # Backend information 
 ## Make good comments when commiting changes to backend code.
 We are using Express, a node framework for back end. 
- 
+
+### in App.js fill in our database ip address. IDK how to make it so it is not viewable to the whole world.  
  open the package.json file to see which packages you need to npm install. 
  They are under dependencies. 
  

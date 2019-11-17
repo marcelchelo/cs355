@@ -3,21 +3,23 @@ var app = express();
 const morgan = require ('morgan')
 const mysql = require ('mysql')
 
-app.use(morgan('short'))
+app.use(morgan('short'))   //morgan will output to our console on terminal whenever a get request is being made and from where. 
 
+//Things we need to add   Connection pool
+//Use router to move the routes and clean up the code
+
+//Database connection credentials
+const connection = mysql.createConnection({
+  host: '35.185.14.255',
+  user: 'admin',
+  password: 'cs3552019',
+  database: 'TransferPortal'
+
+})
 
 //API for Admin  Users
-
-app.get('/adminUsers', (req, res) => {
+app.get('/adminUsers', (req, res) => { //route where the json will be outputed 
   console.log("Fetching all admin users " )
-
-  const connection = mysql.createConnection({
-    host: 'u know the ip',
-    user: 'admin',
-    password: 'cs3552019',
-    database: 'TransferPortal'
-
-  })
 
   const queryString = "SELECT * FROM adminUsers "
   connection.query(queryString, (err, rows, fields) => {
@@ -30,11 +32,11 @@ app.get('/adminUsers', (req, res) => {
 
     console.log("I think we fetched users successfully")
 
-    const catalog = rows.map((row) => {
+    const adminUsers = rows.map((row) => {
       return {Username: row.username, ID: row.id}
     })
 
-    res.json(catalog)
+    res.json(adminUsers)
   })
 
   // res.end()
@@ -45,14 +47,6 @@ app.get('/adminUsers', (req, res) => {
 
 app.get('/colleges', (req, res) => {
   console.log("Fetching colleges " )
-
-  const connection = mysql.createConnection({
-    host: '35.185.14.255',
-    user: 'admin',
-    password: 'cs3552019',
-    database: 'TransferPortal'
-
-  })
 
   const queryString = "SELECT * FROM INSTITUTION_VW "
   connection.query(queryString, (err, rows, fields) => {
@@ -74,6 +68,62 @@ app.get('/colleges', (req, res) => {
 
   // res.end()
 })
+
+
+
+//api for CRSE_CAT
+app.get('/CRSE_CAT', (req, res) => {
+  console.log("Fetching QC Catalogue " )
+
+  const queryString = "SELECT * FROM CRSE_CAT LIMIT 0,1000"
+  connection.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log("Failed to query for users: " + err)
+      res.sendStatus(500)
+      return
+      // throw err
+    }
+
+    console.log("Course Catalogue fetched  successfully")
+
+    const catalog = rows.map((row) => {
+      return {Code: row.Course_ID, Title:row.Long_Title , Description: row.Descr, Status: row.Status,
+              EquivalentCourses: row.Equiv_Crs}
+    })
+
+    res.json(catalog)
+  })
+
+  // res.end()
+})
+
+
+//transfer rules
+
+app.get('/TRNS_RULES', (req, res) => {
+  console.log("Fetching QC Catalogue " )
+
+  const queryString = "SELECT * FROM TRNS_RULES LIMIT 0,1000"
+  connection.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log("Failed to query for users: " + err)
+      res.sendStatus(500)
+      return
+      // throw err
+    }
+
+    console.log("Course Catalogue fetched  successfully")
+
+    const catalog = rows.map((row) => {
+      return {Name: row.Descr}
+    })
+
+    res.json(catalog)
+  })
+
+  // res.end()
+})
+
 
 
 //controlls the verious routes we have
