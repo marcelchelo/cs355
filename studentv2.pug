@@ -50,9 +50,9 @@ html(lang="en")
                 #curr-school.active.panel
                     p Add a college you are current and/or past college(s).
                     hr
-                    div.wrapper
+                    .wrapper
                         .vertical-flow
-                            input(type="text" id="past-colleges" class="testcase" name="past-colleges" placeholder="ie. CUNY Queens College")
+                            input(type="text" id="past-colleges" class="testcase" name="past-colleges" placeholder="ie. East Georgia College")
                             ul.results#past-college-results
 
                         button(type="submit" id="past-college-submit" class="form-button" ) Add
@@ -65,8 +65,16 @@ html(lang="en")
                     //-     button(class="chosen-prev-school") Delete
                 <!-- Transfer School Section -->
                 #transfer-school.non-active.panel
-                    h2 Transfer School Section:
-                    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam explicabo eaque adipisci dicta numquam aperiam autem at excepturi, perferendis possimus odit atque saepe veritatis quasi quia a. Aliquid quam totam est, atque repudiandae neque in, accusantium quis nam assumenda, quibusdam earum. Dolor voluptas deleniti incidunt vitae fuga temporibus provident sint quisquam accusamus fugit? Dicta, quo error. Quisquam ipsa voluptatem provident!
+                    p Add a CUNY college you are planning to attend.
+                    hr
+                    .wrapper
+                        .vertical-flow
+                            input(type="text" id="college-choice" class="testcase" name="past-colleges" placeholder="ie. CUNY Queens College")
+                            ul.results#past-college-results
+
+                        button(type="submit" id="past-college-submit" class="form-button" ) Add
+
+
                 <!-- Majors Section -->
                 #majors.non-active.panel
                     h2 Majors Section:

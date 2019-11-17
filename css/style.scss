@@ -198,10 +198,14 @@ article {
 
 .panel {
     padding: 2.5rem 2.35rem;
+    // p {
+    //     text-align: center;
+    // }
 }
 
 .active {
     display: block;
+    text-align: center;
 }
 
 .non-active {
@@ -274,13 +278,6 @@ input {
     }
 
     //display: none;
-}
-
-#curr-school {
-    // border: 1px green solid;
-    p {
-        text-align: center;
-    }
 }
 
 // #past-college-results {

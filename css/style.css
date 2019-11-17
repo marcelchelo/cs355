@@ -14,7 +14,7 @@ body {
   line-height: 1.6;
   font-weight: 400;
   color: #2b2b28;
-  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "benton sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
   background-color: #f4f4f4;
 }
 
@@ -198,6 +198,7 @@ article h1 {
 
 .active {
   display: block;
+  text-align: center;
 }
 
 .non-active {
@@ -270,10 +271,6 @@ input {
 
 .results li:hover {
   background-color: #e4e4e2;
-}
-
-#curr-school p {
-  text-align: center;
 }
 
 @media only screen and (max-width: 320px) {

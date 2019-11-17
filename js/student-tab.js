@@ -36,10 +36,10 @@ function swapPanel(panel) {
 
     // * remove the active on the tab user is moving out of
     // * active {display:block}; // useless class I think. REMOVED for now
-    //replacedPanel.classList.remove("active");
+    replacedPanel.classList.remove("active");
     replacedPanel.classList.add("non-active");
 
-    //incomingPanel.classList.add("active");
+    incomingPanel.classList.add("active");
     incomingPanel.classList.remove("non-active");
 
     panel.classList.add("btn-focus");
