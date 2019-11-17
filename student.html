@@ -237,9 +237,11 @@
           <script>
             function findUnivertiy(){
               console.log("i'm hit");
-              fetch("http://localhost:3000/colleges")
-              .then(colleges =>  colleges.json())
-              .then(colleges => console.log(colleges));
+              fetch("http://localhost:3000/colleges", {
+                .then(colleges =>  colleges.json())
+                .then(colleges => console.log(colleges));
+              })
+              
             }
 
             let transferSchools = ["Baruch College", "Borough of Manhattan CC", "Bronx Community College", "CUNY Queens College"]
