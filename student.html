@@ -226,7 +226,8 @@
             </button>
             <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_transfer_schools">
               <form class="px-4 py-2">
-                <input type="search" class="form-control" id="searchTransferSchool" placeholder="" autofocus="autofocus">
+                <input type="search" class="form-control" id="searchTransferSchool" placeholder="enter college name" onchange="findUnivertiy()" autofocus="autofocus">
+                <!-- <button type = "submit" value = "search"></button> -->
               </form>
               <div id="transferMenuItems"></div>
               <div id="transferEmpty" class="dropdown-header">No schools found</div>
@@ -234,6 +235,15 @@
           </div>
 
           <script>
+            function findUnivertiy(){
+              console.log("i'm hit");
+              fetch("http://localhost:3000/colleges", {
+                .then(colleges =>  colleges.json())
+                .then(colleges => console.log(colleges));
+              })
+              
+            }
+
             let transferSchools = ["Baruch College", "Borough of Manhattan CC", "Bronx Community College", "CUNY Queens College"]
 
             let transferSchoolsSearchInput = document.getElementById("searchTransferSchool")
