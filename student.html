@@ -110,7 +110,7 @@
       <div class="tab-content">
         <!-- SELECT "FROM SCHOOL" TAB -->
         <div role="tabpanel" class="tab-pane active" id="From">
-
+          <p class="guide">Add the schools you've attended in the past.</p>
           <button class="btn btn-outline-secondary col-xs-12 btn-add-past-schools">
             <span id="btn-add-past-schools-font">+ Add a past college or university</span>
           </button>
@@ -120,7 +120,7 @@
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Find your past college or university
             </button>
-            <div class="menu dropdown-menu" aria-labelledby="dropdown_past_schools">
+            <div class="menu dropdown-menu"aria-labelledby="dropdown_past_schools">
               <form class="px-4 py-2">
                 <input id="search-past-school" type="search" class="form-control searchPastSchool" placeholder="" autofocus="autofocus" oninput="searchPastSchool(this)">
               </form>
@@ -143,7 +143,7 @@
             function buildPastDropDown(values, numOfDropdowns) {
               let contents = []
               for (let school of values) {
-                contents.push('<input type="button" class="dropdown-item past-dropdown-item" type="button" value="' + school + '" onclick="selectSchool(this, '+ numOfDropdowns +' )" />')
+                contents.push('<input type="button" class="dropdown-item past-dropdown-item" value="' + school + '" onclick="selectSchool(this, '+ numOfDropdowns +' )" />')
               }
               // Hides all schools by default.
               var dropdowntest = $('#past-menu-dropdown-items-' + numOfDropdowns)
@@ -211,7 +211,6 @@
                 $('.pastEmpty').show()
               }
             }
-
 
             // For every word entered by user, check if symbol includes with that word
             // If symbol exists, show the symbol; else hide it

@@ -1,10 +1,12 @@
 var express = require ("express");
 var app = express();
+const path = require('path');
 const morgan = require ('morgan')
 const mysql = require ('mysql')
 
 app.use(morgan('short'))
 
+app.use(express.static(path.join(__dirname)))
 
 //API for Admin  Users
 
@@ -113,8 +115,8 @@ app.get('*', function (req, res) {
 
 
 
+const PORT = process.env.PORT || 3000;
 
-
-app.listen(3000, () => console.log('Server has started!!'));
+app.listen(PORT, () => console.log('Server has started!!'));
 //Goto http://localhost:3000/  in your browser to see if it works. Make sure you downloaded node.js  and did npm install express --save first 
 //check the package.json file to see which packages you need to install under dependencies.  You install with npm install <package name>
