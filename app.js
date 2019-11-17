@@ -112,7 +112,7 @@ app.get('/TRNS_RULES', (req, res) => {
       // throw err
     }
 
-    console.log("Course Catalogue fetched  successfully")
+    console.log("Transfer Rules fetched  successfully")
 
     const catalog = rows.map((row) => {
       return {Name: row.Descr}
@@ -143,7 +143,7 @@ app.get('/', function (req, res) {
 
 //Student page
 app.get('/student', function (req, res) {
-  res.render("student")
+  res.render("student.ejs")
   console.log("Someone visited the student page")
 });
 
@@ -165,6 +165,6 @@ app.get('*', function (req, res) {
 
 
 
-app.listen(3000, () => console.log('Server has started!!'));
+app.listen(3000, () => console.log('Server has started on local Host port 3000!!'));
 //Goto http://localhost:3000/  in your browser to see if it works. Make sure you downloaded node.js  and did npm install express --save first 
 //check the package.json file to see which packages you need to install under dependencies.  You install with npm install <package name>
