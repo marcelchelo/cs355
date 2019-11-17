@@ -14,7 +14,11 @@ body {
   line-height: 1.6;
   font-weight: 400;
   color: #2b2b28;
+<<<<<<< HEAD
   font-family: "benton sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
+=======
+  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+>>>>>>> f9b8a932a2dd6ea323ecea264e483bddf0930b3e
   background-color: #f4f4f4;
 }
 
@@ -198,7 +202,10 @@ article h1 {
 
 .active {
   display: block;
+<<<<<<< HEAD
   text-align: center;
+=======
+>>>>>>> f9b8a932a2dd6ea323ecea264e483bddf0930b3e
 }
 
 .non-active {
@@ -273,6 +280,13 @@ input {
   background-color: #e4e4e2;
 }
 
+<<<<<<< HEAD
+=======
+#curr-school p {
+  text-align: center;
+}
+
+>>>>>>> f9b8a932a2dd6ea323ecea264e483bddf0930b3e
 @media only screen and (max-width: 320px) {
   .container {
     -webkit-box-orient: vertical;
