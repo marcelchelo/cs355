@@ -98,27 +98,46 @@ app.get('/CRSE_CAT', (req, res) => {
 })
 
 
-//transfer rules
+//api for Credit_Based_OnTEst
 
+app.get("/creditBasedOnTest", (req,res) => {
+  console.log("Fething AP exams to course equivalency")
+
+  const queryString = "select * from  Credit_Based_OnTest"
+  connection.query(queryString,(err,rows,fields) => {
+    if(err){
+      console.log("Failed to query Credits based on AP exams")
+      res.sendStatus(500)
+      return
+    }
+    console.log("Credits based on Exams taken fethced successfully")
+    
+    const creditBasedOnTests = rows.map ((row) => {
+      return {Institution: row.Institution, TestID: row.testID, Component: row.Component }
+    })
+    res.json(creditBasedOnTests)
+  })
+})
+
+//transfer rules
 app.get('/TRNS_RULES', (req, res) => {
-  console.log("Fetching QC Catalogue " )
+  console.log("Fetching QC TransferRules " )
 
   const queryString = "SELECT * FROM TRNS_RULES LIMIT 0,1000"
   connection.query(queryString, (err, rows, fields) => {
     if (err) {
-      console.log("Failed to query for users: " + err)
+      console.log("Failed to query for TransferRules: " + err)
       res.sendStatus(500)
       return
-      // throw err
     }
 
     console.log("Transfer Rules fetched  successfully")
 
-    const catalog = rows.map((row) => {
+    const tRules = rows.map((row) => {
       return {Name: row.Descr}
     })
 
-    res.json(catalog)
+    res.json(tRules)
   })
 
   // res.end()
