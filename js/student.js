@@ -77,7 +77,6 @@ let pastSchoolsDropdownItems = document.getElementsByClassName("past-dropdown-it
 
 // Capture the event when user types into search box
 function searchPastSchool(elem) {
-    console.log(elem.id)
     if (elem.value.length !== 0) {
         filterSearchFromPast(elem.value.trim().toLowerCase())
     } else {
