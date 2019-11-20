@@ -3,8 +3,8 @@ const Course = require('../models/course');
 //setup connection to database here
 const mongoose = require('mongoose');
 // connect to DB
-const mongoDB = 'mongodb://localhost:27017/cs355';
-mongoose.connect(mongoDB, { useNewUrlParser: true ,useUnifiedTopology: true});
+//const mongoDB = 'mongodb://localhost:27017/cs355';
+//mongoose.connect(mongoDB, { useNewUrlParser: true ,useUnifiedTopology: true});
 const db = mongoose.connection;
 // Display welcome.
 exports.welcome = function(res) {
@@ -23,10 +23,13 @@ exports.getCourses = function(res, courseID) {
 
 // Return courses based on query
 exports.getCoursesByName = function(req, res){
-    let courses = db.collection("courses").find({"Descr": {$regex: "query"}})
-    .toArray(function(err, result) {
-        if (err) throw err;
-        console.log(result);
+    let query = new RegExp(req.body.query);
+    let courses = db.collection("courses").find({"Descr": query }).limit(10).toArray(function(err, results) {
+        if (err) {
+            res.send({message: "failure"});
+        } else {
+            res.send( results );
+        }
       });
 }
 
