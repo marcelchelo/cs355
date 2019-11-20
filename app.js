@@ -1,8 +1,19 @@
 var express = require ("express");
 var app = express();
+const path = require('path');
 const morgan = require ('morgan')
 const mysql = require ('mysql')
 
+const cors = require("cors");
+app.use(
+  cors({
+    origin: "*"
+  })
+)
+
+app.use(morgan('short'))
+
+app.use(express.static(path.join(__dirname)))
 app.use(morgan('short'))   //morgan will output to our console on terminal whenever a get request is being made and from where. 
 
 //Things we need to add   Connection pool
@@ -46,6 +57,7 @@ app.get('/adminUsers', (req, res) => { //route where the json will be outputed
 //API for CUNY colleges
 
 app.get('/colleges', (req, res) => {
+  var importedSchools;
   console.log("Fetching colleges " )
 
   const queryString = "SELECT * FROM INSTITUTION_VW "
@@ -57,7 +69,7 @@ app.get('/colleges', (req, res) => {
       // throw err
     }
 
-    console.log("Institutions fetched  successfully")
+    console.log("Institutions fetched successfully")
 
     const catalog = rows.map((row) => {
       return {Code: row.INSTITUTION, NAME: row.DESCR}
@@ -65,10 +77,37 @@ app.get('/colleges', (req, res) => {
 
     res.json(catalog)
   })
-
   // res.end()
 })
 
+app.post('/colleges', (req, res) => {
+  console.log("fetching")
+
+  const connection = mysql.createConnection({
+    host: '35.185.14.255',
+    user: 'admin',
+    password: 'cs3552019',
+    database: 'TransferPortal'
+  })
+
+  const queryString = "SELECT * FROM INSTITUTION_VW "
+  connection.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log("Failed to query for users: " + err)
+      res.sendStatus(500)
+      return
+      // throw err
+    }
+
+    console.log("Institutions fetched successfully")
+
+    const catalog = rows.map((row) => {
+      return {Code: row.INSTITUTION, NAME: row.DESCR}
+    })
+
+    res.json(catalog)
+  })
+})
 
 
 //api for CRSE_CAT
@@ -182,6 +221,7 @@ app.get('*', function (req, res) {
 
 
 
+const PORT = process.env.PORT || 3000;
 
 
 app.listen(3000, () => console.log('Server has started on local Host port 3000!!'));
