@@ -117,16 +117,16 @@
             <span id="btn-add-past-schools-font">+ Add a past college or university</span>
           </button>
 
-          <div class="dropdown dropdown-past-schools-div" style="display:none">
-            <button id="past-schools" class="btn btn-secondary dropdown-toggle dropdown_past_schools" type="button"
+          <div class="dropdown dropdown-past-schools-div">
+            <button class="btn btn-secondary dropdown-toggle btn-past-schools dropdown_past_schools" type="button"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Find your past college or university
             </button>
             <div class="menu dropdown-menu"aria-labelledby="dropdown_past_schools">
               <form class="px-4 py-2">
-                <input id="search-past-school" type="search" class="form-control searchPastSchool" placeholder="" autofocus="autofocus" oninput="searchPastSchool(this)">
+                <input type="search" class="form-control searchPastSchool" placeholder="" autofocus="autofocus">
               </form>
-              <div id="past-menu-dropdown-items" class="pastMenuItems"></div>
+              <div class="pastMenuItems"></div>
               <div class="dropdown-header pastEmpty">No schools found</div>
             </div>
           </div>

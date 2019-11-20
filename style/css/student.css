@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .collapsible {
   background-color: teal;
   color: white;
@@ -287,3 +288,230 @@ position: relative;
   margin:0;
   }
 }
+=======
+.collapsible {
+  background-color: teal;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  width: 40%;
+  border: double;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+.active,
+.collapsible:hover {
+  background-color: none;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: white;
+}
+
+.navbar {
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 0;
+  font-size: 0;
+  letter-spacing: 0;
+  background-color:#4682B4;
+  color: white;
+}
+
+.nav-tabs{
+    display: flex;
+}
+.nav-tabs li {
+    display: flex;
+    flex: 1;
+}
+
+.nav-tabs li  a {
+    flex: 1;
+}
+
+.progress {
+  margin-bottom: 30px;
+  /* border: 2px solid red; */
+  height: 60%;
+  width: 100%;
+}
+
+
+.dropdown {
+  margin: 20px;
+  width:90%;
+}
+
+.btn-past-schools{
+  width:100%;
+}
+
+.btn{
+  width:100%;
+}
+
+.dropdown-menu {
+  max-height: 20rem;
+  overflow-y: auto;
+  width:100%;
+}
+
+.card{
+  background-color:white;
+  width:50%;
+  height:auto;
+  margin:0 auto 5%;
+  top:5%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cardButton{
+  padding:0.6em 2em;
+  border-radius: 8px;
+  color:#fff;
+  background-color:#1976d2;
+  font-size:1em;
+  border:1;
+  cursor:pointer;
+  border-color:#1976d2;
+}
+
+.button {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+.button:hover {
+  background-color:white;
+  color: black;
+}
+
+.button:focus {
+outline:0;
+}
+
+.nav-tabs > li.active > a {
+  color: black;
+  font-size: 5%;
+}
+
+.nav-tabs > li > a {
+  color: white;
+  background-color:#4682B4;
+  font-size: 90%;
+}
+
+.search {
+	float: center;
+	padding: 10px;
+	border: ridge;
+	margin-top: 8px;
+	margin-right: 16px;
+	font-size: 17px;
+}
+
+
+.selected {
+  /*border: 0.5px solid black;*/
+}
+
+.subject {
+  color: black;
+}
+
+.testScore {
+  width: 200px;
+}
+
+.error {
+  padding-top: 10px;
+  display: none;
+  color: red;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fixed-nav-bar {
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+  height: 3%;
+  background-color:#4682B4;
+  text-align:center;
+  display: inline-block;
+}
+
+.topBar{
+color:white;
+font-family:Garamond, Georgia, serif;
+}
+
+.topBar:hover
+{
+  text-decoration:none;
+  cursor:pointer;
+  color:white;
+}
+
+.boxed {
+  width: 50%;
+  border: 1px solid gray;
+  margin: 0;
+  text-align:center;
+
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color:white;
+}
+
+.footer {
+position: relative;
+
+ text-align: center;
+}
+
+/* Responsiveness for Cellphones */
+
+@media only screen and (max-width: 500px) {
+
+  .wrapper {
+  grid-template-columns: 100%;
+  justify-items: center;
+}
+
+  .rightSide{
+  background-color:#EDEEEC;
+  height: 85%;
+  width: 375px;
+  margin:0;
+}
+
+}
+
+/* Responsiveness for Tablets */
+
+@media only screen and (min-width: 400px; max-width: 768px) {
+
+  .wrapper {
+  grid-template-columns: 60% 40%;
+}
+
+  .rightSide{
+  background-color:#EDEEEC;
+  height: 100%;
+  width: 375px;
+  margin:0;
+}
+>>>>>>> worked on 2 prototypes for student page
