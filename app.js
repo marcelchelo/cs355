@@ -4,6 +4,13 @@ const path = require('path');
 const morgan = require ('morgan')
 const mysql = require ('mysql')
 
+const cors = require("cors");
+app.use(
+  cors({
+    origin: "*"
+  })
+)
+
 app.use(morgan('short'))
 
 app.use(express.static(path.join(__dirname)))
@@ -46,6 +53,7 @@ app.get('/adminUsers', (req, res) => {
 //API for CUNY colleges
 
 app.get('/colleges', (req, res) => {
+  var importedSchools;
   console.log("Fetching colleges " )
 
   const connection = mysql.createConnection({
@@ -65,7 +73,7 @@ app.get('/colleges', (req, res) => {
       // throw err
     }
 
-    console.log("Institutions fetched  successfully")
+    console.log("Institutions fetched successfully")
 
     const catalog = rows.map((row) => {
       return {Code: row.INSTITUTION, NAME: row.DESCR}
@@ -73,10 +81,37 @@ app.get('/colleges', (req, res) => {
 
     res.json(catalog)
   })
-
   // res.end()
 })
 
+app.post('/colleges', (req, res) => {
+  console.log("fetching")
+
+  const connection = mysql.createConnection({
+    host: '35.185.14.255',
+    user: 'admin',
+    password: 'cs3552019',
+    database: 'TransferPortal'
+  })
+
+  const queryString = "SELECT * FROM INSTITUTION_VW "
+  connection.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log("Failed to query for users: " + err)
+      res.sendStatus(500)
+      return
+      // throw err
+    }
+
+    console.log("Institutions fetched successfully")
+
+    const catalog = rows.map((row) => {
+      return {Code: row.INSTITUTION, NAME: row.DESCR}
+    })
+
+    res.json(catalog)
+  })
+})
 
 //controlls the verious routes we have
 const router = express.Router()
