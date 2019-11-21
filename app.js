@@ -1,8 +1,19 @@
 var express = require ("express");
 var app = express();
+const path = require('path');
 const morgan = require ('morgan')
 const mysql = require ('mysql')
 
+const cors = require("cors");
+app.use(
+  cors({
+    origin: "*"
+  })
+)
+
+app.use(morgan('short'))
+
+app.use(express.static(path.join(__dirname)))
 app.use(morgan('short'))   //morgan will output to our console on terminal whenever a get request is being made and from where. 
 
 //Things we need to add   Connection pool
@@ -46,6 +57,7 @@ app.get('/adminUsers', (req, res) => { //route where the json will be outputed
 //API for CUNY colleges
 
 app.get('/colleges', (req, res) => {
+  var importedSchools;
   console.log("Fetching colleges " )
 
   const queryString = "SELECT * FROM INSTITUTION_VW "
@@ -57,7 +69,7 @@ app.get('/colleges', (req, res) => {
       // throw err
     }
 
-    console.log("Institutions fetched  successfully")
+    console.log("Institutions fetched successfully")
 
     const catalog = rows.map((row) => {
       return {Code: row.INSTITUTION, NAME: row.DESCR}
@@ -65,10 +77,37 @@ app.get('/colleges', (req, res) => {
 
     res.json(catalog)
   })
-
   // res.end()
 })
 
+app.post('/colleges', (req, res) => {
+  console.log("fetching")
+
+  const connection = mysql.createConnection({
+    host: '35.185.14.255',
+    user: 'admin',
+    password: 'cs3552019',
+    database: 'TransferPortal'
+  })
+
+  const queryString = "SELECT * FROM INSTITUTION_VW "
+  connection.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log("Failed to query for users: " + err)
+      res.sendStatus(500)
+      return
+      // throw err
+    }
+
+    console.log("Institutions fetched successfully")
+
+    const catalog = rows.map((row) => {
+      return {Code: row.INSTITUTION, NAME: row.DESCR}
+    })
+
+    res.json(catalog)
+  })
+})
 
 
 //api for CRSE_CAT
@@ -98,27 +137,46 @@ app.get('/CRSE_CAT', (req, res) => {
 })
 
 
-//transfer rules
+//api for Credit_Based_OnTEst
 
+app.get("/creditBasedOnTest", (req,res) => {
+  console.log("Fething AP exams to course equivalency")
+
+  const queryString = "select * from  Credit_Based_OnTest"
+  connection.query(queryString,(err,rows,fields) => {
+    if(err){
+      console.log("Failed to query Credits based on AP exams")
+      res.sendStatus(500)
+      return
+    }
+    console.log("Credits based on Exams taken fethced successfully")
+    
+    const creditBasedOnTests = rows.map ((row) => {
+      return {Institution: row.Institution, TestID: row.testID, Component: row.Component }
+    })
+    res.json(creditBasedOnTests)
+  })
+})
+
+//transfer rules
 app.get('/TRNS_RULES', (req, res) => {
-  console.log("Fetching QC Catalogue " )
+  console.log("Fetching QC TransferRules " )
 
   const queryString = "SELECT * FROM TRNS_RULES LIMIT 0,1000"
   connection.query(queryString, (err, rows, fields) => {
     if (err) {
-      console.log("Failed to query for users: " + err)
+      console.log("Failed to query for TransferRules: " + err)
       res.sendStatus(500)
       return
-      // throw err
     }
 
-    console.log("Course Catalogue fetched  successfully")
+    console.log("Transfer Rules fetched  successfully")
 
-    const catalog = rows.map((row) => {
+    const tRules = rows.map((row) => {
       return {Name: row.Descr}
     })
 
-    res.json(catalog)
+    res.json(tRules)
   })
 
   // res.end()
@@ -143,7 +201,7 @@ app.get('/', function (req, res) {
 
 //Student page
 app.get('/student', function (req, res) {
-  res.render("student")
+  res.render("student.ejs")
   console.log("Someone visited the student page")
 });
 
@@ -163,8 +221,9 @@ app.get('*', function (req, res) {
 
 
 
+const PORT = process.env.PORT || 3000;
 
 
-app.listen(3000, () => console.log('Server has started!!'));
+app.listen(3000, () => console.log('Server has started on local Host port 3000!!'));
 //Goto http://localhost:3000/  in your browser to see if it works. Make sure you downloaded node.js  and did npm install express --save first 
 //check the package.json file to see which packages you need to install under dependencies.  You install with npm install <package name>
