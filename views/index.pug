@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible" content="ie=edge")
+        <!-- CSS File -->
+        link(rel="stylesheet" href="./assets/css/studentv3style.css")
+        <!-- autoComplete.js cdn -->
+        //link(rel="stylesheet", href="./node_modules/@tarekraafat/autocomplete.js/dist/css/autoComplete.css", attr)
+        
+
+        
+        <!-- Eww jQuery -->
+        //- script(src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous")
+        <!-- Select2 CDN -->
+        //- link(href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet")
+        //- script(src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js")
+        title Student Transfer(version: final)
+    body
+        <!-- NAVIGATION -->
+
+        <!-- HEADER -->
+       
+
+        <!-- MAIN -->
+        .gray
+            .container.inner
+                #transfer-app
+                    #transfer-nav-container
+                        ul
+                            li(id="instructions" class="focused flex-verticle")
+                                //- a(href="#" class="nav-item-wrap")
+                                //-     object(data="./images/creative-idea.svg" type="image/svg+xml")
+                                .space
+                                span Instructions
+                            li(id="courses" class="left-corner flex-verticle")
+                                //- //a(href="#" class="nav-item-wrap")
+                                 
+                                //-    //object(data="./images/clipboard.svg" type="image/svg+xml" class="ds")
+                                div.space
+                                span Courses
+                            li(id="college-opt" class="flex-verticle")
+                                //- a(href="#" class="nav-item-wrap")    
+                                //-     object(data="./images/school.svg" type="image/svg+xml")
+                                .space
+                                span College Option
+                            li(id="exam-scores" class="flex-verticle")
+                                //- a(href="#" class="nav-item-wrap")
+                                //-     object(data="./images/" type="image/svg+xml")
+                                .space
+                                span Exams
+                            li(id="results" class="flex-verticle")
+                                //- a(href="#" class="nav-item-wrap")
+                                //-     object(data="./images/stadistics.svg" type="image/svg+xml")
+                                .space
+                                span Results
+                    <!-- INSTRUCTION PANEL -->
+                    #instructions-panel.panel.active-panel
+                        h4.center-text Transfer Protocol Guide:
+                        hr
+                        .inner-panel.flex-horizontal
+                            .three.col
+                                .step-one.info-img
+                            .nine.col
+                                h5 Step 1: dududu
+                                p Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure, quasi ducimus. Veniam velit esse cupiditate magni nemo sed unde dolore.
+                        .inner-panel.flex-horizontal
+                            .three.col
+                                .step-two.info-img
+                            .nine.col
+                                h5 Step 2: ddududududuu
+                                p Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure, quasi ducimus. Veniam velit esse cupiditate magni nemo sed unde dolore.
+
+                        .inner-panel.flex-horizontal
+                            .three.col
+                                .step-three.info-img
+                            .nine.col
+                                h5 Step 3: dudududu
+                                p Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus explicabo, iste vitae perferendis similique omnis facere atque ut? Veritatis, exercitationem?
+
+                        .inner-panel.flex-horizontal
+                            .three.col
+                                .step-four.info-img
+                            .nine.col
+                                h5 Step 4: dududuudud
+                                p Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis enim nesciunt reprehenderit quasi dolorem ipsum maiores unde voluptates harum illo.dp
+                        
+                        button#get-started.center-btn Get Started
+                    <!-- COURSES PANEL -->
+                    #courses-panel.panel.hidden-panel
+                    
+                        button#add-school.center-btn Add School
+                        .inner-panel.hidden-panels
+                            .add-school-container.gray.hidden
+                                .row  
+                                    .flex.verticle.ten.col.test2
+                                        input(class="search-school"  type="text" placeholder="Enter a univeristy you have previously attended")
+                                        //- div.school-results
+                                    button(id="submit-school" class="two col" value="Add") Add
+                                    .add-class  
+                                        input(class="search-class" type="text" placeholder="Enter a complete course for this institution.")
+                                
+                    #college-opt-panel.panel.hidden-panel.lala
+                        h1 College Options
+                    #exam-score-panel.panel.hidden-panel.lala
+                        h1 Exam 
+                    #results-panel.panel.hidden-panel.lala
+                        h1 Result
+
+
+        <!-- Autocomplete.js Script -->
+        
+        <!-- Local JS Files -->
+        script(src="./assets/js/main.js")
+        script(src="./assets/js/autoComplete.js" type="text/javascript")
+        script(src="./assets/js/search-functions.js" type="text/javascript")
+        
+
+                  
+
+
+
+// ! FOR THE ICONS
+
+//- <div>Icons made by <a href="https://www.flaticon.com/authors/eucalyp" title="Eucalyp">Eucalyp</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
