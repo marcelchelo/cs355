@@ -55,7 +55,6 @@ app.get('/adminUsers', (req, res) => { //route where the json will be outputed
 
 
 //API for CUNY colleges
-
 app.get('/colleges', (req, res) => {
   var importedSchools;
   console.log("Fetching colleges " )

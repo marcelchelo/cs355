@@ -109,7 +109,7 @@
 
       </ul>
       <!-- CONTENTS OF THE TABS -->
-      <div class="tab-content">
+      <div class="tab-content" id="nav-bar">
         <!-- SELECT "FROM SCHOOL" TAB -->
         <div role="tabpanel" class="tab-pane active" id="From">
           <p class="guide">Add the schools you've attended in the past.</p>
@@ -131,14 +131,14 @@
             </div>
           </div>
 
-          <div class="school-added-container">
+          <div class="school-added-container"></div>
 
-          </div>
+          <a class="done-adding-schools">I'M DONE ADDING SCHOOLS</a>
         </div>
 
-        <div role="tabpanel" class="tab-pane " id="To">
+        <div role="tabpanel" class="tab-pane transferTo" id="To">
           <!-- SELECT "TRANSFER SCHOOL" TAB -->
-          <div class="dropdown">
+          <div class="dropdown" style="display: none;">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_transfer_schools" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               Find your transfer college or university
@@ -150,6 +150,17 @@
               <div id="transferMenuItems"></div>
               <div id="transferEmpty" class="dropdown-header">No schools found</div>
             </div>
+          </div>
+
+          <p class="guide">Add the schools you're transferring to.</p>
+          
+          <div class="add-transfer-school-container" style="display: block;">
+            <div class="add-school-input-container">
+              <input class="add-school-input searchPastSchool" type="text" placeholder="Type School Name">
+            </div>
+            <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a>
+            <div class="pastMenuItems" style="display: block;"></div>
+            <div class="dropdown-header pastEmpty">No schools found</div> 
           </div>
         </div>
 
