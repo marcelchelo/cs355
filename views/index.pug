@@ -90,21 +90,22 @@ html(lang="en")
                     <!-- COURSES PANEL -->
                     #courses-panel.panel.hidden-panel
                     
-                        button#add-school.center-btn Add School
-                        .inner-panel.hidden-panels
-                            .add-school-container.gray.hidden
-                                .row  
-                                    .flex.verticle.ten.col.test2
-                                        input(class="search-school"  type="text" placeholder="Enter a univeristy you have previously attended")
-                                        //- div.school-results
-                                    button(id="submit-school" class="two col" value="Add") Add
-                                    .add-class  
-                                        input(class="search-class" type="text" placeholder="Enter a complete course for this institution.")
-                                
+                        button#add-school.center-btn.active Add School
+                        
+                        #school-search-panel.inner-panel.gray.hidden
+                            
+                            input(type="text" class="school-text-field text-field" name="school-input" placeholder="CUNY Queens Colleges")
+                            .autocomplete-schoollol
+                            
+
+
+                    <!-- COLLEGE OPTION PANEL -->            
                     #college-opt-panel.panel.hidden-panel.lala
                         h1 College Options
+                    <!-- EXAM SCORE PANEL -->
                     #exam-score-panel.panel.hidden-panel.lala
                         h1 Exam 
+                    <!-- RESULTS PANEL -->
                     #results-panel.panel.hidden-panel.lala
                         h1 Result
 
