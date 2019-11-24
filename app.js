@@ -16,11 +16,11 @@ app.use(
 // ! VIEW ENGINE AND ROUTING VIEWS/ASSETS(CSS/IMG/JS)
 
 app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'pug')
+app.set('view engine', 'ejs')
 app.use('/assets', express.static('assets'))
 
 app.get('/', (req, res) => {
-	res.render('index')
+	res.render('studentv3')
 })
 
 //app.use(morgan('short'))
