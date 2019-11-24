@@ -14,37 +14,36 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="style/js/student.js"></script>
-  <script src="style/js/admin.js"></script>
+  <!-- javascript file -->
+  <script src="js/admin.js"></script>
 
 </head>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <ul class="navbar-nav">
-    <li class="nav-item active">
-      <a class="nav-link" href="index.html">Transfer Portal</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="student.html">Go to Student</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="https://github.com/marcelchelo/cs355">Github Repository</a>
-    </li>
-  </ul>
-</nav>
+<body>
 
- <body>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">Transfer Portal</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="student.html">Go to Student</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/marcelchelo/cs355">Github Repository</a>
+      </li>
+    </ul>
+  </nav>
+
    <div class="split">
      <div class="leftSide">
         <a class="navbar-brand" href="adminPage.html"><h5 style="padding:10px">Settings</h5></a>
-      </nav>
-
-      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-link active" id="v-pills-aseth-tab" data-toggle="pill" href="#v-pills-aseth" role="tab" aria-controls="v-pills-aseth" aria-selected="true">Aesthetics</a>
-                <a class="nav-link" id="v-pills-rules-tab" data-toggle="pill" href="#v-pills-rules" role="tab" aria-controls="v-pills-score" aria-selected="false">Transfer School Rules</a>
-        <a class="nav-link" id="v-pills-score-tab" data-toggle="pill" href="#v-pills-score" role="tab" aria-controls="v-pills-score" aria-selected="false">AP Scores</a>
-        <a class="nav-link" id="v-pills-more-tab" data-toggle="pill" href="#v-pills-more" role="tab" aria-controls="v-pills-more" aria-selected="false">Could add more</a>
-      </div>
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <a class="nav-link active" id="v-pills-aseth-tab" data-toggle="pill" href="#v-pills-aseth" role="tab" aria-controls="v-pills-aseth" aria-selected="true">Aesthetics</a>
+          <a class="nav-link" id="v-pills-rules-tab" data-toggle="pill" href="#v-pills-rules" role="tab" aria-controls="v-pills-score" aria-selected="false">Transfer School Rules</a>
+          <a class="nav-link" id="v-pills-more-tab" data-toggle="pill" href="#v-pills-more" role="tab" aria-controls="v-pills-more" aria-selected="false">Major for School</a>
+          <a class="nav-link" id="v-pills-score-tab" data-toggle="pill" href="#v-pills-score" role="tab" aria-controls="v-pills-score" aria-selected="false">Test Requirements</a>
+        </div>
      </div>
 
     <div class="rightSide">
@@ -124,6 +123,7 @@
               <div class = "splitRight">
                 <div>
                   <div class="dropdown">
+                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_tests2" data-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="false">
                       Select a school
@@ -139,7 +139,6 @@
                   <!-- Script for school search-->
                   <script>
                     // Initialize list with example colleges
-                    let tests2 = ["Queens College", "City College"]
 
                     // Input search box
                     let tests2SearchInput = document.getElementById("searchTests2")
@@ -149,6 +148,8 @@
 
                     function buildTest2DropDown(values) {
                       let contents = []
+                      let loadedSchools = []
+
                       for (let test of values) {
                         contents.push('<input type="button" class="dropdown-item test2-dropdown-item" type="button" value="' + test + '"/>')
                       }
@@ -388,205 +389,84 @@
             </div>
           </div>
           <button type="button" class="btn btn-primary" onclick="submitted()">Submit</button>
-          <script>
 
-          </script>
         </div>
+
         <div class="tab-pane" id="v-pills-rules" role="tabpanel" aria-labelledby="v-pills-rules-tab">
           <h2>Review/Modify Transfer Rules</h2>
           <p style="color:red">Note: This will allow you to change the transfer rules for base school in regards to extension school </p>
-          <div class=card>
-            <div class=card-body>
-              <h4 class="card-title">Base School</h4>
-             <div class=splitRight>
-               <div>
-                 <div class="dropdown">
-                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_past_schools" data-toggle="dropdown"
-                     aria-haspopup="true" aria-expanded="false">
-                     Select a base school
-                   </button>
-                   <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_past_schools">
-                     <form class="px-4 py-2">
-                       <input type="search" class="form-control" id="searchPastSchool" placeholder="" autofocus="autofocus">
-                     </form>
-                     <div id="pastMenuItems"></div>
-                     <div id="pastEmpty" class="dropdown-header">No schools found</div>
-                   </div>
-                 </div>
-                 <!-- Script for school search-->
-       			<script>
-                   // Initialize list with example colleges
-                   let pastSchools = ["Alabama State University", "Adelphi University",  "CUNY Queens College", "CUNY Hunter College", "CUNY City Tech", "CUNY John Jay", "SUNY Binghamtom University"]
 
-                   // Input search box
-                   let pastSchoolsSearchInput = document.getElementById("searchPastSchool")
-
-                   // Find all items inside the dropdown
-                   let pastSchoolsDropdownItems = document.getElementsByClassName("past-dropdown-item")
-
-                   function buildPastDropDown(values) {
-                     let contents = []
-                     for (let school of values) {
-                       contents.push('<input type="button" class="dropdown-item past-dropdown-item" type="button" value="' + school + '"/>')
-                     }
-                     // Hides all schools by default.
-                     $('#pastMenuItems').append(contents.join("")).hide()
-                     $('#pastEmpty').show()
-                   }
-                   // Capture the event when user types into search box
-                   document.querySelector("#searchPastSchool").addEventListener('input', function() {
-                     if (pastSchoolsSearchInput.value.length !== 0) {
-                       filterSearchFromPast(pastSchoolsSearchInput.value.trim().toLowerCase())
-                     }
-
-                     else {
-                       $('#pastMenuItems').hide()
-                       $('#pastEmpty').show()
-                     }
-                   })
-                   // For every word entered by user, check if symbol includes with that word
-                   // If symbol exists, show the symbol; else hide it
-                   function filterSearchFromPast(word) {
-                     let length = pastSchoolsDropdownItems.length
-                     let collection = []
-                     let hidden = 0
-                     for (let i = 0; i < length; i++) {
-                       if (pastSchoolsDropdownItems[i].value.toLowerCase().includes(word)) {
-                         $('#pastMenuItems').show()
-                         $(pastSchoolsDropdownItems[i]).show()
-                       }
-                       else {
-                         $(pastSchoolsDropdownItems[i]).hide()
-                         hidden++
-                       }
-                     }
-                     // If all items are hidden, show the empty view
-                     if (hidden === length) {
-                       $('#pastEmpty').show()
-                     }
-                     else {
-                       $('#pastEmpty').hide()
-                     }
-                   }
-                   // If the user clicks on any item, set the title of button as the text of the item
-                   $('#pastMenuItems').on('click', '.past-dropdown-item', function () {
-                     $('#dropdown_past_schools').text($(this)[0].value)
-                     editText(($(this)[0].value));
-                     $('#dropdown_past_schools').dropdown('toggle')
-                   })
-                   function editText(t)
-                   {
-                     document.getElementById("school1").innerHTML = t;
-                   }
-                   buildPastDropDown(pastSchools)
-                 </script>
-               </div>
-
-               <div>
-                 <h5 id="school1">Choose a school</h5>
-               </div>
-             </div>
-           </div>
-         </div>
-
-         <div class=card>
-           <div class=card-body>
-             <h4 class="card-title">Extension School</h4>
-             <div class=splitRight>
-              <div>
-                <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_transfer_schools" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Select a extension school
-                  </button>
-                  <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_transfer_schools">
-                    <form class="px-4 py-2">
-                      <input type="search" class="form-control" id="searchTransferSchool" placeholder="" autofocus="autofocus">
-                    </form>
-                    <div id="transferMenuItems"></div>
-                    <div id="transferEmpty" class="dropdown-header">No schools found</div>
-                  </div>
-                </div>
-
-                <script>
-                  let transferSchools = ["Baruch College", "Borough of Manhattan CC", "Bronx Community College", "CUNY Queens College"]
-
-                  let transferSchoolsSearchInput = document.getElementById("searchTransferSchool")
-
-                  let transferSchoolsDropdownItems = document.getElementsByClassName("transfer-dropdown-item")
-
-                  function buildTransferDropdown(values) {
-                    let contents = []
-                    for (let school of values) {
-                      contents.push('<input type="button" class="dropdown-item transfer-dropdown-item" type="button" value="' + school + '"/>')
-                    }
-
-                    $('#transferMenuItems').append(contents.join("")).hide()
-                    $('#transferEmpty').show()
-                  }
-
-                  document.querySelector("#searchTransferSchool").addEventListener('input', function() {
-                    if (transferSchoolsSearchInput.value.length !== 0) {
-                      filterSearchFromTransfer(transferSchoolsSearchInput.value.trim().toLowerCase())
-                    }
-
-                    else {
-                      $('#transferMenuItems').hide()
-                      $('#transferEmpty').show()
-                    }
-                  })
-
-                  function filterSearchFromTransfer(word) {
-                    let length = transferSchoolsDropdownItems.length
-                    let collection = []
-                    let hidden = 0
-                    for (let i = 0; i < length; i++) {
-                      if (transferSchoolsDropdownItems[i].value.toLowerCase().includes(word)) {
-                        $('#transferMenuItems').show()
-                        $(transferSchoolsDropdownItems[i]).show()
-                      }
-                      else {
-                        $(transferSchoolsDropdownItems[i]).hide()
-                        hidden++
-                      }
-
-                      if (hidden === length) {
-                        $('#transferEmpty').show()
-                      }
-                      else {
-                        $('#transferEmpty').hide()
-                      }
-                    }
-                  }
-
-                  $('#transferMenuItems').on('click', '.transfer-dropdown-item', function () {
-                    $('#dropdown_transfer_schools').text($(this)[0].value)
-                    editText2(($(this)[0].value));
-                    $('#dropdown_transfer_schools').dropdown('toggle')
-                  })
-                  function editText2(t)
-                  {
-                    document.getElementById("school2").innerHTML = t;
-                  }
-
-                  buildTransferDropdown(transferSchools)
-                </script>
-              </div>
-              <div>
-                <h5 id="school2">Choose a school</h5>
-              </div>
-             </div>
+          <div class="dropdown">
+            <!--change id dropdown_-->
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_coins" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Coin
+            </button>
+            <!--change aria to the same as id-->
+            <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_coins">
+              <form class="px-4 py-2">
+                <!--change id search_ -->
+                <input type="search" class="form-control" id="searchCoin" placeholder="BTC" autofocus="autofocus">
+              </form>
+              <!--change id to menu_-->
+              <div id="menuCoin"></div>
+              <div id="emptyCoin" class="dropdown-header">No coins found</div>
+            </div>
           </div>
-          <button type="button" class="btn btn-primary" onclick="showingTest();">Submit</button>
-       </div>
+
+          <script>
+            //increment variable names by one, and change where needed
+            let names1 = ["BTC","XRP","ETH","BCH","ADA","XEM"]
+            var valueX1 = "coins";
+            var valueY1 ="Coin";
+
+            uniSearchBar(valueX1,valueY1,names1,false);
+            document.querySelector("#search"+valueY1).addEventListener('input', function() {
+              uniSearchBar(valueX1,valueY1,names1,true);
+            })
+
+            $('#menu'+valueY1).on('click', "."+valueX1+'-dropdown-item', function(){
+                $('#dropdown_'+valueX1).text($(this)[0].value);
+                $("#dropdown_"+valuesX1).dropdown('toggle');
+            })
+
+          </script>
+
+          <div class="dropdown">
+            <!--change id to dropdown_[valueX] -->
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_hellos" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Coin
+            </button>
+            <!--change aria to dropdown_[valueX]-->
+            <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_hellos">
+              <form class="px-4 py-2">
+                <!--change id search_[valueY] -->
+                <input type="search" class="form-control" id="searchHello" placeholder="ahahaha" autofocus="autofocus">
+              </form>
+              <!--change id to menu[valueY] empty[valueY]-->
+              <div id="menuHello"></div>
+              <div id="emptyHello" class="dropdown-header">No coins found</div>
+            </div>
+          </div>
+
+          <script>
+            //increment variable names by one, and change where needed
+            let names2 = ["Hello","Hi"]
+            //set the variables, just increment, just increment by one
+            var valueX2 = "hellos";
+            var valueY2 ="Hello";
+            uniSearchBar(valueX2,valueY2,names2,false);
+            //increment all variables by 1
+            document.querySelector("#search"+valueY2).addEventListener('input', function() {
+              uniSearchBar(valueX2,valueY2,names2,true);
+            })
+            $('#menu'+valueY2).on('click', "."+valueX2+'-dropdown-item', function(){
+                $('#dropdown_'+valueX2).text($(this)[0].value);
+                $("#dropdown_"+valuesX2).dropdown('toggle');
+            })
+          </script>
 
        </div>
-        <div class="tab-pane" id="v-pills-more" role="tabpanel" aria-labelledby="v-pills-more-tab">
 
-          <p> Something here </p>
-          <a href="student.html">Go to student</a>
-
-        </div>
      </div>
   </div>
 
