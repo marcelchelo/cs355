@@ -44,6 +44,7 @@ summary {
 
 p {
   margin-top: 0;
+  font-size: 1.125rem;
 }
 
 span {
@@ -494,17 +495,58 @@ object {
 // * Start:Courses Panel * //
 // * =================================================== * //
 
-.autocomplete-schoollol {
-  background: white;
-  height: 300px;
-  border: 1px black solid;
+.school-ac-panel {
   width: 100%;
-  z-index: 222;
-
+  max-height: 250px;
+  border: 1px black solid;
   position: absolute;
-  padding: inherit;
+  overflow: scroll;
+  background: #fafafa;
+  margin-bottom: 7px;
+  z-index: 9999;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+      
+      a {
+        font-size: 1.75rem;
+        padding : 8px 12px;
+        width: 100%;
+        //border: 1px red solid;
+        display: block;
+      }
+      
+    }
+    li:hover {
+      background: #f2f2f2;
+    }
+  }
 }
 
-#school-search-panel {
+.inner-panel-relative {
+  width: 100%;
   position: relative;
+}
+
+.college-selection {
+  margin-bottom: 7px;
+}
+
+.school-section {
+  height: 35px;
+  h4 {
+    margin-bottom: 0;
+  }
+}
+
+.delete-college {
+  background-image: url('../images/close.svg');
+  background-size: cover;
+  min-width: 20px;
+  display: inline-block;
+  height: 20px;
+  //border: 1px black solid;
+  cursor: pointer;
 }

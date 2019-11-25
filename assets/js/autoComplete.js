@@ -1,3 +1,5 @@
+
+
 // * Clear input fields on load
 // ? mimics $(document).ready()
 // ? if(document.addEventListener) returns false if there are no addEventListeners on document
@@ -46,10 +48,26 @@ class CollegeProf {
     this.major.forEach(major => console.log(major))
   }
 }
-let userColleges = []
+let userColleges = [
+  {
+    NAME: 'Baruch COllege',
+    CODE: 'BU101',
+    COURSES: []
+  }
+]
+// * this becomes a promise that holds a list of CUNY colleges
 let collegeList
 // * Search field
 const schoolInput = document.querySelector('.school-text-field')
+// * Autocomplete UL
+const schoolAC = document.getElementById('school-input-ac')
+// * Autocomplete container
+const schoolIp = document.querySelector('.school-ac-panel')
+
+// * COURSES PANEL
+const coursePanel = document.getElementById('courses-panel')
+
+let totalNumOfCollege = 0
 
 async function colList() {
   const temp = await fetch('/colleges')
@@ -65,12 +83,78 @@ addSklBtn.addEventListener('click', () => {
 })
 
 function matchSchool(name) {
-  colList().then(x => console.log(x))
+  schoolAC.innerHTML = ''
+  collegeList.then(x => {
+    let matches = x.filter(college => {
+      const regex = new RegExp(`${name}`, 'gi')
+      return college.NAME.match(regex)
+    })
+    matches.forEach(college => {
+      let templi = document.createElement('li')
+      let tempa = document.createElement('a')
+      let temptxt = document.createTextNode(college.NAME)
+      // TODO encase this with an if statement that checks to see if the college is alrdy selected!!
+      tempa.appendChild(temptxt)
+      templi.appendChild(tempa)
+      // * if the school is clicked on from the autocomplete thennnn..... goto createSchoolPanel
+      templi.addEventListener('click', event => {
+        createSchoolPanel(event.target.innerText)
+      })
+
+
+      schoolAC.appendChild(templi)
+      schoolIp.style.display = 'block'
+    })
+  })
+}
+// ! HELP HEREEEEE I NEED TO RECREATE THE COLLEGE PANEL U SEE IN COLLEGE TAB (QUEENS COLLEGE)
+function createSchoolPanel(name) {
+  // overall school panel
+  let panel = document.createElement('div')
+  panel.className = 'college-selection inner-panel gray'
+  // your selected school section
+  let innerPanel = document.createElement('div')
+  innerPanel.className = 'row school-section flex-horizontal'
+  // * the close button that should delete the school (left sidt)
+  let close = document.createElement('div')
+  close.className = 'col one'
+  let closeBtn = document.createElement('a')
+  closeBtn.classList = 'delete-college'
+  closeBtn.addEventListener('click', (event) => {
+    console.log(closeBtn.parentNode)
+  })
+  close.appendChild(closeBtn)
+  // School name (center)
+  let schoolName = document.createElement('div')
+  schoolName.className = 'col ten center-text'
+  schoolName.innerHTML = `<h4>${name}</h4>`
+
+  // counter
+
+  let courseCount = document.createElement('div')
+  courseCount.className = 'col one'
+  let countStart = document.createElement('span')
+  countStart.innerText = '0'
+  courseCount.appendChild(countStart)
+  // stitching it all together
+
+  innerPanel.appendChild(close)
+  innerPanel.appendChild(schoolName)
+  innerPanel.appendChild(courseCount)
+  panel.appendChild(innerPanel)
+  // append to course panel
+  coursePanel.appendChild(panel)
+  
 }
 
 schoolInput.addEventListener('keyup', event => {
-  console.log(schoolInput.value.length)
   if (schoolInput.value.length >= 3) {
     matchSchool(schoolInput.value)
+    
+  } else {
+    schoolAC.innerHTML = ''
+    schoolIp.style.display = 'none'
   }
 })
+
+

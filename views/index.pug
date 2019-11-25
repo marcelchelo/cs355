@@ -63,8 +63,8 @@ html(lang="en")
                             .three.col
                                 .step-one.info-img
                             .nine.col
-                                h5 Step 1: dududu
-                                p Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure, quasi ducimus. Veniam velit esse cupiditate magni nemo sed unde dolore.
+                                h5 Step 1: Past College(s)
+                                p Select your past college(s) along with all the courses you have taken within the institutions. Maximum amount of colleges to pick from is set to 2.
                         .inner-panel.flex-horizontal
                             .three.col
                                 .step-two.info-img
@@ -91,12 +91,25 @@ html(lang="en")
                     #courses-panel.panel.hidden-panel
                     
                         button#add-school.center-btn.active Add School
-                        
+                        span#course-limit.hidden A maximum of 2 schools can be selected.
                         #school-search-panel.inner-panel.gray.hidden
                             
-                            input(type="text" class="school-text-field text-field" name="school-input" placeholder="CUNY Queens Colleges")
-                            .autocomplete-schoollol
-                            
+                            input(type="text" class="school-text-field text-field"  placeholder="CUNY Queens Colleges")
+                            div.inner-panel-relative
+                                div.school-ac-panel.hidden
+                                    ul#school-input-ac
+                        
+                        
+                        //- .college-selection.inner-panel.gray
+                        //-     .school-section.flex-horizontal
+                        //-         .col.one
+                        //-             a(class="delete-college")
+                                        
+                                
+                        //-         .col.ten
+                        //-             h4.center-text CUNY Queens College
+                        //-         .col.one
+                        //-             h4 - 
 
 
                     <!-- COLLEGE OPTION PANEL -->            
@@ -125,3 +138,5 @@ html(lang="en")
 // ! FOR THE ICONS
 
 //- <div>Icons made by <a href="https://www.flaticon.com/authors/eucalyp" title="Eucalyp">Eucalyp</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
+//- <div>Icons made by <a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
