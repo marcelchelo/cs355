@@ -418,52 +418,95 @@
             let names1 = ["BTC","XRP","ETH","BCH","ADA","XEM"]
             var valueX1 = "coins";
             var valueY1 ="Coin";
-
+            var flag1 =false;
             uniSearchBar(valueX1,valueY1,names1,false);
             document.querySelector("#search"+valueY1).addEventListener('input', function() {
               uniSearchBar(valueX1,valueY1,names1,true);
             })
-
+            document.getElementById("dropdown_coins").addEventListener('click',function(){
+              if(flag1)
+              {
+                close("coin2");
+                flag1=false;
+                close("btn-g");
+                flag2=false;
+              }
+            })
             $('#menu'+valueY1).on('click', "."+valueX1+'-dropdown-item', function(){
+                show("coin2");
+                flag1=true;
                 $('#dropdown_'+valueX1).text($(this)[0].value);
                 $("#dropdown_"+valuesX1).dropdown('toggle');
             })
-
           </script>
 
-          <div class="dropdown">
-            <!--change id to dropdown_[valueX] -->
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_hellos" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="dropdown" style="display:none" id="coin2">
+            <!--change id dropdown_-->
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_coins2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Coin
             </button>
-            <!--change aria to dropdown_[valueX]-->
-            <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_hellos">
+            <!--change aria to the same as id-->
+            <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_coins2">
               <form class="px-4 py-2">
-                <!--change id search_[valueY] -->
-                <input type="search" class="form-control" id="searchHello" placeholder="ahahaha" autofocus="autofocus">
+                <!--change id search_ -->
+                <input type="search" class="form-control" id="searchCoin2" placeholder="BTC" autofocus="autofocus">
               </form>
-              <!--change id to menu[valueY] empty[valueY]-->
-              <div id="menuHello"></div>
-              <div id="emptyHello" class="dropdown-header">No coins found</div>
+              <!--change id to menu_-->
+              <div id="menuCoin2"></div>
+              <div id="emptyCoin2" class="dropdown-header">No coins found</div>
             </div>
           </div>
 
           <script>
             //increment variable names by one, and change where needed
-            let names2 = ["Hello","Hi"]
-            //set the variables, just increment, just increment by one
-            var valueX2 = "hellos";
-            var valueY2 ="Hello";
+            let names2 = ["BTC","XRP","ETH","BCH","ADA","XEM"]
+            var valueX2 = "coins2";
+            var valueY2 ="Coin2";
+            var flag2=false;
             uniSearchBar(valueX2,valueY2,names2,false);
-            //increment all variables by 1
+
             document.querySelector("#search"+valueY2).addEventListener('input', function() {
               uniSearchBar(valueX2,valueY2,names2,true);
             })
+            document.getElementById("dropdown_coins2").addEventListener('click',function(){
+              if(flag2)
+              {
+                close("btn-g");
+                flag2=false;
+              }
+            })
             $('#menu'+valueY2).on('click', "."+valueX2+'-dropdown-item', function(){
+                show("btn-g");
+                flag2=true;
                 $('#dropdown_'+valueX2).text($(this)[0].value);
                 $("#dropdown_"+valuesX2).dropdown('toggle');
             })
           </script>
+
+          <div class="btn-group" id="btn-g" style="display:none">
+            <button id="add">Add</button>
+            <button id="delete">Delete</button>
+          </div>
+
+          <div id="aForm" style="display:none">
+            <label for="First_Name">First Name:</label>
+            <input name="first_name" id="First_Name" type="text"/>
+            <label for="Name">Last Name:</label>
+            <input name="last_name" id="Last_Name" type="text" />
+          </div>
+
+          <script>
+          var option="1";
+          document.getElementByid("add").on('click', function(){
+            show("aForm");
+            option="1";
+          });
+          $(document).on('click', '#btn-group .delete', function(){
+            option="2";
+            show("aForm");
+          });
+          </script>
+
 
        </div>
 

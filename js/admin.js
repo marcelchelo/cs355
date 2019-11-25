@@ -52,3 +52,11 @@ function uniSearchBar(name,flagName,searchCollection,flag)
   }
 
 }
+
+function show(elementId) {
+  document.getElementById(elementId).style.display="block";
+}
+function close(elementId)
+{
+  document.getElementById(elementId).style.display="none";
+}
