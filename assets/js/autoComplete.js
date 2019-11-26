@@ -100,6 +100,8 @@ function matchSchool(name) {
       return college.NAME.match(regex)
     })
     matches.forEach(college => {
+
+    
       let templi = document.createElement('li')
       let tempa = document.createElement('a')
       let temptxt = document.createTextNode(college.NAME)
