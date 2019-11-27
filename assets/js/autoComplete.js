@@ -24,6 +24,9 @@ window.ready(() => {
   allInputFields.forEach(field => {
     field.value = ''
   })
+  document.addEventListener('click', event => {
+    console.log(event.target)
+  })
 })
 
 // * Make the school input field appear
@@ -32,7 +35,14 @@ const uiPanel = document.getElementById('school-search-panel')
 
 // * clicking add aggregates the list of schools minus the one that was selected
 
+
+
+
+
+
+
 // ! College Object -- add info
+
 
 class CollegeProf {
   constructor(name, code) {
@@ -90,6 +100,8 @@ function matchSchool(name) {
       return college.NAME.match(regex)
     })
     matches.forEach(college => {
+
+    
       let templi = document.createElement('li')
       let tempa = document.createElement('a')
       let temptxt = document.createTextNode(college.NAME)
@@ -121,7 +133,7 @@ function createSchoolPanel(name) {
   let closeBtn = document.createElement('a')
   closeBtn.classList = 'delete-college'
   closeBtn.addEventListener('click', (event) => {
-    console.log(closeBtn.parentNode)
+    panel.remove()
   })
   close.appendChild(closeBtn)
   // School name (center)
@@ -144,17 +156,22 @@ function createSchoolPanel(name) {
   panel.appendChild(innerPanel)
   // append to course panel
   coursePanel.appendChild(panel)
-  
+  schoolAC.innerHTML = ''
+  schoolIp.style.display = 'none'
+
 }
 
 schoolInput.addEventListener('keyup', event => {
   if (schoolInput.value.length >= 3) {
     matchSchool(schoolInput.value)
-    
+
   } else {
     schoolAC.innerHTML = ''
     schoolIp.style.display = 'none'
   }
 })
+
+
+
 
 
