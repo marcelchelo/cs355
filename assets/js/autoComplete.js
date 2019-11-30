@@ -25,7 +25,9 @@ window.ready(() => {
     field.value = ''
   })
   document.addEventListener('click', event => {
+
    // console.log(event.target)
+
   })
 })
 
@@ -44,7 +46,9 @@ const uiPanel = document.getElementById('school-search-panel')
 // ! College Object -- add info
 
 
+
 class College {
+
   constructor(name, code) {
     this.name = name
     this.code = code
@@ -94,6 +98,7 @@ function matchSchool(name) {
       return college.NAME.match(regex)
     })
     matches.forEach(college => {
+
       if(!userColleges.some(x => x.name === college.NAME)){
 
         let templi = document.createElement('li')
@@ -118,6 +123,7 @@ function matchSchool(name) {
           console.log(userColleges)
 
         })
+
 
 
         schoolAC.appendChild(templi)
@@ -146,8 +152,10 @@ function createSchoolPanel(name) {
   closeBtn.classList = 'delete-college'
   closeBtn.addEventListener('click', (event) => {
     panel.remove()
+
     let temp = userColleges.map(x=>x.name).indexOf(name)
     userColleges.splice(temp, 1)
+
   })
   close.appendChild(closeBtn)
   // School name (center)
@@ -170,9 +178,7 @@ function createSchoolPanel(name) {
   panel.appendChild(innerPanel)
   // append to course panel
   coursePanel.appendChild(panel)
-  
-  
-  
+
   schoolAC.innerHTML = ''
   schoolIp.style.display = 'none'
 
@@ -183,6 +189,7 @@ schoolInput.addEventListener('keyup', event => {
     matchSchool(schoolInput.value)
 
   } else if(schoolInput.value.length < 3){
+
     schoolAC.innerHTML = ''
     schoolIp.style.display = 'none'
   } if(event.keyCode === 13) {
