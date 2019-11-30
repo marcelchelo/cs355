@@ -45,7 +45,7 @@ function grabCurrPanel() {
 		if (panel.data.classList.contains('active-panel')) {
 			currPanel = panel.data
 			currLabel = panel.label
-			console.log(currLabel)
+			//console.log(currLabel)
 			currPos = panels.findIndex((x) => x.data === currPanel)
 		}
 	})
@@ -54,11 +54,11 @@ function grabCurrPanel() {
 nav.addEventListener('click', (x) => {
 	//console.log(x);
 	activatePanel(x.target.parentNode.id)
-	console.log(currPos)
+	//console.log(currPos)
 })
 
 function activatePanel(panel, label) {
-	console.log(currPos)
+	//console.log(currPos)
 	let temp = panels.find((x) => x.key === panel).data
 	let pos = panels.findIndex((x) => x.key === panel)
 
@@ -72,7 +72,7 @@ function activatePanel(panel, label) {
 		//console.log(`currPos: ${currPos}`);
 
 		// ! affect landing pos
-		console.log(currPos)
+		//console.log(currPos)
 		tempLeft = pos - 1
 		tempRight = pos + 1
 		if (tempLeft >= 0) {
@@ -87,7 +87,7 @@ function activatePanel(panel, label) {
 		tempLeft = currPos - 1
 		tempRight = currPos + 1
 		tempId = panels[currPos].label.id
-		console.log(tempId)
+		//console.log(tempId)
 
 		// ! removing the background on the panel past
 		panels[currPos].label.classList.remove('focused')
