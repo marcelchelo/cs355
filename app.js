@@ -18,9 +18,15 @@ app.use(
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 app.use('/assets', express.static('assets'))
+app.use('/style' ,express.static('style'))
+app.use('/js', express.static('js'))
 
 app.get('/', (req, res) => {
 	res.render('index')
+})
+
+app.get('/student', (req, res) => {
+  res.render('student')
 })
 
 //app.use(morgan('short'))

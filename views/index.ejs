@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <!-- CSS File -->
     <link rel="stylesheet" href="./assets/css/studentv3style.css" />
+  
     <!-- autoComplete.js cdn -->
     <!--link(rel="stylesheet", href="./node_modules/@tarekraafat/autocomplete.js/dist/css/autoComplete.css", attr)-->
     <!-- Eww jQuery -->
@@ -97,25 +98,32 @@
             </div>
             <button class="center-btn" id="get-started">Get Started</button>
           </div>
+
           <!-- COURSES PANEL -->
           <div class="panel hidden-panel" id="courses-panel">
-            <button class="center-btn active" id="add-school">Add School</button
+            <p class="guide">Add the schools you've attended in the past.</p>
+            <button class="center-btn active" id="add-school-btn">Add School</button
             ><span class="hidden" id="course-limit"
               >A maximum of 2 schools can be selected.</span
             >
-            <div class="inner-panel gray hidden" id="school-search-panel">
-              <input
-                class="school-text-field text-field"
-                type="text"
-                placeholder="CUNY Queens Colleges"
-              />
-              <div class="inner-panel-relative">
+
+            <div class="add-school-container" style="display: block; display: none;">
+              <div class="add-school-input-container">
+                <input class="school-text-field" type="text" placeholder="Type School Name" onkeyup="handleSchoolNameInput(this)">
                 <div class="school-ac-panel hidden">
-                  <ul id="school-input-ac"></ul>
+                  <ul class="school-input-ac-1"></ul>
                 </div>
               </div>
+              <a class='close'> <img src='/style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a>
+              <div class="pastMenuItems"></div>
+              <div class="dropdown-header pastEmpty" style="display: none;">No schools found</div> 
             </div>
+
+            <div class="school-added-container"></div>
+
+            <a class="done-adding-schools">I'M DONE ADDING SCHOOLS</a>
           </div>
+
           <!-- COLLEGE OPTION PANEL -->
           <div class="panel hidden-panel lala" id="college-opt-panel">
             <h1>College Options</h1>
@@ -131,12 +139,14 @@
         </div>
       </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- Autocomplete.js Script -->
     <!-- Local JS Files -->
-    <script src="./assets/js/main.js"></script>
-    <script src="./assets/js/autoComplete.js" type="text/javascript"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/autoComplete.js" type="text/javascript"></script>
     <script
-      src="./assets/js/search-functions.js"
+      src="../assets/js/search-functions.js"
       type="text/javascript"
     ></script>
   </body>
