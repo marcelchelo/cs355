@@ -23,7 +23,7 @@ function ready(fn) {
   }
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
   initEvents();
 })
 
@@ -115,7 +115,7 @@ function hideSchoolList(element) {
 
 function matchSchool(name, element) {
   var schoolIp = $(element).next(".school-ac-panel")[0]
-  console.log("found ul: "+ $(element).next(".school-ac-panel").children(".school-input-ac-1").attr('class'))
+  console.log("found ul: " + $(element).next(".school-ac-panel").children(".school-input-ac-1").attr('class'))
   var schoolAC = $(element).next(".school-ac-panel").children(".school-input-ac-1")[0]
   schoolAC.innerHTML = ''
   collegeList.then(x => {
@@ -191,7 +191,7 @@ function deleteSelectedSchool() {
 
 function deleteSchoolInputContainer() {
   $(this).parent().remove()
-  
+
   if (selectedSchools.length < 3) {
     $('#add-school-btn').insertBefore($('.school-added-container'))
     $('#add-school-btn').show()
@@ -366,3 +366,41 @@ function deleteTransferSchoolInputContainer() {
     $('#add-transfer-school-btn').show()
   }
 }
+
+
+
+
+
+
+// ! TEST SCORE SECTION
+//? fetch example
+
+async function fetchExams() {
+  const res = await fetch('/EXAMS/')
+  const arr = await res.json()
+
+
+  console.log(arr)
+}
+
+// ? post example:: open up console in your browswer and type in : postGibberish() to see post in motion
+
+async function postGibberish() {
+  const dataToBeSent = {
+    name: "Paul Chon",
+    hp: 14,
+    class: "homeless man"
+  }
+  const options = {
+    method: 'POST',
+    body: JSON.stringify(dataToBeSent),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  const res = await fetch('/SEND_ME_TO_SPACE/', options)
+
+  const json = await res.json()
+  console.log(json)
+
+} 
