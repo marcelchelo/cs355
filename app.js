@@ -188,7 +188,7 @@ app.get('/creditBasedOnTest', (req, res) => {
 // ? 3 tablets utilized: INSTITUTION_VW AND TEST_EQ BY THEIR INSTITUTION CODE
 // ? TEST_EQ AND TEST_TABLE BY THEIR TEST COMPONENT ID
 
-app.get('/TEST_FETCH/:id', (req, res) => {
+app.get('/EXAM_FETCH/:id', (req, res) => {
   const userId = req.params.id
   const queryString =
     'SELECT * FROM (SELECT INSTITUTION, DESCR FROM INSTITUTION_VW WHERE DESCR = ?) col INNER JOIN(SELECT Institution, Component, Test_ID, LISTAGG_C_CRSE_ID_WITHI, Min_Score, Max_Score FROM TEST_EQ ) test_eq ON col.INSTITUTION = test_eq.Institution INNER JOIN (SELECT testID, Component, Descr, TestComponentDescr, Min_Score, Max_Score FROM test_Table) test_table ON test_eq.Component = test_table.Component'
