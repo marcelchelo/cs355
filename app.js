@@ -20,9 +20,7 @@ app.set('view engine', 'ejs')
 app.use('/assets', express.static('assets'))
 
 app.get('/', (req, res) => {
-
 	res.render('index')
-
 })
 
 //app.use(morgan('short'))
@@ -67,7 +65,7 @@ app.get('/adminUsers', (req, res) => {
   // res.end()
 })
 
-//API for CUNY colleges - returns CUNY colleges
+//API for CUNY colleges
 app.get('/colleges', (req, res) => {
   var importedSchools
   console.log('Fetching colleges ')
@@ -91,9 +89,6 @@ app.get('/colleges', (req, res) => {
   })
   // res.end()
 })
-
-
-
 
 app.post('/colleges', (req, res) => {
   console.log('fetching')
@@ -154,9 +149,6 @@ app.get('/CRSE_CAT', (req, res) => {
 
   // res.end()
 })
-
-
-
 
 //api for Credit_Based_OnTEst
 
@@ -233,7 +225,7 @@ app.use(express.static('public'))
 // })
 
 //This is the catch all, if unavailable address is provided.
-app.get('*', function (req, res) {
+app.get('*', function(req, res) {
   res.send('Sorry this directory is not valid, go back to the homepage')
 })
 

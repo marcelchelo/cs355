@@ -25,9 +25,7 @@ window.ready(() => {
     field.value = ''
   })
   document.addEventListener('click', event => {
-
-   // console.log(event.target)
-
+    console.log(event.target)
   })
 })
 
@@ -46,9 +44,7 @@ const uiPanel = document.getElementById('school-search-panel')
 // ! College Object -- add info
 
 
-
-class College {
-
+class CollegeProf {
   constructor(name, code) {
     this.name = name
     this.code = code
@@ -62,7 +58,13 @@ class College {
     this.major.forEach(major => console.log(major))
   }
 }
-let userColleges = []
+let userColleges = [
+  {
+    NAME: 'Baruch COllege',
+    CODE: 'BU101',
+    COURSES: []
+  }
+]
 // * this becomes a promise that holds a list of CUNY colleges
 let collegeList
 // * Search field
@@ -99,41 +101,21 @@ function matchSchool(name) {
     })
     matches.forEach(college => {
 
-      if(!userColleges.some(x => x.name === college.NAME)){
-
-        let templi = document.createElement('li')
-        let tempa = document.createElement('a')
-        let temptxt = document.createTextNode(college.NAME)
-        // TODO encase this with an if statement that checks to see if the college is alrdy selected!!
-        tempa.appendChild(temptxt)
-        templi.appendChild(tempa)
-        // * if the school is clicked on from the autocomplete thennnn..... goto createSchoolPanel
-        templi.addEventListener('click', event => {
-        
-        if(userColleges.length === 0 || !userColleges.some(x => x.name === college.NAME)) {
-          // console.log(college.NAME)
-          createSchoolPanel(event.target.innerText)
-
-          // if the datalist item is clicked on, created a College object and push it in userCollege array
-          userColleges.push(new College(college.NAME, college.Code))
-        } 
-          schoolAC.innerHTML = ''
-          schoolIp.style.display = 'none'
-          schoolInput.value = ''
-          console.log(userColleges)
-
-        })
-
-
-
-        schoolAC.appendChild(templi)
-        schoolIp.style.display = 'block'
-
-
-
-      }
     
-      
+      let templi = document.createElement('li')
+      let tempa = document.createElement('a')
+      let temptxt = document.createTextNode(college.NAME)
+      // TODO encase this with an if statement that checks to see if the college is alrdy selected!!
+      tempa.appendChild(temptxt)
+      templi.appendChild(tempa)
+      // * if the school is clicked on from the autocomplete thennnn..... goto createSchoolPanel
+      templi.addEventListener('click', event => {
+        createSchoolPanel(event.target.innerText)
+      })
+
+
+      schoolAC.appendChild(templi)
+      schoolIp.style.display = 'block'
     })
   })
 }
@@ -152,10 +134,6 @@ function createSchoolPanel(name) {
   closeBtn.classList = 'delete-college'
   closeBtn.addEventListener('click', (event) => {
     panel.remove()
-
-    let temp = userColleges.map(x=>x.name).indexOf(name)
-    userColleges.splice(temp, 1)
-
   })
   close.appendChild(closeBtn)
   // School name (center)
@@ -178,7 +156,6 @@ function createSchoolPanel(name) {
   panel.appendChild(innerPanel)
   // append to course panel
   coursePanel.appendChild(panel)
-
   schoolAC.innerHTML = ''
   schoolIp.style.display = 'none'
 
@@ -188,12 +165,9 @@ schoolInput.addEventListener('keyup', event => {
   if (schoolInput.value.length >= 3) {
     matchSchool(schoolInput.value)
 
-  } else if(schoolInput.value.length < 3){
-
+  } else {
     schoolAC.innerHTML = ''
     schoolIp.style.display = 'none'
-  } if(event.keyCode === 13) {
-   // console.log('Enter')
   }
 })
 
