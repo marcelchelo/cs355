@@ -261,6 +261,7 @@ app.get('/TRNS_RULES/:id', (req, res) => {
           CourseName: row.w,
           CourseID: row.Course_ID,
           EquivalentCrs: row.Equiv_Crs
+
         }
       })
       res.json(mapping)

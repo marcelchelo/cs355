@@ -115,8 +115,6 @@
                 </div>
               </div>
               <a class='close'> <img src='/style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a>
-              <div class="pastMenuItems"></div>
-              <div class="dropdown-header pastEmpty" style="display: none;">No schools found</div> 
             </div>
 
             <div class="school-added-container"></div>
@@ -126,8 +124,22 @@
 
           <!-- COLLEGE OPTION PANEL -->
           <div class="panel hidden-panel lala" id="college-opt-panel">
-            <h1>College Options</h1>
+            <p class="guide">Find your transfer college or university.</p>
+            <button class="center-btn active" id="add-transfer-school-btn">Add School</button>
+            <div class="add-transfer-school-container" style="display: block; display: none;">
+              <div class="add-transfer-school-input-container">
+                <input class="transfer-school-text-field" type="text" placeholder="Type School Name" onkeyup="handleTransferSchoolNameInput(this)">
+                <div class="transfer-school-ac-panel hidden">
+                  <ul class="transfer-school-input-ac"></ul>
+                </div>
+              </div>
+              <a class='close'> <img src='/style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a>
+            </div>
+            <div class="transfer-school-added-container"></div>
+
+            <a class="done-adding-options">I'M DONE ADDING COLLEGE OPTIONS</a>
           </div>
+
           <!-- EXAM SCORE PANEL -->
           <div class="panel hidden-panel lala" id="exam-score-panel">
             <h1>Exam</h1>
