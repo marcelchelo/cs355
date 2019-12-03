@@ -1,8 +1,8 @@
 // Stores the selected schools in this array
 var selectedSchools = []
 
-// Counts the number of total selected schools
-var totalNumOfSelectedSchools = 0
+// Stores the selected TRANSFER schools in this array
+var selectedTransferSchools = []
 
 // * Clear input fields on load
 // ? mimics $(document).ready()
@@ -25,14 +25,17 @@ function ready(fn) {
 
 $(document).ready(function() {
   initEvents();
-}) 
+})
 
 function initEvents() {
   $("#add-school-btn").on('click', addAnotherSchool);
-  $(".school-option").on('click', addSchoolPanel);
+  $("#add-transfer-school-btn").on('click', addAnotherTransferSchool);
   $("#courses-panel").on('click', '.school-added-container a.close', deleteSelectedSchool);
   $("#courses-panel").on('click', '.add-school-container a.close', deleteSchoolInputContainer);
   $(".done-adding-schools").on('click', goToCollegeOption);
+
+  $("#college-opt-panel").on('click', '.transfer-school-added-container a.close', deleteSelectedTransferSchool);
+  $("#college-opt-panel").on('click', '.add-transfer-school-container a.close', deleteTransferSchoolInputContainer);
 }
 
 // * clears the inputfields when refreshing! add class text-field to your input text elements... ** if you need anything to load when DOM load, write it here
@@ -99,7 +102,6 @@ function addAnotherSchool() {
     $(newAddSchoolContainer).insertBefore('.school-added-container')
     newAddSchoolContainer.show()
 
-    // $('.add-school-container').show();
     collegeList = colList()
   }
 }
@@ -188,8 +190,6 @@ function deleteSelectedSchool() {
 }
 
 function deleteSchoolInputContainer() {
-  console.log($(this).parent().attr("class"))
-
   $(this).parent().remove()
   
   if (selectedSchools.length < 3) {
@@ -264,6 +264,105 @@ function goToCollegeOption() {
   $('#transfer-nav-container #college-opt').click();
 }
 
+function addAnotherTransferSchool() {
+  $('#add-transfer-school-btn').hide();
+  var newAddSchoolContainer = $("<div class='add-transfer-school-container' style='display: block; display: none;'> <div class='add-transfer-school-input-container'> <input class='transfer-school-text-field' type='text' placeholder='Type School Name' oninput='handleTransferSchoolNameInput(this)' onblur='hideTransferSchoolList(this)' onfocus='handleTransferSchoolNameInput(this)'> <div class='transfer-school-ac-panel hidden'> <ul class='transfer-school-input-ac'></ul> </div> </div> <a class='close'> <img src='../../style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> </div>");
+  $(newAddSchoolContainer).insertBefore('.transfer-school-added-container')
+  newAddSchoolContainer.show()
+  collegeList = colList()
+}
 
+function handleTransferSchoolNameInput(element) {
+  var schoolAC = $(element).next(".transfer-school-ac-panel").children(".transfer-school-input-ac")[0]
+  var schoolIp = $(element).next(".transfer-school-ac-panel")[0]
+  if (element.value.length >= 1) {
+    matchTransferSchool(element.value, element)
+  } else {
+    schoolAC.innerHTML = ''
+    schoolIp.style.display = 'none'
+  }
+}
 
+function matchTransferSchool(name, element) {
+  let schoolIp = $(element).next(".transfer-school-ac-panel")[0]
+  let schoolAC = $(element).next(".transfer-school-ac-panel").children(".transfer-school-input-ac")[0]
+  schoolAC.innerHTML = ''
+  collegeList.then(x => {
+    let matches = x.filter(college => {
+      const regex = new RegExp(`${name}`, 'gi')
+      return college.NAME.match(regex)
+    })
+    if (matches.length === 0) {
+      let tempinput = document.createElement('input')
+      tempinput.type = 'button'
+      tempinput.className = 'school-option'
+      tempinput.value = "Sorry, the school you have entered was not found in our system."
+      let templi = document.createElement('li')
+      templi.className = 'disable-select-school'
+      templi.appendChild(tempinput)
+      schoolAC.appendChild(templi);
+      schoolIp.style.display = 'block'
+    }
+    matches.forEach(college => {
+      let tempinput = document.createElement('input')
+      tempinput.type = 'button'
+      tempinput.className = 'school-option'
+      tempinput.value = college.NAME
+      let templi = document.createElement('li')
 
+      // Checks if school is already selected
+      if (selectedSchools.includes(college.NAME)) {
+        templi.className = 'disable-select-school'
+      }
+
+      templi.appendChild(tempinput)
+
+      templi.addEventListener('click', event => {
+        addTransferSchoolPanel(event.target.value)
+      })
+
+      schoolAC.appendChild(templi);
+      schoolIp.style.display = 'block'
+    })
+  })
+}
+
+function addTransferSchoolPanel(name) {
+  selectedTransferSchools.push(name);
+  let selectedTransferSchool = $("<div class='transfer-school' id='" + name + "'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> </div>");
+  $('.transfer-school-added-container').append(selectedTransferSchool);
+  $('.add-transfer-school-container').remove();
+  $('#add-transfer-school-btn').insertBefore($('.transfer-school-added-container'));
+  if (selectedTransferSchools.length < 1) {
+    $('#add-transfer-school-btn').show();
+  }
+}
+
+function deleteSelectedTransferSchool() {
+  let $this = $(this)
+  let $transferSchool = $this.closest('.transfer-school')
+  $transferSchool.remove()
+  var transferSchoolName = ($($transferSchool).attr("id"))
+
+  for (var i = 0; i < selectedTransferSchools.length; i++) {
+    if (selectedTransferSchools[i] === transferSchoolName) {
+      selectedTransferSchools.splice(i, 1);
+    }
+  }
+
+  if (selectedTransferSchools.length < 1) {
+    if (!($('#college-opt-panel').find('.add-transfer-school-container').length)) {
+      $('#add-transfer-school-btn').insertBefore($('.transfer-school-added-container'))
+      $('#add-transfer-school-btn').show()
+    }
+  }
+}
+
+function deleteTransferSchoolInputContainer() {
+  $(this).parent().remove()
+
+  if (selectedTransferSchools.length < 1) {
+    $('#add-transfer-school-btn').insertBefore($('.transfer-school-added-container'))
+    $('#add-transfer-school-btn').show()
+  }
+}
