@@ -262,7 +262,7 @@ app.get('/TRNS_RULES', (req, res) => {
 app.get('/TRNS_RULES/:id', (req, res) => {
   const userId = req.params.id
   const queryString =
-    'SELECT * FROM (SELECT Course_ID, Descr w, Equiv_Crs FROM CRSE_CAT LIMIT 15000) A INNER JOIN (SELECT Descr, CRSE_ID FROM TRNS_RULES WHERE Descr = ?) B ON A.Course_ID = B.CRSE_ID'
+    'SELECT * FROM (SELECT Course_ID, Descr w, Equiv_Crs FROM CRSE_CAT LIMIT 15000) A INNER JOIN (SELECT Descr, CRSE_ID, SCHOOL_SUBJECT FROM TRNS_RULES WHERE Descr = ?) B ON A.Course_ID = B.CRSE_ID'
   connection.query(queryString, [userId], (err, rows, fields) => {
     if (err) {
       console.log("failed to query for courses: " + err)
@@ -274,6 +274,7 @@ app.get('/TRNS_RULES/:id', (req, res) => {
         return {
           CollegeName: row.Descr,
           CourseName: row.w,
+          SchoolSubject: row.SCHOOL_SUBJECT,
           CourseID: row.Course_ID,
           EquivalentCrs: row.Equiv_Crs
 
