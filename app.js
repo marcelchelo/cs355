@@ -181,6 +181,42 @@ app.get('/creditBasedOnTest', (req, res) => {
   })
 })
 
+// ! TEST //
+
+// ? this endpoint includes College name, min/max score for test to meet requirements of said college,
+// ? test name, LISTAGG_C_CRSE_ID_WITHI(I think this denotes courseID equivalence)
+// ? 3 tablets utilized: INSTITUTION_VW AND TEST_EQ BY THEIR INSTITUTION CODE
+// ? TEST_EQ AND TEST_TABLE BY THEIR TEST COMPONENT ID
+
+app.get('/EXAM_FETCH/:id', (req, res) => {
+  const userId = req.params.id
+  const queryString =
+    'SELECT * FROM (SELECT INSTITUTION, DESCR FROM INSTITUTION_VW WHERE DESCR = ?) col INNER JOIN(SELECT Institution, Component, Test_ID, LISTAGG_C_CRSE_ID_WITHI, Min_Score, Max_Score FROM TEST_EQ ) test_eq ON col.INSTITUTION = test_eq.Institution INNER JOIN (SELECT testID, Component, Descr, TestComponentDescr, Min_Score, Max_Score FROM test_Table) test_table ON test_eq.Component = test_table.Component'
+  connection.query(queryString, [userId], (err, rows, fields) => {
+    if (err) {
+      console.log('Failed to query : ' + err)
+      res.sendStatus(500)
+      res.end()
+      return
+    } else {
+      res.json(rows)
+    }
+  })
+})
+
+// USE TransferPortal
+// SELECT * FROM
+// (SELECT INSTITUTION, DESCR FROM INSTITUTION_VW WHERE DESCR = "Baruch College") col
+// INNER JOIN
+// (SELECT Institution, Component, Test_ID, LISTAGG_C_CRSE_ID_WITHI, Min_Score, Max_Score FROM TEST_EQ ) test_eq
+// ON col.INSTITUTION = test_eq.Institution
+// INNER JOIN
+// (SELECT testID, Component, Descr, TestComponentDescr, Min_Score, Max_Score FROM test_Table) test_table
+// ON test_eq.Component = test_table.Component
+
+
+
+
 //transfer rules
 app.get('/TRNS_RULES', (req, res) => {
   console.log('Fetching QC TransferRules ')
@@ -225,7 +261,6 @@ app.get('/TRNS_RULES/:id', (req, res) => {
           CourseName: row.w,
           CourseID: row.Course_ID,
           EquivalentCrs: row.Equiv_Crs
-
 
         }
       })
