@@ -5,6 +5,8 @@ const morgan = require('morgan')
 const mysql = require('mysql')
 
 const cors = require('cors')
+
+app.use(express.json())
 app.use(
   cors({
     origin: '*',
@@ -18,11 +20,11 @@ app.use(
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 app.use('/assets', express.static('assets'))
-app.use('/style' ,express.static('style'))
+app.use('/style', express.static('style'))
 app.use('/js', express.static('js'))
 
 app.get('/', (req, res) => {
-	res.render('index')
+  res.render('index')
 })
 
 app.get('/student', (req, res) => {
@@ -181,6 +183,74 @@ app.get('/creditBasedOnTest', (req, res) => {
   })
 })
 
+// ! TEST //
+// ? Pulls all the Exams
+
+app.get('/EXAMS/', (req, res) => {
+  const queryString = 'SELECT testID, Component, TestComponentDescr, Min_Score, Max_Score FROM test_Table'
+  connection.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log(`Failed to query test_Table: ${err}`)
+      res.sendStatus(500)
+      res.end()
+    } else {
+      res.json(rows)
+    }
+  })
+})
+
+
+
+// ? this endpoint includes College name, min/max score for test to meet requirements of said college,
+// ? test name, LISTAGG_C_CRSE_ID_WITHI(I think this denotes courseID equivalence)
+// ? 3 tablets utilized: INSTITUTION_VW AND TEST_EQ BY THEIR INSTITUTION CODE
+// ? TEST_EQ AND TEST_TABLE BY THEIR TEST COMPONENT ID
+// * this is used for finding equivalence.. for the results section
+
+app.get('/EXAM_FETCH/:id', (req, res) => {
+  const userId = req.params.id
+  const queryString =
+    'SELECT * FROM (SELECT INSTITUTION, DESCR FROM INSTITUTION_VW WHERE DESCR = ?) col INNER JOIN(SELECT Institution, Component, Test_ID, LISTAGG_C_CRSE_ID_WITHI, Min_Score x, Max_Score y FROM TEST_EQ ) test_eq ON col.INSTITUTION = test_eq.Institution INNER JOIN (SELECT testID, Component, Descr, TestComponentDescr, Min_Score a, Max_Score b FROM test_Table) test_table ON test_eq.Component = test_table.Component'
+  connection.query(queryString, [userId], (err, rows, fields) => {
+    if (err) {
+      console.log('Failed to query : ' + err)
+      res.sendStatus(500)
+      res.end()
+      return
+    } else {
+      const mapping = rows.map(row => {
+        return {
+          collegeName: row.DESCR,
+          testCompletesCourse: row.LISTAGG_C_CRSE_ID_WITHI,
+          testName: row.TestComponentDescr,
+          component: row.Component,
+          testTag: row.testID,
+          examsMinScore: row.a,
+          examsMaxScore: row.b,
+          collegeMinScore: row.x,
+          collegeMaxScore: row.y
+
+        }
+      })
+      res.json(mapping)
+
+    }
+  })
+})
+
+// USE TransferPortal
+// SELECT * FROM
+// (SELECT INSTITUTION, DESCR FROM INSTITUTION_VW WHERE DESCR = "Baruch College") col
+// INNER JOIN
+// (SELECT Institution, Component, Test_ID, , Min_Score, Max_Score FROM TEST_EQ ) test_eq
+// ON col.INSTITUTION = test_eq.Institution
+// INNER JOIN
+// (SELECT testID, Component, Descr, TestComponentDescr, Min_Score, Max_Score FROM test_Table) test_table
+// ON test_eq.Component = test_table.Component
+
+
+
+
 //transfer rules
 app.get('/TRNS_RULES', (req, res) => {
   console.log('Fetching QC TransferRules ')
@@ -195,15 +265,56 @@ app.get('/TRNS_RULES', (req, res) => {
 
     console.log('Transfer Rules fetched  successfully')
 
-    const tRules = rows.map(row => {
-      return { Name: row.Descr }
-    })
+    // const tRules = rows.map(row => {
+    //   return { Name: row.Descr
 
-    res.json(tRules)
+    //   }
+    // })
+
+    res.json(rows)
   })
 
   // res.end()
 })
+
+
+app.get('/TRNS_RULES/:id', (req, res) => {
+  const userId = req.params.id
+  const queryString =
+    'SELECT * FROM (SELECT Course_ID, Descr w, Equiv_Crs FROM CRSE_CAT LIMIT 15000) A INNER JOIN (SELECT Descr, CRSE_ID, SCHOOL_SUBJECT FROM TRNS_RULES WHERE Descr = ?) B ON A.Course_ID = B.CRSE_ID'
+  connection.query(queryString, [userId], (err, rows, fields) => {
+    if (err) {
+      console.log("failed to query for courses: " + err)
+      res.sendStatus(500)
+      res.end()
+      return
+    } else {
+      const mapping = rows.map(row => {
+        return {
+          CollegeName: row.Descr,
+          CourseName: row.w,
+          SchoolSubject: row.SCHOOL_SUBJECT,
+          CourseID: row.Course_ID,
+          EquivalentCrs: row.Equiv_Crs
+
+        }
+      })
+      res.json(mapping)
+    }
+
+  })
+
+
+})
+
+
+// USE TransferPortal;
+// SELECT * FROM
+//   (SELECT Course_ID, Descr, Equiv_Crs FROM CRSE_CAT LIMIT 15000) A
+// INNER JOIN
+//   (SELECT Descr, CRSE_ID FROM TRNS_RULES WHERE Descr = "Baruch College") B
+// ON A.Course_ID = B.CRSE_ID
+
 
 //controlls the verious routes we have
 const router = express.Router()
@@ -231,13 +342,31 @@ app.use(express.static('public'))
 // })
 
 //This is the catch all, if unavailable address is provided.
-app.get('*', function(req, res) {
+app.get('*', function (req, res) {
   res.send('Sorry this directory is not valid, go back to the homepage')
 })
 
+
+// ? learning purpose only. dont acutally send anyone to space
+app.post('/SEND_ME_TO_SPACE/', (req, res) => {
+  // ? console logging what frontend sent me
+  console.log(req.body)
+
+
+  res.json({
+    'gotem': "GOTEM",
+    'yourA': `${req.body.class}`
+  })
+  res.end()
+
+})
+
+
+
+
 const PORT = process.env.PORT || 3000
 
-app.listen(3000, () =>
+app.listen(PORT, () =>
   console.log('Server has started on local Host port 3000!!')
 )
 //Goto http://localhost:3000/  in your browser to see if it works. Make sure you downloaded node.js  and did npm install express --save first
