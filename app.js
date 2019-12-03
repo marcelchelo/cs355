@@ -199,7 +199,6 @@ app.get('/EXAM_FETCH/:id', (req, res) => {
       res.end()
       return
     } else {
-
       const mapping = rows.map(row => {
         return {
           collegeName: row.DESCR,
@@ -215,6 +214,7 @@ app.get('/EXAM_FETCH/:id', (req, res) => {
         }
       })
       res.json(mapping)
+
     }
   })
 })
