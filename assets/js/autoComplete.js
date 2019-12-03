@@ -32,10 +32,12 @@ function initEvents() {
   $("#add-transfer-school-btn").on('click', addAnotherTransferSchool);
   $("#courses-panel").on('click', '.school-added-container a.close', deleteSelectedSchool);
   $("#courses-panel").on('click', '.add-school-container a.close', deleteSchoolInputContainer);
+  $("#courses-panel").on('click', '.add_course', toggleCourseForm);
   $(".done-adding-schools").on('click', goToCollegeOption);
 
   $("#college-opt-panel").on('click', '.transfer-school-added-container a.close', deleteSelectedTransferSchool);
   $("#college-opt-panel").on('click', '.add-transfer-school-container a.close', deleteTransferSchoolInputContainer);
+
 }
 
 // * clears the inputfields when refreshing! add class text-field to your input text elements... ** if you need anything to load when DOM load, write it here
@@ -161,11 +163,74 @@ function matchSchool(name, element) {
 function addSchoolPanel(name) {
   selectedSchools.push(name);
   var selectedSchool = $("<div class='school' id='" + name + "'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> </div>");
-  $('.school-added-container').append(selectedSchool);
+  var selectedSchoolTEST = $("<div class='school' id='" + name + "'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='course_container'><a class='add_course'>+ Add Course</a><div class='add_course_container'><div class='add_course_input_container'><input class='add_course_input' type='text' placeholder='Type Course Name, Subject, or Number' oninput='handleCourseNameInput(this)' onblur='hideCourseList(this)' onfocus='handleCourseNameInput(this)' /><div class='not_found'>I can't find my course</div><div class='course_list' /></div><a class='course_close' /></div><div class='selected_courses' /></div></div>");
+
+  var selectedSchoolTESTwithcollapse = $("<div class='school' id='" + name + "'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='course_container'><a class='add_course'>+ Add Course</a><div class='add_course_container'><div class='add_course_input_container'><input class='add_course_input' type='text' placeholder='Type Course Name, Subject, or Number' oninput='handleCourseNameInput(this)' onblur='hideCourseList(this)' onfocus='handleCourseNameInput(this)' /><div class='not_found'>I can't find my course</div><div class='course_list' /></div><a class='course_close' /></div><div class='selected_courses' /><span class='collapse'>Collapse This Window</span></div></div>");
+
+
+  // $('.school-added-container').append(selectedSchool);
+  $('.school-added-container').append(selectedSchoolTEST);
+
   $('.add-school-container').remove();
   $('#add-school-btn').insertBefore($('.school-added-container'));
   if (selectedSchools.length < 3) {
     $('#add-school-btn').show();
+  }
+
+  var courseList = $(selectedSchoolTEST).find(".course_list");
+  $.ajax({
+    type: 'GET',
+    url: "/TRNS_RULES/" + name,
+    dataType: "json",
+    success: function(data) {
+      console.log("SUCCESS")
+      for (let course of data) {
+        var $option = $("<a data-id='" + course.CourseID + "'>" + course.SchoolSubject + " " + course.CourseID + " - " + course.CourseName + "</a>");
+        $(courseList).append($option);
+      }
+    }
+  })
+  // fetchCoursesFromSchool(name, courseList);
+}
+
+async function fetchCoursesFromSchool(name, courseList) {
+  courseList = await getCoursesFromSchool(name)
+
+  for (let course of courseList) {
+    console.log(course.CourseName)
+  }
+}
+
+function getCoursesFromSchool(name) {
+  return $.ajax({
+    type: 'GET',
+    url: "/TRNS_RULES/" + name,
+    dataType: "json",
+    success: function() {
+      console.log("SUCCESS")
+    }
+  })
+}
+
+function toggleCourseForm() {
+  var $container = $(this).closest('.course_container')
+  $container.find(".add_course").toggle();
+  $container.find(".add_course_container").toggle();
+  $container.find(".add_course_input").val("").filter(":visible").focus();
+}
+
+function handleCourseNameInput(element) {
+  
+}
+
+function handleSchoolNameInput(element) {
+  var schoolAC = $(element).next(".school-ac-panel").children(".school-input-ac-1")[0]
+  var schoolIp = $(element).next(".school-ac-panel")[0]
+  if (element.value.length >= 1) {
+    matchSchool(element.value, element)
+  } else {
+    schoolAC.innerHTML = ''
+    schoolIp.style.display = 'none'
   }
 }
 
