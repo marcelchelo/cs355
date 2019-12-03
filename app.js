@@ -5,6 +5,8 @@ const morgan = require('morgan')
 const mysql = require('mysql')
 
 const cors = require('cors')
+
+app.use(express.json())
 app.use(
   cors({
     origin: '*',
@@ -182,11 +184,28 @@ app.get('/creditBasedOnTest', (req, res) => {
 })
 
 // ! TEST //
+// ? Pulls all the Exams
+
+app.get('/EXAMS/', (req, res) => {
+  const queryString = 'SELECT testID, Component, TestComponentDescr, Min_Score, Max_Score FROM test_Table'
+  connection.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log(`Failed to query test_Table: ${err}`)
+      res.sendStatus(500)
+      res.end()
+    } else {
+      res.json(rows)
+    }
+  })
+})
+
+
 
 // ? this endpoint includes College name, min/max score for test to meet requirements of said college,
 // ? test name, LISTAGG_C_CRSE_ID_WITHI(I think this denotes courseID equivalence)
 // ? 3 tablets utilized: INSTITUTION_VW AND TEST_EQ BY THEIR INSTITUTION CODE
 // ? TEST_EQ AND TEST_TABLE BY THEIR TEST COMPONENT ID
+// * this is used for finding equivalence.. for the results section
 
 app.get('/EXAM_FETCH/:id', (req, res) => {
   const userId = req.params.id
@@ -327,9 +346,27 @@ app.get('*', function (req, res) {
   res.send('Sorry this directory is not valid, go back to the homepage')
 })
 
+
+// ? learning purpose only. dont acutally send anyone to space
+app.post('/SEND_ME_TO_SPACE/', (req, res) => {
+  // ? console logging what frontend sent me
+  console.log(req.body)
+
+
+  res.json({
+    'gotem': "GOTEM",
+    'yourA': `${req.body.class}`
+  })
+  res.end()
+
+})
+
+
+
+
 const PORT = process.env.PORT || 3000
 
-app.listen(3000, () =>
+app.listen(PORT, () =>
   console.log('Server has started on local Host port 3000!!')
 )
 //Goto http://localhost:3000/  in your browser to see if it works. Make sure you downloaded node.js  and did npm install express --save first
