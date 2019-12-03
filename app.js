@@ -191,7 +191,7 @@ app.get('/creditBasedOnTest', (req, res) => {
 app.get('/EXAM_FETCH/:id', (req, res) => {
   const userId = req.params.id
   const queryString =
-    'SELECT * FROM (SELECT INSTITUTION, DESCR FROM INSTITUTION_VW WHERE DESCR = ?) col INNER JOIN(SELECT Institution, Component, Test_ID, LISTAGG_C_CRSE_ID_WITHI, Min_Score, Max_Score FROM TEST_EQ ) test_eq ON col.INSTITUTION = test_eq.Institution INNER JOIN (SELECT testID, Component, Descr, TestComponentDescr, Min_Score, Max_Score FROM test_Table) test_table ON test_eq.Component = test_table.Component'
+    'SELECT * FROM (SELECT INSTITUTION, DESCR FROM INSTITUTION_VW WHERE DESCR = ?) col INNER JOIN(SELECT Institution, Component, Test_ID, LISTAGG_C_CRSE_ID_WITHI, Min_Score x, Max_Score y FROM TEST_EQ ) test_eq ON col.INSTITUTION = test_eq.Institution INNER JOIN (SELECT testID, Component, Descr, TestComponentDescr, Min_Score a, Max_Score b FROM test_Table) test_table ON test_eq.Component = test_table.Component'
   connection.query(queryString, [userId], (err, rows, fields) => {
     if (err) {
       console.log('Failed to query : ' + err)
@@ -199,7 +199,22 @@ app.get('/EXAM_FETCH/:id', (req, res) => {
       res.end()
       return
     } else {
-      res.json(rows)
+      const mapping = rows.map(row => {
+        return {
+          collegeName: row.DESCR,
+          testCompletesCourse: row.LISTAGG_C_CRSE_ID_WITHI,
+          testName: row.TestComponentDescr,
+          component: row.Component,
+          testTag: row.testID,
+          examsMinScore: row.a,
+          examsMaxScore: row.b,
+          collegeMinScore: row.x,
+          collegeMaxScore: row.y
+
+        }
+      })
+      res.json(mapping)
+
     }
   })
 })
@@ -208,7 +223,7 @@ app.get('/EXAM_FETCH/:id', (req, res) => {
 // SELECT * FROM
 // (SELECT INSTITUTION, DESCR FROM INSTITUTION_VW WHERE DESCR = "Baruch College") col
 // INNER JOIN
-// (SELECT Institution, Component, Test_ID, LISTAGG_C_CRSE_ID_WITHI, Min_Score, Max_Score FROM TEST_EQ ) test_eq
+// (SELECT Institution, Component, Test_ID, , Min_Score, Max_Score FROM TEST_EQ ) test_eq
 // ON col.INSTITUTION = test_eq.Institution
 // INNER JOIN
 // (SELECT testID, Component, Descr, TestComponentDescr, Min_Score, Max_Score FROM test_Table) test_table
