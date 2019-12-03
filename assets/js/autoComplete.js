@@ -1,4 +1,8 @@
+// Stores the selected schools in this array
+var selectedSchools = []
 
+// Counts the number of total selected schools
+var totalNumOfSelectedSchools = 0
 
 // * Clear input fields on load
 // ? mimics $(document).ready()
@@ -18,6 +22,19 @@ function ready(fn) {
     }
   }
 }
+
+$(document).ready(function() {
+  initEvents();
+}) 
+
+function initEvents() {
+  $("#add-school-btn").on('click', addAnotherSchool);
+  $(".school-option").on('click', addSchoolPanel);
+  $("#courses-panel").on('click', '.school-added-container a.close', deleteSelectedSchool);
+  $("#courses-panel").on('click', '.add-school-container a.close', deleteSchoolInputContainer);
+  $(".done-adding-schools").on('click', goToCollegeOption);
+}
+
 // * clears the inputfields when refreshing! add class text-field to your input text elements... ** if you need anything to load when DOM load, write it here
 window.ready(() => {
   const allInputFields = document.querySelectorAll('.text-field')
@@ -25,30 +42,21 @@ window.ready(() => {
     field.value = ''
   })
   document.addEventListener('click', event => {
-
-   // console.log(event.target)
-
+    console.log(event.target)
   })
 })
 
 // * Make the school input field appear
-const addSklBtn = document.getElementById('add-school')
-const uiPanel = document.getElementById('school-search-panel')
+const addSklBtn = document.getElementById('add-school-btn')
 
 // * clicking add aggregates the list of schools minus the one that was selected
-
-
-
-
 
 
 
 // ! College Object -- add info
 
 
-
-class College {
-
+class CollegeProf {
   constructor(name, code) {
     this.name = name
     this.code = code
@@ -62,81 +70,134 @@ class College {
     this.major.forEach(major => console.log(major))
   }
 }
-let userColleges = []
+let userColleges = [
+  {
+    NAME: 'Baruch COllege',
+    CODE: 'BU101',
+    COURSES: []
+  }
+]
 // * this becomes a promise that holds a list of CUNY colleges
 let collegeList
-// * Search field
-const schoolInput = document.querySelector('.school-text-field')
-// * Autocomplete UL
-const schoolAC = document.getElementById('school-input-ac')
-// * Autocomplete container
-const schoolIp = document.querySelector('.school-ac-panel')
 
 // * COURSES PANEL
 const coursePanel = document.getElementById('courses-panel')
-
-let totalNumOfCollege = 0
 
 async function colList() {
   const temp = await fetch('/colleges')
   const res = await temp.json()
   return res
 }
+
 // ? btn to make the school text field to show
 // ? pressing btn also fetchs the database for the CUNY college list
-addSklBtn.addEventListener('click', () => {
-  addSklBtn.style.display = 'none'
-  uiPanel.style.display = 'block'
-  collegeList = colList()
-})
+function addAnotherSchool() {
+  if (selectedSchools.length < 3) {
+    addSklBtn.style.display = 'none'
 
-function matchSchool(name) {
+    var newAddSchoolContainer = $("<div class='add-school-container' style='display: block; display: none;'> <div class='add-school-input-container'> <input class='school-text-field' type='text' placeholder='Type School Name' oninput='handleSchoolNameInput(this)' onblur='hideSchoolList(this)' onfocus='handleSchoolNameInput(this)'> <div class='school-ac-panel hidden'> <ul class='school-input-ac-1'></ul> </div> </div> <a class='close'> <img src='../../style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='pastMenuItems'> </div> <div class='dropdown-header pastEmpty' style='display: none;'>No schools found</div> </div>");
+    $(newAddSchoolContainer).insertBefore('.school-added-container')
+    newAddSchoolContainer.show()
+
+    // $('.add-school-container').show();
+    collegeList = colList()
+  }
+}
+
+function hideSchoolList(element) {
+  var panel = $(element).next(".school-ac-panel")
+  if (!$(".school-input-ac-1:hover").length) {
+    $(panel).hide();
+  }
+}
+
+function matchSchool(name, element) {
+  var schoolIp = $(element).next(".school-ac-panel")[0]
+  console.log("found ul: "+ $(element).next(".school-ac-panel").children(".school-input-ac-1").attr('class'))
+  var schoolAC = $(element).next(".school-ac-panel").children(".school-input-ac-1")[0]
   schoolAC.innerHTML = ''
   collegeList.then(x => {
     let matches = x.filter(college => {
       const regex = new RegExp(`${name}`, 'gi')
       return college.NAME.match(regex)
     })
+    if (matches.length === 0) {
+      let tempinput = document.createElement('input')
+      tempinput.type = 'button'
+      tempinput.className = 'school-option'
+      tempinput.value = "Sorry, the school you have entered was not found in our system."
+      let templi = document.createElement('li')
+      templi.className = 'disable-select-school'
+      templi.appendChild(tempinput)
+      schoolAC.appendChild(templi);
+      schoolIp.style.display = 'block'
+    }
     matches.forEach(college => {
+      let tempinput = document.createElement('input')
+      tempinput.type = 'button'
+      tempinput.className = 'school-option'
+      tempinput.value = college.NAME
+      let templi = document.createElement('li')
 
-      if(!userColleges.some(x => x.name === college.NAME)){
-
-        let templi = document.createElement('li')
-        let tempa = document.createElement('a')
-        let temptxt = document.createTextNode(college.NAME)
-        // TODO encase this with an if statement that checks to see if the college is alrdy selected!!
-        tempa.appendChild(temptxt)
-        templi.appendChild(tempa)
-        // * if the school is clicked on from the autocomplete thennnn..... goto createSchoolPanel
-        templi.addEventListener('click', event => {
-        
-        if(userColleges.length === 0 || !userColleges.some(x => x.name === college.NAME)) {
-          // console.log(college.NAME)
-          createSchoolPanel(event.target.innerText)
-
-          // if the datalist item is clicked on, created a College object and push it in userCollege array
-          userColleges.push(new College(college.NAME, college.Code))
-        } 
-          schoolAC.innerHTML = ''
-          schoolIp.style.display = 'none'
-          schoolInput.value = ''
-          console.log(userColleges)
-
-        })
-
-
-
-        schoolAC.appendChild(templi)
-        schoolIp.style.display = 'block'
-
-
-
+      // Checks if school is already selected
+      if (selectedSchools.includes(college.NAME)) {
+        templi.className = 'disable-select-school'
       }
-    
-      
+
+      templi.appendChild(tempinput)
+
+      templi.addEventListener('click', event => {
+        addSchoolPanel(event.target.value)
+      })
+
+      schoolAC.appendChild(templi);
+      schoolIp.style.display = 'block'
     })
   })
 }
+
+function addSchoolPanel(name) {
+  selectedSchools.push(name);
+  var selectedSchool = $("<div class='school' id='" + name + "'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> </div>");
+  $('.school-added-container').append(selectedSchool);
+  $('.add-school-container').remove();
+  $('#add-school-btn').insertBefore($('.school-added-container'));
+  if (selectedSchools.length < 3) {
+    $('#add-school-btn').show();
+  }
+}
+
+function deleteSelectedSchool() {
+  var $this = $(this)
+  var $school = $this.closest('.school')
+  $school.remove()
+  var schoolName = ($($school).attr("id"))
+
+  for (var i = 0; i < selectedSchools.length; i++) {
+    if (selectedSchools[i] === schoolName) {
+      selectedSchools.splice(i, 1);
+    }
+  }
+
+  if (selectedSchools.length < 3) {
+    if (!($('#courses-panel').find('.add-school-container').length)) {
+      $('#add-school-btn').insertBefore($('.school-added-container'))
+      $('#add-school-btn').show()
+    }
+  }
+}
+
+function deleteSchoolInputContainer() {
+  console.log($(this).parent().attr("class"))
+
+  $(this).parent().remove()
+  
+  if (selectedSchools.length < 3) {
+    $('#add-school-btn').insertBefore($('.school-added-container'))
+    $('#add-school-btn').show()
+  }
+}
+
 // ! HELP HEREEEEE I NEED TO RECREATE THE COLLEGE PANEL U SEE IN COLLEGE TAB (QUEENS COLLEGE)
 function createSchoolPanel(name) {
   // overall school panel
@@ -152,10 +213,6 @@ function createSchoolPanel(name) {
   closeBtn.classList = 'delete-college'
   closeBtn.addEventListener('click', (event) => {
     panel.remove()
-
-    let temp = userColleges.map(x=>x.name).indexOf(name)
-    userColleges.splice(temp, 1)
-
   })
   close.appendChild(closeBtn)
   // School name (center)
@@ -178,25 +235,34 @@ function createSchoolPanel(name) {
   panel.appendChild(innerPanel)
   // append to course panel
   coursePanel.appendChild(panel)
-
-  schoolAC.innerHTML = ''
+  // schoolAC.innerHTML = ''
   schoolIp.style.display = 'none'
 
 }
 
-schoolInput.addEventListener('keyup', event => {
-  if (schoolInput.value.length >= 3) {
-    matchSchool(schoolInput.value)
+// $(".school-text-field").keyup(function() {
+//   if (this.value.length >= 2) {
+//     matchSchool(this.value, this)
+//   } else {
+//     
+//     schoolIp.style.display = 'none'
+//   }
+// })
 
-  } else if(schoolInput.value.length < 3){
-
+function handleSchoolNameInput(element) {
+  var schoolAC = $(element).next(".school-ac-panel").children(".school-input-ac-1")[0]
+  var schoolIp = $(element).next(".school-ac-panel")[0]
+  if (element.value.length >= 1) {
+    matchSchool(element.value, element)
+  } else {
     schoolAC.innerHTML = ''
     schoolIp.style.display = 'none'
-  } if(event.keyCode === 13) {
-   // console.log('Enter')
   }
-})
+}
 
+function goToCollegeOption() {
+  $('#transfer-nav-container #college-opt').click();
+}
 
 
 

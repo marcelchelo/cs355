@@ -280,7 +280,7 @@ input[type='text'] {
 .panel {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  padding: 30px 20px 45px 20px;
+  padding: 10px 20px 45px 20px;
   min-height: 400px;
 }
 
@@ -294,6 +294,11 @@ input[type='text'] {
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
+}
+
+#add-school-btn {
+  width: 97%;
+  margin-bottom: 10px;
 }
 
 .flex-horizontal {
@@ -484,12 +489,15 @@ object {
 .school-ac-panel {
   width: 100%;
   max-height: 250px;
-  border: 1px black solid;
+  border: 1px solid rgba(0,0,0,.15);
   position: absolute;
   overflow: scroll;
   background: #fafafa;
-  margin-bottom: 7px;
+  margin: 0.125rem 0 0;
   z-index: 9999;
+  border-radius: .25rem;
+  padding: 0.5rem 0;
+  min-width: 10rem;
 }
 
 .school-ac-panel ul {
@@ -520,11 +528,163 @@ object {
 
 .school-section {
   height: 35px;
-  margin-bottom: 22px;
 }
 
 .school-section h4 {
   margin-bottom: 0;
+}
+
+#courses-panel .guide {
+  padding: 10px;
+  line-height: 22px;
+  color: #3f3f3f;
+  margin-top: 6px;
+  margin-left: 6px;
+  margin-right: 6px;
+  margin-bottom: 0px;
+  font-size: 16px;
+  text-align: center;
+}
+
+#courses-panel .school-text-field {
+  padding: 10px;
+}
+
+#courses-panel .close {
+  position: absolute;
+  top: 10px;
+  right: 33px;
+  bottom: 10px;
+  width: 10px;
+}
+
+#courses-panel .close-button {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  height: 12px;
+  width: 12px;
+  cursor: pointer;
+}
+
+#courses-panel .add-school-container {
+  background: #ebeff3;
+  border-radius: 4px;
+  height: 56px;
+  position: relative;
+  margin: 8px auto;
+}
+
+#courses-panel .add-school-container .close {
+  position: absolute;
+  top: 10px;
+  right: 33px;
+  bottom: 10px;
+  width: 10px;
+}
+
+#courses-panel .add-school-container .close-button {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  height: 12px;
+  width: 12px;
+  cursor: pointer;
+}
+
+#courses-panel .add-school-input-container {
+  position: absolute;
+  top: 10px;
+  right: 50px;
+  bottom: 10px;
+  left: 10px;
+}
+
+#courses-panel .add-school-input {
+  width: 100%;
+  height: 36px;
+  padding: 6px;
+}
+
+#courses-panel .school-option {
+  display: block;
+  width: 100%;
+  padding: .25rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  font-size: medium;
+  font-family: inherit;
+  line-height: inherit;
+  color: #212529;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+#courses-panel .disable-select-school {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+#courses-panel .school {
+  background: #ebeff3;
+  border-radius: 4px;
+  margin-top: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+  padding: 0 16px;
+  position: relative;
+}
+
+#courses-panel .school h2 {
+  font-size: 14px;
+  line-height: 18px;
+  color: black;
+  text-align: left;
+  padding: 16px 24px 16px 28px;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+#courses-panel .school .close {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  height: 36px;
+  width: 36px;
+  cursor: pointer;
+}
+
+#courses-panel .school .close-button {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  height: 12px;
+  width: 12px;
+  cursor: pointer;
+}
+
+#courses-panel .done-adding-schools {
+  display: block;
+  background-color: #476589;
+  border-radius: 2px;
+  margin: 10px auto;
+  cursor: pointer;
+  text-decoration: none !important;
+  font-size: 14px;
+  line-height: 18px;
+  color: #fff !important;
+  font-weight: bold;
+  padding: 12px;
+  max-width: 300px;
+  width: 100%;
+  text-align: center;  
+}
+
+#school-input-ac {
+  width: 100%;
 }
 
 .delete-college {
