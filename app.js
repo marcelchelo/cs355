@@ -31,13 +31,11 @@ app.get('/student', (req, res) => {
   res.render('student')
 })
 
-//app.use(morgan('short'))
-
 //app.use(express.static(path.join(__dirname)))
-app.use(morgan('short')) //morgan will output to our console on terminal whenever a get request is being made and from where.
+app.use(morgan('short')) //morgan will output to our console on terminal whenever a get post/get request is being made and from where. Also if any errors are returned
 
-//Things we need to add   Connection pool
-//Use router to move the routes and clean up the code
+//Things we need to add   Connection pool mv
+//Use router to move the routes and clean up the code mv
 
 //Database connection credentials
 const connection = mysql.createConnection({
@@ -370,4 +368,4 @@ app.listen(PORT, () =>
   console.log('Server has started on local Host port 3000!!')
 )
 //Goto http://localhost:3000/  in your browser to see if it works. Make sure you downloaded node.js  and did npm install express --save first
-//check the package.json file to see which packages you need to install under dependencies.  You install with npm install <package name>
+//check the package.json file to see which packages you need to install under dependencies.  You install with npm install <package name> mv
