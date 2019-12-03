@@ -1,5 +1,4 @@
 {
-
   "name": "cs355",
   "version": "1.0.0",
   "description": "Transfer application for incoming students to Queens College",
@@ -7,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app",
-    "dev": "nodemon app"
+    "dev": "nodemon app",
+    "format": "prettier --write \"./views/**/*.{html,js}\""
   },
   "repository": {
     "type": "git",
@@ -28,9 +28,13 @@
     "morgan": "^1.9.1",
     "mysql": "^2.17.1",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.4"
   },
   "devDependencies": {
-    "nodemon": "^1.19.4"
+    "eslint": "^6.7.0",
+    "eslint-config-prettier": "^6.7.0",
+    "nodemon": "^1.19.4",
+    "prettier": "^1.19.1"
   }
 }
