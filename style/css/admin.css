@@ -64,18 +64,16 @@ form{
   min-height:100%;
 }
 
-.dropdown {
-  margin: 20px;
-  width:90%;
-}
-
 .btn{
   width:100%;
   text-align:center;
 }
 
-.dropdown-menu {
-  width:100%;
+.dropdown {
+  margin: 20px;
 }
 
-
+.dropdown-menu {
+  max-height: 20rem;
+  overflow-y: auto;
+}
