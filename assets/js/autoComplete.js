@@ -1,8 +1,14 @@
 // Stores the selected schools in this array
 var selectedSchools = []
 
+// Stores the details of each selected school
+var transferDetailList = []
+
 // Stores the selected TRANSFER schools in this array
 var selectedTransferSchools = []
+
+var course_list = []
+
 
 // * this becomes a promise that holds a list of CUNY colleges
 let collegeList
@@ -25,18 +31,32 @@ let userColleges = [
  *  - Selected exams and scores
  * Will be used to compute result
  */
-class TransferPortalInfo {
+class TransferDetail {
+  courses = [];
+  major;
+
   constructor(schoolName, schoolCode) {
-    this.schoolName = schoolName
-    this.schoolCode = schoolCode
-  }
-  addMajor(major) {
-    this.major.append(major)
+    this.school = {'schoolName': schoolName, 'schoolCode': schoolCode}
   }
 
-  // getters
-  getMajors() {
-    this.major.forEach(major => console.log(major))
+  addCourses(courseName, courseCode) {
+    this.courses.push({'courseName': courseName, 'courseCode': courseCode})
+  }
+
+  addMajor(majorName, majorCode) {
+    this.major = {'majorName': majorName, 'majorCode': majorCode}
+  }
+
+  getSchool() {
+    return this.school
+  }
+
+  getCourses() {
+    return this.courses
+  }
+
+  getMajor() {
+    return this.major
   }
 }
 
@@ -86,12 +106,6 @@ window.ready(() => {
   })
 })
 
-async function colList() {
-  const temp = await fetch('/colleges')
-  const res = await temp.json()
-  return res
-}
-
 /**
  * COURSES PANEL
  * Handles button clicked to add "add school" container
@@ -107,6 +121,12 @@ function addAnotherSchool() {
 
     collegeList = colList()
   }
+}
+
+async function colList() {
+  const temp = await fetch('/colleges')
+  const res = await temp.json()
+  return res
 }
 
 /**
@@ -129,7 +149,6 @@ function hideSchoolList(element) {
  */
 function matchSchool(name, element) {
   var schoolIp = $(element).next(".school-ac-panel")[0]
-  console.log("found ul: " + $(element).next(".school-ac-panel").children(".school-input-ac-1").attr('class'))
   var schoolAC = $(element).next(".school-ac-panel").children(".school-input-ac-1")[0]
   schoolAC.innerHTML = ''
   collegeList.then(x => {
@@ -181,17 +200,20 @@ function matchSchool(name, element) {
  *  - The div allows students to add courses from that school
  *  - The courses from that school are populated into a dropdown list
  */ 
-function addSchoolPanel(element) {
+async function addSchoolPanel(element) {
   let name = element.value;
   let schoolCode = $(element).attr('data-school-code')
   selectedSchools.push(name);
+
+  // Create object for this selected school
+  let transferDetail = new TransferDetail(name, schoolCode)
+  transferDetailList.push(transferDetail)
+  
   var selectedSchool = $("<div class='school' id='" + name + "' data-school-code='"+ schoolCode +"'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> </div>");
-  var selectedSchoolTEST = $("<div class='school' id='" + name + "' data-school-code='"+ schoolCode +"'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='course_container'><a class='add_course'>+ Add Course</a><div class='add_course_container'><div class='add_course_input_container'><input class='add_course_input' type='text' placeholder='Type Course Name, Subject, or Number' oninput='handleCourseNameInput(this)' onblur='hideCourseList(this)' onfocus='handleCourseNameInput(this)' /><div class='not_found'>I can't find my course</div><div class='course_list' /></div><a class='course_close' /></div><div class='selected_courses' /></div></div>");
+  var selectedSchoolTEST = $("<div class='school' id='" + name + "' data-school-code='"+ schoolCode +"'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='course_container'><a class='add_course'>+ Add Course</a><div class='add_course_container'><div class='add_course_input_container'><input class='add_course_input' type='text' placeholder='Type Course Name, Subject, or Number' oninput='handleCourseNameInput(this)' onfocus='handleCourseNameInput(this)' onblur='hideCourseList(this)' /> <div class='not_found' style='display:none;'>Can't find my courses</div> <div class='course_list'> </div> </div> <a class='course_close' /></div><div class='selected_courses' /></div></div>");
 
-  var selectedSchoolTESTwithcollapse = $("<div class='school' id='" + name + "' data-school-code='"+ schoolCode +"'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='course_container'><a class='add_course'>+ Add Course</a><div class='add_course_container'><div class='add_course_input_container'><input class='add_course_input' type='text' placeholder='Type Course Name, Subject, or Number' oninput='handleCourseNameInput(this)' onblur='hideCourseList(this)' onfocus='handleCourseNameInput(this)' /><div class='not_found'>I can't find my course</div><div class='course_list' /></div><a class='course_close' /></div><div class='selected_courses' /><span class='collapse'>Collapse This Window</span></div></div>");
+  var selectedSchoolTESTwithcollapse = $("<div class='school' id='" + name + "' data-school-code='"+ schoolCode +"'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='course_container'><a class='add_course'>+ Add Course</a><div class='add_course_container'><div class='add_course_input_container'><input class='add_course_input' type='text' placeholder='Type Course Name, Subject, or Number' oninput='handleCourseNameInput(this)' onblur='hideCourseList(this)' onfocus='handleCourseNameInput(this)' /><div class='course_list' /></div><a class='course_close' /></div><div class='selected_courses' /><span class='collapse'>Collapse This Window</span></div></div>");
 
-
-  // $('.school-added-container').append(selectedSchool);
   $('.school-added-container').append(selectedSchoolTEST);
 
   $('.add-school-container').remove();
@@ -201,15 +223,21 @@ function addSchoolPanel(element) {
   }
 
   var courseList = $(selectedSchoolTEST).find(".course_list");
+  course_list['school' + schoolCode] = []
+
   $.ajax({
     type: 'GET',
     url: "/TRNS_RULES/" + name,
     dataType: "json",
     success: function(data) {
       console.log("SUCCESS")
+      course_list['school' + schoolCode] = []
       for (let course of data) {
-        var $option = $("<a data-id='" + course.CourseID + "'>" + course.SchoolSubject + " " + course.CourseID + " - " + course.CourseName + "</a>");
-        $(courseList).append($option);
+        if (!course_list['school' + schoolCode].includes(course.CourseName.toLowerCase())) {
+          course_list['school' + schoolCode].push(course.CourseName.toLowerCase())
+          var $option = $("<a data-id='" + course.CourseID + "'>" + course.SchoolSubject + " " + course.CourseID + " - " + course.CourseName + "</a>");
+          $(courseList).append($option);
+        }
       }
     }
   })
@@ -231,7 +259,60 @@ function toggleCourseForm() {
  * @param {DOM Object} element 
  */
 function handleCourseNameInput(element) {
-  
+  if (element.value.length >= 1) {
+    matchCoursesFromInput(element)
+  } else {
+
+  }
+}
+
+function matchCoursesFromInput(element) {
+  var $this = $(element)
+  var $list = $this.siblings('.course_list')
+   
+  var $not_found = $this.siblings('.not_found')
+  var not_found = $not_found[0]
+  var list = $list[0]
+  list.style.top = '72px'
+
+  var id = $this.closest('.school').attr('data-school-code');
+  var val = $this.val().toLowerCase();
+  var links = list.getElementsByTagName("a");
+
+  for(var i = 0; i < course_list['school' + id].length; i++){
+    links[i].className = course_list['school' + id][i].indexOf(val) != -1 ? 'visible' : '';
+  }
+
+  var visible_links = list.getElementsByClassName('visible');
+  if(visible_links.length){
+    if(visible_links.length == 1){
+      visible_links[0].className = 'visible selected';
+    }
+    list.scrollTop = 0;
+    $("#course_not_listed_" + $this.attr('data-school-id')).remove()
+  }
+  else{
+    list.style.top = '39px';
+    if(!$("#course_not_listed_" + $this.attr('data-school-id')).length){
+      if(manual_courses){
+        $list.append("<div class='course_not_listed' id='course_not_listed_" + $this.attr('data-school-id') + "'><strong>We couldn’t find a match for this course in our database, but that doesn’t mean you can’t get transfer credit for it! If you’d like to add an undergraduate course to our database, we’ll evaluate it and let you know within 10 business days whether it applies for additional transfer credit. For more information about graduate course transfer, please contact a member of Admissions at <a href='mailto:graduate.admissions@franklin.edu'>graduate.admissions@franklin.edu</a>.</strong><a class='mtc_form_button'>Add A New Course</a></div>");
+      }
+      else{
+        $list.append("<span class='course_not_listed' id='course_not_listed_" + $this.attr('data-school-id') + "'><strong>No courses match this result.</strong> Please check to be sure the course name is spelled correctly. If you still don’t see your class, don’t give up. Contact us at admissions@franklin.edu to see how credit for this course can transfer to Franklin.</span>");
+      }
+    }
+  }
+  list.style.display = 'block';
+  not_found.style.display = 'block';
+  $this.attr("original_value",$this.val());
+}
+
+function hideCourseList(element) {
+  var panel = $(element).closest(".course_container")
+  if (!panel.find('.course_list:hover, .not_found:hover').length) {
+    panel.find('.course_list').hide()
+    panel.find('.not_found').hide() 
+  }
 }
 
 /**
