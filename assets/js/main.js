@@ -106,3 +106,49 @@ function activatePanel(panel, label) {
 		currLabel = panels[pos].label
 	}
 }
+
+
+
+
+// ? let the kids drop!!! in 60fps or somethign
+
+document.addEventListener("DOMContentLoaded", dropTheBass)
+
+const farLeftBoii = document.getElementById('kid-1')
+const leftBoii = document.getElementById('kid-2')
+const title = document.querySelector('.title')
+const farRightGal = document.getElementById('kid-3')
+const rightGal = document.getElementById('kid-4')
+let yScroll
+let xScroll
+let containerPos
+
+function dropTheBass() {
+
+	yScroll = window.scrollY
+	xScroll = window.scrollX
+	containerPos = header.getBoundingClientRect().bottom
+	console.log(yScroll)
+	function translate(element, x, y) {
+		element.style.transform = `translate3d(0, ${y}px, 0)`
+	}
+
+	let dropFun = (timeStamp) => {
+		if (containerPos > 0) {
+			translate(farLeftBoii, 0, yScroll * 0.85)
+			translate(leftBoii, 0, yScroll * 0.45)
+			translate(farRightGal, 0, yScroll * -0.56)
+			translate(rightGal, 0, yScroll * 0.22)
+			translate(title, 0, yScroll * 0.35)
+		}
+
+	}
+
+
+	requestAnimationFrame(dropFun)
+}
+const header = document.getElementById('header')
+document.addEventListener('scroll', () => {
+
+	dropTheBass()
+})

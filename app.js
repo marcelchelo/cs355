@@ -27,9 +27,11 @@ app.get('/', (req, res) => {
   res.render('index')
 })
 
-app.get('/student', (req, res) => {
-  res.render('student')
+app.get('/adminLogin', (req, res) => {
+  res.render('adminLogin')
 })
+
+
 
 //app.use(express.static(path.join(__dirname)))
 app.use(morgan('short')) //morgan will output to our console on terminal whenever a get post/get request is being made and from where. Also if any errors are returned
