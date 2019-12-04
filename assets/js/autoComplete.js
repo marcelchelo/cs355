@@ -375,6 +375,10 @@ function addTransferSchoolPanel(name) {
   }
 }
 
+/**
+ * COLLEGE OPTION PANEL
+ * Called when user clicks on "x" of a selected school
+ */
 function deleteSelectedTransferSchool() {
   let $this = $(this)
   let $transferSchool = $this.closest('.transfer-school')
