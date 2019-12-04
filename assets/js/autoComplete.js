@@ -4,6 +4,42 @@ var selectedSchools = []
 // Stores the selected TRANSFER schools in this array
 var selectedTransferSchools = []
 
+// * this becomes a promise that holds a list of CUNY colleges
+let collegeList
+
+// Save the "add school button" as a variable to be easily accessed later
+const addSklBtn = document.getElementById('add-school-btn')
+
+let userColleges = [
+  {
+    NAME: 'Baruch COllege',
+    CODE: 'BU101',
+    COURSES: []
+  }
+]
+
+/**
+ * Class that will store all user selected info such as:
+ *  - Selected school & its courses
+ *  - Selected transfer school and intended major
+ *  - Selected exams and scores
+ * Will be used to compute result
+ */
+class TransferPortalInfo {
+  constructor(schoolName, schoolCode) {
+    this.schoolName = schoolName
+    this.schoolCode = schoolCode
+  }
+  addMajor(major) {
+    this.major.append(major)
+  }
+
+  // getters
+  getMajors() {
+    this.major.forEach(major => console.log(major))
+  }
+}
+
 // * Clear input fields on load
 // ? mimics $(document).ready()
 // ? if(document.addEventListener) returns false if there are no addEventListeners on document
@@ -37,7 +73,6 @@ function initEvents() {
 
   $("#college-opt-panel").on('click', '.transfer-school-added-container a.close', deleteSelectedTransferSchool);
   $("#college-opt-panel").on('click', '.add-transfer-school-container a.close', deleteTransferSchoolInputContainer);
-
 }
 
 // * clears the inputfields when refreshing! add class text-field to your input text elements... ** if you need anything to load when DOM load, write it here
@@ -51,51 +86,17 @@ window.ready(() => {
   })
 })
 
-// * Make the school input field appear
-const addSklBtn = document.getElementById('add-school-btn')
-
-// * clicking add aggregates the list of schools minus the one that was selected
-
-
-
-// ! College Object -- add info
-
-
-class CollegeProf {
-  constructor(name, code) {
-    this.name = name
-    this.code = code
-  }
-  addMajor(major) {
-    this.major.append(major)
-  }
-
-  // getters
-  getMajors() {
-    this.major.forEach(major => console.log(major))
-  }
-}
-let userColleges = [
-  {
-    NAME: 'Baruch COllege',
-    CODE: 'BU101',
-    COURSES: []
-  }
-]
-// * this becomes a promise that holds a list of CUNY colleges
-let collegeList
-
-// * COURSES PANEL
-const coursePanel = document.getElementById('courses-panel')
-
 async function colList() {
   const temp = await fetch('/colleges')
   const res = await temp.json()
   return res
 }
 
-// ? btn to make the school text field to show
-// ? pressing btn also fetchs the database for the CUNY college list
+/**
+ * COURSES PANEL
+ * Handles button clicked to add "add school" container
+ *  - Fetches all CUNY colleges from database
+ */
 function addAnotherSchool() {
   if (selectedSchools.length < 3) {
     addSklBtn.style.display = 'none'
@@ -108,6 +109,11 @@ function addAnotherSchool() {
   }
 }
 
+/**
+ * COURSES PANEL
+ * Hides the school search dropdown menu when user clicks outside of it
+ * @param {DOM Object} element 
+ */
 function hideSchoolList(element) {
   var panel = $(element).next(".school-ac-panel")
   if (!$(".school-input-ac-1:hover").length) {
@@ -115,6 +121,12 @@ function hideSchoolList(element) {
   }
 }
 
+/**
+ * COURSES PANEL
+ * Filters and shows only the schools that matches the user input
+ * @param {String} name 
+ * @param {DOM Object} element 
+ */
 function matchSchool(name, element) {
   var schoolIp = $(element).next(".school-ac-panel")[0]
   console.log("found ul: " + $(element).next(".school-ac-panel").children(".school-input-ac-1").attr('class'))
@@ -130,6 +142,7 @@ function matchSchool(name, element) {
       tempinput.type = 'button'
       tempinput.className = 'school-option'
       tempinput.value = "Sorry, the school you have entered was not found in our system."
+      tempinput.style.textAlign = "center"
       let templi = document.createElement('li')
       templi.className = 'disable-select-school'
       templi.appendChild(tempinput)
@@ -140,6 +153,7 @@ function matchSchool(name, element) {
       let tempinput = document.createElement('input')
       tempinput.type = 'button'
       tempinput.className = 'school-option'
+      tempinput.setAttribute('data-school-code', college.Code)
       tempinput.value = college.NAME
       let templi = document.createElement('li')
 
@@ -151,7 +165,7 @@ function matchSchool(name, element) {
       templi.appendChild(tempinput)
 
       templi.addEventListener('click', event => {
-        addSchoolPanel(event.target.value)
+        addSchoolPanel(event.target)
       })
 
       schoolAC.appendChild(templi);
@@ -160,12 +174,21 @@ function matchSchool(name, element) {
   })
 }
 
-function addSchoolPanel(name) {
+/** 
+ * COURSES PANEL
+ * This function is called when user selects a school from the dropdown
+ *  - Create a "school" div that contains the name of the selected school
+ *  - The div allows students to add courses from that school
+ *  - The courses from that school are populated into a dropdown list
+ */ 
+function addSchoolPanel(element) {
+  let name = element.value;
+  let schoolCode = $(element).attr('data-school-code')
   selectedSchools.push(name);
-  var selectedSchool = $("<div class='school' id='" + name + "'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> </div>");
-  var selectedSchoolTEST = $("<div class='school' id='" + name + "'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='course_container'><a class='add_course'>+ Add Course</a><div class='add_course_container'><div class='add_course_input_container'><input class='add_course_input' type='text' placeholder='Type Course Name, Subject, or Number' oninput='handleCourseNameInput(this)' onblur='hideCourseList(this)' onfocus='handleCourseNameInput(this)' /><div class='not_found'>I can't find my course</div><div class='course_list' /></div><a class='course_close' /></div><div class='selected_courses' /></div></div>");
+  var selectedSchool = $("<div class='school' id='" + name + "' data-school-code='"+ schoolCode +"'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> </div>");
+  var selectedSchoolTEST = $("<div class='school' id='" + name + "' data-school-code='"+ schoolCode +"'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='course_container'><a class='add_course'>+ Add Course</a><div class='add_course_container'><div class='add_course_input_container'><input class='add_course_input' type='text' placeholder='Type Course Name, Subject, or Number' oninput='handleCourseNameInput(this)' onblur='hideCourseList(this)' onfocus='handleCourseNameInput(this)' /><div class='not_found'>I can't find my course</div><div class='course_list' /></div><a class='course_close' /></div><div class='selected_courses' /></div></div>");
 
-  var selectedSchoolTESTwithcollapse = $("<div class='school' id='" + name + "'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='course_container'><a class='add_course'>+ Add Course</a><div class='add_course_container'><div class='add_course_input_container'><input class='add_course_input' type='text' placeholder='Type Course Name, Subject, or Number' oninput='handleCourseNameInput(this)' onblur='hideCourseList(this)' onfocus='handleCourseNameInput(this)' /><div class='not_found'>I can't find my course</div><div class='course_list' /></div><a class='course_close' /></div><div class='selected_courses' /><span class='collapse'>Collapse This Window</span></div></div>");
+  var selectedSchoolTESTwithcollapse = $("<div class='school' id='" + name + "' data-school-code='"+ schoolCode +"'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='course_container'><a class='add_course'>+ Add Course</a><div class='add_course_container'><div class='add_course_input_container'><input class='add_course_input' type='text' placeholder='Type Course Name, Subject, or Number' oninput='handleCourseNameInput(this)' onblur='hideCourseList(this)' onfocus='handleCourseNameInput(this)' /><div class='not_found'>I can't find my course</div><div class='course_list' /></div><a class='course_close' /></div><div class='selected_courses' /><span class='collapse'>Collapse This Window</span></div></div>");
 
 
   // $('.school-added-container').append(selectedSchool);
@@ -190,39 +213,32 @@ function addSchoolPanel(name) {
       }
     }
   })
-  // fetchCoursesFromSchool(name, courseList);
 }
 
-async function fetchCoursesFromSchool(name, courseList) {
-  courseList = await getCoursesFromSchool(name)
-
-  for (let course of courseList) {
-    console.log(course.CourseName)
-  }
-}
-
-function getCoursesFromSchool(name) {
-  return $.ajax({
-    type: 'GET',
-    url: "/TRNS_RULES/" + name,
-    dataType: "json",
-    success: function() {
-      console.log("SUCCESS")
-    }
-  })
-}
-
+/**
+ * COURSES PANEL
+ * Handles showing/hiding of "add course" options
+ */
 function toggleCourseForm() {
   var $container = $(this).closest('.course_container')
   $container.find(".add_course").toggle();
   $container.find(".add_course_container").toggle();
   $container.find(".add_course_input").val("").filter(":visible").focus();
 }
-
+/**
+ * COURSES PANEL
+ * Handle user course search input
+ * @param {DOM Object} element 
+ */
 function handleCourseNameInput(element) {
   
 }
 
+/**
+ * COURSES PANEL
+ * Handles user school search input
+ * @param {DOM Object} element 
+ */
 function handleSchoolNameInput(element) {
   var schoolAC = $(element).next(".school-ac-panel").children(".school-input-ac-1")[0]
   var schoolIp = $(element).next(".school-ac-panel")[0]
@@ -234,6 +250,10 @@ function handleSchoolNameInput(element) {
   }
 }
 
+/**
+ * COURSES PANEL
+ * Called when user clicks on "x" of a selected school
+ */
 function deleteSelectedSchool() {
   var $this = $(this)
   var $school = $this.closest('.school')
@@ -254,6 +274,10 @@ function deleteSelectedSchool() {
   }
 }
 
+/**
+ * COURSES PANEL
+ * Called when user clicks on "x" next to school search input
+ */
 function deleteSchoolInputContainer() {
   $(this).parent().remove()
 
@@ -263,72 +287,15 @@ function deleteSchoolInputContainer() {
   }
 }
 
-// ! HELP HEREEEEE I NEED TO RECREATE THE COLLEGE PANEL U SEE IN COLLEGE TAB (QUEENS COLLEGE)
-function createSchoolPanel(name) {
-  // overall school panel
-  let panel = document.createElement('div')
-  panel.className = 'college-selection inner-panel gray'
-  // your selected school section
-  let innerPanel = document.createElement('div')
-  innerPanel.className = 'row school-section flex-horizontal'
-  // * the close button that should delete the school (left sidt)
-  let close = document.createElement('div')
-  close.className = 'col one'
-  let closeBtn = document.createElement('a')
-  closeBtn.classList = 'delete-college'
-  closeBtn.addEventListener('click', (event) => {
-    panel.remove()
-  })
-  close.appendChild(closeBtn)
-  // School name (center)
-  let schoolName = document.createElement('div')
-  schoolName.className = 'col ten center-text'
-  schoolName.innerHTML = `<h4>${name}</h4>`
-
-  // counter
-
-  let courseCount = document.createElement('div')
-  courseCount.className = 'col one'
-  let countStart = document.createElement('span')
-  countStart.innerText = '0'
-  courseCount.appendChild(countStart)
-  // stitching it all together
-
-  innerPanel.appendChild(close)
-  innerPanel.appendChild(schoolName)
-  innerPanel.appendChild(courseCount)
-  panel.appendChild(innerPanel)
-  // append to course panel
-  coursePanel.appendChild(panel)
-  // schoolAC.innerHTML = ''
-  schoolIp.style.display = 'none'
-
-}
-
-// $(".school-text-field").keyup(function() {
-//   if (this.value.length >= 2) {
-//     matchSchool(this.value, this)
-//   } else {
-//     
-//     schoolIp.style.display = 'none'
-//   }
-// })
-
-function handleSchoolNameInput(element) {
-  var schoolAC = $(element).next(".school-ac-panel").children(".school-input-ac-1")[0]
-  var schoolIp = $(element).next(".school-ac-panel")[0]
-  if (element.value.length >= 1) {
-    matchSchool(element.value, element)
-  } else {
-    schoolAC.innerHTML = ''
-    schoolIp.style.display = 'none'
-  }
-}
-
 function goToCollegeOption() {
   $('#transfer-nav-container #college-opt').click();
 }
 
+/**
+ * COLLEGE OPTION PANEL
+ * Handles button clicked to add "add school" container
+ *  - Fetches all CUNY colleges from database
+ */
 function addAnotherTransferSchool() {
   $('#add-transfer-school-btn').hide();
   var newAddSchoolContainer = $("<div class='add-transfer-school-container' style='display: block; display: none;'> <div class='add-transfer-school-input-container'> <input class='transfer-school-text-field' type='text' placeholder='Type School Name' oninput='handleTransferSchoolNameInput(this)' onblur='hideTransferSchoolList(this)' onfocus='handleTransferSchoolNameInput(this)'> <div class='transfer-school-ac-panel hidden'> <ul class='transfer-school-input-ac'></ul> </div> </div> <a class='close'> <img src='../../style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> </div>");
@@ -337,6 +304,11 @@ function addAnotherTransferSchool() {
   collegeList = colList()
 }
 
+/**
+ * COLLEGE OPTION PANEL
+ * Handles user school search input
+ * @param {DOM Object} element 
+ */
 function handleTransferSchoolNameInput(element) {
   var schoolAC = $(element).next(".transfer-school-ac-panel").children(".transfer-school-input-ac")[0]
   var schoolIp = $(element).next(".transfer-school-ac-panel")[0]
