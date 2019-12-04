@@ -1,4 +1,5 @@
 {
+
   "name": "cs355",
   "version": "1.0.0",
   "description": "Transfer application for incoming students to Queens College",
@@ -17,7 +18,8 @@
   },
   "homepage": "https://github.com/marcelchelo/cs355#readme",
   "dependencies": {
-    "cors": "^2.8.5",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "morgan": "^1.9.1",
