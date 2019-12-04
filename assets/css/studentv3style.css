@@ -166,7 +166,7 @@ button:hover {
 
 .container.inner {
   padding-top: 10em;
-  padding-bottom: 38px;
+  padding-bottom: 10em;
 }
 
 .col {
@@ -281,7 +281,7 @@ input[type='text'] {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 10px 20px 45px 20px;
-  min-height: 400px;
+  min-height: 840px;
 }
 
 .center-text {
@@ -945,7 +945,7 @@ object {
 .nav-container {
   padding: 0 8.5em;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   border: 1px black solid;
   margin: 0 auto;
 }
@@ -988,7 +988,7 @@ object {
 
 .title {
   margin-left: calc(50% - 20rem);
-  margin-top: 7%;
+  margin-top: 3%;
   max-width: 40rem;
  
 }
@@ -997,6 +997,9 @@ object {
 
   #kid-1 {
     animation: kidone .2s ease-in forwards;
+
+
+    z-index: 999;
   }
   @keyframes kidone{
     from {
@@ -1025,4 +1028,46 @@ object {
     right: 19%;
     
   }
+}
+
+
+/* This is the footer section */
+
+
+footer {
+  height: 400px;
+  background-color: #313639;
+}
+
+.footer-container {
+  /*color: #eee;*/
+  height: 80%;
+  width: 100%;
+  position: relative;
+}
+
+.test2 {
+  border: 2px blue solid;
+  height: 100px;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  z-index: 12;
+  transform: translateX(-40px);
+}
+
+.test3 {
+  border: 1px blue solid;
+  height: 100px;
+  position: absolute;
+  opacity: 0;
+  right: 0;
+  z-index: 12;
+  transform: translateX(40px);
+}
+
+.open {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all ease-in 0.4s;
 }
