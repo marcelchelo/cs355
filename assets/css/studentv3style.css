@@ -736,6 +736,7 @@ object {
   cursor: pointer;
   z-index: 1;
   display: none;
+  text-align: center;
 }
 
 #courses-panel .course_list {
@@ -745,9 +746,23 @@ object {
   padding: 8px;
   background: #fff;
   z-index: 1;
-  display: none;
   overflow-y: auto;
   max-height: 250px;
+}
+
+#courses-panel .course_list > a {
+  display: none;
+  text-align: left;
+  color: #000 !important;
+  padding: 8px;
+  text-decoration: none !important;
+  font-size: 14px;
+  line-height: 18px;
+  cursor: pointer;
+}
+
+#courses-panel .course_list > a.visible {
+  display: block;
 }
 
 #school-input-ac {
