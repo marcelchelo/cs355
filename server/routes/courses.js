@@ -15,7 +15,6 @@ router.get('/:Course_ID', function(req, res) {
 
 // Find courses by name
 router.post('/query', function(req, res, next){
-  console.log(req.body)
   return courses.getCoursesByName(req, res);
 })
 
