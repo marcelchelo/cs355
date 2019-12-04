@@ -328,10 +328,7 @@ app.use(express.static('public'))
 // })
 
 //Student page
-// app.get('/student', function(req, res) {
-// 	res.render('student.ejs')
-// 	console.log('Someone visited the student page')
-// })
+
 
 //adminLogin page
 // app.get('/adminLogin', function(req, res) {
@@ -359,10 +356,21 @@ app.post('/SEND_ME_TO_SPACE/', (req, res) => {
 
 })
 
+//app.use(express.static(path.join(__dirname)))
+app.use(morgan('short')) //morgan will output to our console on terminal whenever a get request is being made and from where.
+
+//Things we need to add   Connection pool
+//Use router to move the routes and clean up the code
+
+//Database connection credentials
+const connection = mysql.createConnection({
+	host: '35.185.14.255',
+	user: 'admin',
+	password: 'cs3552019',
+	database: 'TransferPortal'
+})
 
 
-
-const PORT = process.env.PORT || 3000
 
 app.listen(PORT, () =>
   console.log('Server has started on local Host port 3000!!')
