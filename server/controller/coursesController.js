@@ -32,4 +32,3 @@ exports.getCoursesByName = function(req, res){
         }
       });
 }
-
