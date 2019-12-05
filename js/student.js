@@ -46,7 +46,7 @@ $(document).ready(function() {
 function initEvents() {
 	$('#From').on('click', '.school-added-container a.close', deleteSchool);
     $('.btn-add-past-schools').on('click', addAnotherSchool);
-    $(".done-adding-credits").on('click', goToTransferSchool);
+    $(".done-adding-schools").on('click', goToTransferSchool);
 }
 
 function addAnotherSchool() {
