@@ -491,7 +491,7 @@ object {
   max-height: 250px;
   border: 1px solid rgba(0,0,0,.15);
   position: absolute;
-  overflow: auto;
+  overflow-y: auto;
   background: #fafafa;
   margin: 0.125rem 0 0;
   z-index: 9999;
@@ -504,6 +504,10 @@ object {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.school-ac-panel .school-input-ac-1 > li {
+  padding: 2px;
 }
 
 .school-ac-panel ul li a {
@@ -666,6 +670,33 @@ object {
   cursor: pointer;
 }
 
+#courses-panel .course a.delete-course-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: unset;
+  height: 36px;
+  width: 36px;
+  background: url(../../style/images/close-button.svg) no-repeat center center;
+  background-size: 12px 12px;
+  cursor: pointer;
+}
+
+#courses-panel .course a {
+  text-decoration: none;
+}
+
+#courses-panel .close-course-input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 36px;
+  width: 36px;
+  background: url(../../style/images/close-button.svg) no-repeat center center;
+  background-size: 12px 12px;
+  cursor: pointer;
+}
+
 #courses-panel .done-adding-schools {
   display: block;
   background-color: #476589;
@@ -715,6 +746,14 @@ object {
   height: 40px;
 }
 
+#courses-panel .add_course_input_container {
+  position: absolute;
+  top: 0;
+  right: 36px;
+  left: 0;
+  bottom: 16px;
+}
+
 #courses-panel .add_course_input {
   height: 40px;
   padding: 10px;
@@ -727,27 +766,28 @@ object {
   height: 34px;
   width: 100%;
   background: #fff;
-  border: 1px solid gray;
+  border: 1px solid rgba(0,0,0,.15);
   padding: 8px;
-  font-size: 14px;
+  font-size: medium;
   line-height: 18px;
-  color: #08678d;
-  font-weight: bold;
-  cursor: pointer;
+  color: #787A7D;
+  pointer-events: none;
   z-index: 1;
   display: none;
   text-align: center;
+  border-radius: 2px;
 }
 
 #courses-panel .course_list {
   position: absolute;
   width: 100%;
-  border: 1px solid gray;
+  border: 1px solid rgba(0,0,0,.15);
   padding: 8px;
   background: #fff;
   z-index: 1;
   overflow-y: auto;
   max-height: 250px;
+  border-radius: 4px;
 }
 
 #courses-panel .course_list > a {
@@ -756,13 +796,33 @@ object {
   color: #000 !important;
   padding: 8px;
   text-decoration: none !important;
-  font-size: 14px;
+  font-size: medium;
   line-height: 18px;
   cursor: pointer;
 }
 
+#courses-panel .course_list > a:hover {
+  background: #f2f2f2;
+}
+
+#courses-panel .course_list > a[data-selected] {
+  cursor: default;
+  opacity: .6;
+}
+
 #courses-panel .course_list > a.visible {
   display: block;
+}
+
+#courses-panel .course {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px 40px 10px 10px;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: left;
+  margin-top: 10px;
+  position: relative;
 }
 
 #school-input-ac {
@@ -828,7 +888,7 @@ object {
   max-height: 250px;
   border: 1px solid rgba(0,0,0,.15);
   position: absolute;
-  overflow: auto;
+  overflow-y: auto;
   background: #fafafa;
   margin: 0.125rem 0 0;
   z-index: 9999;
