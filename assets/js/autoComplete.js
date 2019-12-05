@@ -9,7 +9,7 @@ var selectedTransferSchools = []
 
 // Stores all the courses for the specific school
 // course_list['school' + schoolCode] is the value
-// ['school' + schoolCode] is the key 
+// ['school' + schoodlCode] is the key 
 var course_list = []
 
 
@@ -583,6 +583,18 @@ function addTransferSchoolPanel(name) {
   if (selectedTransferSchools.length < 1) {
     $('#add-transfer-school-btn').show();
   }
+
+  $.ajax({
+    type: 'GET',
+    url: "/ACAD_PLAN/" + name,
+    dataType: "json",
+    success: function(data) {
+      console.log("SUCCESS")
+      for (let major of data) {
+          console.log(major.AcademicDescr)
+      }
+    }
+  })
 }
 
 /**
@@ -609,6 +621,10 @@ function deleteSelectedTransferSchool() {
   }
 }
 
+/**
+ * COLLEGE OPTION PANEL
+ * Called when user clicks on "x" next to school search input
+ */
 function deleteTransferSchoolInputContainer() {
   $(this).parent().remove()
 
