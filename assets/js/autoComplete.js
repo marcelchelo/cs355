@@ -7,6 +7,9 @@ var transferDetailList = []
 // Stores the selected TRANSFER schools in this array
 var selectedTransferSchools = []
 
+// Stores all the courses for the specific school
+// course_list['school' + schoolCode] is the value
+// ['school' + schoolCode] is the key 
 var course_list = []
 
 
@@ -88,6 +91,8 @@ function initEvents() {
   $("#add-transfer-school-btn").on('click', addAnotherTransferSchool);
   $("#courses-panel").on('click', '.school-added-container a.close', deleteSelectedSchool);
   $("#courses-panel").on('click', '.add-school-container a.close', deleteSchoolInputContainer);
+  $("#courses-panel").on('click', '.course a.delete-course-btn', deleteSelectedCourse)
+  $("#courses-panel").on('click', 'a.close-course-input', deleteCourseInputContainer);
   $("#courses-panel").on('click', '.add_course', toggleCourseForm);
   $(".done-adding-schools").on('click', goToCollegeOption);
 
@@ -200,7 +205,7 @@ function matchSchool(name, element) {
  *  - The div allows students to add courses from that school
  *  - The courses from that school are populated into a dropdown list
  */ 
-async function addSchoolPanel(element) {
+function addSchoolPanel(element) {
   let name = element.value;
   let schoolCode = $(element).attr('data-school-code')
   selectedSchools.push(name);
@@ -208,9 +213,11 @@ async function addSchoolPanel(element) {
   // Create object for this selected school
   let transferDetail = new TransferDetail(name, schoolCode)
   transferDetailList.push(transferDetail)
+  console.log("TESTING SCHOOL CODE "+transferDetailList[0].getSchool().schoolCode)
+
   
   var selectedSchool = $("<div class='school' id='" + name + "' data-school-code='"+ schoolCode +"'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> </div>");
-  var selectedSchoolTEST = $("<div class='school' id='" + name + "' data-school-code='"+ schoolCode +"'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='course_container'><a class='add_course'>+ Add Course</a><div class='add_course_container'><div class='add_course_input_container'><input class='add_course_input' type='text' placeholder='Type Course Name, Subject, or Number' oninput='handleCourseNameInput(this)' onfocus='handleCourseNameInput(this)' onblur='hideCourseList(this)' /> <div class='not_found' style='display:none;'>Can't find my courses</div> <div class='course_list'> </div> </div> <a class='course_close' /></div><div class='selected_courses' /></div></div>");
+  var selectedSchoolTEST = $("<div class='school' id='" + name + "' data-school-code='"+ schoolCode +"'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='course_container'><a class='add_course'>+ Add Course</a><div class='add_course_container'><div class='add_course_input_container'><input class='add_course_input' type='text' placeholder='Type Course Name' oninput='handleCourseNameInput(this)' onfocus='handleCourseNameInput(this)' onblur='hideCourseList(this)' /> <div class='not_found' style='display:none;'>Sorry, the course you've entered was not found in our system.</div> <div class='course_list'> </div> </div> <a class='close-course-input' /> </div><div class='selected_courses' /></div></div>");
 
   var selectedSchoolTESTwithcollapse = $("<div class='school' id='" + name + "' data-school-code='"+ schoolCode +"'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='course_container'><a class='add_course'>+ Add Course</a><div class='add_course_container'><div class='add_course_input_container'><input class='add_course_input' type='text' placeholder='Type Course Name, Subject, or Number' oninput='handleCourseNameInput(this)' onblur='hideCourseList(this)' onfocus='handleCourseNameInput(this)' /><div class='course_list' /></div><a class='course_close' /></div><div class='selected_courses' /><span class='collapse'>Collapse This Window</span></div></div>");
 
@@ -234,8 +241,10 @@ async function addSchoolPanel(element) {
       course_list['school' + schoolCode] = []
       for (let course of data) {
         if (!course_list['school' + schoolCode].includes(course.CourseName.toLowerCase())) {
+          // Store all the courses in a 'key value pair' object for that specific school
           course_list['school' + schoolCode].push(course.CourseName.toLowerCase())
-          var $option = $("<a data-id='" + course.CourseID + "'>" + course.SchoolSubject + " " + course.CourseID + " - " + course.CourseName + "</a>");
+          // var $option = $("<a data-id='" + course.CourseID + "'>" + course.SchoolSubject + " " + course.CourseID + " - " + course.CourseName + "</a>");
+          var $option = $("<a data-id='" + course.CourseID + "'>" + course.CourseName + "</a>");
           $(courseList).append($option);
         }
       }
@@ -245,13 +254,65 @@ async function addSchoolPanel(element) {
 
 /**
  * COURSES PANEL
+ * This function is triggered when user selects a course from the dropdown
+ *  - Checks if selected course has already been added
+ *  - Only proceed to add course if above is false
+ */
+function handleAddCoursePanel() {
+  let addCourseContainer = $(this).parents('.add_course_container')[0]
+  let selectedCourses = $(addCourseContainer).siblings('.selected_courses')[0]
+  let dataId = $(this).attr('data-id')
+  if (!$(selectedCourses).children("[data-id='" + dataId + "']").length > 0) {
+    addCoursePanel(this)
+    $(addCourseContainer).find('.add_course_input').val('')
+  }
+}
+
+/**
+ * COURSES PANEL
+ * Add course
+ *  - Create div for selected course
+ *  - Add course to its respective school in TransferDetail object
+ * @param {DOM Object} element 
+ */
+function addCoursePanel(element) {
+  let name = $(element).text();
+  let courseCode = $(element).attr('data-id')
+
+  let school = $(element).parents('.school')[0]
+  let schoolCode = $(school).data('school-code')
+  let thisSchool;
+
+  for (var i = 0; i < transferDetailList.length; i++) {
+    if (transferDetailList[i].getSchool().schoolCode === schoolCode) {
+      thisSchool = transferDetailList[i]
+      break;
+    }
+  }
+  thisSchool.addCourses(name, courseCode)
+
+  $(element).attr("data-selected", "true")
+
+  var selectedCourse = $("<div class='course' data-id='" + courseCode + "' >" + name + "<a class='delete-course-btn' /> </a> </div>")
+  $(element).closest('.school').find('.selected_courses').prepend(selectedCourse)
+
+  $(element).parent().hide()
+  $(element).parent().siblings('.not_found').hide()
+
+  var $container = $(element).closest('.course_container')
+  $container.find(".add_course").toggle()
+  $container.find(".add_course_container").toggle()
+}
+
+/**
+ * COURSES PANEL
  * Handles showing/hiding of "add course" options
  */
 function toggleCourseForm() {
   var $container = $(this).closest('.course_container')
-  $container.find(".add_course").toggle();
-  $container.find(".add_course_container").toggle();
-  $container.find(".add_course_input").val("").filter(":visible").focus();
+  $container.find(".add_course").toggle()
+  $container.find(".add_course_container").toggle()
+  $container.find(".add_course_input").val("").filter(":visible").focus()
 }
 /**
  * COURSES PANEL
@@ -259,13 +320,21 @@ function toggleCourseForm() {
  * @param {DOM Object} element 
  */
 function handleCourseNameInput(element) {
+  let courseList = $(element).siblings('.course_list')[0]
+  let notFound = $(element).siblings('.not_found')[0]
   if (element.value.length >= 1) {
     matchCoursesFromInput(element)
   } else {
-
+    $(courseList).hide()
+    $(notFound).hide()    
   }
 }
 
+/**
+ * COURSES PANEL
+ * Filters and shows only the courses that matches the user input
+ * @param {DOM Object} element 
+ */
 function matchCoursesFromInput(element) {
   var $this = $(element)
   var $list = $this.siblings('.course_list')
@@ -281,6 +350,7 @@ function matchCoursesFromInput(element) {
 
   for(var i = 0; i < course_list['school' + id].length; i++){
     links[i].className = course_list['school' + id][i].indexOf(val) != -1 ? 'visible' : '';
+    links[i].addEventListener('click', handleAddCoursePanel)
   }
 
   var visible_links = list.getElementsByClassName('visible');
@@ -290,23 +360,23 @@ function matchCoursesFromInput(element) {
     }
     list.scrollTop = 0;
     $("#course_not_listed_" + $this.attr('data-school-id')).remove()
-  }
-  else{
+
+    list.style.display = 'block';
     list.style.top = '39px';
-    if(!$("#course_not_listed_" + $this.attr('data-school-id')).length){
-      if(manual_courses){
-        $list.append("<div class='course_not_listed' id='course_not_listed_" + $this.attr('data-school-id') + "'><strong>We couldn’t find a match for this course in our database, but that doesn’t mean you can’t get transfer credit for it! If you’d like to add an undergraduate course to our database, we’ll evaluate it and let you know within 10 business days whether it applies for additional transfer credit. For more information about graduate course transfer, please contact a member of Admissions at <a href='mailto:graduate.admissions@franklin.edu'>graduate.admissions@franklin.edu</a>.</strong><a class='mtc_form_button'>Add A New Course</a></div>");
-      }
-      else{
-        $list.append("<span class='course_not_listed' id='course_not_listed_" + $this.attr('data-school-id') + "'><strong>No courses match this result.</strong> Please check to be sure the course name is spelled correctly. If you still don’t see your class, don’t give up. Contact us at admissions@franklin.edu to see how credit for this course can transfer to Franklin.</span>");
-      }
-    }
+    not_found.style.display = 'none';
+    $this.attr("original_value",$this.val());
+  } else {
+    $(list).hide()
+    not_found.style.display = 'block';
+    $this.attr("original_value",$this.val());
   }
-  list.style.display = 'block';
-  not_found.style.display = 'block';
-  $this.attr("original_value",$this.val());
 }
 
+/**
+ * COURSES PANEL
+ * Hide dropdown menu when user clicks outside of the dropdown menu
+ * @param {DOM Object} element 
+ */
 function hideCourseList(element) {
   var panel = $(element).closest(".course_container")
   if (!panel.find('.course_list:hover, .not_found:hover').length) {
@@ -334,12 +404,17 @@ function handleSchoolNameInput(element) {
 /**
  * COURSES PANEL
  * Called when user clicks on "x" of a selected school
+ *  - Delete school div
+ *  - Delete school from the "selectedSchool" array
+ *  - Delete school's TransferDetail object from the "transferDetailList" array
+ *  - Delete all courses related to that school stored in "course_list" array
  */
 function deleteSelectedSchool() {
   var $this = $(this)
   var $school = $this.closest('.school')
   $school.remove()
   var schoolName = ($($school).attr("id"))
+  var schoolCode = ($($school).attr("data-school-code"))
 
   for (var i = 0; i < selectedSchools.length; i++) {
     if (selectedSchools[i] === schoolName) {
@@ -347,12 +422,50 @@ function deleteSelectedSchool() {
     }
   }
 
+  for (var i = 0; i < transferDetailList.length; i++) {
+    if (transferDetailList[i].getSchool().schoolCode === schoolCode) {
+      transferDetailList.splice(i, 1);
+    }
+  }
+
+  // delete all the courses loaded for that specific school 
+  delete course_list['school' + schoolCode]
+
   if (selectedSchools.length < 3) {
     if (!($('#courses-panel').find('.add-school-container').length)) {
       $('#add-school-btn').insertBefore($('.school-added-container'))
       $('#add-school-btn').show()
     }
   }
+}
+
+/**
+ * COURSES PANEL
+ * Called when user clicks on "x" of a selected course
+ *  - Delete course div
+ *  - Delete the course from its respective school in TransferDetail object
+ */
+function deleteSelectedCourse() {
+  var $this = $(this)
+  var $course = $this.closest('.course')
+  var schoolCode = $this.closest('.school').attr('data-school-code')
+  var courseCode = $this.parent().attr('data-id')
+  var courseContainer = $this.parents('.course_container')[0]
+  $(courseContainer).find(".course_list a[data-id='" + courseCode + "']").removeAttr("data-selected")
+
+  for (var i = 0; i < transferDetailList.length; i++) {
+    if (transferDetailList[i].getSchool().schoolCode === schoolCode) {
+      let courseList = transferDetailList[i].getCourses()
+      for (var j = 0; j < courseList.length; j++) {
+        if (courseList[j].courseCode === courseCode) {
+          console.log("REMOVING THIS COURSE: " + courseList[j].courseName)
+          courseList.splice(j, 1)
+          console.log("AFTER REMOVING COURSE LIST SIZE: " + courseList.length)
+        }
+      }
+    }
+  }
+  $course.remove()
 }
 
 /**
@@ -370,6 +483,16 @@ function deleteSchoolInputContainer() {
 
 function goToCollegeOption() {
   $('#transfer-nav-container #college-opt').click();
+}
+
+/**
+ * COURSES PANEL
+ * Called when user clicks on "x" next to course search input
+ */
+function deleteCourseInputContainer() {
+  var $container = $(this).closest('.course_container')
+  $container.find(".add_course").toggle()
+  $container.find(".add_course_container").toggle()
 }
 
 /**
@@ -401,6 +524,12 @@ function handleTransferSchoolNameInput(element) {
   }
 }
 
+/**
+ * COLLEGE OPTION PANEL
+ * Filters and shows only the schools that matches the user input
+ * @param {String} name 
+ * @param {DOM Object} element 
+ */
 function matchTransferSchool(name, element) {
   let schoolIp = $(element).next(".transfer-school-ac-panel")[0]
   let schoolAC = $(element).next(".transfer-school-ac-panel").children(".transfer-school-input-ac")[0]
