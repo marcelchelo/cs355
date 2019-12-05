@@ -277,6 +277,32 @@ app.get('/TRNS_RULES', (req, res) => {
   // res.end()
 })
 
+// Retrieves all majors from respective school 
+app.get('/ACAD_PLAN/:id', (req, res) => {
+  const userId = req.params.id
+  const queryString = 
+  'SELECT INSTITUTION_DESCR, ACAD_PLAN, DEGREE, DEGREE_DESCR, TRNSCR_DESCR FROM ACAD_PLAN_TBL_LTD WHERE INSTITUTION_DESCR = ?'
+  connection.query(queryString, [userId], (err, rows, fields) => {
+    if (err) {
+      console.log("Failed to query academic plans: " + err)
+      res.sendStatus(500)
+      res.end()
+      return
+    } else {
+      const mapping = rows.map(row => {
+        return {
+          CollegeName: row.INSTITUTION_DESCR,
+          AcademicPlan: row.ACAD_PLAN,
+          Degree: row.DEGREE,
+          DegreeDescr: row.DEGREE_DESCR,
+          AcademicDescr: row.TRNSCR_DESCR
+        }
+      })
+      res.json(mapping)
+    }
+  })
+})
+
 
 app.get('/TRNS_RULES/:id', (req, res) => {
   const userId = req.params.id
@@ -303,8 +329,6 @@ app.get('/TRNS_RULES/:id', (req, res) => {
     }
 
   })
-
-
 })
 
 
