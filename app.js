@@ -277,11 +277,40 @@ app.get('/TRNS_RULES', (req, res) => {
   // res.end()
 })
 
+// Retrieves all majors from respective school 
+app.get('/ACAD_PLAN/:id', (req, res) => {
+  const userId = req.params.id
+  const queryString = 
+  'SELECT INSTITUTION_DESCR, ACAD_PLAN, DEGREE, DEGREE_DESCR, TRNSCR_DESCR FROM ACAD_PLAN_TBL_LTD WHERE INSTITUTION_DESCR = ?'
+  connection.query(queryString, [userId], (err, rows, fields) => {
+    if (err) {
+      console.log("Failed to query academic plans: " + err)
+      res.sendStatus(500)
+      res.end()
+      return
+    } else {
+      const mapping = rows.map(row => {
+        return {
+          CollegeName: row.INSTITUTION_DESCR,
+          AcademicPlan: row.ACAD_PLAN,
+          Degree: row.DEGREE,
+          DegreeDescr: row.DEGREE_DESCR,
+          AcademicDescr: row.TRNSCR_DESCR
+        }
+      })
+      res.json(mapping)
+    }
+  })
+})
+
 
 app.get('/TRNS_RULES/:id', (req, res) => {
   const userId = req.params.id
-  const queryString =
-    'SELECT * FROM (SELECT Course_ID, Long_Title w, Equiv_Crs FROM CRSE_CAT LIMIT 15000) A INNER JOIN (SELECT Descr, CRSE_ID, SCHOOL_SUBJECT FROM TRNS_RULES WHERE Descr = ?) B ON A.Course_ID = B.CRSE_ID'
+  const queryString = 'SELECT * FROM CRSECAT_B WHERE \`Institution Descr\` = ?'
+
+
+
+  // 'SELECT * FROM (SELECT Course_ID, Long_Title w, Equiv_Crs FROM CRSE_CAT LIMIT 15000) A INNER JOIN (SELECT Descr, CRSE_ID, SCHOOL_SUBJECT FROM TRNS_RULES WHERE Descr = ?) B ON A.Course_ID = B.CRSE_ID'
   connection.query(queryString, [userId], (err, rows, fields) => {
     if (err) {
       console.log("failed to query for courses: " + err)
@@ -291,11 +320,11 @@ app.get('/TRNS_RULES/:id', (req, res) => {
     } else {
       const mapping = rows.map(row => {
         return {
-          CollegeName: row.Descr,
-          CourseName: row.w,
-          SchoolSubject: row.SCHOOL_SUBJECT,
+          CollegeName: row['Institution Descr'],
+          CourseName: row.Descr,
+          SchoolSubject: row.Subject,
           CourseID: row.Course_ID,
-          EquivalentCrs: row.Equiv_Crs
+          //EquivalentCrs: row.Equiv_Crs
 
         }
       })
@@ -303,8 +332,6 @@ app.get('/TRNS_RULES/:id', (req, res) => {
     }
 
   })
-
-
 })
 
 
