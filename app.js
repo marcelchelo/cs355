@@ -187,23 +187,14 @@ app.get('/creditBasedOnTest', (req, res) => {
 // ? Pulls all the Exams
 
 app.get('/EXAMS/', (req, res) => {
-  const queryString = 'SELECT testID, Component, TestComponentDescr, Min_Score, Max_Score FROM test_Table ORDER BY TestComponentDescr'
+  const queryString = 'SELECT testID, Component, TestComponentDescr, Min_Score, Max_Score FROM test_Table'
   connection.query(queryString, (err, rows, fields) => {
     if (err) {
       console.log(`Failed to query test_Table: ${err}`)
       res.sendStatus(500)
       res.end()
     } else {
-      const mapping = rows.map(row => {
-        return {
-          testName: row.TestComponentDescr,
-          component: row.Component,
-          testTag: row.testID,
-          examsMinScore: row.Min_Score,
-          examsMaxScore: row.Max_Score,
-        }
-      })
-      res.json(mapping)
+      res.json(rows)
     }
   })
 })
@@ -219,7 +210,7 @@ app.get('/EXAMS/', (req, res) => {
 app.get('/EXAM_FETCH/:id', (req, res) => {
   const userId = req.params.id
   const queryString =
-    'SELECT * FROM (SELECT INSTITUTION, DESCR FROM INSTITUTION_VW WHERE DESCR = ?) col INNER JOIN(SELECT Institution, Component, Test_ID, listagg_D_SUBJECT_tr, Min_Score x, Max_Score y FROM TEST_EQ ) test_eq ON col.INSTITUTION = test_eq.Institution INNER JOIN (SELECT testID, Component, Descr, TestComponentDescr, Min_Score a, Max_Score b FROM test_Table) test_table ON test_eq.Component = test_table.Component'
+    'SELECT * FROM (SELECT INSTITUTION, DESCR FROM INSTITUTION_VW WHERE DESCR = ?) col INNER JOIN(SELECT Institution, Component, Test_ID, LISTAGG_C_CRSE_ID_WITHI, Min_Score x, Max_Score y FROM TEST_EQ ) test_eq ON col.INSTITUTION = test_eq.Institution INNER JOIN (SELECT testID, Component, Descr, TestComponentDescr, Min_Score a, Max_Score b FROM test_Table) test_table ON test_eq.Component = test_table.Component'
   connection.query(queryString, [userId], (err, rows, fields) => {
     if (err) {
       console.log('Failed to query : ' + err)
