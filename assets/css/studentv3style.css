@@ -1143,7 +1143,7 @@ object {
 
 
 #header {
-  height: 400px;
+  height: 100px;
   width: 100%;
   overflow: hidden;
   position: relative;
@@ -1198,9 +1198,10 @@ object {
 }
 
 .title {
-  margin-left: calc(50% - 20rem);
-  margin-top: 3%;
-  max-width: 40rem;
+  margin-left: calc(60% - 20rem);
+  margin-top: 1%;
+  max-width: 50rem;
+  max-height: 8rem;
  
 }
 

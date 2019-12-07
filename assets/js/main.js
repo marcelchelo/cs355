@@ -107,10 +107,11 @@ function activatePanel(panel, label) {
 	}
 }
 
+// Test button functionality, add the rest
+function switchCourses() {
+	activatePanel("courses", undefined);
+}
 
-
-
-// ? let the kids drop!!! in 60fps or somethign
 
 document.addEventListener("DOMContentLoaded", dropTheBass)
 
@@ -152,11 +153,6 @@ document.addEventListener('scroll', () => {
 
 	dropTheBass()
 })
-
-
-// * FOOTER FETISH
-
-
 
 const footContainer = document.getElementById('footer-container')
 const rightFooter = document.getElementById('right-footer')
