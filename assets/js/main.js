@@ -107,9 +107,15 @@ function activatePanel(panel, label) {
 	}
 }
 
-// Test button functionality, add the rest
+// Switching tabs when user is done
 function switchCourses() {
 	activatePanel("courses", undefined);
+}
+function switchCollegeOpt() {
+	activatePanel("college-opt", undefined);
+}
+function switchExams() {
+	activatePanel("exam-scores", undefined);
 }
 
 
