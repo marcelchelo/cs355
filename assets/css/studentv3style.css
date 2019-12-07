@@ -1373,6 +1373,13 @@ object {
 #exam-input-ac {
   width: 100%;
 }
+
+.error {
+  padding-top: 10px;
+  display: none;
+  color: red;
+}
+
 /* This is the footer section */
 
 
