@@ -1105,7 +1105,274 @@ object {
   }
 }
 
+/*Exam Panel*/
+#add-exam-btn {
+  width: 97%;
+  margin-bottom: 10px;
+}
 
+.exam-ac-panel {
+  width: 100%;
+  max-height: 250px;
+  border: 1px solid rgba(0,0,0,.15);
+  position: absolute;
+  overflow: auto;
+  background: #fafafa;
+  margin: 0.125rem 0 0;
+  z-index: 9999;
+  border-radius: .25rem;
+  padding: 0.5rem 0;
+  min-width: 10rem;
+}
+
+.exam-ac-panel ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.exam-ac-panel ul li a {
+  font-size: 1.75rem;
+  padding: 8px 12px;
+  width: 100%;
+  display: block;
+}
+
+.exam-ac-panel ul li:hover {
+  background: #f2f2f2;
+}
+
+#exam-score-panel #guide-need-to-add-tranfer-school {
+  padding: 10px;
+  line-height: 22px;
+  color: #3f3f3f;
+  margin-top: 6px;
+  margin-left: 6px;
+  margin-right: 6px;
+  margin-bottom: 0px;
+  font-size: 16px;
+  text-align: center;
+}
+
+#exam-score-panel .guide {
+  padding: 10px;
+  line-height: 22px;
+  color: #3f3f3f;
+  margin-top: 6px;
+  margin-left: 6px;
+  margin-right: 6px;
+  margin-bottom: 0px;
+  font-size: 16px;
+  text-align: center;
+}
+
+#exam-score-panel .exam-text-field {
+  padding: 10px;
+}
+
+#exam-score-panel .close {
+  position: absolute;
+  top: 10px;
+  right: 33px;
+  bottom: 10px;
+  width: 10px;
+}
+
+#exam-score-panel .close-button {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  height: 12px;
+  width: 12px;
+  cursor: pointer;
+}
+
+#exam-score-panel .add-exam-container {
+  background: #ebeff3;
+  border-radius: 4px;
+  height: 56px;
+  position: relative;
+  margin: 8px auto;
+}
+
+#exam-score-panel .add-exam-container .close {
+  position: absolute;
+  top: 10px;
+  right: 33px;
+  bottom: 10px;
+  width: 10px;
+}
+
+#exam-score-panel .add-exam-container .close-button {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  height: 12px;
+  width: 12px;
+  cursor: pointer;
+}
+
+#exam-score-panel .add-exam-input-container {
+  position: absolute;
+  top: 10px;
+  right: 50px;
+  bottom: 10px;
+  left: 10px;
+}
+
+#exam-score-panel .add-exam-input {
+  width: 100%;
+  height: 36px;
+  padding: 6px;
+}
+
+#exam-score-panel .exam-option {
+  display: block;
+  width: 100%;
+  padding: .25rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  font-size: medium;
+  font-family: inherit;
+  line-height: inherit;
+  color: #212529;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+#exam-score-panel .disable-select-exam {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+#exam-score-panel .exam {
+  background: #ebeff3;
+  border-radius: 4px;
+  margin-top: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+  padding: 0 16px 16px 16px;
+  position: relative;
+}
+
+#exam-score-panel .exam h2 {
+  font-size: 14px;
+  line-height: 18px;
+  color: black;
+  text-align: left;
+  padding: 16px 24px 16px 28px;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+#exam-score-panel .exam .close {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  height: 36px;
+  width: 36px;
+  cursor: pointer;
+}
+
+#exam-score-panel .exam .close-button {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  height: 12px;
+  width: 12px;
+  cursor: pointer;
+}
+
+#exam-score-panel .done-adding-schools {
+  display: block;
+  background-color: #476589;
+  border-radius: 2px;
+  margin: 15px auto;
+  cursor: pointer;
+  text-decoration: none !important;
+  font-size: 14px;
+  line-height: 18px;
+  color: #fff !important;
+  font-weight: bold;
+  padding: 12px;
+  max-width: 300px;
+  width: 100%;
+  text-align: center;  
+}
+
+#exam-score-panel .score_container {
+  display: block;
+  position: relative;
+}
+
+#exam-score-panel .add_score {
+  display: block;
+  border: 1px dashed #cfcfcf;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none !important;
+  font-size: 14px;
+  line-height: 22px;
+  color: #000 !important;
+  background: #fff;
+  text-align: center;
+}
+
+#exam-score-panel .exam .collapse {
+  color: #333;
+  display: inline-block;
+  margin-bottom: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
+#exam-score-panel .add_score_container {
+  display: none;
+  height: 40px;
+}
+
+#exam-score-panel .add_score_input {
+  height: 40px;
+  padding: 10px;
+}
+
+#exam-score-panel .not_found {
+  position: absolute;
+  top: 39px;
+  left: 0;
+  height: 34px;
+  width: 100%;
+  background: #fff;
+  border: 1px solid gray;
+  padding: 8px;
+  font-size: 14px;
+  line-height: 18px;
+  color: #08678d;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1;
+  display: none;
+}
+
+#exam-score-panel .score_list {
+  position: absolute;
+  width: 100%;
+  border: 1px solid gray;
+  padding: 8px;
+  background: #fff;
+  z-index: 1;
+  display: none;
+  overflow-y: auto;
+  max-height: 250px;
+}
+
+#exam-input-ac {
+  width: 100%;
+}
 /* This is the footer section */
 
 
