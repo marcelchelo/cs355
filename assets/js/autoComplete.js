@@ -23,6 +23,19 @@ let collegeList
 // Save the "add school button" as a variable to be easily accessed later
 const addSklBtn = document.getElementById('add-school-btn')
 
+// Stores the selected exams in this array
+var acceptedExams = []
+// Stores the selected exams in this array
+var selectedExams = []
+
+// * this becomes a promise that holds a list of exams from transfer school
+let examList
+
+// Save the "add exam button" as a variable to be easily accessed later
+const addExamBtn = document.getElementById('add-exam-btn')
+
+
+
 let userColleges = [
   {
     NAME: 'Baruch COllege',
@@ -102,9 +115,17 @@ function initEvents() {
 
   $("#college-opt-panel").on('click', '.transfer-school-added-container a.close', deleteSelectedTransferSchool);
   $("#college-opt-panel").on('click', '.add-transfer-school-container a.close', deleteTransferSchoolInputContainer);
+
+
+  $("#add-exam-btn").on('click', addAnotherExam);
+  $("#exam-score-panel").on('click', '.exam-added-container a.close', deleteSelectedExam);
+  $("#exam-score-panel").on('click', '.add-exam-container a.close', deleteExamInputContainer);
+  $("#exam-score-panel").on('click', '.add_score', toggleScoreForm);
+
   $("#college-opt-panel").on('click', '.program a.delete-program-btn', deleteSelectedProgram);
   $("#college-opt-panel").on('click', 'a.close-program-input', deleteProgramInputContainer);
   $("#college-opt-panel").on('click', '.add_program', toggleProgramForm);
+
 }
 
 // * clears the inputfields when refreshing! add class text-field to your input text elements... ** if you need anything to load when DOM load, write it here
@@ -600,6 +621,12 @@ function addTransferSchoolPanel(element) {
     $('#add-transfer-school-btn').show();
   }
 
+  /*Show exam buttons to add exams*/
+  $('#guide-need-to-add-tranfer-school').hide()
+  $('#exam-score-panel').find('.guide').show()
+  $('#add-exam-btn').show()
+
+
   var programList = $(selectedTransferSchool).find(".program_list")
 
   $.ajax({
@@ -618,6 +645,7 @@ function addTransferSchoolPanel(element) {
       }
     }
   })
+
 }
 
 /**
@@ -636,6 +664,15 @@ function deleteSelectedTransferSchool() {
     }
   }
 
+  //Show exam buttons to add exams
+  $('#guide-need-to-add-tranfer-school').show()
+  $('#exam-score-panel').find('.guide').hide()
+  $('#add-exam-btn').hide()
+  //Remove selected tests from div
+  $('.exam-added-container').children().remove()
+  //Case where Type in exam input is active, remove it
+  $('.add-exam-container').remove()
+
   if (selectedTransferSchools.length < 1) {
     if (!($('#college-opt-panel').find('.add-transfer-school-container').length)) {
       $('#add-transfer-school-btn').insertBefore($('.transfer-school-added-container'))
@@ -650,12 +687,233 @@ function deleteSelectedTransferSchool() {
  */
 function deleteTransferSchoolInputContainer() {
   $(this).parent().remove()
-
+  
   if (selectedTransferSchools.length < 1) {
     $('#add-transfer-school-btn').insertBefore($('.transfer-school-added-container'))
     $('#add-transfer-school-btn').show()
   }
 }
+
+
+/*if anyone needs the list of the tests with course equivalencies this should bring up all of the tests
+async function examsWithCreditMinList() {
+  let schoolName = $('.transfer-school')[0].getAttribute("id")
+  const examsFromTransferSchool = '/EXAM_FETCH/' + schoolName
+  const examTemp = await fetch(`${examsFromTransferSchool}`)
+  const examRes = await examTemp.json()
+  console.log(examRes)
+  return examRes
+}
+*/
+
+
+/**
+ * EXAM SCORE PANEL
+ * does not show exams until transfer school inputted
+ * Handles button clicked to add "add exam" container
+ *  - Fetches all tests from database
+ */
+
+async function exList() {
+  const examTemp = await fetch('/EXAMS')
+  const examRes = await examTemp.json()
+  console.log(examRes)
+  return examRes
+}
+function addAnotherExam() {
+  
+    addExamBtn.style.display = 'none'
+
+    var newAddExamContainer = $("<div class='add-exam-container' style='display: block; display: none;'> <div class='add-exam-input-container'> <input class='exam-text-field' type='text' placeholder='Type Exam Name' oninput='handleExamNameInput(this)' onblur='hideExamList(this)' onfocus='handleExamNameInput(this)'> <div class='exam-ac-panel hidden'> <ul class='exam-input-ac-1'></ul> </div> </div> <a class='close'> <img src='../../style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='pastMenuItems'> </div> <div class='dropdown-header pastEmpty' style='display: none;'>No schools found</div> </div>");
+    $(newAddExamContainer).insertBefore('.exam-added-container')
+    newAddExamContainer.show()
+
+    examList = exList()
+    console.log(examList)
+  
+}
+
+/**
+ * EXAM SCORE PANEL
+ * Hides the exam search dropdown menu when user clicks outside of it
+ * @param {DOM Object} element 
+ */
+function hideExamList(element) {
+  var panel = $(element).next(".exam-ac-panel")
+  if (!$(".exam-input-ac-1:hover").length) {
+    $(panel).hide();
+  }
+}
+
+/**
+ * EXAM SCORE PANEL
+ * Filters and shows only the exams that matches the user input
+ * @param {String} name 
+ * @param {DOM Object} element 
+ */
+function matchExam(name, element) {
+  var examIp = $(element).next(".exam-ac-panel")[0]
+  console.log("found ul: " + $(element).next(".exam-ac-panel").children(".exam-input-ac-1").attr('class'))
+  var examAC = $(element).next(".exam-ac-panel").children(".exam-input-ac-1")[0]
+  examAC.innerHTML = ''
+  examList.then(x => {
+    let matches = x.filter(exam => {
+      const regex = new RegExp(`${name}`, 'gi')
+      return exam.testName.match(regex)
+    })
+    if (matches.length === 0) {
+      let tempinput = document.createElement('input')
+      tempinput.type = 'button'
+      tempinput.className = 'exam-option'
+      tempinput.value = "Sorry, the exam you have entered was not found in our system."
+      tempinput.style.textAlign = "center"
+      let templi = document.createElement('li')
+      templi.className = 'disable-select-exam'
+      templi.appendChild(tempinput)
+      examAC.appendChild(templi);
+      examIp.style.display = 'block'
+    }
+    matches.forEach(exam => {
+      let tempinput = document.createElement('input')
+      tempinput.type = 'button'
+      tempinput.className = 'exam-option'
+      tempinput.setAttribute('data-exam-name', exam.testName)
+      tempinput.setAttribute('data-exam-code', exam.component)
+      tempinput.setAttribute('data-exam-tag', exam.testTag)
+      tempinput.setAttribute('data-exam-min-score', exam.examsMinScore)
+      tempinput.setAttribute('data-exam-max-score', exam.examsMaxScore)
+      tempinput.value = exam.testName + " (" + exam.testTag + " Exam)"
+      let templi = document.createElement('li')
+      // Checks if exam is already selected
+      if (selectedExams.includes(exam.component)) {
+        templi.className = 'disable-select-exam'
+      }
+
+      templi.appendChild(tempinput)
+
+      templi.addEventListener('click', event => {
+        addExamPanel(event.target)
+      })
+
+      examAC.appendChild(templi);
+      examIp.style.display = 'block'
+    })
+  })
+}
+
+/** 
+ * EXAM SCORE PANEL
+ * This function is called when user selects a exam from the dropdown
+ *  - Create a "exam" div that contains the name of the selected exam
+ *  - The div allows students to add score to exam
+ *  - The courses from that school are populated into a dropdown list
+ */ 
+function addExamPanel(element) {
+  /* '(data-exam-name', exam.testName)
+      ('data-exam-code', exam.component)
+      ('data-exam-tag', exam.testTag)
+      ('data-exam-min-score', exam.examsMinScore)
+      ('data-exam-max-score', exam.examsMaxScore)*/
+  let name = $(element).attr('data-exam-name');
+  let examCode = $(element).attr('data-exam-code')
+  let tag = $(element).attr('data-exam-tag');
+  let minScore = $(element).attr('data-exam-min-score')
+  let maxScore = $(element).attr('data-exam-max-score');
+  selectedExams.push(examCode);
+
+  let error = "<p class='error'>Score entered needs to be a whole number from " + minScore + " to " + maxScore + "</p>"
+  var selectedExamTEST = $("<div class='exam' id='" + name + "' data-exam-code='"+ examCode +"' data-exam-tag='" + tag +"' data-exam-min-score='" + minScore +"' data-exam-max-score='" + maxScore + "' > <h2> <span></span> " + element.value + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='score_container'><a class='add_score'>+ Add Score</a><div class='add_score_container'><div class='add_score_input_container'><input class='add_score_input' type='text' oninput='isValidScore(this)' placeholder='Type in Score' /><div class='not_found'>I can't find my score</div><div class='score_list' /></div><a class='score_close' /></div><div class='selected_scores' /></div>" + error + "</div>");
+
+
+  $('.exam-added-container').prepend(selectedExamTEST);
+
+  $('.add-exam-container').remove();
+  $('#add-exam-btn').insertBefore($('.exam-added-container'));
+ 
+    $('#add-exam-btn').show();
+  
+
+  var scoreList = $(selectedExamTEST).find(".score_list");
+  
+}
+
+function isValidScore(element) {
+  let score = element.value
+
+  let $exam = element.closest('.exam')
+  
+  if(onlyDigits(score)) {
+    let $examMinScore = parseInt($($exam).attr('data-exam-min-score'))
+    let $examMaxScore = parseInt($($exam).attr('data-exam-max-score'))
+    if(score < $examMinScore || score > $examMaxScore) {
+      $($exam).parent().find('p').filter('.error').show();
+    }
+    else {
+      $($exam).parent().find('p').filter('.error').hide();
+    }
+  }
+  else {
+    $($exam).parent().find('p').filter('.error').show();
+  }
+}
+
+function onlyDigits(s) {
+  for (let i = s.length - 1; i >= 0; i--) {
+    //char code 48 to 57 are 0 to 9 respectively
+    //any char that lies outside that will not be a digit
+    const d = s.charCodeAt(i);
+    if (d < 48 || d > 57) return false
+  }
+  return true
+}
+
+/**
+ * EXAM SCORE PANEL
+ * Handles showing/hiding of "add score" options
+ */
+function toggleScoreForm() {
+  var $container = $(this).closest('.score_container')
+  $container.find(".add_score").toggle();
+  $container.find(".add_score_container").toggle();
+  $container.find(".add_score_input").val("").filter(":visible").focus();
+}
+/**
+ * EXAM SCORE PANEL
+ * Handle user score search input
+ * @param {DOM Object} element 
+ */
+
+/**
+ * EXAM SCORE PANEL
+ * Handles user exam search input
+ * @param {DOM Object} element 
+ */
+function handleExamNameInput(element) {
+  var examAC = $(element).next(".exam-ac-panel").children(".exam-input-ac-1")[0]
+  var examIp = $(element).next(".exam-ac-panel")[0]
+  if (element.value.length >= 1) {
+    matchExam(element.value, element)
+  } else {
+    examAC.innerHTML = ''
+    examIp.style.display = 'none'
+  }
+}
+
+/**
+ * EXAM SCORE PANEL
+ * Called when user clicks on "x" of a selected exam
+ */
+function deleteSelectedExam() {
+  var $this = $(this)
+  var $exam = $this.closest('.exam')
+  $exam.remove()
+  var examName = ($($exam).attr("id"))
+
+  for (var i = 0; i < selectedExams.length; i++) {
+    if (selectedExams[i] === examName) {
+      selectedExams.splice(i, 1);
+    }
+  }
 
 function toggleProgramForm() {
   var $container = $(this).closest('.program_container')
@@ -726,6 +984,7 @@ function addProgramPanel(element) {
   let schoolCode = $(school).data('transfer-school-code')
   let thisSchool;
 
+
   $(element).attr("data-selected", "true")
   var selectedProgram = $("<div class='program' data-id='" + programCode + "' >" + programName + "<a class='delete-program-btn' /> </a> </div>")
   $(element).closest('.transfer-school').find('.selected_program').prepend(selectedProgram)
@@ -760,6 +1019,26 @@ function deleteProgramInputContainer() {
   $container.find(".add_program_container").toggle()
 }
 
+    if (!($('#exam-score-panel').find('.add-exam-container').length)) {
+      $('#add-exam-btn').insertBefore($('.exam-added-container'))
+      $('#add-exam-btn').show()
+    }
+  
+}
+
+/**
+ * EXAM SCORE PANEL
+ * Called when user clicks on "x" next to exam search input
+ */
+function deleteExamInputContainer() {
+  $(this).parent().remove()
+
+ 
+    $('#add-exam-btn').insertBefore($('.exam-added-container'))
+    $('#add-exam-btn').show()
+  
+}
+
 
 // ! TEST SCORE SECTION
 //? fetch example
@@ -771,6 +1050,11 @@ async function fetchExams() {
 
   console.log(arr)
 }
+
+
+
+
+
 
 // ? post example:: open up console in your browswer and type in : postGibberish() to see post in motion
 
