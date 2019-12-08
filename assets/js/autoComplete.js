@@ -116,10 +116,12 @@ function initEvents() {
   $("#college-opt-panel").on('click', 'a.close-program-input', deleteProgramInputContainer);
   $("#college-opt-panel").on('click', '.add_program', toggleProgramForm);
 
+
   $("#add-exam-btn").on('click', addAnotherExam);
   $("#exam-score-panel").on('click', '.exam-added-container a.close', deleteSelectedExam);
   $("#exam-score-panel").on('click', '.add-exam-container a.close', deleteExamInputContainer);
   $("#exam-score-panel").on('click', '.add_score', toggleScoreForm);
+
 
 }
 
@@ -1090,6 +1092,7 @@ function deleteProgramInputContainer() {
   $container.find(".add_program_container").toggle()
 }
 
+
     if (!($('#exam-score-panel').find('.add-exam-container').length)) {
       $('#add-exam-btn').insertBefore($('.exam-added-container'))
       $('#add-exam-btn').show()
@@ -1109,6 +1112,7 @@ function deleteExamInputContainer() {
     $('#add-exam-btn').show()
   
 }
+
 
 
 // ! TEST SCORE SECTION
