@@ -1521,7 +1521,7 @@ object {
 
 
 footer {
-  height: 400px;
+  height: 100px;
   background-color: #313639;
 }
 
@@ -1530,6 +1530,17 @@ footer {
   height: 80%;
   width: 100%;
   position: relative;
+}
+
+.footer-text {
+	color: white;
+	text-align: center;
+	font-size: large;
+}
+
+.footer-link {
+	color: white;
+	text-decoration: none;
 }
 
 .test2 {
