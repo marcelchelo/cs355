@@ -12,7 +12,7 @@
   <!--link(rel="stylesheet", href="./node_modules/@tarekraafat/autocomplete.js/dist/css/autoComplete.css", attr)-->
   <!-- Eww jQuery -->
   <!-- Select2 CDN -->
-  <title>Student Transfer(version: final)</title>
+  <title>CUNY Transfer Portal</title>
 </head>
 
 <body>
@@ -120,7 +120,7 @@
               </p>
             </div>
           </div>
-          <button class="center-btn" id="get-started">Get Started</button>
+          <button class="center-btn" id="get-started" onclick="switchCourses()">Get Started</button>
         </div>
 
         <!-- COURSES PANEL -->
@@ -143,7 +143,7 @@
 
           <div class="school-added-container"></div>
 
-          <a class="done-adding-schools">I'M DONE ADDING SCHOOLS</a>
+          <button class="done-adding-schools" onclick="switchCollegeOpt()">I'M DONE ADDING SCHOOLS</a>
         </div>
 
         <!-- COLLEGE OPTION PANEL -->
@@ -163,7 +163,7 @@
           </div>
           <div class="transfer-school-added-container"></div>
 
-          <a class="done-adding-options">I'M DONE ADDING COLLEGE OPTIONS</a>
+          <button class="done-adding-options" onclick="switchExams()">I'M DONE ADDING COLLEGE OPTIONS</a>
         </div>
 
         <!-- EXAM SCORE PANEL -->
