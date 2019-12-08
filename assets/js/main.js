@@ -106,3 +106,72 @@ function activatePanel(panel, label) {
 		currLabel = panels[pos].label
 	}
 }
+
+// Switching tabs when user is done
+function switchCourses() {
+	activatePanel("courses", undefined);
+}
+function switchCollegeOpt() {
+	activatePanel("college-opt", undefined);
+}
+function switchExams() {
+	activatePanel("exam-scores", undefined);
+}
+
+
+document.addEventListener("DOMContentLoaded", dropTheBass)
+
+const farLeftBoii = document.getElementById('kid-1')
+const leftBoii = document.getElementById('kid-2')
+const title = document.querySelector('.title')
+const farRightGal = document.getElementById('kid-3')
+const rightGal = document.getElementById('kid-4')
+let yScroll
+let xScroll
+let containerPos
+
+function dropTheBass() {
+
+	yScroll = window.scrollY
+	xScroll = window.scrollX
+	containerPos = header.getBoundingClientRect().bottom
+
+	function translate(element, x, y) {
+		element.style.transform = `translate3d(0, ${y}px, 0)`
+	}
+
+	let dropFun = (timeStamp) => {
+		if (containerPos > 0) {
+			translate(farLeftBoii, 0, yScroll * 0.65)
+			translate(leftBoii, 0, yScroll * 0.32)
+			translate(farRightGal, 0, yScroll * -0.06)
+			translate(rightGal, 0, yScroll * 0.22)
+			translate(title, 0, yScroll * 0.60)
+		}
+
+	}
+
+
+	requestAnimationFrame(dropFun)
+}
+const header = document.getElementById('header')
+document.addEventListener('scroll', () => {
+
+	dropTheBass()
+})
+
+const footContainer = document.getElementById('footer-container')
+const rightFooter = document.getElementById('right-footer')
+const leftFooter = document.getElementById('left-footer')
+
+document.addEventListener('scroll', () => {
+	let ele = footContainer.getBoundingClientRect()
+
+	if (ele.top >= 0 && ele.bottom + 200 <= window.innerHeight) {
+		rightFooter.classList.add('open')
+		leftFooter.classList.add('open')
+	}
+
+
+})
+
