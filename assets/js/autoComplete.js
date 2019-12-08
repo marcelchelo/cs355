@@ -116,12 +116,10 @@ function initEvents() {
   $("#college-opt-panel").on('click', 'a.close-program-input', deleteProgramInputContainer);
   $("#college-opt-panel").on('click', '.add_program', toggleProgramForm);
 
-
   $("#add-exam-btn").on('click', addAnotherExam);
   $("#exam-score-panel").on('click', '.exam-added-container a.close', deleteSelectedExam);
   $("#exam-score-panel").on('click', '.add-exam-container a.close', deleteExamInputContainer);
   $("#exam-score-panel").on('click', '.add_score', toggleScoreForm);
-
 
 }
 
@@ -779,6 +777,12 @@ function deleteProgramInputContainer() {
 }
 
 
+
+
+
+
+
+
 /**
  * EXAM SCORE PANEL
  * does not show exams until transfer school inputted
@@ -972,10 +976,6 @@ function handleExamNameInput(element) {
   }
 }
 
-/**
- * EXAM SCORE PANEL
- * Called when user clicks on "x" of a selected exam
- */
 function deleteSelectedExam() {
   var $this = $(this)
   var $exam = $this.closest('.exam')
@@ -988,133 +988,19 @@ function deleteSelectedExam() {
     }
   }
 
-function toggleProgramForm() {
-  var $container = $(this).closest('.program_container')
-  $container.find(".add_program").toggle()
-  $container.find(".add_program_container").toggle()
-  $container.find(".add_program_input").val("").filter(":visible").focus()
-}
-
-function handleProgramNameInput(element) {
-  let programList = $(element).siblings('.program_list')[0]
-  let notFound = $(element).siblings('.not_found')[0]
-  if (element.value.length >= 1) {
-    matchProgramsFromInput(element)
-  } else {
-    $(programList).hide()
-    $(notFound).hide()
+  if (!($('#exam-score-panel').find('.add-exam-container').length)) {
+    $('#add-exam-btn').insertBefore($('.exam-added-container'))
+    $('#add-exam-btn').show()
   }
-}
-
-function matchProgramsFromInput(element) {
-  var $this = $(element)
-  var $list = $this.siblings('.program_list')
-  var list = $list[0]
-  var $not_found = $this.siblings('.not_found')
-  var not_found = $not_found[0]
-  list.style.top = '72px'
-
-  var transferSchoolCode = $this.closest('.transfer-school').attr('data-transfer-school-code')
-  var val = $this.val().toLowerCase()
-  var links = list.getElementsByTagName("a")
-
-  for (var i = 0; i < program_list['school' + transferSchoolCode].length; i++) {
-    links[i].className = program_list['school' + transferSchoolCode][i].indexOf(val) != -1 ? 'visible' : '';
-    links[i].addEventListener('click', handleAddProgramPanel)
-  }
-
-  var visible_links = list.getElementsByClassName('visible')
-
-  if (visible_links.length) {
-    if (visible_links.length == 1) {
-      visible_links[0].className = 'visible selected'
-    }
-    list.scrollTop = 0
-    list.style.display = 'block'
-    list.style.top = '39px'
-    not_found.style.display = 'none'
-    $this.attr("original_value",$this.val())
-  } else {
-    $(list).hide()
-    not_found.style.display = 'block'
-    $this.attr("original_value", $this.val())
-  }
-}
-
-function handleAddProgramPanel() {
-  let addProgramContainer = $(this).parents('.add_program_container')[0]
-  let selectedProgram = $(addProgramContainer).siblings('.selected_program')[0]
-  let dataId = $(this).attr('data-id')
-  addProgramPanel(this)
-  $(addProgramContainer).find('.add_program_input').val('')
-}
-
-function addProgramPanel(element) {
-  let programName = $(element).text()
-  let programCode = $(element).attr('data-id')
-
-  let school = $(element).parents('.transfer-school')[0]
-  let schoolCode = $(school).data('transfer-school-code')
-  let thisSchool;
-
-
-  $(element).attr("data-selected", "true")
-  var selectedProgram = $("<div class='program' data-id='" + programCode + "' >" + programName + "<a class='delete-program-btn' /> </a> </div>")
-  $(element).closest('.transfer-school').find('.selected_program').prepend(selectedProgram)
-  $(element).parent().hide()
-  $(element).parent().siblings('.not_found').hide()
-  var $container = $(element).closest('.program_container')
-  $container.find(".add_program").toggle()
-  $container.find(".add_program_container").toggle()
-}
-
-function hideProgramList(element) {
-  var panel = $(element).closest(".program_container")
-  if (!panel.find('.program_list:hover, not_found:hover').length) {
-    panel.find('.program_list').hide()
-    panel.find('.not_found').hide()
-  }
-}
-
-function deleteSelectedProgram() {
-  var $this = $(this)
-  var $program = $this.closest('.program')
-  var transferSchoolCode = $this.closest('.transfer-school').attr('data-transfer-school-code')
-  var programCode = $this.parent().attr('data-id')
-  var programContainer = $this.parents('.program_container')[0]
-  $(programContainer).find(".program_list a[data-id='" + programCode + "']").removeAttr("data-selected")
-  $program.remove()
-}
-
-function deleteProgramInputContainer() {
-  var $container = $(this).closest('.program_container')
-  $container.find(".add_program").toggle()
-  $container.find(".add_program_container").toggle()
-}
-
-
-    if (!($('#exam-score-panel').find('.add-exam-container').length)) {
-      $('#add-exam-btn').insertBefore($('.exam-added-container'))
-      $('#add-exam-btn').show()
-    }
   
 }
 
-/**
- * EXAM SCORE PANEL
- * Called when user clicks on "x" next to exam search input
- */
 function deleteExamInputContainer() {
   $(this).parent().remove()
-
- 
     $('#add-exam-btn').insertBefore($('.exam-added-container'))
     $('#add-exam-btn').show()
   
 }
-
-
-
 // ! TEST SCORE SECTION
 //? fetch example
 
