@@ -151,6 +151,7 @@
                 close("btn-h");
                 close("testForm");
                 close("testForm2");
+                close("testForm3");
                 document.getElementById('testText').innerHTML = "";
                 flag4=false;
               }
@@ -182,18 +183,21 @@
           document.getElementById("addT").addEventListener('click', function(){
             show("testForm");
             show("testForm2");
+            show("testForm3");
             testOption="1";
             document.getElementById('testText').innerHTML = "You're in adding";
           });
           document.getElementById("editT").addEventListener('click', function(){
             show("testForm");
             show("testForm2");
+            close("testForm3");
             testOption="2";
             document.getElementById('testText').innerHTML = "You're in editing";
           });
           document.getElementById("deleteT").addEventListener('click', function(){
             show("testForm");
             close("testForm2");
+            close("testForm3");
             testOption="3";
             document.getElementById('testText').innerHTML = "You're in removing";
           });
@@ -201,11 +205,25 @@
 
           <div id="testForm" style="display:none">
             <p id=testText></p>
-            <label for="Test_Name">Test Name</label>
-            <input name="test_name" id="TestName" type="text"/>
+            <label for="Test_Component">Component</label>
+            <input name="test_Component" id="TestComponent" type="text"/>
             <div id="testForm2" style="display:none">
               <label for="Test_Score" id="Test_Score">Requirement Score</label>
               <input name="test_score" id="TestScore" type="text"/>
+            </div>
+            <div id="testForm3" style="display:none">
+              <label for="Test_ID" id="Test_ID">Test ID</label>
+              <input name="test_id" id="TestID" type="text"/> </br>
+
+              <label for="Test_DEC" id="Test_DEC">Desc</label>
+              <input name="test_dec" id="TestDEC" type="text"/></br>
+
+              <label for="Test_MIN" id="Test_MIN">Min Score</label>
+              <input name="test_min" id="TestMIN" type="text"/></br>
+
+              <label for="Test_MAX" id="Test_MAX">Max Score</label>
+              <input name="test_MAX" id="TestMAX" type="text"/></br>
+
             </div>
             <button type="button" class="btn btn-primary">Submit</button>
 
