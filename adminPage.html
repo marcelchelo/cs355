@@ -327,44 +327,6 @@
             </div>
           </div>
 
-          <script>
-            //increment variable names by one, and change where needed
-            var valueX1 = "bases";
-            var valueY1 ="Base";
-            var flag1 =false;
-            let currentBase="";
-
-            let p3 = fetchColleges();
-            p3.then(function(result) {
-              uniSearchBar(valueX1,valueY1,result,false);
-            });
-
-            document.querySelector("#search"+valueY1).addEventListener('input', function() {
-              let p3 = fetchColleges();
-              p3.then(function(result) {
-                uniSearchBar(valueX1,valueY1,result,false);
-              });
-            })
-            document.getElementById("dropdown_bases").addEventListener('click',function(){
-              if(flag1)
-              {
-                close("ext");
-                flag1=false;
-                close("btn-g");
-                flag2=false;
-                close("aForm");
-                flag3=false;
-              }
-            })
-            $('#menu'+valueY1).on('click', "."+valueX1+'-dropdown-item', function(){
-                show("ext");
-                flag1=true;
-                currentBase=$(this)[0].value;
-                $('#dropdown_'+valueX1).text("Base School: "+$(this)[0].value);
-                $("#dropdown_"+valueX1).dropdown('toggle');
-            })
-          </script>
-
           <div class="dropdown" style="display:none" id="ext">
             <!--change id dropdown_-->
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_exts" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -384,18 +346,69 @@
 
           <script>
             //increment variable names by one, and change where needed
+            var valueX1 = "bases";
+            var valueY1 ="Base";
+            var flag1 =false;
             var valueX2 = "exts";
             var valueY2 ="Ext";
             var flag2=false;
-            let p4 = fetchColleges();
-            p4.then(function(result) {
-              uniSearchBar(valueX2,valueY2,result,false);
+            let currentBase="";
+            let p3 = fetchColleges();
+            p3.then(function(result) {
+              uniSearchBar(valueX1,valueY1,result,false);
             });
+
+            document.querySelector("#search"+valueY1).addEventListener('input', function() {
+              let p3 = fetchColleges();
+              p3.then(function(result) {
+                uniSearchBar(valueX1,valueY1,result,true);
+              });
+            })
+            document.getElementById("dropdown_bases").addEventListener('click',function(){
+              if(flag1)
+              {
+                $('#dropdown_'+valueX2).text("Please select a extention school to continue");
+                close("ext");
+                flag1=false;
+                close("btn-g");
+                flag2=false;
+                close("aForm");
+                flag3=false;
+              }
+            })
+            $('#menu'+valueY1).on('click', "."+valueX1+'-dropdown-item', function(){
+                show("ext");
+                flag1=true;
+                currentBase=$(this)[0].value;
+                let p4 = fetchColleges();
+                p4.then(function(result) {
+                  let temp = [];
+                  for(let i=0;i<result.length;i++)
+                  {
+                    if(result[i]!=currentBase)
+                    {
+                      temp.push(result[i]);
+                    }
+                  }
+                  uniSearchBar(valueX2,valueY2,temp,false);
+                });
+                $('#dropdown_'+valueX1).text("Base School: "+$(this)[0].value);
+                $("#dropdown_"+valueX1).dropdown('toggle');
+            })
+            //increment variable names by one, and change where needed
 
             document.querySelector("#search"+valueY2).addEventListener('input', function() {
               let p4 = fetchColleges();
               p4.then(function(result) {
-                uniSearchBar(valueX2,valueY2,x,true);
+                let temp = [];
+                for(let i=0;i<result.length;i++)
+                {
+                  if(result[i]!=currentBase)
+                  {
+                    temp.push(result[i]);
+                  }
+                }
+                uniSearchBar(valueX2,valueY2,temp,true);
               });
             })
             document.getElementById("dropdown_exts").addEventListener('click',function(){

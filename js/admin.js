@@ -25,6 +25,7 @@ function buildDropDown(oName,tempItem,searchCollection) {
     var tempMenu = "#menu"+oName;
     var tempEmpty = "#empty"+oName;
     let contents = []
+    $(tempMenu)[0].innerHTML="";
     for (let name of searchCollection) {
     contents.push('<input type="button" class="dropdown-item '+tempItem+'"/ type="button" value="' + name + '"/>')
     }
