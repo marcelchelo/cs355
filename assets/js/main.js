@@ -116,10 +116,17 @@ function activatePanel(panel, label) {
 	}
 }
 
+// Switching tabs when user is done
+function switchCourses() {
+	activatePanel("courses", undefined);
+}
+function switchCollegeOpt() {
+	activatePanel("college-opt", undefined);
+}
+function switchExams() {
+	activatePanel("exam-scores", undefined);
+}
 
-
-
-// ? let the kids drop!!! in 60fps or somethign
 
 document.addEventListener("DOMContentLoaded", dropTheBass)
 
@@ -161,11 +168,6 @@ document.addEventListener('scroll', () => {
 
 	dropTheBass()
 })
-
-
-// * FOOTER FETISH
-
-
 
 const footContainer = document.getElementById('footer-container')
 const rightFooter = document.getElementById('right-footer')

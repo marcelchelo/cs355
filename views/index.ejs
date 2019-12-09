@@ -14,7 +14,7 @@
   <!--link(rel="stylesheet", href="./node_modules/@tarekraafat/autocomplete.js/dist/css/autoComplete.css", attr)-->
   <!-- Eww jQuery -->
   <!-- Select2 CDN -->
-  <title>Student Transfer(version: final)</title>
+  <title>CUNY Transfer Portal</title>
 </head>
 
 <body>
@@ -119,7 +119,9 @@
               </p>
             </div>
           </div>
-          <button class="center-btn tab_btn" id="get-started" onclick="switchPanel(this.className)">Get Started</button>
+
+       <button class="center-btn tab_btn" >Get Started</button>
+
         </div>
 
         <!-- COURSES PANEL -->
@@ -142,7 +144,10 @@
 
           <div class="school-added-container"></div>
 
+
           <a class="done-adding-schools tab-btn">I'M DONE ADDING SCHOOLS</a>
+
+       
         </div>
 
         <!-- COLLEGE OPTION PANEL -->
@@ -162,16 +167,22 @@
           </div>
           <div class="transfer-school-added-container"></div>
 
+
           <a class="done-adding-options tab-btn">I'M DONE ADDING COLLEGE OPTIONS</a>
+
         </div>
 
         <!-- EXAM SCORE PANEL -->
         <div class="panel hidden-panel lala" id="exam-score-panel">
-          <h1>Exam</h1>
+          <p class="guide" style="display: block;">Add the Exams you've attended in the past.</p>
+          <button class="center-btn active" id="add-exam-btn" style="display: block;">Add Exam</button>
+
+          
+          <div class="exam-added-container"></div>
         </div>
         <!-- RESULTS PANEL -->
         <div class="panel hidden-panel lala" id="results-panel">
-          <h1>Result</h1>
+          
         </div>
       </div>
     </div>

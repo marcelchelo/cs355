@@ -5,6 +5,8 @@ const morgan = require('morgan')
 const mysql = require('mysql')
 
 const cors = require('cors')
+//morgan will output to our console on terminal whenever a get post/get request is being made and from where. Also if any errors are returned
+app.use(morgan('short')) 
 
 app.use(express.json())
 app.use(
@@ -12,8 +14,6 @@ app.use(
     origin: '*',
   })
 )
-
-// ? Please add comments and explain what the modules do for the rest of the group to know thanks marcelo a
 
 // ! VIEW ENGINE AND ROUTING VIEWS/ASSETS(CSS/IMG/JS)
 
@@ -34,7 +34,7 @@ app.get('/adminLogin', (req, res) => {
 
 
 //app.use(express.static(path.join(__dirname)))
-app.use(morgan('short')) //morgan will output to our console on terminal whenever a get post/get request is being made and from where. Also if any errors are returned
+
 
 //Things we need to add   Connection pool mv
 //Use router to move the routes and clean up the code mv
@@ -187,18 +187,26 @@ app.get('/creditBasedOnTest', (req, res) => {
 // ? Pulls all the Exams
 
 app.get('/EXAMS/', (req, res) => {
-  const queryString = 'SELECT testID, Component, TestComponentDescr, Min_Score, Max_Score FROM test_Table'
+  const queryString = 'SELECT testID, Component, TestComponentDescr, Min_Score, Max_Score FROM test_Table ORDER BY TestComponentDescr'
   connection.query(queryString, (err, rows, fields) => {
     if (err) {
       console.log(`Failed to query test_Table: ${err}`)
       res.sendStatus(500)
       res.end()
     } else {
-      res.json(rows)
+      const mapping = rows.map(row => {
+        return {
+          testName: row.TestComponentDescr,
+          component: row.Component,
+          testTag: row.testID,
+          examsMinScore: row.Min_Score,
+          examsMaxScore: row.Max_Score,
+        }
+      })
+      res.json(mapping)
     }
   })
 })
-
 
 
 // ? this endpoint includes College name, min/max score for test to meet requirements of said college,
@@ -250,12 +258,11 @@ app.get('/EXAM_FETCH/:id', (req, res) => {
 
 
 
-
-//transfer rules
+//transfer rules api
 app.get('/TRNS_RULES', (req, res) => {
   console.log('Fetching QC TransferRules ')
 
-  const queryString = 'SELECT * FROM TRNS_RULES LIMIT 0,1000'
+  const queryString = 'SELECT * FROM TRNS_RULES LIMIT 0,2000'
   connection.query(queryString, (err, rows, fields) => {
     if (err) {
       console.log('Failed to query for TransferRules: ' + err)
@@ -343,10 +350,9 @@ app.get('/TRNS_RULES/:id', (req, res) => {
 // ON A.Course_ID = B.CRSE_ID
 
 
-//controlls the verious routes we have
+//controlls the various routes we have
 const router = express.Router()
 //tells express to serve contents of public directory
-
 app.use(express.static('public'))
 //Express will now expect ejs file.    No need to write file.ejs anymore
 // app.set('view engine', 'ejs')
