@@ -21,9 +21,9 @@ function filter(name,otherName,items,word) {
     }
 }
 
-function buildDropDown(name,tempItem,searchCollection) {
-    var tempMenu = "#menu"+name;
-    var tempEmpty = "#empty"+name;
+function buildDropDown(oName,tempItem,searchCollection) {
+    var tempMenu = "#menu"+oName;
+    var tempEmpty = "#empty"+oName;
     let contents = []
     for (let name of searchCollection) {
     contents.push('<input type="button" class="dropdown-item '+tempItem+'"/ type="button" value="' + name + '"/>')
@@ -58,4 +58,19 @@ function show(elementId) {
 function close(elementId)
 {
   document.getElementById(elementId).style.display="none";
+}
+
+async function fetchColleges() {
+  var output = [];
+
+  const collegeTemp = await fetch('http://localhost:3000/colleges')
+  const collegeRes = await collegeTemp.json()
+
+  for(let i=0;i<collegeRes.length;i++)
+  {
+    output.push(collegeRes[i].NAME)
+  }
+
+  return output;
+
 }
