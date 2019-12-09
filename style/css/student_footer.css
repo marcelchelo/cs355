@@ -1,0 +1,67 @@
+.Copyright{
+    text-indent: 10px;
+    color: white;
+    font-size: small;
+    text-align: 100px;
+    
+
+}
+
+.TermsofUse {
+    color: white;
+    font-size: medium;
+    text-align: center;
+    text-decoration: none;
+
+
+}
+
+.thank_you{
+    text-align: left;
+    color: white;
+    font-size: 15px;
+
+}
+
+.contact_us{
+    text-align: center;
+    color: white;
+    font-size: 13px;
+    text-decoration: bold;
+}
+
+.soical_media li{
+    display: table-row;
+}
+
+.icons , .fab ,  .fas  {
+    display: inline;
+    color:white;
+    text-align: center;
+    font-size:  large;
+    padding: 7px;
+    text-decoration: none;
+   
+}
+.icons :hover{
+    padding :5px;
+    color: white;
+    text-decoration: none;
+}
+
+.left_one{
+    list-style: none;
+    text-align: center;
+    tex
+}
+
+.contact_info{
+    color: white;
+    font-size: medium;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 15%;
+    position: relative;
+}
+
+

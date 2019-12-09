@@ -1534,22 +1534,23 @@ footer {
 
 .test2 {
   border: 2px blue solid;
-  height: 100px;
+  height: 150px;
   left: 0;
   opacity: 0;
   position: absolute;
   z-index: 12;
   transform: translateX(-40px);
+  text-decoration: none;
 }
 
 .test3 {
   border: 1px blue solid;
-  height: 100px;
+  height: 150px;
   position: absolute;
   opacity: 0;
   right: 0;
   z-index: 12;
-  transform: translateX(40px);
+  transform: translateX(-40px);
 }
 
 .open {
