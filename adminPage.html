@@ -280,7 +280,7 @@
                 $('#dropdown_'+valueX4).text("Chosen School: "+$(this)[0].value);
                 flag5=true;
                 show("btn-j");
-                $("#dropdown_"+valuesX4).dropdown('toggle');
+                $("#dropdown_"+valueX4).dropdown('toggle');
             })
           </script>
 
@@ -332,6 +332,7 @@
             var valueX1 = "bases";
             var valueY1 ="Base";
             var flag1 =false;
+            let currentBase="";
 
             let p3 = fetchColleges();
             p3.then(function(result) {
@@ -358,8 +359,9 @@
             $('#menu'+valueY1).on('click', "."+valueX1+'-dropdown-item', function(){
                 show("ext");
                 flag1=true;
+                currentBase=$(this)[0].value;
                 $('#dropdown_'+valueX1).text("Base School: "+$(this)[0].value);
-                $("#dropdown_"+valuesX1).dropdown('toggle');
+                $("#dropdown_"+valueX1).dropdown('toggle');
             })
           </script>
 
@@ -393,7 +395,7 @@
             document.querySelector("#search"+valueY2).addEventListener('input', function() {
               let p4 = fetchColleges();
               p4.then(function(result) {
-                uniSearchBar(valueX2,valueY2,result,true);
+                uniSearchBar(valueX2,valueY2,x,true);
               });
             })
             document.getElementById("dropdown_exts").addEventListener('click',function(){
@@ -409,7 +411,7 @@
                 show("btn-g");
                 flag2=true;
                 $('#dropdown_'+valueX2).text("Extension School: "+$(this)[0].value);
-                $("#dropdown_"+valuesX2).dropdown('toggle');
+                $("#dropdown_"+valueX2).dropdown('toggle');
             })
           </script>
 

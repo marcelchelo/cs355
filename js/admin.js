@@ -60,6 +60,7 @@ function close(elementId)
   document.getElementById(elementId).style.display="none";
 }
 
+//only works with localhost:3000
 async function fetchColleges() {
   var output = [];
 
