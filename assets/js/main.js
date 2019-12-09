@@ -33,7 +33,14 @@ let currPos = 0
 let tempLeft
 let tempRight;
 
+// var tab_btns = document.getElementsByClassName("tab-btn");
 
+
+// for( i = 0 ; i < tab_btns.length ;i++){
+// 	 tab_btns[i].addEventListener('click' , (x) => {
+// 		activatePanel(x.target.parentNode.id)
+// 	 });
+// }
 
 (async function preload() {
 	let temp = await grabCurrPanel()
@@ -45,21 +52,22 @@ function grabCurrPanel() {
 		if (panel.data.classList.contains('active-panel')) {
 			currPanel = panel.data
 			currLabel = panel.label
-			console.log(currLabel)
-			currPos = panels.findIndex((x) => x.data === currPanel)
+			//console.log(currLabel)
+			currPos = panels.findIndex((x) =>  x.data === currPanel)
 		}
 	})
 }
 // ! START HERE - to follow the
 nav.addEventListener('click', (x) => {
 	//console.log(x);
+	console.log( " This is  x "+ x.target.parentNode.id)
 	activatePanel(x.target.parentNode.id)
-	console.log(currPos)
+	// console.log(currPos)
 })
 
 function activatePanel(panel, label) {
-	console.log(currPos)
-	let temp = panels.find((x) => x.key === panel).data
+	console.log(panel)
+	let temp = panels.find( (x) => x.key === panel).data
 	let pos = panels.findIndex((x) => x.key === panel)
 
 	if (temp !== currPanel) {
@@ -87,6 +95,7 @@ function activatePanel(panel, label) {
 		tempLeft = currPos - 1
 		tempRight = currPos + 1
 		tempId = panels[currPos].label.id
+		// console.log("TempId whatver that is")
 		console.log(tempId)
 
 		// ! removing the background on the panel past
@@ -174,4 +183,11 @@ document.addEventListener('scroll', () => {
 
 
 })
+
+function switchPanel(value ){
+	console.log(value);
+	// $(`.${class_value}`).fadeOut('fast', function() {
+	// 	$(`#${id_value}` + ID).fadeIn('fast')
+
+}
 

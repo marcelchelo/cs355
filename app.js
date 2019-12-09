@@ -187,14 +187,23 @@ app.get('/creditBasedOnTest', (req, res) => {
 // ? Pulls all the Exams
 
 app.get('/EXAMS/', (req, res) => {
-  const queryString = 'SELECT testID, Component, TestComponentDescr, Min_Score, Max_Score FROM test_Table'
+  const queryString = 'SELECT testID, Component, TestComponentDescr, Min_Score, Max_Score FROM test_Table ORDER BY TestComponentDescr'
   connection.query(queryString, (err, rows, fields) => {
     if (err) {
       console.log(`Failed to query test_Table: ${err}`)
       res.sendStatus(500)
       res.end()
     } else {
-      res.json(rows)
+      const mapping = rows.map(row => {
+        return {
+          testName: row.TestComponentDescr,
+          component: row.Component,
+          testTag: row.testID,
+          examsMinScore: row.Min_Score,
+          examsMaxScore: row.Max_Score,
+        }
+      })
+      res.json(mapping)
     }
   })
 })
