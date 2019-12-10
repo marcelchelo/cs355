@@ -162,11 +162,18 @@
             <div class="pastMenuItems" style="display: block;"></div>
             <div class="dropdown-header pastEmpty">No schools found</div> 
           </div>
+          <div>
+              <button class="btn-next-tab" value = "#Majors" onclick="switchTab(this.value)">Go To Majors -></button>
+              <!--Confused on how to get the button to move onto the Majors Tab-->
+          </div>
         </div>
+
+        
 
         <div role="tabpanel" class="tab-pane " id="Majors">
       <!--Major Search Bar -->
-      <br><input class = "search" type="text" id="userInput" size="80" onkeyup="updateMajor()" placeholder="Search for major"><br><br>
+      <p class="guide_message">Pick the Major you want</p>
+      <br><input class = "search" type="text" id="userInput" onkeyup="updateMajor()" placeholder="Search for major"><br><br>
 
       <!--List of majors -->
       <ul id="majorUL" class = "majorDisplay" style = "list-style: none">
@@ -204,6 +211,11 @@
           <li><label><input id = "Urban Studies" name = "Major" class="single-checkbox" type="checkbox" onclick=updateValue(id)> Urban Studies</label><br></li>
         </div>
       </ul>
+
+      <div>
+          <button class="btn-next-tab" value = "#Classes" onclick="switchTab(this.value)">Pick Your Classes -></button>
+          <!--to do write  a scrpit to move to the next tab-->
+      </div>
 
       <script>
       // Search bar updates majors displayed
@@ -280,7 +292,9 @@
 
        <!--The Classes Tab-->
        <div role="tabpanel" class="tab-pane " id="Classes">
+          
         <div class="dropdown">
+            <p class="guide_message">Select the Classes you've Taken</p>
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_classes" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false" onclick="Class_Search()" >
             Find your Previous Classes
@@ -292,7 +306,19 @@
             <div id="Classes_Desc" data-toggle="dropdown" ></div>
             <div id="NoClasses" class="dropdown-header">No Classes Selected</div>
           </div>
+          <div>
+              <button class="btn-next-tab" value = "#AP" onclick="switchTab(this.value)" >Pick your Tests -></button>
+              <!--to do write  a scrpit to move to the next tab-->
+          </div>
         </div>
+
+        <script>
+          function switchTab(value){
+             
+             var temp = '"'+value+'"';
+            $(`.nav-tabs a[href=${temp}]`).tab('show')  ;
+          }
+        </script>
 
 
       <!--Script for the classes Tab-->
@@ -374,6 +400,7 @@
       </div>
 
         <div role="tabpanel" class="tab-pane " id="AP">
+            <p class="guide_message">Select the Placemnt Tests you've Taken</p>
 
               <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_tests" data-toggle="dropdown"
@@ -534,8 +561,11 @@
                     $(score).parent().find('p').filter('.error').hide();
                 }
               </script>
-
-
+               <div>
+                  <button class="btn-next-tab" value = "#Result" onclick="switchTab(this.value)" >Final your Results !! </button>
+                  <!--to do write  a scrpit to move to the next tab-->
+              </div>
+             
         </div>
 
         <div="tabpanel" class="tab-pane" id="Result">
