@@ -165,8 +165,8 @@ button:hover {
 }
 
 .container.inner {
-  padding-top: 10em;
-  padding-bottom: 10em;
+  padding-top: 5em;
+  padding-bottom: 5em;
 }
 
 .col {
@@ -281,11 +281,12 @@ input[type='text'] {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 10px 20px 45px 20px;
-  min-height: 840px;
+  min-height: 500px;
 }
 
 .center-text {
   text-align: center;
+  font-size: 30px;
 }
 
 .center-btn {
@@ -333,6 +334,7 @@ input[type='text'] {
   display: none;
 }
 
+/* Transfer App Container */
 #transfer-app {
   max-width: 960px;
   background-color: #fafafa;
@@ -348,6 +350,7 @@ input[type='text'] {
   display: block;
 }
 
+/* Container tab text */
 #transfer-nav-container {
   width: 100%;
   text-align: center;
@@ -443,6 +446,7 @@ object {
 
 #instructions-panel h5 {
   margin-bottom: 5px;
+  font-size: 25px;
 }
 
 @media only screen and (max-width: 590px) {
@@ -474,12 +478,12 @@ object {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  width: 75px;
-  height: 75px;
+  width: 80px;
+  height: 80px;
 }
 
 .inner-panel {
-  padding: 13px 25px;
+  padding: 10px 25px;
   margin-bottom: 15px;
   -webkit-box-sizing: inherit;
           box-sizing: inherit;
@@ -1198,8 +1202,7 @@ object {
 }
 
 .title {
-  margin-left: calc(60% - 20rem);
-  margin-top: 1%;
+  margin-left: calc(50% - 20rem);
   max-width: 50rem;
   max-height: 8rem;
  
@@ -1519,17 +1522,26 @@ object {
 
 /* This is the footer section */
 
-
 footer {
-  height: 400px;
+  height: 100px;
   background-color: #313639;
 }
 
 .footer-container {
-  /*color: #eee;*/
   height: 80%;
   width: 100%;
   position: relative;
+}
+
+.footer-text {
+	color: white;
+	text-align: center;
+	font-size: large;
+}
+
+.footer-link {
+	color: white;
+	text-decoration: none;
 }
 
 .test2 {
