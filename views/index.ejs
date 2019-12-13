@@ -6,13 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <!-- CSS File -->
-  <link rel="stylesheet" href="./assets/css/studentv3style.css" />
+  <link rel="stylesheet" href="../style/css/student_footer.css" />
+  <link rel="stylesheet" href="../assets/css/studentv3style.css" />
+  
 
   <!-- autoComplete.js cdn -->
   <!--link(rel="stylesheet", href="./node_modules/@tarekraafat/autocomplete.js/dist/css/autoComplete.css", attr)-->
   <!-- Eww jQuery -->
   <!-- Select2 CDN -->
-  <title>Student Transfer(version: final)</title>
+  <title>CUNY Transfer Portal</title>
 </head>
 
 <body>
@@ -66,18 +68,17 @@
         </div>
         <!-- INSTRUCTION PANEL -->
         <div class="panel active-panel" id="instructions-panel">
-          <h4 class="center-text">Transfer Protocol Guide:</h4>
-          <hr />
+          <h4 class="center-text">Transfer Protocol Guide</h4>
+          <hr style="margin: 0px"/>
           <div class="inner-panel flex-horizontal">
             <div class="three col">
               <div class="step-one info-img"></div>
             </div>
             <div class="nine col">
-              <h5>Step 1: Past College(s)</h5>
+              <h5>Step 1: Courses</h5>
               <p>
-                Select your past college(s) along with all the courses you
-                have taken within the institutions. Maximum amount of colleges
-                to pick from is set to 2.
+                Choose up to 3 past colleges along with the courses you
+				have taken in each corresponding institution.
               </p>
             </div>
           </div>
@@ -86,9 +87,11 @@
               <div class="step-two info-img"></div>
             </div>
             <div class="nine col">
+
               <h5>Step 2: College Option</h5>
               <p>
                 Select the CUNY campus you are interested in.
+
               </p>
             </div>
           </div>
@@ -114,7 +117,9 @@
               </p>
             </div>
           </div>
-          <button class="center-btn" id="get-started">Get Started</button>
+
+       <button class="center-btn tab_btn" >Get Started</button>
+
         </div>
 
         <!-- COURSES PANEL -->
@@ -137,7 +142,10 @@
 
           <div class="school-added-container"></div>
 
-          <a class="done-adding-schools">I'M DONE ADDING SCHOOLS</a>
+
+          <a class="done-adding-schools tab-btn">I'M DONE ADDING SCHOOLS</a>
+
+       
         </div>
 
         <!-- COLLEGE OPTION PANEL -->
@@ -157,35 +165,60 @@
           </div>
           <div class="transfer-school-added-container"></div>
 
-          <a class="done-adding-options">I'M DONE ADDING COLLEGE OPTIONS</a>
+
+          <a class="done-adding-options tab-btn">I'M DONE ADDING COLLEGE OPTIONS</a>
+
         </div>
 
         <!-- EXAM SCORE PANEL -->
         <div class="panel hidden-panel lala" id="exam-score-panel">
-          <h1>Exam</h1>
+          <p class="guide" style="display: block;">Add the exams you've taken in the past.</p>
+          <button class="center-btn active" id="add-exam-btn" style="display: block;">Add Exam</button>
+
+          
+          <div class="exam-added-container"></div>
         </div>
         <!-- RESULTS PANEL -->
         <div class="panel hidden-panel lala" id="results-panel">
-          <h1>Result</h1>
+          
         </div>
       </div>
     </div>
   </div>
+  
   <!-- Footer -->
   <footer>
-    <div class="container" id="footer-container">
-      <div class="rdw">
-        <div id="right-footer" class="col six test2">
 
-
-        </div>
-        <div id="left-footer" class="col six test3"></div>
-      </div>
-
-    </div>
-
+    <div class = "footer-text">
+	
+		<br>
+		<a href = https://www.cuny.edu/website/copyright/ class = "footer-link">
+			Copyright© <script language="JavaScript" type="text/javascript">document.write((new Date()).getFullYear());</script>
+		</a>| 
+		<a href = https://www.cuny.edu/website/privacy-policy/ class = "footer-link">
+			Privacy
+		</a>|
+		<a href = https://www.cuny.edu/about/administration/offices/cis/information-security/ class = "footer-link">
+			Security
+		</a>|
+		<a href = https://www.cuny.edu/accessibility/ class = "footer-link">
+			Accessibility
+		</a>|
+		<a href = https://www.cuny.edu/website/terms/ class = "footer-link">
+			Terms of Use
+		</a>|
+		<a href = https://www.cuny.edu/cuny-alert/ class = "footer-link">
+			CUNY Alert
+		</a>|
+		<a href = https://www.cuny.edu/contact-us/ class = "footer-link">
+			Contact Us
+		</a>
+		
+		
+	</div>
 
   </footer>
+  
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -193,8 +226,10 @@
   <!-- Local JS Files -->
   <script src="../assets/js/main.js"></script>
   <script src="../assets/js/autoComplete.js" type="text/javascript"></script>
-
 </body>
+
+
+
 
 </html>
 <!-- ! FOR THE ICONS-->

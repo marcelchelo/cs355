@@ -82,6 +82,17 @@
   font-size: 16px;
   text-align: center;
 }
+.guide_message{
+  padding: 10px;
+  line-height: 22px;
+  color: #3f3f3f;
+  margin-top: 6px;
+  margin-left: 6px;
+  margin-right: 6px;
+  margin-bottom: 0px;
+  font-size: 16px;
+  text-align: center;
+}
 
 #From .add-school-container {
   background: #ebeff3;
@@ -162,6 +173,25 @@
   height: 12px;
   width: 12px;
   cursor: pointer;
+}
+
+.btn-next-tab {
+  position: relative;
+  display: block;
+  background-color: #476d8e;
+  border-radius: 2px;
+  margin: 10px auto;
+  cursor: pointer;
+  text-decoration: none !important;
+  font-size: 14px;
+  line-height: 18px;
+  color: #fff !important;
+  font-weight: bold;
+  padding: 12px;
+  max-width: 300px;
+  width: 100%;
+  text-align: center;
+
 }
 
 #To .add-school-input-container {
@@ -293,7 +323,8 @@ outline:0;
 	border: ridge;
 	margin-top: 8px;
 	margin-right: 16px;
-	font-size: 17px;
+  font-size: 17px;
+  width: 500px;
 }
 
 
@@ -498,7 +529,7 @@ position: relative;
   color: black;
 }
 
-.button:focus {
+.buttfon:focus {
 outline:0;
 }
 
