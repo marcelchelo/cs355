@@ -296,6 +296,7 @@ app.get('/ACAD_PLAN/:id', (req, res) => {
       res.end()
       return
     } else {
+      console.log("Majors fetched successfully")
       const mapping = rows.map(row => {
         return {
           CollegeName: row.INSTITUTION_DESCR,
