@@ -1057,6 +1057,16 @@ async function fetchExams() {
   console.log(arr)
 }
 
+//RESULTS TAB
+async function examScoreList() {
+  const fetchURL = '/EXAM_FETCH/'
+  const transferSchool = nameofschool
+  fetchURL += transferSchool
+  const temp = await fetch(`${fetchURL}`)
+  const res = await temp.json()
+  return res
+}
+
 // ? post example:: open up console in your browswer and type in : postGibberish() to see post in motion
 
 async function postGibberish() {
