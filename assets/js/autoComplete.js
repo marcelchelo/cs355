@@ -26,7 +26,12 @@ const addSklBtn = document.getElementById('add-school-btn')
 // Stores the selected exams in this array
 var selectedExams = []
 
-// * this becomes a promise that holds a list of exams from transfer school
+//Stores the submitted exams with a valid score in this array as objects
+//format of objects have three properties: examCode, name, and score
+//example: {examCode: "C0036", name: "Accounting 2", score: "3"}
+var submittedExams = []
+
+// * this becomes a promise that holds a list of exams
 let examList
 
 // Save the "add exam button" as a variable to be easily accessed later
@@ -793,7 +798,7 @@ function deleteProgramInputContainer() {
 async function exList() {
   const examTemp = await fetch('/EXAMS')
   const examRes = await examTemp.json()
-  console.log(examRes)
+  //console.log(examRes)
   return examRes
 }
 function addAnotherExam() {
@@ -898,7 +903,9 @@ function addExamPanel(element) {
   selectedExams.push(examCode);
 
   let error = "<p class='error'>Score entered needs to be a whole number from " + minScore + " to " + maxScore + "</p>"
-  var selectedExamTEST = $("<div class='exam' id='" + name + "' data-exam-code='"+ examCode +"' data-exam-tag='" + tag +"' data-exam-min-score='" + minScore +"' data-exam-max-score='" + maxScore + "' > <h2> <span></span> " + element.value + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='score_container'><a class='add_score'>+ Add Score</a><div class='add_score_container'><div class='add_score_input_container'><input class='add_score_input' type='text' oninput='isValidScore(this)' placeholder='Type in Score' /><div class='not_found'>I can't find my score</div><div class='score_list' /></div><a class='score_close' /></div><div class='selected_scores' /></div>" + error + "</div>");
+  let submitButton = "<button class='button button2' disabled onclick=submitScore(this)>Submit</button>"
+  let submitSuccessful = "<p class='success'>Score was added successfully</p>"
+  var selectedExamTEST = $("<div class='exam' id='" + name + "' data-exam-code='"+ examCode +"' data-exam-tag='" + tag +"' data-exam-min-score='" + minScore +"' data-exam-max-score='" + maxScore + "' > <h2> <span></span> " + element.value + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='score_container'><a class='add_score'>+ Add Score</a><div class='add_score_container'><div class='add_score_input_container'><input class='add_score_input' type='text' oninput='isValidScore(this)' placeholder='Type in Score' />" + submitButton +"<div class='not_found'>I can't find my score</div><div class='score_list' /></div><a class='score_close' /></div><div class='selected_scores' /></div>" + submitSuccessful + error + "</div>");
 
 
   $('.exam-added-container').prepend(selectedExamTEST);
@@ -917,6 +924,7 @@ function isValidScore(element) {
   let score = element.value
 
   let $exam = element.closest('.exam')
+  $($exam).children('p').filter('.success').hide();
   console.log(score)
   if(score == "Type in Score") $($exam).children('p').filter('.error').hide();
   if(onlyDigits(score)) {
@@ -924,13 +932,16 @@ function isValidScore(element) {
     let $examMaxScore = parseInt($($exam).attr('data-exam-max-score'))
     if(score < $examMinScore || score > $examMaxScore) {
       $($exam).children('p').filter('.error').show();
+      $($exam).children('.score_container').children('.add_score_container').children('.add_score_input_container').children('button').attr('disabled',true)
     }
     else {
       $($exam).children('p').filter('.error').hide();
+      $($exam).children('.score_container').children('.add_score_container').children('.add_score_input_container').children('button').attr('disabled',false)
     }
   }
   else {
     $($exam).children('p').filter('.error').show();
+    $($exam).children('.score_container').children('.add_score_container').children('.add_score_input_container').children('button').attr('disabled',true)
   }
 }
 
@@ -944,6 +955,33 @@ function onlyDigits(s) {
   return true
 }
 
+function submitScore(element) {
+  //console.log('submitted')
+  
+  let $exam = element.closest('.exam')
+  let component = ($($exam).attr('data-exam-code'))
+  let testName = ($($exam).attr('id'))
+  let submittedScore = $($exam).children('.score_container').children('.add_score_container').children('.add_score_input_container').children('.add_score_input').val();
+  
+  //Check if score is in submittedExams array or not. If so, update the score. else, add a new objct to array
+  let indexOfTest = -1;
+  for (let i = 0; i < submittedExams.length; i++) {
+    if (submittedExams[i]['name'] === testName) {
+      indexOfTest = i;
+      break;
+    }
+  }
+  if(indexOfTest > -1) {
+    submittedExams[indexOfTest]['score'] = submittedScore;
+    console.log(submittedExams)
+  }
+  else {
+    let testToSubmit = {examCode: component, name: testName, score: submittedScore}  
+    submittedExams.push(testToSubmit)
+    console.log(submittedExams)
+  }
+  $($exam).children('p').filter('.success').show();
+}
 /**
  * EXAM SCORE PANEL
  * Handles showing/hiding of "add score" options
@@ -988,6 +1026,13 @@ function deleteSelectedExam() {
     }
   }
 
+  for (var i = 0; i < submittedExams.length; i++) {
+    if (submittedExams[i]['examCode'] === examName) {
+      submittedExams.splice(i, 1);
+    }
+  }
+  console.log(selectedExams)
+  console.log(submittedExams)
   if (!($('#exam-score-panel').find('.add-exam-container').length)) {
     $('#add-exam-btn').insertBefore($('.exam-added-container'))
     $('#add-exam-btn').show()
