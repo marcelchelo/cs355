@@ -1,3 +1,6 @@
+
+
+// const e = require("express")
 // Stores the selected schools in this array
 var selectedSchools = []
 
@@ -37,6 +40,20 @@ let examList
 // Save the "add exam button" as a variable to be easily accessed later
 const addExamBtn = document.getElementById('add-exam-btn')
 
+// list of the the current classes being compared
+let curr_classes_list = []
+
+// how many credits the student recived per school the index is the same index as in the transfer detail 
+var number_of_credits = []
+
+// the classes the tests translate too
+var exams_equal_classes = []
+
+// list of classes that are equal to the classes already taken 
+var transfer_eq_classes = []
+
+var temp_class_list = []
+
 
 let userColleges = [
   {
@@ -58,15 +75,15 @@ class TransferDetail {
   major;
 
   constructor(schoolName, schoolCode) {
-    this.school = {'schoolName': schoolName, 'schoolCode': schoolCode}
+    this.school = { 'schoolName': schoolName, 'schoolCode': schoolCode }
   }
 
   addCourses(courseName, courseCode) {
-    this.courses.push({'courseName': courseName, 'courseCode': courseCode})
+    this.courses.push({ 'courseName': courseName, 'courseCode': courseCode })
   }
 
   addMajor(majorName, majorCode) {
-    this.major = {'majorName': majorName, 'majorCode': majorCode}
+    this.major = { 'majorName': majorName, 'majorCode': majorCode }
   }
 
   getSchool() {
@@ -232,7 +249,7 @@ function matchSchool(name, element) {
  *  - Create a "school" div that contains the name of the selected school
  *  - The div allows students to add courses from that school
  *  - The courses from that school are populated into a dropdown list
- */ 
+ */
 function addSchoolPanel(element) {
   let name = element.value;
   let schoolCode = $(element).attr('data-school-code')
@@ -241,13 +258,13 @@ function addSchoolPanel(element) {
   // Create object for this selected school
   let transferDetail = new TransferDetail(name, schoolCode)
   transferDetailList.push(transferDetail)
-  console.log("TESTING SCHOOL CODE "+transferDetailList[0].getSchool().schoolCode)
+  console.log("TESTING SCHOOL CODE " + transferDetailList[0].getSchool().schoolCode)
 
-  
-  var selectedSchool = $("<div class='school' id='" + name + "' data-school-code='"+ schoolCode +"'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> </div>");
-  var selectedSchoolTEST = $("<div class='school' id='" + name + "' data-school-code='"+ schoolCode +"'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='course_container'><a class='add_course'>+ Add Course</a><div class='add_course_container'><div class='add_course_input_container'><input class='add_course_input' type='text' placeholder='Type Course Name' oninput='handleCourseNameInput(this)' onfocus='handleCourseNameInput(this)' onblur='hideCourseList(this)' /> <div class='not_found' style='display:none;'>Sorry, the course you've entered was not found in our system.</div> <div class='course_list'> </div> </div> <a class='close-course-input' /> </div><div class='selected_courses' /></div></div>");
 
-  var selectedSchoolTESTwithcollapse = $("<div class='school' id='" + name + "' data-school-code='"+ schoolCode +"'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='course_container'><a class='add_course'>+ Add Course</a><div class='add_course_container'><div class='add_course_input_container'><input class='add_course_input' type='text' placeholder='Type Course Name, Subject, or Number' oninput='handleCourseNameInput(this)' onblur='hideCourseList(this)' onfocus='handleCourseNameInput(this)' /><div class='course_list' /></div><a class='course_close' /></div><div class='selected_courses' /><span class='collapse'>Collapse This Window</span></div></div>");
+  var selectedSchool = $("<div class='school' id='" + name + "' data-school-code='" + schoolCode + "'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> </div>");
+  var selectedSchoolTEST = $("<div class='school' id='" + name + "' data-school-code='" + schoolCode + "'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='course_container'><a class='add_course'>+ Add Course</a><div class='add_course_container'><div class='add_course_input_container'><input class='add_course_input' type='text' placeholder='Type Course Name' oninput='handleCourseNameInput(this)' onfocus='handleCourseNameInput(this)' onblur='hideCourseList(this)' /> <div class='not_found' style='display:none;'>Sorry, the course you've entered was not found in our system.</div> <div class='course_list'> </div> </div> <a class='close-course-input' /> </div><div class='selected_courses' /></div></div>");
+
+  var selectedSchoolTESTwithcollapse = $("<div class='school' id='" + name + "' data-school-code='" + schoolCode + "'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='course_container'><a class='add_course'>+ Add Course</a><div class='add_course_container'><div class='add_course_input_container'><input class='add_course_input' type='text' placeholder='Type Course Name, Subject, or Number' oninput='handleCourseNameInput(this)' onblur='hideCourseList(this)' onfocus='handleCourseNameInput(this)' /><div class='course_list' /></div><a class='course_close' /></div><div class='selected_courses' /><span class='collapse'>Collapse This Window</span></div></div>");
 
   $('.school-added-container').append(selectedSchoolTEST)
   $('.add-school-container').remove()
@@ -263,7 +280,7 @@ function addSchoolPanel(element) {
     type: 'GET',
     url: "/TRNS_RULES/" + name,
     dataType: "json",
-    success: function(data) {
+    success: function (data) {
       console.log("SUCCESS")
       course_list['school' + schoolCode] = []
       for (let course of data) {
@@ -351,7 +368,7 @@ function handleCourseNameInput(element) {
     matchCoursesFromInput(element)
   } else {
     $(courseList).hide()
-    $(notFound).hide()    
+    $(notFound).hide()
   }
 }
 
@@ -372,13 +389,13 @@ function matchCoursesFromInput(element) {
   var val = $this.val().toLowerCase()
   var links = list.getElementsByTagName("a")
 
-  for(var i = 0; i < course_list['school' + id].length; i++) {
+  for (var i = 0; i < course_list['school' + id].length; i++) {
     links[i].className = course_list['school' + id][i].indexOf(val) != -1 ? 'visible' : '';
     links[i].addEventListener('click', handleAddCoursePanel)
   }
 
   var visible_links = list.getElementsByClassName('visible')
-  
+
   if (visible_links.length) {
     if (visible_links.length == 1) {
       visible_links[0].className = 'visible selected'
@@ -389,7 +406,7 @@ function matchCoursesFromInput(element) {
     list.style.display = 'block'
     list.style.top = '39px'
     not_found.style.display = 'none'
-    $this.attr("original_value",$this.val())
+    $this.attr("original_value", $this.val())
   } else {
     $(list).hide()
     not_found.style.display = 'block'
@@ -406,7 +423,7 @@ function hideCourseList(element) {
   var panel = $(element).closest(".course_container")
   if (!panel.find('.course_list:hover, .not_found:hover').length) {
     panel.find('.course_list').hide()
-    panel.find('.not_found').hide() 
+    panel.find('.not_found').hide()
   }
 }
 
@@ -611,9 +628,9 @@ function addTransferSchoolPanel(element) {
   let name = element.value
   let transferSchoolCode = $(element).attr('data-transfer-school-code')
   selectedTransferSchools.push(name);
-  
+
   let selectedTransferSchool = $("<div class='transfer-school' id='" + name + "' data-transfer-school-code='" + transferSchoolCode + "'> <h2> <span></span> " + name + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='program_container'><a class='add_program'>+ Add Program</a> <div class='add_program_container'><div class='add_program_input_container'><input class='add_program_input' type='text' placeholder='Type Program Name' oninput='handleProgramNameInput(this)' onfocus='handleProgramNameInput(this)' onblur='hideProgramList(this)' /><div class='not_found' style='display:none;'>Sorry, the program you've entered was not found in our system.</div> <div class='program_list'> </div> </div> <a class='close-program-input' /> </div><div class='selected_program' /></div>");
-  
+
   $('.transfer-school-added-container').append(selectedTransferSchool);
   $('.add-transfer-school-container').remove();
   $('#add-transfer-school-btn').insertBefore($('.transfer-school-added-container'));
@@ -627,7 +644,7 @@ function addTransferSchoolPanel(element) {
     type: 'GET',
     url: "/ACAD_PLAN/" + name,
     dataType: "json",
-    success: function(data) {
+    success: function (data) {
       console.log("SUCCESS")
       program_list['school' + transferSchoolCode] = []
       for (let program of data) {
@@ -723,7 +740,7 @@ function matchProgramsFromInput(element) {
     list.style.display = 'block'
     list.style.top = '39px'
     not_found.style.display = 'none'
-    $this.attr("original_value",$this.val())
+    $this.attr("original_value", $this.val())
   } else {
     $(list).hide()
     not_found.style.display = 'block'
@@ -802,16 +819,16 @@ async function exList() {
   return examRes
 }
 function addAnotherExam() {
-  
-    addExamBtn.style.display = 'none'
 
-    var newAddExamContainer = $("<div class='add-exam-container' style='display: block; display: none;'> <div class='add-exam-input-container'> <input class='exam-text-field' type='text' placeholder='Type Exam Name' oninput='handleExamNameInput(this)' onblur='hideExamList(this)' onfocus='handleExamNameInput(this)'> <div class='exam-ac-panel hidden'> <ul class='exam-input-ac-1'></ul> </div> </div> <a class='close'> <img src='../../style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='pastMenuItems'> </div> <div class='dropdown-header pastEmpty' style='display: none;'>No schools found</div> </div>");
-    $(newAddExamContainer).insertBefore('.exam-added-container')
-    newAddExamContainer.show()
+  addExamBtn.style.display = 'none'
 
-    examList = exList()
-    console.log(examList)
-  
+  var newAddExamContainer = $("<div class='add-exam-container' style='display: block; display: none;'> <div class='add-exam-input-container'> <input class='exam-text-field' type='text' placeholder='Type Exam Name' oninput='handleExamNameInput(this)' onblur='hideExamList(this)' onfocus='handleExamNameInput(this)'> <div class='exam-ac-panel hidden'> <ul class='exam-input-ac-1'></ul> </div> </div> <a class='close'> <img src='../../style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='pastMenuItems'> </div> <div class='dropdown-header pastEmpty' style='display: none;'>No schools found</div> </div>");
+  $(newAddExamContainer).insertBefore('.exam-added-container')
+  newAddExamContainer.show()
+
+  examList = exList()
+  console.log(examList)
+
 }
 
 /**
@@ -888,7 +905,7 @@ function matchExam(name, element) {
  *  - Create a "exam" div that contains the name of the selected exam
  *  - The div allows students to add score to exam
  *  - The courses from that school are populated into a dropdown list
- */ 
+ */
 function addExamPanel(element) {
   /* '(data-exam-name', exam.testName)
       ('data-exam-code', exam.component)
@@ -905,19 +922,19 @@ function addExamPanel(element) {
   let error = "<p class='error'>Score entered needs to be a whole number from " + minScore + " to " + maxScore + "</p>"
   let submitButton = "<button class='button button2' disabled onclick=submitScore(this)>Submit</button>"
   let submitSuccessful = "<p class='success'>Score was added successfully</p>"
-  var selectedExamTEST = $("<div class='exam' id='" + name + "' data-exam-code='"+ examCode +"' data-exam-tag='" + tag +"' data-exam-min-score='" + minScore +"' data-exam-max-score='" + maxScore + "' > <h2> <span></span> " + element.value + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='score_container'><a class='add_score'>+ Add Score</a><div class='add_score_container'><div class='add_score_input_container'><input class='add_score_input' type='text' oninput='isValidScore(this)' placeholder='Type in Score' />" + submitButton +"<div class='not_found'>I can't find my score</div><div class='score_list' /></div><a class='score_close' /></div><div class='selected_scores' /></div>" + submitSuccessful + error + "</div>");
+  var selectedExamTEST = $("<div class='exam' id='" + name + "' data-exam-code='" + examCode + "' data-exam-tag='" + tag + "' data-exam-min-score='" + minScore + "' data-exam-max-score='" + maxScore + "' > <h2> <span></span> " + element.value + " </h2> <a class='close'> <img src='style/images/close-button.svg' alt='close button' class='close-button' align='middle'/> </a> <div class='score_container'><a class='add_score'>+ Add Score</a><div class='add_score_container'><div class='add_score_input_container'><input class='add_score_input' type='text' oninput='isValidScore(this)' placeholder='Type in Score' />" + submitButton + "<div class='not_found'>I can't find my score</div><div class='score_list' /></div><a class='score_close' /></div><div class='selected_scores' /></div>" + submitSuccessful + error + "</div>");
 
 
   $('.exam-added-container').prepend(selectedExamTEST);
 
   $('.add-exam-container').remove();
   $('#add-exam-btn').insertBefore($('.exam-added-container'));
- 
-    $('#add-exam-btn').show();
-  
+
+  $('#add-exam-btn').show();
+
 
   var scoreList = $(selectedExamTEST).find(".score_list");
-  
+
 }
 
 function isValidScore(element) {
@@ -926,22 +943,22 @@ function isValidScore(element) {
   let $exam = element.closest('.exam')
   $($exam).children('p').filter('.success').hide();
   console.log(score)
-  if(score == "Type in Score") $($exam).children('p').filter('.error').hide();
-  if(onlyDigits(score)) {
+  if (score == "Type in Score") $($exam).children('p').filter('.error').hide();
+  if (onlyDigits(score)) {
     let $examMinScore = parseInt($($exam).attr('data-exam-min-score'))
     let $examMaxScore = parseInt($($exam).attr('data-exam-max-score'))
-    if(score < $examMinScore || score > $examMaxScore) {
+    if (score < $examMinScore || score > $examMaxScore) {
       $($exam).children('p').filter('.error').show();
-      $($exam).children('.score_container').children('.add_score_container').children('.add_score_input_container').children('button').attr('disabled',true)
+      $($exam).children('.score_container').children('.add_score_container').children('.add_score_input_container').children('button').attr('disabled', true)
     }
     else {
       $($exam).children('p').filter('.error').hide();
-      $($exam).children('.score_container').children('.add_score_container').children('.add_score_input_container').children('button').attr('disabled',false)
+      $($exam).children('.score_container').children('.add_score_container').children('.add_score_input_container').children('button').attr('disabled', false)
     }
   }
   else {
     $($exam).children('p').filter('.error').show();
-    $($exam).children('.score_container').children('.add_score_container').children('.add_score_input_container').children('button').attr('disabled',true)
+    $($exam).children('.score_container').children('.add_score_container').children('.add_score_input_container').children('button').attr('disabled', true)
   }
 }
 
@@ -957,12 +974,12 @@ function onlyDigits(s) {
 
 function submitScore(element) {
   //console.log('submitted')
-  
+
   let $exam = element.closest('.exam')
   let component = ($($exam).attr('data-exam-code'))
   let testName = ($($exam).attr('id'))
   let submittedScore = $($exam).children('.score_container').children('.add_score_container').children('.add_score_input_container').children('.add_score_input').val();
-  
+
   //Check if score is in submittedExams array or not. If so, update the score. else, add a new objct to array
   let indexOfTest = -1;
   for (let i = 0; i < submittedExams.length; i++) {
@@ -971,12 +988,12 @@ function submitScore(element) {
       break;
     }
   }
-  if(indexOfTest > -1) {
+  if (indexOfTest > -1) {
     submittedExams[indexOfTest]['score'] = submittedScore;
     console.log(submittedExams)
   }
   else {
-    let testToSubmit = {examCode: component, name: testName, score: submittedScore}  
+    let testToSubmit = { examCode: component, name: testName, score: submittedScore }
     submittedExams.push(testToSubmit)
     console.log(submittedExams)
   }
@@ -1037,14 +1054,14 @@ function deleteSelectedExam() {
     $('#add-exam-btn').insertBefore($('.exam-added-container'))
     $('#add-exam-btn').show()
   }
-  
+
 }
 
 function deleteExamInputContainer() {
   $(this).parent().remove()
-    $('#add-exam-btn').insertBefore($('.exam-added-container'))
-    $('#add-exam-btn').show()
-  
+  $('#add-exam-btn').insertBefore($('.exam-added-container'))
+  $('#add-exam-btn').show()
+
 }
 // ! TEST SCORE SECTION
 //? fetch example
@@ -1087,4 +1104,173 @@ async function postGibberish() {
   const json = await res.json()
   console.log(json)
 
-} 
+}
+
+// Code of Result Panel 
+
+function get_Trans() {
+  var x, curr_school, curr_school_code, future_school, URL
+  var classes_list = []
+
+  future_school = selectedTransferSchools[0]
+
+  if (transferDetailList.length === 0) {
+    console.log("not enough input ")
+  }
+  else {
+    for (x in transferDetailList) {
+      // console.log("This is the transfer detail list x " + transferDetailList[x])
+      curr_school = transferDetailList[x].getSchool()
+      curr_school_code = curr_school['schoolCode']
+      // console.log("SRT* from transfer detail" + transferDetailList[x].getCourses())
+      curr_classes_list = transferDetailList[x].getCourses()
+      // console.log(curr_classes_list)
+      get_trns_rules(curr_school_code, future_school ,curr_classes_list )
+      console.log()
+      console.log()
+      // get_test_rules(future_school)
+      var total 
+      console.log(number_of_credits)
+      for( credit in number_of_credits){
+        console.log(credit)
+        total += parseInt(number_of_credits[credit])
+
+      }
+      console.log(total)
+      if(total === 120){
+        $('#progress-bar').attr("aria-valuenow","100"); 
+      document.getElementById("progress-bar").innerHTML = "100%"
+      }
+      else{
+      $('#progress-bar').attr("aria-valuenow",String(total)); 
+      document.getElementById("progress-bar").innerHTML = String(total)
+      }
+
+
+
+
+
+    }
+
+
+  }
+
+
+
+}
+
+function rules_conversations(data , class_list) {
+
+  var itr
+  sum = 0;
+  high = data.length - 1
+  low = 0
+  itr = 0
+  for (x in class_list) {
+    curr_class = class_list[x]['courseCode']
+    // console.log(curr_class + " is the current class that needs to be evaluated")
+
+    while (low <= high) {
+
+      itr = Math.floor((high + low) / 2)
+      // console.log("The class that is being checked now is " + data[itr]['BCRSE_ID'])
+
+      if (parseInt(curr_class) === data[itr]['BCRSE_ID']) {
+
+        sum += data[itr]['UNT_TAKEN']
+        low = high + 1
+
+      }
+
+      else if (parseInt(curr_class) >= data[itr]['BCRSE_ID']) {
+        low = itr + 1
+      }
+      else if (parseInt(curr_class) <= data[itr]['BCRSE_ID']) {
+        high = itr - 1
+      }
+
+    }
+    low = 0;
+    high = data.length - 1
+
+
+  }
+
+
+  number_of_credits.push(sum)
+  // console.log("The sum is " + number_of_credits)
+
+
+
+}
+
+function get_trns_rules(going, coming , class_list) {
+
+
+  $.ajax({
+    type: 'GET',
+    url: "/Trns_Rules_Result/" + going + '/' + coming,
+    dataType: "json",
+    success: function (data) {
+
+      rules_conversations(data , class_list)
+
+    }
+  }
+  )
+
+}
+
+// function get_test_rules(coming) {
+
+
+//   $.ajax({
+//     type: 'GET',
+//     url: "/Test_eq/"  + coming , 
+//     dataType: "json",
+//     success: function (data) {
+//       console.log("Hitting")
+//       test_convert(data)
+
+//     }
+//   }
+//   )
+
+// }
+
+// function test_convert(data) {
+
+//   console.log(data.length)
+//   var itr
+//   sum = 0;
+//   itr = 0
+//   // console.log(submittedExams)
+// for(low in submittedExams)
+//   for ( itr = 0; itr< data.length-1 ;itr++){
+//     console.log(itr)
+//     if(data[itr]['Component'] == submittedExams[low]['examCode'] && submittedExams[low]['score'] <= data[itr]['Max_Score'] && submittedExams[low]['score'] >= data[itr]['Min_Score']  ){
+//       if(data[itr]['LISTAGG_C_CRSE_ID_WITHI'].contains('&'))
+//       var res = str.split("&");
+//       temp_class_list.push(data[itr]['LISTAGG_C_CRSE_ID_WITHI'])
+//       i = data.length
+//     }
+//   }
+
+//       console.log(temp_class_list)
+
+//   }
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
