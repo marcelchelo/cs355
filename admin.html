@@ -7,15 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Admin Page</title>
-  <!-- Local CSS -->
-  <link rel="stylesheet" href="./style/css/admin.css">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <!-- javascript file -->
-  <script src="js/admin.js"></script>
 
 </head>
 
@@ -135,73 +126,12 @@
             </div>
           </div>
 
-          <script>
-            //increment variable names by one, and change where needed
-            var valueX3 = "tschools";
-            var valueY3 ="TSchool";
-            var flag4=false;
-            let p1 = fetchColleges();
-            p1.then(function(result) {
-              uniSearchBar(valueX3,valueY3,result,false);
-            });
-
-            document.getElementById("dropdown_tschools").addEventListener('click',function(){
-              if(flag4)
-              {
-                close("btn-h");
-                close("testForm");
-                close("testForm2");
-                close("testForm3");
-                document.getElementById('testText').innerHTML = "";
-                flag4=false;
-              }
-            })
-
-            document.querySelector("#search"+valueY3).addEventListener('input', function() {
-              let p1 = fetchColleges();
-              p1.then(function(result) {
-                uniSearchBar(valueX3,valueY3,result,true);
-              });
-            })
-            $('#menu'+valueY3).on('click', "."+valueX3+'-dropdown-item', function(){
-                $('#dropdown_'+valueX3).text("Chosen School: "+$(this)[0].value);
-                flag4=true;
-                show("btn-h");
-                $("#dropdown_"+valueX3).dropdown('toggle');
-            })
-          </script>
-
           <div class="btn-group" id="btn-h" style="display:none">
             <button id="addT">Add</button>
             <button id="editT"> Edit</button>
             <button id="deleteT">Delete</button>
             <p id=testText></p>
           </div>
-
-          <script>
-          var testOption="-1";
-          document.getElementById("addT").addEventListener('click', function(){
-            show("testForm");
-            show("testForm2");
-            show("testForm3");
-            testOption="1";
-            document.getElementById('testText').innerHTML = "You're in adding";
-          });
-          document.getElementById("editT").addEventListener('click', function(){
-            show("testForm");
-            show("testForm2");
-            close("testForm3");
-            testOption="2";
-            document.getElementById('testText').innerHTML = "You're in editing";
-          });
-          document.getElementById("deleteT").addEventListener('click', function(){
-            show("testForm");
-            close("testForm2");
-            close("testForm3");
-            testOption="3";
-            document.getElementById('testText').innerHTML = "You're in removing";
-          });
-          </script>
 
           <div id="testForm" style="display:none">
             <p id=testText></p>
@@ -250,53 +180,10 @@
             </div>
           </div>
 
-          <script>
-            //increment variable names by one, and change where needed
-            var valueX4 = "majors";
-            var valueY4 ="Major";
-            var flag5=false;
-            let p2 = fetchColleges();
-            p2.then(function(result) {
-              uniSearchBar(valueX4,valueY4,result,false);
-            });
-
-            document.getElementById("dropdown_majors").addEventListener('click',function(){
-              if(flag5)
-              {
-                close("majorForm");
-                close("btn-j");
-                flag5=false;
-                document.getElementById('majorText').innerHTML = "";
-              }
-            })
-
-            document.querySelector("#search"+valueY4).addEventListener('input', function() {
-              let p2 = fetchColleges();
-              p2.then(function(result) {
-                uniSearchBar(valueX4,valueY4,result,true);
-              });
-            })
-            $('#menu'+valueY4).on('click', "."+valueX4+'-dropdown-item', function(){
-                $('#dropdown_'+valueX4).text("Chosen School: "+$(this)[0].value);
-                flag5=true;
-                show("btn-j");
-                $("#dropdown_"+valueX4).dropdown('toggle');
-            })
-          </script>
-
           <div class="btn-group" id="btn-j" style="display:none">
             <button id="deleteM">Delete</button>
             <p id="majorText"></p>
           </div>
-
-          <script>
-            var majorOption="1";
-            document.getElementById("deleteM").addEventListener('click', function(){
-              show("majorForm");
-              majorOption="1";
-              document.getElementById('majorText').innerHTML = "You're removing";
-            });
-          </script>
 
           <div id="majorForm" style="display:none">
             <p id=majorText></p>
@@ -344,90 +231,6 @@
             </div>
           </div>
 
-          <script>
-            //increment variable names by one, and change where needed
-            var valueX1 = "bases";
-            var valueY1 ="Base";
-            var flag1 =false;
-            var valueX2 = "exts";
-            var valueY2 ="Ext";
-            var flag2=false;
-            let currentBase="";
-            let p3 = fetchColleges();
-            p3.then(function(result) {
-              uniSearchBar(valueX1,valueY1,result,false);
-            });
-
-            document.querySelector("#search"+valueY1).addEventListener('input', function() {
-              let p3 = fetchColleges();
-              p3.then(function(result) {
-                uniSearchBar(valueX1,valueY1,result,true);
-              });
-            })
-            document.getElementById("dropdown_bases").addEventListener('click',function(){
-              if(flag1)
-              {
-                $('#dropdown_'+valueX2).text("Please select a extention school to continue");
-                close("ext");
-                flag1=false;
-                close("btn-g");
-                flag2=false;
-                close("aForm");
-                flag3=false;
-              }
-            })
-            $('#menu'+valueY1).on('click', "."+valueX1+'-dropdown-item', function(){
-                show("ext");
-                flag1=true;
-                currentBase=$(this)[0].value;
-                let p4 = fetchColleges();
-                p4.then(function(result) {
-                  let temp = [];
-                  for(let i=0;i<result.length;i++)
-                  {
-                    if(result[i]!=currentBase)
-                    {
-                      temp.push(result[i]);
-                    }
-                  }
-                  uniSearchBar(valueX2,valueY2,temp,false);
-                });
-                $('#dropdown_'+valueX1).text("Base School: "+$(this)[0].value);
-                $("#dropdown_"+valueX1).dropdown('toggle');
-            })
-            //increment variable names by one, and change where needed
-
-            document.querySelector("#search"+valueY2).addEventListener('input', function() {
-              let p4 = fetchColleges();
-              p4.then(function(result) {
-                let temp = [];
-                for(let i=0;i<result.length;i++)
-                {
-                  if(result[i]!=currentBase)
-                  {
-                    temp.push(result[i]);
-                  }
-                }
-                uniSearchBar(valueX2,valueY2,temp,true);
-              });
-            })
-            document.getElementById("dropdown_exts").addEventListener('click',function(){
-              if(flag2)
-              {
-                close("btn-g");
-                close("aForm")
-                flag2=false;
-                flag3=false;
-              }
-            })
-            $('#menu'+valueY2).on('click', "."+valueX2+'-dropdown-item', function(){
-                show("btn-g");
-                flag2=true;
-                $('#dropdown_'+valueX2).text("Extension School: "+$(this)[0].value);
-                $("#dropdown_"+valueX2).dropdown('toggle');
-            })
-          </script>
-
           <div class="btn-group" id="btn-g" style="display:none">
             <button id="add">Add</button>
             <button id="delete">Delete</button>
@@ -451,26 +254,19 @@
 
           </div>
 
-          <script>
-          var option="1";
-          flag3=false;
-          document.getElementById("add").addEventListener('click', function(){
-            show("aForm");
-            option="1";
-            document.getElementById('pText').innerHTML = "You're in adding";
-          });
-          document.getElementById("delete").addEventListener('click', function(){
-            show("aForm");
-            option="2";
-            document.getElementById('pText').innerHTML = "You're in removing";
-          });
-          </script>
-
 
        </div>
 
      </div>
   </div>
-
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <!-- javascript file -->
+  <script src="../assets/js/admin.js" type='text/javascript'></script>
+  <link rel="stylesheet" href="../assets/css/admin.css">
 </body>
 <html>
