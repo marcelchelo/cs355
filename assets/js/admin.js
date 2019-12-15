@@ -1,3 +1,4 @@
+//universal filter funciton used to help create dropdown
 function filter(name,otherName,items,word) {
     let length = items.length
     let collection = []
@@ -21,6 +22,7 @@ function filter(name,otherName,items,word) {
     }
 }
 
+//universal buildDropDown to help create dropdown
 function buildDropDown(oName,tempItem,searchCollection) {
     var tempMenu = "#menu"+oName;
     var tempEmpty = "#empty"+oName;
@@ -34,6 +36,7 @@ function buildDropDown(oName,tempItem,searchCollection) {
     $(tempEmpty).hide()
 }
 
+//main function to be called when dropdown is sent
 function uniSearchBar(name,flagName,searchCollection,flag)
 {
   var tempItem = name+"-dropdown-item"
@@ -53,15 +56,18 @@ function uniSearchBar(name,flagName,searchCollection,flag)
 
 }
 
+//function to show hidden divs
 function show(elementId) {
   document.getElementById(elementId).style.display="block";
 }
+
+//function to hide shown divs
 function close(elementId)
 {
   document.getElementById(elementId).style.display="none";
 }
 
-//only works with http://localhost:3000/colleges
+//used to fetch Colleges from API
 async function fetchColleges() {
   var output = [];
 
@@ -77,6 +83,8 @@ async function fetchColleges() {
 
 }
 
+//This section of the code is used to create the dropdowns
+//During a post of tab to change data, we have to work with option number, input data from text, and selection from dropdowns
 var valueX3 = "tschools";
 var valueY3 ="TSchool";
 var flag4=false;
@@ -110,6 +118,7 @@ $('#menu'+valueY3).on('click', "."+valueX3+'-dropdown-item', function(){
     $("#dropdown_"+valueX3).dropdown('toggle');
 })
 
+//TEST OPTION IS USED TO SEE WHAT OPTION IS BEING PICKED
 var testOption="-1";
 document.getElementById("addT").addEventListener('click', function(){
   show("testForm");
@@ -253,6 +262,7 @@ $('#menu'+valueY2).on('click', "."+valueX2+'-dropdown-item', function(){
     $("#dropdown_"+valueX2).dropdown('toggle');
 })
 
+//OPTION NUMBER IS USED TO SEE WHAT OPTION IS SELECTED
 var option="1";
 flag3=false;
 document.getElementById("add").addEventListener('click', function(){
