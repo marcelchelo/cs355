@@ -6,7 +6,7 @@ const mysql = require('mysql')
 
 const cors = require('cors')
 //morgan will output to our console on terminal whenever a get post/get request is being made and from where. Also if any errors are returned
-app.use(morgan('short')) 
+app.use(morgan('short'))
 
 app.use(express.json())
 app.use(
@@ -31,7 +31,9 @@ app.get('/adminLogin', (req, res) => {
   res.render('adminLogin')
 })
 
-
+app.get('/admin', (req,res) => {
+  res.render('admin')
+})
 
 //app.use(express.static(path.join(__dirname)))
 
@@ -284,10 +286,10 @@ app.get('/TRNS_RULES', (req, res) => {
   // res.end()
 })
 
-// Retrieves all majors from respective school 
+// Retrieves all majors from respective school
 app.get('/ACAD_PLAN/:id', (req, res) => {
   const userId = req.params.id
-  const queryString = 
+  const queryString =
   'SELECT INSTITUTION_DESCR, ACAD_PLAN, DEGREE, DEGREE_DESCR, TRNSCR_DESCR FROM ACAD_PLAN_TBL_LTD WHERE INSTITUTION_DESCR = ?'
   connection.query(queryString, [userId], (err, rows, fields) => {
     if (err) {

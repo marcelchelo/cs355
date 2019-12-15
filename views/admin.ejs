@@ -1,0 +1,270 @@
+<head>
+ <!-- Required meta tags -->
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ <title>Admin Page</title>
+
+</head>
+
+<body>
+
+ <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+   <ul class="navbar-nav">
+     <li class="nav-item active">
+       <a class="nav-link" href="index.html">Transfer Portal</a>
+     </li>
+     <li class="nav-item">
+       <a class="nav-link" href="student.html">Go to Student</a>
+     </li>
+     <li class="nav-item">
+       <a class="nav-link" href="https://github.com/marcelchelo/cs355">Github Repository</a>
+     </li>
+   </ul>
+ </nav>
+
+  <div class="split">
+    <div class="leftSide">
+       <a class="navbar-brand" href="adminPage.html"><h5 style="padding:10px">Settings</h5></a>
+       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+         <a class="nav-link active" id="v-pills-aseth-tab" data-toggle="pill" href="#v-pills-aseth" role="tab" aria-controls="v-pills-aseth" aria-selected="true">Aesthetics</a>
+         <a class="nav-link" id="v-pills-rules-tab" data-toggle="pill" href="#v-pills-rules" role="tab" aria-controls="v-pills-rules" aria-selected="false">Transfer School Rules</a>
+         <a class="nav-link" id="v-pills-major-tab" data-toggle="pill" href="#v-pills-major" role="tab" aria-controls="v-pills-major" aria-selected="false">Major for School</a>
+         <a class="nav-link" id="v-pills-score-tab" data-toggle="pill" href="#v-pills-score" role="tab" aria-controls="v-pills-score" aria-selected="false">Test Requirements</a>
+       </div>
+    </div>
+
+   <div class="rightSide">
+     <div class="tab-content" id="v-pills-tabContent">
+       <div class="tab-pane show active"  id="v-pills-aseth" role="tabpanel" aria-labelledby="v-pills-aseth-tab">
+         <div class="splitRight">
+           <div>
+             <div class="card">
+               <div class="card-body">
+                 <div class="form-group">
+                   <label for="PageTitleChanger">Page Title</label>
+                     <input type="title" class="form-control" id="aTitle" aria-describedby="textHelp" placeholder="Enter title">
+                     <small id="textHelp" class="form-text text-muted">Text displayed in Browser Title</small>
+                     <button class="btn btn-info btn-lg" onclick="changeTitle()">Change Title</button>
+                 </div>
+               </div>
+             </div>
+
+             <div class="card">
+               <div class="card-body">
+                 <p>Change Background Color of Student Page</p>
+                 <input type="color" id="studentPageColor" style="width:30%">
+                 <small class="form-text text-muted">Choose your color, then click the button below to apply it to the student page!</small>
+                 <button class="btn btn-info btn-lg" onclick="changeColor()">Change Color</button>
+               </div>
+             </div>
+
+           </div>
+           <div>
+
+             <div class="card">
+               <div class="card-body">
+                 <div class="form-group">
+                   <label for="DescChanger">Page Description</label>
+                     <input type="text" class="form-control" id="aDesc" aria-describedby="textHelp" placeholder="Enter Description">
+                     <small id="textHelp" class="form-text text-muted">Text displayed on page description</small>
+                     <button class="btn btn-info btn-lg" onclick="changeDescription()">Change Description</button>
+                 </div>
+               </div>
+             </div>
+
+             <div class="card">
+               <div class="card-body">
+                 <p>Upload New Banner and Logo</p>
+                 <div class="input-group">
+                   <div class="input-group-prepend">
+                     <span class="input-group-text" id="inputBanner">Upload</span>
+                   </div>
+                   <div class="custom-file">
+                     <input type="file" class="custom-file-input" id="inputBanner" aria-describedby="inputBanner1">
+                     <label class="custom-file-label" for="inputBanner">Banner File</label>
+                   </div>
+                 </div>
+                 <div class="input-group" style="top:10px">
+                   <div class="input-group-prepend">
+                     <span class="input-group-text" id="inputLogo">Upload</span>
+                   </div>
+                   <div class="custom-file">
+                     <input type="file" class="custom-file-input" id="inputLogo" aria-describedby="inputLogo1">
+                     <label class="custom-file-label" for="inputLogo">Logo File</label>
+                   </div>
+                 </div>
+
+               </div>
+             </div>
+
+           </div>
+         </div>
+       </div>
+
+       <div class="tab-pane" id="v-pills-score" role="tabpanel" aria-labelledby="v-pills-score-tab">
+         <h2>Review Rules for AP Exams</h2>
+         <p>Choose a school and AP Exam to review</p>
+
+         <div class="dropdown">
+           <!--change id dropdown_-->
+           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_tschools" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Please choose a School to modify
+           </button>
+           <!--change aria to the same as id-->
+           <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_tschools">
+             <form class="px-4 py-2">
+               <!--change id search_ -->
+               <input type="search" class="form-control" id="searchTSchool" placeholder="Search please" autofocus="autofocus">
+             </form>
+             <!--change id to menu_-->
+             <div id="menuTSchool"></div>
+             <div id="emptyTSchool" class="dropdown-header">No schools found</div>
+           </div>
+         </div>
+
+         <div class="btn-group" id="btn-h" style="display:none">
+           <button id="addT">Add</button>
+           <button id="editT"> Edit</button>
+           <button id="deleteT">Delete</button>
+           <p id=testText></p>
+         </div>
+
+         <div id="testForm" style="display:none">
+           <p id=testText></p>
+           <label for="Test_Component">Component</label>
+           <input name="test_Component" id="TestComponent" type="text"/>
+           <div id="testForm2" style="display:none">
+             <label for="Test_Score" id="Test_Score">Requirement Score</label>
+             <input name="test_score" id="TestScore" type="text"/>
+           </div>
+           <div id="testForm3" style="display:none">
+             <label for="Test_ID" id="Test_ID">Test ID</label>
+             <input name="test_id" id="TestID" type="text"/> </br>
+
+             <label for="Test_DEC" id="Test_DEC">Desc</label>
+             <input name="test_dec" id="TestDEC" type="text"/></br>
+
+             <label for="Test_MIN" id="Test_MIN">Min Score</label>
+             <input name="test_min" id="TestMIN" type="text"/></br>
+
+             <label for="Test_MAX" id="Test_MAX">Max Score</label>
+             <input name="test_MAX" id="TestMAX" type="text"/></br>
+
+           </div>
+           <button type="button" class="btn btn-primary">Submit</button>
+
+         </div>
+
+       </div>
+       <div class="tab-pane" id="v-pills-major" role="tabpanel" aria-labelledby="v-pills-major-tab">
+         <h2>Review Rules for Majors</h2>
+         <p>Choose a school to modify Majors</p>
+         <div class="dropdown">
+           <!--change id dropdown_-->
+           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_majors" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Please choose a School to modify
+           </button>
+           <!--change aria to the same as id-->
+           <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_majors">
+             <form class="px-4 py-2">
+               <!--change id search_ -->
+               <input type="search" class="form-control" id="searchMajor" placeholder="Search please" autofocus="autofocus">
+             </form>
+             <!--change id to menu_-->
+             <div id="menuMajor"></div>
+             <div id="emptyMajor" class="dropdown-header">No schools found</div>
+           </div>
+         </div>
+
+         <div class="btn-group" id="btn-j" style="display:none">
+           <button id="deleteM">Delete</button>
+           <p id="majorText"></p>
+         </div>
+
+         <div id="majorForm" style="display:none">
+           <p id=majorText></p>
+           <label for="Major_Code">Major Code</label>
+           <input name="major_base" id="MajorBase" type="text"/></br>
+           <button type="button" class="btn btn-primary">Submit</button>
+         </div>
+
+       </div>
+       <div class="tab-pane" id="v-pills-rules" role="tabpanel" aria-labelledby="v-pills-rules-tab">
+         <h2>Review/Modify Transfer Rules</h2>
+         <p style="color:red">Note: This will allow you to change the transfer rules for base school in regards to extension school </p>
+
+         <div class="dropdown">
+           <!--change id dropdown_-->
+           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_bases" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Please choose a Base school to continue
+           </button>
+           <!--change aria to the same as id-->
+           <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_bases">
+             <form class="px-4 py-2">
+               <!--change id search_ -->
+               <input type="search" class="form-control" id="searchBase" placeholder="Search please" autofocus="autofocus">
+             </form>
+             <!--change id to menu_-->
+             <div id="menuBase"></div>
+             <div id="emptyBase" class="dropdown-header">No coins found</div>
+           </div>
+         </div>
+
+         <div class="dropdown" style="display:none" id="ext">
+           <!--change id dropdown_-->
+           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_exts" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Please select a Extension school to continue
+           </button>
+           <!--change aria to the same as id-->
+           <div id="menu" class="dropdown-menu" aria-labelledby="dropdown_exts">
+             <form class="px-4 py-2">
+               <!--change id search_ -->
+               <input type="search" class="form-control" id="searchExt" placeholder="Search please" autofocus="autofocus">
+             </form>
+             <!--change id to menu_-->
+             <div id="menuExt"></div>
+             <div id="emptyExt" class="dropdown-header">No coins found</div>
+           </div>
+         </div>
+
+         <div class="btn-group" id="btn-g" style="display:none">
+           <button id="add">Add</button>
+           <button id="delete">Delete</button>
+         </div>
+
+         <div id="aForm" style="display:none">
+           <p id=pText></p>
+           <label for="Class_Code_Base">Class Code Base</label>
+           <input name="class_code_base" id="ClassCodeBase" type="text"/>
+           <label for="Class_Name_Base">Class Name Base</label>
+           <input name="class_name_base" id="ClassNameBase" type="text"/></br>
+
+           <p> is equivelent to </p>
+
+           <label for="Class_Code_Ext">Class Code Ext</label>
+           <input name="class_code_ext" id="ClassCodeExt" type="text"/>
+           <label for="Class_Name_Ext">Class Name Ext</label>
+           <input name="class_name_ext" id="ClassNameExt" type="text"/></br>
+
+           <button type="button" class="btn btn-primary">Submit</button>
+
+         </div>
+
+
+      </div>
+
+    </div>
+ </div>
+ <!-- Bootstrap CSS -->
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+ <!-- javascript file -->
+ <script src="../assets/js/admin.js" type='text/javascript'></script>
+ <link rel="stylesheet" href="../assets/css/admin.css">
+</body>
