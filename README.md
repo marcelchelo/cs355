@@ -12,6 +12,7 @@ Instructions for running locally: Go into terminal, change into the directory of
 http://localhost:3000/
 
 Technologies that were used were html/css/javascript/jquery/bootstrap for frontend, and node.js for backend. Used google cloud mySQL for the database. 
+We are using Express, a node framework for back end. 
 
  
  
