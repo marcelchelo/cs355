@@ -814,6 +814,10 @@ object {
   opacity: .6;
 }
 
+#courses-panel .course_list > a[data-selected]:hover {
+  background: none;
+}
+
 #courses-panel .course_list > a.visible {
   display: block;
 }
@@ -954,6 +958,10 @@ object {
 #college-opt-panel .program_list > a[data-selected] {
   cursor: default;
   opacity: .6;
+}
+
+#college-opt-panel .program_list > a[data-selected]:hover {
+  background: none;
 }
 
 #college-opt-panel .program_list > a:hover {
@@ -1476,6 +1484,7 @@ object {
 }
 
 #exam-score-panel .add_score_input {
+  width:75%;
   height: 40px;
   padding: 10px;
 }
@@ -1515,11 +1524,54 @@ object {
 }
 
 .error {
+  font-size: 16px;
   padding-top: 10px;
   display: none;
   color: red;
 }
 
+.success {
+  font-size: 16px;
+  padding-top: 10px;
+  display: none;
+  color: black;
+}
+
+#exam-score-panel .button {
+  width: 20%;
+  border: 2px solid #008CBA;
+  color: white;
+  /*padding: 16px 32px;*/
+  text-align: center;
+  text-decoration: none;
+  display: inline;
+  font-size: 14px;
+  margin-left: 4px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+#exam-score-panel .button2 {
+    background-color: #008CBA;
+    color: white;
+   
+}
+
+#exam-score-panel .button2:hover {
+background-color: white;
+  color: black;
+}
+
+#exam-score-panel button[disabled] {
+  border: 2px solid rgb(138, 213, 238);
+  background: rgb(138, 213, 238);
+  color: white;
+}
+#exam-score-panel button[disabled]:hover {
+  background: rgb(138, 213, 238);
+  color: white;
+}
 /* This is the footer section */
 
 footer {

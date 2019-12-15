@@ -6,7 +6,7 @@ const mysql = require('mysql')
 
 const cors = require('cors')
 //morgan will output to our console on terminal whenever a get post/get request is being made and from where. Also if any errors are returned
-app.use(morgan('short')) 
+app.use(morgan('short'))
 
 app.use(express.json())
 app.use(
@@ -31,7 +31,9 @@ app.get('/adminLogin', (req, res) => {
   res.render('adminLogin')
 })
 
-
+app.get('/admin', (req,res) => {
+  res.render('admin')
+})
 
 //app.use(express.static(path.join(__dirname)))
 
@@ -218,7 +220,7 @@ app.get('/EXAMS/', (req, res) => {
 app.get('/EXAM_FETCH/:id', (req, res) => {
   const userId = req.params.id
   const queryString =
-    'SELECT * FROM (SELECT INSTITUTION, DESCR FROM INSTITUTION_VW WHERE DESCR = ?) col INNER JOIN(SELECT Institution, Component, Test_ID, LISTAGG_C_CRSE_ID_WITHI, Min_Score x, Max_Score y FROM TEST_EQ ) test_eq ON col.INSTITUTION = test_eq.Institution INNER JOIN (SELECT testID, Component, Descr, TestComponentDescr, Min_Score a, Max_Score b FROM test_Table) test_table ON test_eq.Component = test_table.Component'
+    'SELECT * FROM (SELECT INSTITUTION, DESCR FROM INSTITUTION_VW WHERE DESCR = ?) col INNER JOIN(SELECT Institution, Component, Test_ID, listagg_D_SUBJECT_tr, Min_Score x, Max_Score y FROM TEST_EQ ) test_eq ON col.INSTITUTION = test_eq.Institution INNER JOIN (SELECT testID, Component, Descr, TestComponentDescr, Min_Score a, Max_Score b FROM test_Table) test_table ON test_eq.Component = test_table.Component'
   connection.query(queryString, [userId], (err, rows, fields) => {
     if (err) {
       console.log('Failed to query : ' + err)
@@ -229,7 +231,7 @@ app.get('/EXAM_FETCH/:id', (req, res) => {
       const mapping = rows.map(row => {
         return {
           collegeName: row.DESCR,
-          testCompletesCourse: row.LISTAGG_C_CRSE_ID_WITHI,
+          testCompletesCourse: row.listagg_D_SUBJECT_tr,
           testName: row.TestComponentDescr,
           component: row.Component,
           testTag: row.testID,
@@ -284,10 +286,10 @@ app.get('/TRNS_RULES', (req, res) => {
   // res.end()
 })
 
-// Retrieves all majors from respective school 
+// Retrieves all majors from respective school
 app.get('/ACAD_PLAN/:id', (req, res) => {
   const userId = req.params.id
-  const queryString = 
+  const queryString =
   'SELECT INSTITUTION_DESCR, ACAD_PLAN, DEGREE, DEGREE_DESCR, TRNSCR_DESCR FROM ACAD_PLAN_TBL_LTD WHERE INSTITUTION_DESCR = ?'
   connection.query(queryString, [userId], (err, rows, fields) => {
     if (err) {
@@ -296,6 +298,7 @@ app.get('/ACAD_PLAN/:id', (req, res) => {
       res.end()
       return
     } else {
+      console.log("Majors fetched successfully")
       const mapping = rows.map(row => {
         return {
           CollegeName: row.INSTITUTION_DESCR,
