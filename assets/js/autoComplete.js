@@ -54,6 +54,9 @@ var transfer_eq_classes = []
 
 var temp_class_list = []
 
+var width_prograss_bar = 0 ;
+var percentage = 0 ;
+
 
 let userColleges = [
   {
@@ -1126,36 +1129,50 @@ function get_Trans() {
       curr_classes_list = transferDetailList[x].getCourses()
       // console.log(curr_classes_list)
       get_trns_rules(curr_school_code, future_school ,curr_classes_list )
+     
       console.log()
       console.log()
       // get_test_rules(future_school)
       var total 
-      console.log(number_of_credits)
-      for( credit in number_of_credits){
-        console.log(credit)
-        total += parseInt(number_of_credits[credit])
+      // console.log(number_of_credits)
+      // for( i = 0; i < number_of_credits.length ; i++){
+      //   total += number_of_credits[i]
+      // }
+      // console.log(total)
+      // $('#progress-bar').attr("aria-valuenow","100"); 
+      // document.getElementById("progress-bar").innerHTML = "100%"
+      // $('.progress-bar').css('width', 100+'%').attr('aria-valuenow', 100);
+      // console.log(total)
+      // if(total === 120){
+      //   $('#progress-bar').attr("aria-valuenow","100"); 
+      // document.getElementById("progress-bar").innerHTML = "100%"
+      // }
+      // else{
+      // $('#progress-bar').attr("aria-valuenow",String(total)); 
+      // document.getElementById("progress-bar").innerHTML = String(total)
+      // }
 
-      }
-      console.log(total)
-      if(total === 120){
-        $('#progress-bar').attr("aria-valuenow","100"); 
-      document.getElementById("progress-bar").innerHTML = "100%"
-      }
-      else{
-      $('#progress-bar').attr("aria-valuenow",String(total)); 
-      document.getElementById("progress-bar").innerHTML = String(total)
-      }
 
-
-
-
-
+      
+      console.log(width_prograss_bar)
+      myFunction()
+      // $('.progress-bar').css('width',width_prograss_bar+'%').attr('aria-valuenow',width_prograss_bar );
+      // document.getElementById('progress-bar').innerHTML = width_prograss_bar;
     }
 
 
   }
 
+  
 
+  function myFunction() {
+    myVar = setTimeout(update_bar, 3000);
+  }
+  
+  function update_bar() {
+    $('.progress-bar').css('width',width_prograss_bar+'%').attr('aria-valuenow',width_prograss_bar );
+    document.getElementById('progress-bar').innerHTML = width_prograss_bar;
+  }
 
 }
 
@@ -1197,8 +1214,12 @@ function rules_conversations(data , class_list) {
   }
 
 
+  width_prograss_bar  += sum ;
+  percentage += width_prograss_bar / 120
+
   number_of_credits.push(sum)
-  // console.log("The sum is " + number_of_credits)
+  
+  console.log("The sum is " + number_of_credits)
 
 
 
