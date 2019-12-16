@@ -1,36 +1,24 @@
 # cs355
-Web Application for CUNY transfer Students, Collaborative Project.  
+Web Application for CUNY transfer Students, Collaborative Project. 
 
-For now  the current web page is on my venus account .   WILL NOT REFLECT ANY CHANGES IMEDIATELY. 
+Group members: Paul Chon, Mamadou Diallo, Harpreet Ghotra, Brandon Hwang, Daniel Kopeloff, Marcelo Villalba, Kelvin Wu, Laert Xhumari, Jason Xu, Jeffrey Zhao, Emanuel Zubli
 
-https://venus.cs.qc.cuny.edu/~vima9953/
+Github Repository: https://github.com/marcelchelo/cs355
+Contributors page: https://github.com/marcelchelo/cs355/graphs/contributors
 
-We can decide to host it elsewhere (heroku?) later on, but for now this will do. 
+Heroku: https://evening-woodland-45306.herokuapp.com/
 
-# Backend information 
-## Make good comments when commiting changes to backend code.
+Instructions for running locally: Go into terminal, change into the directory of the folder, and type the command: "node app". From there, the server will start on localhost port 3000.
+http://localhost:3000/
+
+Technologies that were used were html/css/javascript/jquery/bootstrap for frontend, and node.js for backend. Used google cloud mySQL for the database. 
 We are using Express, a node framework for back end. 
 
-### in App.js fill in our database ip address. IDK how to make it so it is not viewable to the whole world.  
- open the package.json file to see which packages you need to npm install. 
- They are under dependencies. 
- 
- Check if its working, by running node app.js    (check port 3000 on browser)
- 
- 
- 
- Views folder contains the html as ejs(embedded java script)  files for express to render them. 
- folder public contains the css.  WE allow express to serve this in app.js file. Read comments. 
  
  
  
  
- 
- 
- Useful Links (feel free to add more)
- https://guides.github.com/activities/hello-world/    
- https://www.youtube.com/watch?v=TlB_eWDSMt4
- https://www.w3schools.com
+
 
 
 

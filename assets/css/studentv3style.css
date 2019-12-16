@@ -814,6 +814,10 @@ object {
   opacity: .6;
 }
 
+#courses-panel .course_list > a[data-selected]:hover {
+  background: none;
+}
+
 #courses-panel .course_list > a.visible {
   display: block;
 }
@@ -954,6 +958,10 @@ object {
 #college-opt-panel .program_list > a[data-selected] {
   cursor: default;
   opacity: .6;
+}
+
+#college-opt-panel .program_list > a[data-selected]:hover {
+  background: none;
 }
 
 #college-opt-panel .program_list > a:hover {

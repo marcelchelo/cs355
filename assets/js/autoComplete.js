@@ -10,6 +10,9 @@ var transferDetailList = []
 // Stores the selected TRANSFER schools in this array
 var selectedTransferSchools = []
 
+// Stores PROGRAM CODE of the selected transfer school programs
+var selectedPrograms = []
+
 // Stores all the courses for the specific school
 // course_list['school' + schoolCode] is the value
 // ['school' + schoodlCode] is the key 
@@ -230,7 +233,7 @@ function matchSchool(name, element) {
       let templi = document.createElement('li')
 
       // Checks if school is already selected
-      if (selectedSchools.includes(college.NAME)) {
+      if (selectedSchools.includes(college.NAME) || selectedTransferSchools.includes(college.NAME)) {
         templi.className = 'disable-select-school'
       }
 
@@ -404,8 +407,6 @@ function matchCoursesFromInput(element) {
       visible_links[0].className = 'visible selected'
     }
     list.scrollTop = 0
-    // $("#course_not_listed_" + $this.attr('data-school-id')).remove()
-
     list.style.display = 'block'
     list.style.top = '39px'
     not_found.style.display = 'none'
@@ -487,7 +488,7 @@ function deleteSelectedSchool() {
 /**
  * COURSES PANEL
  * Called when user clicks on "x" of a selected course
- *  - Delete course div
+ *  - Delete selected course div
  *  - Delete the course from its respective school in TransferDetail object
  */
 function deleteSelectedCourse() {
@@ -620,6 +621,11 @@ function matchTransferSchool(name, element) {
   })
 }
 
+/**
+ * COLLEGE OPTION PANEL
+ * Hides the school search dropdown menu when user clicks outside of it
+ * @param {DOM Object} element 
+ */
 function hideTransferSchoolList(element) {
   var panel = $(element).next(".transfer-school-ac-panel")
   if (!$(".transfer-school-input-ac:hover").length) {
@@ -627,6 +633,13 @@ function hideTransferSchoolList(element) {
   }
 }
 
+/** 
+ * COLLEGE OPTION PANEL
+ * This function is called when user selects a school from the dropdown
+ *  - Create a "school" div that contains the name of the selected school
+ *  - The div allows students to add programs/majors from that school
+ *  - The programs/majors from that school are populated into a dropdown list
+ */ 
 function addTransferSchoolPanel(element) {
   let name = element.value
   let transferSchoolCode = $(element).attr('data-transfer-school-code')
@@ -698,6 +711,10 @@ function deleteTransferSchoolInputContainer() {
   }
 }
 
+/**
+ * COLLEGE OPTION PANEL
+ * Handles showing/hiding of "add program" options
+ */
 function toggleProgramForm() {
   var $container = $(this).closest('.program_container')
   $container.find(".add_program").toggle()
@@ -705,6 +722,11 @@ function toggleProgramForm() {
   $container.find(".add_program_input").val("").filter(":visible").focus()
 }
 
+/**
+ * COLLEGE OPTION PANEL
+ * Handles user programs search input
+ * @param {DOM Object} element 
+ */
 function handleProgramNameInput(element) {
   let programList = $(element).siblings('.program_list')[0]
   let notFound = $(element).siblings('.not_found')[0]
@@ -716,6 +738,11 @@ function handleProgramNameInput(element) {
   }
 }
 
+/**
+ * COLLEGE OPTION PANEL
+ * Filters and shows only the programs that matches the user input
+ * @param {DOM Object} element 
+ */
 function matchProgramsFromInput(element) {
   var $this = $(element)
   var $list = $this.siblings('.program_list')
@@ -751,21 +778,38 @@ function matchProgramsFromInput(element) {
   }
 }
 
+/**
+ * COLLEGE OPTION PANEL
+ * This function is triggered when user selects a program from the dropdown
+ *  - Checks if selected program has already been added
+ *  - Only proceed to add program if above is false
+ */
 function handleAddProgramPanel() {
   let addProgramContainer = $(this).parents('.add_program_container')[0]
   let selectedProgram = $(addProgramContainer).siblings('.selected_program')[0]
   let dataId = $(this).attr('data-id')
-  addProgramPanel(this)
-  $(addProgramContainer).find('.add_program_input').val('')
+  console.log(dataId)
+  if (!selectedPrograms.includes(dataId)) {
+    addProgramPanel(this)
+    $(addProgramContainer).find('.add_program_input').val('')
+  }
 }
 
+/**
+ * COLLEGE OPTION PANEL
+ * Add program
+ *  - Create div for selected program
+ *  - Add program code to the list of "selectedPrograms"
+ * @param {DOM Object} element 
+ */
 function addProgramPanel(element) {
   let programName = $(element).text()
   let programCode = $(element).attr('data-id')
+  selectedPrograms.push(programCode)
+  console.log(programCode)
 
   let school = $(element).parents('.transfer-school')[0]
   let schoolCode = $(school).data('transfer-school-code')
-  let thisSchool;
 
   $(element).attr("data-selected", "true")
   var selectedProgram = $("<div class='program' data-id='" + programCode + "' >" + programName + "<a class='delete-program-btn' /> </a> </div>")
@@ -777,6 +821,11 @@ function addProgramPanel(element) {
   $container.find(".add_program_container").toggle()
 }
 
+/**
+ * COLLEGE OPTION PANEL
+ * Hide dropdown menu when user clicks outside of the dropdown menu
+ * @param {DOM Object} element 
+ */
 function hideProgramList(element) {
   var panel = $(element).closest(".program_container")
   if (!panel.find('.program_list:hover, not_found:hover').length) {
@@ -785,6 +834,12 @@ function hideProgramList(element) {
   }
 }
 
+/**
+ * COLLEGE OPTION PANEL
+ * Called when user clicks on "x" of a selected program
+ *  - Delete selected program div
+ *  - Delete the program from "selectedPrograms" list
+ */
 function deleteSelectedProgram() {
   var $this = $(this)
   var $program = $this.closest('.program')
@@ -793,8 +848,18 @@ function deleteSelectedProgram() {
   var programContainer = $this.parents('.program_container')[0]
   $(programContainer).find(".program_list a[data-id='" + programCode + "']").removeAttr("data-selected")
   $program.remove()
+  
+  for (var i = 0; i < selectedPrograms.length; i++) {
+    if (selectedPrograms[i] === programCode) {
+      selectedPrograms.splice(i, 1);
+    }
+  }
 }
 
+/**
+ * COLLEGE OPTION PANEL
+ * Called when user clicks on "x" next to program search input
+ */
 function deleteProgramInputContainer() {
   var $container = $(this).closest('.program_container')
   $container.find(".add_program").toggle()
