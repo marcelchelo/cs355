@@ -3,7 +3,7 @@
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
@@ -161,7 +161,7 @@ button:hover {
   margin: 0 auto;
   padding: 0 20px;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .container.inner {
@@ -169,12 +169,13 @@ button:hover {
   padding-bottom: 5em;
 }
 
-.col {
+.cole {
   width: 100%;
   margin-bottom: 5px;
   float: left;
+
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* For devices larger than 400px */
@@ -190,46 +191,46 @@ button:hover {
   .container {
     width: 80%;
   }
-  .col {
+  .cole {
     margin-left: 3%;
   }
-  .col:first-child {
+  .cole:first-child {
     margin-left: 0;
   }
-  .one.col {
+  .one.cole {
     width: 5.58333333333%;
   }
-  .two.col {
+  .two.cole {
     width: 14.1666666667%;
   }
-  .three.col {
+  .three.cole {
     width: 22.75%;
   }
-  .four.col {
+  .four.cole {
     width: 31.3333333333%;
   }
-  .five.col {
+  .five.cole {
     width: 39.9166666667%;
   }
-  .six.col {
+  .six.cole {
     width: 48.5%;
   }
-  .seven.col {
+  .seven.cole {
     width: 57.0833333333%;
   }
-  .eight.col {
+  .eight.cole {
     width: 65.6666666667%;
   }
-  .nine.col {
+  .nine.cole {
     width: 74.25%;
   }
-  .ten.col {
+  .ten.cole {
     width: 82.8333333333%;
   }
-  .eleven.col {
+  .eleven.cole {
     width: 91.4166666667%;
   }
-  .twelve.col {
+  .twelve.cole {
     width: 100%;
     margin-left: 0;
   }
@@ -261,7 +262,7 @@ button {
   cursor: pointer;
   border-radius: 4px;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   border: 1px solid #bbb;
   background-color: transparent;
   white-space: nowrap;
@@ -279,7 +280,7 @@ input[type='text'] {
 
 .panel {
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   padding: 10px 20px 45px 20px;
   min-height: 500px;
 }
@@ -294,7 +295,7 @@ input[type='text'] {
   margin: 10px 0 20px 0;
   left: 50%;
   -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
 }
 
 #add-school-btn {
@@ -307,13 +308,13 @@ input[type='text'] {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .flex-verticle {
@@ -322,8 +323,8 @@ input[type='text'] {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .active-panel {
@@ -363,8 +364,8 @@ input[type='text'] {
   display: -ms-grid;
   display: grid;
   -ms-grid-rows: 1fr;
-  -ms-grid-columns: (1fr)[5];
-      grid-template: 1fr/repeat(5, 1fr);
+  -ms-grid-columns: (1fr) [5];
+  grid-template: 1fr / repeat(5, 1fr);
   grid-column-gap: 1px;
   height: 80px;
   -webkit-transition: height 200ms ease-in;
@@ -417,19 +418,19 @@ object {
 }
 
 #courses {
-  background-image: url("../images/courses.svg");
+  background-image: url('../images/courses.svg');
 }
 
 #college-opt {
-  background-image: url("../images/college-opt.svg");
+  background-image: url('../images/college-opt.svg');
 }
 
 #exam-scores {
-  background-image: url("../images/exam-scores.svg");
+  background-image: url('../images/exam-scores.svg');
 }
 
 #results {
-  background-image: url("../images/results.svg");
+  background-image: url('../images/results.svg');
 }
 
 .right-corner {
@@ -459,19 +460,19 @@ object {
 }
 
 .step-one {
-  background-image: url("../images/courses-invert.svg");
+  background-image: url('../images/courses-invert.svg');
 }
 
 .step-two {
-  background-image: url("../images/college-opt-invert.svg");
+  background-image: url('../images/college-opt-invert.svg');
 }
 
 .step-three {
-  background-image: url("../images/exam-scores-invert.svg");
+  background-image: url('../images/exam-scores-invert.svg');
 }
 
 .step-four {
-  background-image: url("../images/results-invert.svg");
+  background-image: url('../images/results-invert.svg');
 }
 
 .info-img {
@@ -486,20 +487,20 @@ object {
   padding: 10px 25px;
   margin-bottom: 15px;
   -webkit-box-sizing: inherit;
-          box-sizing: inherit;
+  box-sizing: inherit;
   position: relative;
 }
 
 .school-ac-panel {
   width: 100%;
   max-height: 250px;
-  border: 1px solid rgba(0,0,0,.15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   position: absolute;
   overflow-y: auto;
   background: #fafafa;
   margin: 0.125rem 0 0;
   z-index: 9999;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   padding: 0.5rem 0;
   min-width: 10rem;
 }
@@ -617,7 +618,7 @@ object {
 #courses-panel .school-option {
   display: block;
   width: 100%;
-  padding: .25rem 1.5rem;
+  padding: 0.25rem 1.5rem;
   clear: both;
   font-weight: 400;
   font-size: medium;
@@ -715,7 +716,7 @@ object {
   padding: 12px;
   max-width: 300px;
   width: 100%;
-  text-align: center;  
+  text-align: center;
 }
 
 #courses-panel .course_container {
@@ -770,11 +771,11 @@ object {
   height: 34px;
   width: 100%;
   background: #fff;
-  border: 1px solid rgba(0,0,0,.15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   padding: 8px;
   font-size: medium;
   line-height: 18px;
-  color: #787A7D;
+  color: #787a7d;
   pointer-events: none;
   z-index: 1;
   display: none;
@@ -785,7 +786,7 @@ object {
 #courses-panel .course_list {
   position: absolute;
   width: 100%;
-  border: 1px solid rgba(0,0,0,.15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   padding: 8px;
   background: #fff;
   z-index: 1;
@@ -811,7 +812,7 @@ object {
 
 #courses-panel .course_list > a[data-selected] {
   cursor: default;
-  opacity: .6;
+  opacity: 0.6;
 }
 
 #courses-panel .course_list > a[data-selected]:hover {
@@ -916,11 +917,11 @@ object {
   height: 34px;
   width: 100%;
   background: #fff;
-  border: 1px solid rgba(0,0,0,.15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   padding: 8px;
   font-size: medium;
   line-height: 18px;
-  color: #787A7D;
+  color: #787a7d;
   pointer-events: none;
   z-index: 1;
   display: none;
@@ -931,7 +932,7 @@ object {
 #college-opt-panel .program_list {
   position: absolute;
   width: 100%;
-  border: 1px solid rgba(0,0,0,.15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   padding: 8px;
   background: #fff;
   z-index: 1;
@@ -957,7 +958,7 @@ object {
 
 #college-opt-panel .program_list > a[data-selected] {
   cursor: default;
-  opacity: .6;
+  opacity: 0.6;
 }
 
 #college-opt-panel .program_list > a[data-selected]:hover {
@@ -1011,13 +1012,13 @@ object {
 #college-opt-panel .transfer-school-ac-panel {
   width: 100%;
   max-height: 250px;
-  border: 1px solid rgba(0,0,0,.15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   position: absolute;
   overflow-y: auto;
   background: #fafafa;
   margin: 0.125rem 0 0;
   z-index: 9999;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   padding: 0.5rem 0;
   min-width: 10rem;
 }
@@ -1085,7 +1086,7 @@ object {
 #college-opt-panel .school-option {
   display: block;
   width: 100%;
-  padding: .25rem 1.5rem;
+  padding: 0.25rem 1.5rem;
   clear: both;
   font-weight: 400;
   font-size: medium;
@@ -1136,11 +1137,11 @@ object {
   padding: 12px;
   max-width: 300px;
   width: 100%;
-  text-align: center;  
+  text-align: center;
 }
 
 .delete-college {
-  background-image: url("../images/close.svg");
+  background-image: url('../images/close.svg');
   background-size: cover;
   min-width: 20px;
   display: inline-block;
@@ -1149,10 +1150,7 @@ object {
 }
 /*# sourceMappingURL=studentv3style.css.map */
 
-
-
 /* Navigation bar & header */
-
 
 #header {
   height: 100px;
@@ -1162,7 +1160,6 @@ object {
   background-color: #bdd4e7;
   background-color: #d9f3ff;
   background-image: linear-gradient(0deg, #d9f3ff 0%, #476589 100%);
-  
 }
 
 .nav-container {
@@ -1175,7 +1172,6 @@ object {
 
 .nav-list {
   list-style: none;
-  
 }
 
 .nav-list li a {
@@ -1200,31 +1196,26 @@ object {
 #kid-3 {
   top: 10%;
   right: 2%;
-  
 }
 
 #kid-4 {
   top: 30%;
   right: 15%;
-  
 }
 
 .title {
   margin-left: calc(50% - 20rem);
   max-width: 50rem;
   max-height: 8rem;
- 
 }
 
 @media only screen and (max-width: 590px) {
-
   #kid-1 {
-    animation: kidone .2s ease-in forwards;
-
+    animation: kidone 0.2s ease-in forwards;
 
     z-index: 999;
   }
-  @keyframes kidone{
+  @keyframes kidone {
     from {
       top: 20%;
       left: 6%;
@@ -1234,22 +1225,20 @@ object {
       left: 6%;
     }
   }
-  
+
   #kid-2 {
     top: 50%;
     left: 30%;
   }
-  
+
   #kid-3 {
     top: 40%;
     right: 2%;
-    
   }
-  
+
   #kid-4 {
     top: 60%;
     right: 19%;
-    
   }
 }
 
@@ -1262,13 +1251,13 @@ object {
 .exam-ac-panel {
   width: 100%;
   max-height: 250px;
-  border: 1px solid rgba(0,0,0,.15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   position: absolute;
   overflow: auto;
   background: #fafafa;
   margin: 0.125rem 0 0;
   z-index: 9999;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   padding: 0.5rem 0;
   min-width: 10rem;
 }
@@ -1377,7 +1366,7 @@ object {
 #exam-score-panel .exam-option {
   display: block;
   width: 100%;
-  padding: .25rem 1.5rem;
+  padding: 0.25rem 1.5rem;
   clear: both;
   font-weight: 400;
   font-size: medium;
@@ -1448,7 +1437,7 @@ object {
   padding: 12px;
   max-width: 300px;
   width: 100%;
-  text-align: center;  
+  text-align: center;
 }
 
 #exam-score-panel .score_container {
@@ -1484,7 +1473,7 @@ object {
 }
 
 #exam-score-panel .add_score_input {
-  width:75%;
+  width: 75%;
   height: 40px;
   padding: 10px;
 }
@@ -1539,7 +1528,7 @@ object {
 
 #exam-score-panel .button {
   width: 20%;
-  border: 2px solid #008CBA;
+  border: 2px solid #008cba;
   color: white;
   /*padding: 16px 32px;*/
   text-align: center;
@@ -1553,13 +1542,12 @@ object {
 }
 
 #exam-score-panel .button2 {
-    background-color: #008CBA;
-    color: white;
-   
+  background-color: #008cba;
+  color: white;
 }
 
 #exam-score-panel .button2:hover {
-background-color: white;
+  background-color: white;
   color: black;
 }
 
@@ -1586,14 +1574,14 @@ footer {
 }
 
 .footer-text {
-	color: white;
-	text-align: center;
-	font-size: large;
+  color: white;
+  text-align: center;
+  font-size: large;
 }
 
 .footer-link {
-	color: white;
-	text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 .test2 {
