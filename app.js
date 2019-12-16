@@ -264,7 +264,7 @@ app.get('/EXAM_FETCH/:id', (req, res) => {
 app.get('/TRNS_RULES', (req, res) => {
   console.log('Fetching QC TransferRules ')
 
-  const queryString = 'SELECT * FROM TRNS_RULES LIMIT 0,2000'
+  const queryString = 'SELECT ADescr, BTRNSFR_SRC_ID , BCRSE_ID , AInstitution , ACourseID , UNT_TAKEN FROM TRNS_RULES LIMIT 0 ,2000'
   connection.query(queryString, (err, rows, fields) => {
     if (err) {
       console.log('Failed to query for TransferRules: ' + err)
@@ -273,13 +273,112 @@ app.get('/TRNS_RULES', (req, res) => {
     }
 
     console.log('Transfer Rules fetched  successfully')
+    
 
     // const tRules = rows.map(row => {
     //   return { Name: row.Descr
 
     //   }
     // })
+    
+    res.json(rows)
+  })
 
+  // res.end()
+})
+
+// getting the trasnfer for a specific school so we dont have to load the complete TRNS_RULES Table 
+
+app.get('/Trns_Rules_Result/:Coming/:Going', (req, res) => {
+  // this is going to be a school name 
+  const userId = req.params.Going
+  
+  // this is going to be a school code 
+  const coming_school = req.params.Coming
+  
+
+  const queryString = 'SELECT ADescr, BTRNSFR_SRC_ID , BCRSE_ID , AInstitution , ACourseID , UNT_TAKEN FROM TransferPortal.TRNS_RULES where BTRNSFR_SRC_ID = ? and  ADescr = ? and UNT_TAKEN != 99 order by BCRSE_ID'
+  // const queryString = 'SELECT distinct ADescr FROM TransferPortal.TRNS_RULES  ;'
+
+  connection.query(queryString, [coming_school , userId] , (err, rows, fields) => {
+    if (err) {
+      console.log('Failed to query for TransferRules: ' + err)
+      res.sendStatus(500)
+      return
+    }
+
+    console.log('Trnasfer Rules 2.0 fetched  successfully')
+    
+
+    // const tRules = rows.map(row => {
+    //   return { Name: row.Descr
+
+    //   }
+    // })
+    
+    res.json(rows)
+  })
+
+  // res.end()
+})
+
+// creating an api for the requirments for the Queens College CSCI major 
+app.get('/QC_CSCI/', (req, res) => {
+  // const userId = req.params.Going
+  // console.log(userId)
+  // const coming_school = req.params.Coming
+  // console.log(coming_school)
+
+  // const queryString = 'SELECT ADescr, BTRNSFR_SRC_ID , BCRSE_ID , AInstitution , ACourseID , UNT_TAKEN FROM TransferPortal.TRNS_RULES where AInstitution = ? and UNT_TAKEN != 99  and BTRNSFR_SRC_ID = ?'
+   const queryString = 'SELECT * FROM TransferPortal.QC_CSCI_REQ; '
+
+  connection.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log('Failed to query for TransferRules: ' + err)
+      res.sendStatus(500)
+      return
+    }
+
+    console.log('Trnasfer Rules 2.0 fetched  successfully')
+    
+
+    // const tRules = rows.map(row => {
+    //   return { Name: row.Descr
+
+    //   }
+    // })
+    
+    res.json(rows)
+  })
+
+  // res.end()
+})
+
+app.get('/Test_eq/:id', (req, res) => {
+  const userId = req.params.id
+  // console.log(userId)
+  // const coming_school = req.params.Coming
+  // console.log(coming_school)
+
+  // const queryString = 'SELECT ADescr, BTRNSFR_SRC_ID , BCRSE_ID , AInstitution , ACourseID , UNT_TAKEN FROM TransferPortal.TRNS_RULES where AInstitution = ? and UNT_TAKEN != 99  and BTRNSFR_SRC_ID = ?'
+   const queryString = 'SELECT Component , Min_Score, Max_Score ,    LISTAGG_C_CRSE_ID_WITHI   FROM TransferPortal.INSTITUTION_VW as a  , TransferPortal.TEST_EQ as b where a.INSTITUTION = b.Institution and a.DESCR = ? ; '
+
+  connection.query(queryString, [userId],(err, rows, fields) => {
+    if (err) {
+      console.log('Failed to query for Test eq: ' + err)
+      res.sendStatus(500)
+      return
+    }
+
+    console.log('Test stuff was brought in')
+    
+
+    // const tRules = rows.map(row => {
+    //   return { Name: row.Descr
+
+    //   }
+    // })
+    
     res.json(rows)
   })
 
@@ -289,8 +388,10 @@ app.get('/TRNS_RULES', (req, res) => {
 // Retrieves all majors from respective school
 app.get('/ACAD_PLAN/:id', (req, res) => {
   const userId = req.params.id
+
   const queryString =
   'SELECT INSTITUTION_DESCR, ACAD_PLAN, DEGREE, DEGREE_DESCR, TRNSCR_DESCR FROM ACAD_PLAN_TBL_LTD WHERE INSTITUTION_DESCR = ?'
+
   connection.query(queryString, [userId], (err, rows, fields) => {
     if (err) {
       console.log("Failed to query academic plans: " + err)
